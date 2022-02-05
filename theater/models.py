@@ -75,3 +75,18 @@ class CommentPreview(models.Model):
     content = models.TextField(verbose_name='내용')
     like = models.IntegerField(verbose_name='좋아요', default=0)
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
+
+class Business(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(verbose_name='제목', max_length=100)
+    content = models.TextField(verbose_name='내용')
+    hits = models.IntegerField(verbose_name='조회수', default=0)
+    created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
+
+    def __str__(self):
+        return str(self.title)
+
+
+    
+
+    

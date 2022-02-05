@@ -8,5 +8,6 @@ admin.site.register(UnreleasedMovie)
 admin.site.register(Review)
 admin.site.register(CommentReview)
 admin.site.register(CommentPreview)
+admin.site.register(Business)
 
 
