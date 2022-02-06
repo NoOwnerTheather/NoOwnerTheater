@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="page-section bg-warning" id="">
+    <div class="container text-dark p-4">
+        <div class="text-dark pb-2">
+          <div class="vl"></div>
+          <h5 class="section-heading mx-3">지금 인기 있는 영화</h5>
+        </div>
+        <div class="row">
+        {% for row1 in rows1 %}
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src ="{{ row1.poster }}" alt = "">
+              <div class="card-body">
+                <h5 class="card-title text-center">{{row1.title}}</h5>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        
+
+          <!-- <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div> -->
+        </div>
+    </div>
+  </section>
+
+  <section class="page-section bg-light" id="">
+    <div class="container text-dark p-4">
+        <div class="text-dark pb-2">
+          <div class="ve"></div>
+          <h5 class="section-heading mx-3">장르별 영화</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <section class="page-section bg-light" id="">
+    <div class="container text-dark p-4">
+        <div class="text-dark pb-2">
+          <div class="ve"></div>
+          <h5 class="section-heading mx-3">최근 개봉한 영화</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card" style="width: 100%">
+              <img src="사진1.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">벌새</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </section>
+
+
+
+{% endblock content %}
+
+

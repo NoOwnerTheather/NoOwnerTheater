@@ -15,3 +15,13 @@ def business_detail(request, pk):
    ctx = {'business' : business}
 
    return render(request, template_name='theater/business_detail.html', context=ctx) 
+
+def chart_list(request):
+   rows1 = Movie.objects.filter(comeout='개봉').order_by('-rating')[:20]
+   rows2 = Movie.objects.filter(comeout='개봉', genre='드라마').order_by('-id')[:20]
+   rows3 = Movie.objects.filter(comeout='개봉').order_by('-release_date')[:20]
+   ctx = {'rows1':rows1, 'rows2':rows2, 'rows3':rows3}
+
+   return render(request, template_name='theater/chart_list.html', context=ctx) 
+
+   
