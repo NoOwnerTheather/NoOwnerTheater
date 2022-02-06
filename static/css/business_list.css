@@ -18,21 +18,32 @@
   margin-bottom: 4rem;
 }
 
+.board-search {
+  border-bottom: 1px solid #707070;
+  margin-bottom: 4rem;
+  width: 200px;
+}
+
+.board-search input {
+  border: none;
+  background-color: #f5f4f2;
+}
+
+.board-search i {
+  cursor: pointer;
+}
 .board-header-count {
   display: flex;
   justify-content: flex-start;
 }
 
-.board-search {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 4rem;
+thead {
+  border-top: 6px solid #e3e3e2;
+  border-bottom: 6px solid #e3e3e2;
 }
 
-.board-search input {
-  border: none;
-  border-bottom: 1px solid #707070;
-  background-color: #f5f4f2;
+tbody > tr {
+  border-bottom: 1px solid #e3e3e2;
 }
 
 .board-pagination {

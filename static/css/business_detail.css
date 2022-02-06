@@ -24,6 +24,17 @@
   justify-content: space-between;
   border-top: 3px solid #707070;
   border-bottom: 3px solid #707070;
+  padding: 8px 0px;
+  font-size: 14px;
+  align-items: center;
+}
+
+.business_detail p {
+  margin: 0;
+}
+
+.business_detail_left {
+  font-size: 18px;
 }
 
 .business_detail_right {
@@ -35,6 +46,13 @@
   margin-left: 8px;
 }
 
+.business_detail_right i {
+  margin-right: 4px;
+}
+
+.business_detail_content {
+  padding: 12px 0;
+}
 .business_list {
   display: flex;
   justify-content: center;
