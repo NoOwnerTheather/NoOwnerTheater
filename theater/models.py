@@ -1,3 +1,4 @@
+from pickle import FALSE
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -28,8 +29,13 @@ class Movie(models.Model):
     rating = models.FloatField(verbose_name='평점', default=0)
     poster = models.ImageField(upload_to="poster/", null=True, blank=True, verbose_name="포스터")
     video = models.FileField(upload_to='videos/', null=True, blank=True, verbose_name="예고편")
+<<<<<<< Updated upstream
     url= models.URLField(verbose_name='링크',null=True)
     comeout=models.CharField(verbose_name="개봉여부",choices=COMEOUT_CHOICE,max_length=100)
+=======
+    check = models.BooleanField(verbose_name='검수', default=FALSE)
+
+>>>>>>> Stashed changes
     def __str__(self):
         return str(self.title)
 
