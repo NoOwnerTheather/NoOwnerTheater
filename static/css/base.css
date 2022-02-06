@@ -1,0 +1,16 @@
+@import url(business_list.css);
+@import url(business_detail.css);
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  font-weight: bold;
+}
+
+ul {
+  list-style: none;
+}

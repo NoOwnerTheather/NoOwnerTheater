@@ -1,12 +1,38 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}?after"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"></link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <title>주인없는영화관</title>
 </head>
 <body>
+    <div class="navbar">
+        <a  href="{% url 'theater:main' %}"><div>주인없는영화관</div></a>
+        <a><div>영화 차트</div></a>
+        <a><div>영화 리뷰</div></a>
+        <a><div>온라인 시사회</div></a>
+        <a  href="{% url 'theater:business_list' %}"><div>지원사업 게시판</div></a>
+        <div class="dropdown event-dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="far fa-user"></i>
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
     {% block content %}
         <!-- extend -->
     {% endblock %}
