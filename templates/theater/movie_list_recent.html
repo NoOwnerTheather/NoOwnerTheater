@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form class="d-flex" method="POST" action="{% url 'theater:movie_search' %}">
+        {% csrf_token %}        
+        <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit"> Search </button>
+    </form>
+    <section class="page-section bg-warning" id="">
+        <div class="container text-dark p-4">
+          <div class="text-dark pb-2">
+            <div class="vl"></div>
+            <h5 class="section-heading mx-3">최근 개봉한 영화</h5>
+            <div class="d-flex justify-content-end">
+              <!-- <a class="badge rounded-pill bg-warning text-dark" href="{% url 'theater:movie_list_popular' %}"></a> -->
+            </div>
+          </div>
+        {% for movie in movies %}       
+        <div class="col-md-4">
+            <div class="card" style="width: 100%">
+              <img src="{{movie.poster.url}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">{{movie.title}}</h5>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </section>
+    
+{% endblock %}

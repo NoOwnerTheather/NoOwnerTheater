@@ -2,138 +2,152 @@
 
 {% block content %}
 
+<form class="d-flex" method="POST" action="{% url 'theater:movie_search' %}">
+    {% csrf_token %}        
+    <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit"> Search </button>
+</form>
+
 <section class="page-section bg-warning" id="">
     <div class="container text-dark p-4">
         <div class="text-dark pb-2">
           <div class="vl"></div>
           <h5 class="section-heading mx-3">지금 인기 있는 영화</h5>
+          <div class="d-flex justify-content-end">
+            <a class="badge rounded-pill bg-warning text-dark" href="{% url 'theater:movie_list_popular' %}">전체 보기</a>
+          </div>
         </div>
-        <div class="row">
-        {% for row1 in rows1 %}
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src ="{{ row1.poster }}" alt = "">
-              <div class="card-body">
-                <h5 class="card-title text-center">{{row1.title}}</h5>
-              </div>
+        <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">         
+                <div class="item active">
+                {% for row1 in rows1 %}
+                    <div class="col-md-3">
+                        <div class="card" style="width: 100%">
+                            <img src="{{row1.poster.url}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title text-center">{{row1.title}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                   {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                   </div>
+                   <div class="item">
+                   {% endif %}
+                {% endfor %}
+                </div>  
             </div>
-          </div>
-        {% endfor %}
-        
-
-          <!-- <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
-          </div> -->
-        </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button> 
     </div>
-  </section>
+</section>
 
-  <section class="page-section bg-light" id="">
+
+<section class="page-section bg-light" id="">
     <div class="container text-dark p-4">
         <div class="text-dark pb-2">
           <div class="ve"></div>
           <h5 class="section-heading mx-3">장르별 영화</h5>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
+          <div class="order-container d-flex justify-content-end">
+            <form method="GET" action="{% url 'theater:genre_order' %}">
+            <select name="sort" id="sort" class="form-select w-auto" aria-label="Default select example">
+              <option selected value="0">--- 정렬 기준 ---</option>
+              <option value="1">드라마</option>
+              <option value="2">멜로/로맨스</option>
+              <option value="3">다큐멘터리</option>
+              <option value="4">코미디</option>
+              <option value="5">액션</option>
+              <option value="6">가족</option>
+              <option value="7">미스터리</option>
+              <option value="8">스릴러</option>
+              <option value="9">범죄</option>
+              <option value="10">공포(호러)</option>
+              <option value="11">SF</option>
+              <option value="12">판타지</option>
+              <option value="13">성인물(에로)</option>
+              <option value="14">전쟁</option>
+              <option value="15">애니메이션</option>
+              <option value="16">사극</option>
+              <option value="17">뮤지컬</option>
+            </select>
+            <button class="btn btn-primary" type="submit" value="">정렬</button>
+            </form>
           </div>
         </div>
+        <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">         
+                <div class="item active">
+                {% for row2 in rows2 %}
+                    <div class="col-md-3">
+                        <div class="card" style="width: 100%">
+                            <img src="{{row2.poster.url}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title text-center">{{row2.title}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                   {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                   </div>
+                   <div class="item">
+                   {% endif %}
+                {% endfor %}
+                </div>  
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button> 
     </div>
-  </section>
+</section>
 
-  <section class="page-section bg-light" id="">
+
+<section class="page-section bg-light" id="">
     <div class="container text-dark p-4">
         <div class="text-dark pb-2">
           <div class="ve"></div>
           <h5 class="section-heading mx-3">최근 개봉한 영화</h5>
-        </div>
-        <div class="row">
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="card" style="width: 100%">
-              <img src="사진1.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">벌새</h5>
-              </div>
-            </div>
+          <div class="d-flex justify-content-end">
+            <a class="badge rounded-pill bg-light text-dark" href="{% url 'theater:movie_list_recent' %}">전체 보기</a>
           </div>
         </div>
+        <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">         
+                <div class="item active">
+                {% for row3 in rows3 %}
+                    <div class="col-md-3">
+                        <div class="card" style="width: 100%">
+                            <img src="{{row3.poster.url}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title text-center">{{row3.title}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                   {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                   </div>
+                   <div class="item">
+                   {% endif %}
+                {% endfor %}
+                </div>  
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button> 
     </div>
-  </section>
+</section>
 
 
 
