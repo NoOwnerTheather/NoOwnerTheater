@@ -2,12 +2,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}?after"> 
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}?after"> 
+    <!--font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <!--bootstrap-->
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
@@ -29,6 +30,7 @@
             <a>영화 리뷰</a>
             <a>온라인 시사회</a>
             <a  href="{% url 'theater:business_list' %}">지원사업 게시판</a>
+            {% if user.is_authenticated %}
             <div class="dropdown event-dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="far fa-user"></i>
@@ -38,6 +40,10 @@
                     <li><a href="#">로그아웃</a></li>
                 </ul>
             </div>
+            {% else %}
+            <a href="{% url 'account:login' %}">로그인</a>
+            <a href="{% url 'account:signup' %}">회원가입</a>
+            {% endif %}
         </div>
     </div>
     {% block content %}
