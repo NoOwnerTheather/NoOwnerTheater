@@ -7,7 +7,7 @@ class MovieForm(forms.ModelForm):
     class Meta:
         model=Movie
 
-        fields=('title','director','actor','poster','genre','release_date','comeout','content','running_time','url')
+        fields=('title','director','actor','poster','genre','release_date','comeout','content','running_time','url','video')
 
 
 class ReviewForm(forms.ModelForm):
@@ -25,4 +25,3 @@ class InfoForm(forms.ModelForm):
 
         fields=('title','content','image')
 
-        
