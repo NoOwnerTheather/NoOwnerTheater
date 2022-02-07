@@ -75,6 +75,16 @@
 
     opacity: 0%;
 }
+.form-input{
+    font-size:1.5rem;
+    height:4rem;
+}
+.form-contentinput{
+    font-size:1.5rem;
+    height:12rem;
+    
+}
+
 /* .form_line:after{
     content: "";
     display: block;
