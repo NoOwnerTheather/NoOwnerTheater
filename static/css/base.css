@@ -24,7 +24,7 @@
   flex-direction: row;
 }
 .nav_right a {
-  margin-left: 18px;
+  margin-left: 36px;
 }
 
 .nav_right a:hover {
@@ -33,4 +33,10 @@
 
 ul {
   list-style: none;
+}
+
+.footer {
+  padding: 4px 12px;
+  background-color: #000000;
+  color: #fff;
 }

@@ -30,7 +30,7 @@
                     <th scope="row">{{business.id}}</th>
                     <td><a href="{% url 'theater:business_detail' pk=business.pk %}">{{business.title}}</a></td>
                     <td>{{business.user}}</td>
-                    <td>{{business.created_at}}</td>
+                    <td>{{business.created_at|date:'Y-m-d'}}</td>
                     <td>{{business.hits}}</td>
                 </tr>
                 {% endfor %}
