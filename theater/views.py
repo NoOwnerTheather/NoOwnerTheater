@@ -37,7 +37,12 @@ def movie_fix(request,pk):
       ctx={'form':form}
       return render(request,template_name='theater/enroll.html',context=ctx)
       # redirect랑 render 주소는 임시
+def movie_delete(request,pk):
+   post=get_object_or_404(Movie,id=pk)
+   post.delete()
+   return redirect("theater:main")
 
+   
 def review_enroll(request):
    
    if request.method=="POST":
@@ -67,6 +72,10 @@ def review_fix(request,pk):
       ctx={'form':form}
       return render(request,template_name='theater/review.html',context=ctx)
       # redirect랑 render 주소는 임시
+def review_delete(request,pk):
+   post=get_object_or_404(Review,id=pk)
+   post.delete()
+   return redirect("theater:main")
 
 def info_enroll(request):
 
@@ -98,3 +107,7 @@ def info_fix(request,pk):
       return render(request,template_name='theater/info_enroll.html',context=ctx)
       # redirect랑 render 주소는 임시
 
+def info_delete(request,pk):
+   post=get_object_or_404(Business,id=pk)
+   post.delete()
+   return redirect("theater:main")
