@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<table>
+ <div>
+    {{form.title}}
+</div>
+<div>
+    {{form.director}}
+</div>
+<div>
+    {{form.actor}}
+</div>
+<div>
+    {{form.actor}}
+</div>
+<div>
+    {{form.poster}}
+</div>
+<div>
+    {{form.genre}}
+</div>
+<div>
+    {{form.release_date}}
+</div>
+<div>
+    {{form.comeout}}
+</div>
+<span>거의 끝났습니다!</span>
+<div>
+    {{form.content}}
+</div>
+<div>
+    {{form.running_time}}
+</div>
+<div>
+    url
+    {{form.url}}
+</div>
+</table>
+<input type="submit" valye="등록하기">
+</form>
+{% endblock%}
