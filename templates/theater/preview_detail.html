@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="preview_detail.css">
+    <title>온라인 시사</title></head>
+    
+<body class="bg-light">
+
+
+    {% extends 'base.html' %}
+
+    {% block content %}
+
+    <div class="preview_detail_image" style="background-image: url({{movie.poster.url}}); width: 90rem; height:40rem;" >
+        
+        <div class="">
+
+          <h1 class="preview_detail_image_item">{{movie.title}}</h1>
+          
+        </div>
+
+        <div class="">
+          
+            <p class="">감독 | {{movie.director}}</p>
+            <p class="">장르 | {{movie.genre}}</p>
+            <p class="">출연 | {{movie.actor}}</p>
+            
+        </div>
+
+    </div>
+
+    <div>
+        <a class="btn btn-dark" type="button" href="{{movie.url}}">펀딩링크</a>
+
+        <h3>시놉시스</h3>
+        <hr>
+        <h5>{{movie.content}}</h5>
+
+    </div>
+
+    <!--<h2>커뮤니티</h2>-->
+    
+    
+    <div class="movie-comment">
+        <h3>커뮤니티</h3>
+        <hr>
+
+        {% if user.is_authenticated %}
+        <section class="input">
+            <input id="comment_input-{{movie.id}}" placeholder="댓글을 남겨주세요" type="text"/>
+            <button class="btn" onclick="onClickComment({{movie.id}}, 'write')">작성</button>
+        </section>
+        {% else %}
+        로그인 후 댓글을 쓸 수 있습니다.
+        {% endif %}
+
+
+
+
+        <div>
+            
+            <table class="comment-table-{{movie.id}}">
+                {% for comment in movie.commentpreview_set.all %}
+                <tr class = "comment-{{comment.id}}">
+                    <td>{{comment.user}} </td>
+                    <td>{{comment.content}} </td>
+                    <td>{{comment.created_at}} </td>
+                    <td>좋아요 : {{comment.like}}</td>
+                    {% if user == comment.user %}
+                    <td>
+                        <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
+                    </td>
+                    {% else %}
+                    {% endif %}
+
+                    
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+
+
+
+
+
+
+    </div>
+
+
+    <a class="btn btn-dark" type="button" href="{% url 'theater:preview' %}">목록</a>
+
+    {% endblock %}
+
+
+
+    <script>
+    
+    
+        const requestComment = new XMLHttpRequest();
+        const requestDel = new XMLHttpRequest();
+    
+        const onClickComment = (id, type) => {
+            const url = "write_comment/";
+            const content = document.getElementById(`comment_input-${id}`).value
+            requestComment.open("POST", url, true);
+            requestComment.setRequestHeader(
+                "Content-Type", "application/x-www-form-urlencoded"
+            );
+            requestComment.send(JSON.stringify({id: id, type: type, content: content}))
+        }
+    
+        requestComment.onreadystatechange = () => {
+            if(requestComment.readyState === XMLHttpRequest.DONE){
+                WriteHandleResponse();
+            }
+        }
+    
+    
+    
+    
+    
+    
+        const WriteHandleResponse = () => {
+            if (requestComment.status < 400){
+                const {id, type, content, comment_id} = JSON.parse(requestComment.response);
+                const element = document.querySelector(`.comment-table-${id}`);
+                const new_comment = document.createElement("tr");
+                const comment_content = document.createElement("td");    
+                const del = document.createElement("td");
+                
+    
+                new_comment.setAttribute("class", `comment-${comment_id}`);
+    
+                comment_content.innerHTML = `${content}`;
+    
+                del.innerHTML = `<button onclick="onClickDel(${comment_id})">삭제</button>`;
+            
+    
+                document.getElementById(`comment_input-${id}`).value = '';
+                
+    
+                element.append(new_comment);
+                new_comment.appendChild(comment_content);
+                new_comment.appendChild(del);
+            };
+        };
+    
+    
+    
+        const onClickDel = (id) => {
+            const url = "del_comment/";
+            requestDel.open("POST", url, true);
+            requestDel.setRequestHeader(
+                "Content-Type", "application/x-www-form-urlencoded"
+            );
+            requestDel.send(JSON.stringify({id: id}))
+        }
+    
+        const DelHandleResponse = () => {
+            if (requestComment.status < 400){
+                const {id} = JSON.parse(requestDel.response)
+    
+                const element = document.querySelector(`.comment-${id}`)
+                element.remove();
+    
+            }
+        }
+    
+        requestDel.onreadystatechange = () => {
+            if(requestDel.readyState === XMLHttpRequest.DONE){
+                DelHandleResponse();
+            }
+        }
+    </script>
+
+
+    
+</body>
+</html>

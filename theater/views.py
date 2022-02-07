@@ -1,5 +1,64 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
+from .forms import *
+
 
 def main(request):
    return render(request, template_name='theater/main.html')
+
+
+
+
+def preview(request):
+
+    movie = Movie.objects.all()
+
+    ctx = {'movie': movie}
+
+    return render(request, template_name='theater/preview.html', context=ctx)
+
+
+def preview_detail(request,pk):
+
+    #movie=Movie.objects.get(id=pk)
+    movie = get_object_or_404(Movie, pk=pk)
+    #print(movie.comment_set.all())
+    #preview_form = CommentPreviewForm()
+    #preview_comments = movie.commentpreview_set.all()
+
+
+    ctx = {
+       'movie': movie,
+       #'preview_form':preview_form,
+       #'preview_comments':preview_comments,
+       }
+
+    return render(request, 'theater/preview_detail.html',context=ctx)
+
+
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt
+def write_comment(request):
+    req = json.loads(request.body)
+    id = req['id']
+    type = req['type']
+    content = req['content']
+
+    movie = Movie.objects.get(id=id)
+    comment = CommentPreview.objects.create(movie=movie, content=content)
+    comment.save()
+    return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
+
+
+@csrf_exempt
+def del_comment(request):
+    req = json.loads(request.body)
+    comment_id = req['id']
+
+    comment = get_object_or_404(CommentPreview, id=comment_id)
+    comment.delete()
+    return JsonResponse({'id': comment_id})
