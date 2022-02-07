@@ -66,7 +66,7 @@ def genre_order(request):
    rows1 = Movie.objects.filter(comeout='개봉').order_by('-rating')[:20]
    rows3 = Movie.objects.filter(comeout='개봉').order_by('-release_date')[:20]
 
-   sort = request.GET.get('sort','')
+   sort = request.GET.get('so','')
    if sort == '1':
       content_list = Movie.objects.filter(comeout='개봉', genre='드라마').order_by('-id')[:20]
    elif sort ==  '2':
@@ -106,7 +106,7 @@ def genre_order(request):
 
 
 
-   ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3}
+   ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3, 'so':sort}
 
    return render(request, template_name='theater/chart_list.html', context=ctx) 
    

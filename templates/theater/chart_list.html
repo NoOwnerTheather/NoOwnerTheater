@@ -59,29 +59,29 @@
           <div class="ve"></div>
           <h5 class="section-heading mx-3">장르별 영화</h5>
           <div class="order-container d-flex justify-content-end">
-            <form method="GET" action="{% url 'theater:genre_order' %}">
-            <select name="sort" id="sort" class="form-select w-auto" aria-label="Default select example">
-              <option selected value="0">--- 정렬 기준 ---</option>
-              <option value="1">드라마</option>
-              <option value="2">멜로/로맨스</option>
-              <option value="3">다큐멘터리</option>
-              <option value="4">코미디</option>
-              <option value="5">액션</option>
-              <option value="6">가족</option>
-              <option value="7">미스터리</option>
-              <option value="8">스릴러</option>
-              <option value="9">범죄</option>
-              <option value="10">공포(호러)</option>
-              <option value="11">SF</option>
-              <option value="12">판타지</option>
-              <option value="13">성인물(에로)</option>
-              <option value="14">전쟁</option>
-              <option value="15">애니메이션</option>
-              <option value="16">사극</option>
-              <option value="17">뮤지컬</option>
+            <!-- <form method="GET" action="{% url 'theater:genre_order' %}"> -->
+            <select name="sort" id="sort" class="form-select w-auto so" aria-label="Default select example">
+              <option value="0" {% if so == '0' %}selected{% endif %}>--- 정렬 기준 ---</option>
+              <option value="1" {% if so == '1' %}selected{% endif %}>드라마</option>
+              <option value="2" {% if so == '2' %}selected{% endif %}>멜로/로맨스</option>
+              <option value="3" {% if so == '3' %}selected{% endif %}>다큐멘터리</option>
+              <option value="4" {% if so == '4' %}selected{% endif %}>코미디</option>
+              <option value="5" {% if so == '5' %}selected{% endif %}>액션</option>
+              <option value="6" {% if so == '6' %}selected{% endif %}>가족</option>
+              <option value="7" {% if so == '7' %}selected{% endif %}>미스터리</option>
+              <option value="8" {% if so == '8' %}selected{% endif %}>스릴러</option>
+              <option value="9" {% if so == '9' %}selected{% endif %}>범죄</option>
+              <option value="10 {% if so == '10' %}selected{% endif %}">공포(호러)</option>
+              <option value="11 {% if so == '11' %}selected{% endif %}">SF</option>
+              <option value="12 {% if so == '12' %}selected{% endif %}">판타지</option>
+              <option value="13 {% if so == '13' %}selected{% endif %}">성인물(에로)</option>
+              <option value="14 {% if so == '14' %}selected{% endif %}">전쟁</option>
+              <option value="15 {% if so == '15' %}selected{% endif %}">애니메이션</option>
+              <option value="16 {% if so == '16' %}selected{% endif %}">사극</option>
+              <option value="17 {% if so == '17' %}selected{% endif %}">뮤지컬</option>
             </select>
-            <button class="btn btn-primary" type="submit" value="">정렬</button>
-            </form>
+            <!-- <button class="btn btn-primary" type="submit" value="">정렬</button> -->
+            <!-- </form> -->
           </div>
         </div>
         <div class="row mx-auto my-auto">
@@ -109,6 +109,10 @@
         </div>
     </div>
 </section>
+
+<form id="searchForm" method="get" action="{% url 'theater:genre_order' %}">
+    <input type="hidden" id="so" name="so" value="{{ so }}">
+</form>
 
 
 <section class="page-section" style="background-color: #C1C1A0;" id="">
@@ -170,6 +174,16 @@ navigation : { // 네비게이션
     nextEl : '.swiper-button-next', // 다음 버튼 클래스명
     prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
 },
+});
+
+
+$(document).ready(function(){
+
+    $(".so").on('change', function() {
+        $("#so").val($(this).val());
+        // $("#page").val(1);
+        $("#searchForm").submit();
+    });
 });
 
 
