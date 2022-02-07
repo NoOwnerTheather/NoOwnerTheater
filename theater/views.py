@@ -40,6 +40,18 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
+def like_ajax(request):
+    req=json.loads(request.body) # json 임퐅, {'id':1, 'type':'like'} 파이썬 딕셔너리 형태로 변환하여 req변수에 담아준다
+    post_id=req['id']
+    button_type=req['type']
+
+    movie=Movie.objects.get(id=post_id) #id가 1인 포스트를 찾아서 변수에 넣어준다
+
+    movie.save()
+
+    return JsonResponse({'id':post_id, 'type':button_type})
+
 
 @csrf_exempt
 def write_comment(request):

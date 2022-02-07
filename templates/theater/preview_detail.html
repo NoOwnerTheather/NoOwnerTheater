@@ -54,13 +54,9 @@
             <button class="btn" onclick="onClickComment({{movie.id}}, 'write')">작성</button>
         </section>
         {% else %}
-        로그인 후 댓글을 쓸 수 있습니다.
+        로그인 후 이용할 수 있습니다.
         {% endif %}
 
-
-
-
-        <div>
             
             <table class="comment-table-{{movie.id}}">
                 {% for comment in movie.commentpreview_set.all %}
@@ -68,7 +64,10 @@
                     <td>{{comment.user}} </td>
                     <td>{{comment.content}} </td>
                     <td>{{comment.created_at}} </td>
-                    <td>좋아요 : {{comment.like}}</td>
+                    <td>
+                        <button class=" post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요</button>
+                        {{comment.like}}
+                    </td>
                     {% if user == comment.user %}
                     <td>
                         <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
@@ -99,12 +98,64 @@
 
     <script>
     
+    const requestLike = new XMLHttpRequest();
+
+    const onClickLike = (id, type) => { //  id값 /like,dislike
+        const url = "/preview/<int:pk>/like_ajax/"; // 앞뒤로'/'이거 꼭 붙여줘야한다. 문법임!
+        requestLike.open("POST", url, true);
+        requestLike.setRequestHeader(
+            "Content-Type",
+            "application/x-www-form-urlencoded"
+        );
+        
+        requestLike.send(JSON.stringify({id: id, type: type})); //{'id':1, 'type':like}-->JSon형태로 바꿔서 보내준다
+    };
+
+    const likeHandleResponse = () => {
+        //statue는 상태값, 오류가 있나 없나를 확인하기 위해 사용한 코드(아래).
+        if (requestLike.status < 400) {
+            const {id, type} = JSON.parse(requestLike.response); //JSON으로 변환
+            const element = document.querySelector(`.post-id-${id} .post__${type}`);
+            const originHTML = element.innerHTML; //'like 0' <<0을 올려줘야 하니깐 스페이스바 기준으로 나눠서 배열 형식으로 바꿔줌
+            const [buttonType, num] = originHTML.split(' '); //['like','0'] buttontye=like, num=0 다 string 형태임
+            const count = Number(num) + 1; //string타입이라 "0" 에 +1 하면 에러나니깐 Number()로 숫자로 만들어준다
+            
+            let like="좋아요";
+            if(originHTML=="좋아요 하기"){
+                console.log("a");
+                like="좋아요 취소";
+            }
+            else{
+                console.log("b");
+                like="좋아요 하기";
+                
+            }
+
+            element.innerHTML = `${like}`; //찾아놓은 innerHTML을 'like 1' 로 변환시켜서 사용자에게 보여준다
+
+
+        }
+    };
+
+    //응답 받을 준비 완료됐을때
+
+    requestLike.onreadystatechange = () => {
+        if (requestLike.readyState === XMLHttpRequest.DONE) {
+            //console.log("aaa");
+            likeHandleResponse();
+        }
+    }; //readyState는 리퀘스트가 초기화 됐는지, 연결됐는지, (ppt 부분) 응답할 준비가 되었는지 상태를 의미
+
+
+
+
+    
     
         const requestComment = new XMLHttpRequest();
         const requestDel = new XMLHttpRequest();
     
         const onClickComment = (id, type) => {
-            const url = "write_comment/";
+            const url = "/preview/<int:pk>/write_comment/";
             const content = document.getElementById(`comment_input-${id}`).value
             requestComment.open("POST", url, true);
             requestComment.setRequestHeader(
@@ -152,7 +203,7 @@
     
     
         const onClickDel = (id) => {
-            const url = "del_comment/";
+            const url = "/preview/<int:pk>/del_comment/";
             requestDel.open("POST", url, true);
             requestDel.setRequestHeader(
                 "Content-Type", "application/x-www-form-urlencoded"
