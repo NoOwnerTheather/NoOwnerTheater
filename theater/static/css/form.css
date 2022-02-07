@@ -3,7 +3,7 @@
 
 .enroll{
     font-family: 'Pretendard';
-
+    background-color: #F5F4F2;
 }
 
 .enroll{
@@ -84,7 +84,9 @@
     height:12rem;
     
 }
-
+#id_poster{
+    max-width: 40rem;
+}
 /* .form_line:after{
     content: "";
     display: block;

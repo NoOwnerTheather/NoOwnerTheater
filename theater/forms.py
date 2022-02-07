@@ -71,7 +71,29 @@ class ReviewForm(forms.ModelForm):
         model=Review 
 
         fields=('title','content','rating')
-
+        widgets={
+            'title': TextInput(attrs={
+                'class': "form-input",
+                'style': 'max-width: 300px;',
+                'placeholder': '글의 제목을 적어주세요'
+                
+                }),
+            
+            
+            'content': TextInput(attrs={
+                'class': "form-contentinput",
+                'style': 'max-width: 800px;',
+                'placeholder': '''텍스트 에디터적용 예정'
+                '''
+                }),
+            'rating': NumberInput(attrs={
+                'class': "form-input",
+                'style': 'max-width: 200px;',
+                'placeholder': '영화 평점을 적어주세요 0~5'
+                
+                }),
+                
+        }
 
 class InfoForm(forms.ModelForm):
 
@@ -79,4 +101,19 @@ class InfoForm(forms.ModelForm):
         model=Business
 
         fields=('title','content','image')
+        widgets={
+            'title': TextInput(attrs={
+                'class': "form-input",
+                'style': 'max-width: 300px;',
+                'placeholder': '글의 제목을 적어주세요'
+                
+                }),
+            
+            'content': TextInput(attrs={
+                'class': "form-contentinput",
+                'style': 'max-width: 800px;',
+                'placeholder': '''텍스트 에디터적용 예정'
+                '''
+                }),
 
+        }

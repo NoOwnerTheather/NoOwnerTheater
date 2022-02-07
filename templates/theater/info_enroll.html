@@ -5,20 +5,30 @@
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
 
+<div class="enroll">
 <table>
- <div>
-    제목
-    {{form.title}}
-</div>
-<div>
-    이미지
+    <div class="form_block">
+        <div class="main_text">제목</div>
+        <div class="sub_text">영상을 대표할 수 있거나 영상의 타이틀 제목을 적어주세요</div>
+       {{form.title}}
+   </div>
+<div class="form_block"> 
+    <div class="main_text">이미지</div>
+    <div class="sub_text">내용과 관련된 이미지를 업로드하세요</div>
+    
     {{form.image}}
+    <div class="plus_text">파일 형식은 jpg 또는 png 또는 gif로,
+        사이즈는 가로 200px, 세로 200px 이상으로 올려주세요.</div>
 </div>
-<div>
-    내용
+
+<div class="form_block">
+    <div class="main_text">내용</div>
+    <div class="sub_text">영화제 혹은 지원사업과 관련된 정보를 담고 있는 내용물을 작성해주세요!</div>
     {{form.content}}
 </div>
 </table>
-<input type="submit" value="등록하기">
+<input type="submit" value="취소하기">
+<input type="submit" value="작성완료">
 </form>
 {% endblock%}
+</div>
