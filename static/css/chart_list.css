@@ -1,5 +1,5 @@
 .vl {
-    border-left: 6px solid whitesmoke;
+    border-left: 6px solid #f5f4f2;
     height: 30px;
     position: absolute;
     margin-left: -3px;
@@ -7,7 +7,7 @@
   }
   
   .ve {
-      border-left: 6px solid #C1C1A0;
+    border-left: 6px solid #C1C1A0;
     height: 30px;
     position: absolute;
     margin-left: -3px;

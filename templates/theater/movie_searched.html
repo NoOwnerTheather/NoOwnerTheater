@@ -2,12 +2,16 @@
 
 {% block content %}
     {% if movies %}  
-    <form class="d-flex" method="POST" action="{% url 'theater:movie_search' %}">
-        {% csrf_token %}        
-        <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit"> Search </button>
-    </form>
-    <section class="page-section bg-warning" id="">
+    <div class="pt-5" style="display: flex; justify-content: center; align-items: center; background-color: #f5f4f2">
+        <form  method="POST" action="{% url 'theater:movie_search' %}">
+            {% csrf_token %}     
+            <div class="board-search">
+                <input value="{{searched}}" name="searched"/ >
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+      </div>
+    <section class="page-section" style="background-color: #C1C1A0;" id="">
         <div class="container text-dark p-4">
         {% for movie in movies %}       
         <div class="col-md-4">
@@ -22,13 +26,17 @@
         </div>
     </section>
     {% else %}
-    <form class="d-flex" method="POST" action="{% url 'theater:movie_search' %}">
-        {% csrf_token %}        
-        <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit"> Search </button>
-    </form>
+    <div class="pt-5" style="display: flex; justify-content: center; align-items: center; background-color: #f5f4f2">
+        <form  method="POST" action="{% url 'theater:movie_search' %}">
+            {% csrf_token %}     
+            <div class="board-search">
+                <input value="{{searched}}" name="searched"/ >
+                <button type="submit"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+      </div>
     
-    <section class="page-section bg-warning py-5" id="">
+    <section class="page-section py-5" style="background-color: #C1C1A0;" id="">
         <i class="fas fa-exclamation-circle d-flex justify-content-center"></i>
         <h1 class="text-center">검색된 영화가 없습니다.</h1>
     </section>

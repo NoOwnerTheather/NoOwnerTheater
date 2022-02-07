@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form class="d-flex" method="POST" action="{% url 'theater:movie_search' %}">
-        {% csrf_token %}        
-        <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit"> Search </button>
-    </form>
-    <section class="page-section bg-warning" id="">
+<div class="pt-5" style="display: flex; justify-content: center; align-items: center; background-color: #f5f4f2">
+  <form  method="POST" action="{% url 'theater:movie_search' %}">
+      {% csrf_token %}     
+      <div class="board-search">
+          <input placeholder="검색어를 입력하시오" name="searched"/ >
+          <button type="submit"><i class="fas fa-search"></i></button>
+      </div>
+  </form>
+</div>
+    <section class="page-section" style="background-color: #C1C1A0;" id="">
         <div class="container text-dark p-4">
           <div class="text-dark pb-2">
             <div class="vl"></div>
@@ -17,7 +21,7 @@
           </div>
         {% for movie in movies %}       
         <div class="col-md-4">
-            <div class="card" style="width: 100%">
+            <div class="card my-3" style="width: 100%">
               <img src="{{movie.poster.url}}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title text-center">{{movie.title}}</h5>

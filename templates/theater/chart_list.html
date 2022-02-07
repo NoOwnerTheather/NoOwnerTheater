@@ -5,19 +5,24 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
-<form class="d-flex" method="POST" action="{% url 'theater:movie_search' %}">
-    {% csrf_token %}        
-    <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="Search">
-    <button class="btn btn-outline-success" type="submit"> Search </button>
-</form>
 
-<section class="page-section bg-warning" id="">
+<div class="pt-5" style="display: flex; justify-content: center; align-items: center; background-color: #f5f4f2">
+    <form  method="POST" action="{% url 'theater:movie_search' %}">
+        {% csrf_token %}     
+        <div class="board-search">
+            <input placeholder="검색어를 입력하시오" name="searched"/ >
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </div>
+    </form>
+</div>
+
+<section class="page-section" style="background-color: #C1C1A0;" id="">
     <div class="container text-dark p-4">
         <div class="text-dark pb-2">
           <div class="vl"></div>
           <h5 class="section-heading mx-3">지금 인기 있는 영화</h5>
           <div class="d-flex justify-content-end">
-            <a class="badge rounded-pill bg-warning text-dark" href="{% url 'theater:movie_list_popular' %}">전체 보기</a>
+            <a class="badge rounded-pill bg-light text-dark" href="{% url 'theater:movie_list_popular' %}">전체 보기</a>
           </div>
         </div>
         
@@ -48,7 +53,7 @@
 </section>
 
 
-<section class="page-section bg-light" id="">
+<section class="page-section" style="background-color: #f5f4f2;" id="">
     <div class="container text-dark p-4">
         <div class="text-dark pb-2">
           <div class="ve"></div>
@@ -87,7 +92,7 @@
                         <div class="card" style="width: 100%">
                             <img src="{{row2.poster.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
-                              <h5 class="card-title text-center">{{rows2.title}}</h5>
+                                <h5 class="card-title text-center">{{row2.title}}</h5>
                             </div>
                         </div>
                     </div>
@@ -106,10 +111,10 @@
 </section>
 
 
-<section class="page-section bg-light" id="">
+<section class="page-section" style="background-color: #C1C1A0;" id="">
     <div class="container text-dark p-4">
         <div class="text-dark pb-2">
-          <div class="ve"></div>
+          <div class="vl"></div>
           <h5 class="section-heading mx-3">최근 개봉한 영화</h5>
           <div class="d-flex justify-content-end">
             <a class="badge rounded-pill bg-light text-dark" href="{% url 'theater:movie_list_recent' %}">전체 보기</a>
@@ -123,7 +128,7 @@
                         <div class="card" style="width: 100%">
                             <img src="{{row3.poster.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
-                              <h5 class="card-title text-center">{{rows3.title}}</h5>
+                              <h5 class="card-title text-center">{{row3.title}}</h5>
                             </div>
                         </div>
                     </div>
