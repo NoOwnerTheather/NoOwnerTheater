@@ -84,7 +84,7 @@ class Business(models.Model):
     content = models.TextField(verbose_name='내용')
     hits = models.IntegerField(verbose_name='조회수', default=0)
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
-
+    image=models.ImageField(upload_to="poster/", null=True, blank=True, verbose_name="포스터")
     def __str__(self):
         return str(self.title)
 

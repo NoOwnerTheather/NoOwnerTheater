@@ -5,15 +5,12 @@
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
 
-<table>
+
  <div>
     {{form.title}}
 </div>
 <div>
     {{form.director}}
-</div>
-<div>
-    {{form.actor}}
 </div>
 <div>
     {{form.actor}}
@@ -41,7 +38,7 @@
     url
     {{form.url}}
 </div>
-</table>
-<input type="submit" valye="등록하기">
+
+<input type="submit" value="등록하기">
 </form>
 {% endblock%}

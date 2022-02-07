@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+
+<table>
+ <div>
+     리뷰 타이틀
+    {{form.title}}
+</div>
+<div>
+    영상 평점
+    {{form.rating}}
+</div>
+<div>
+    영화 리뷰
+    {{form.content}}
+</div>
+</table>
+<input type="submit" value="등록하기">
+</form>
+{% endblock%}
