@@ -178,7 +178,7 @@ button:focus,
 button:active {
   box-shadow: none;
   outline: none;
-
+}
 input:focus {
   outline: none;
 }
