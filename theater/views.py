@@ -72,7 +72,7 @@ def write_comment(request,pk):
 
    movie = Movie.objects.get(id=id)
    comment = CommentPreview.objects.create(movie=movie, content=content, user=user)
-   print(comment)
+   #print(comment)
    comment.save()
    return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
 

@@ -51,7 +51,7 @@
         {% if user.is_authenticated %}
         <section class="input">
             <input id="comment_input-{{movie.id}}" placeholder="댓글을 남겨주세요" type="text"/>
-            <button class="btn" onclick="onClickComment({{movie.id}}, 'write', {{request.user}})">작성</button>
+            <button class="btn" onclick="onClickComment({{movie.id}}, 'write', '{{request.user}}')">작성</button>
         </section>
         {% else %}
         로그인 후 이용할 수 있습니다.
@@ -141,7 +141,7 @@
         const requestDel = new XMLHttpRequest();
     
         const onClickComment = (id, type, user) => {
-            const url = "/preview/1/write_comment/";
+            const url = "/preview/<int:pk>/write_comment/";
             console.log("hii")
             const content = document.getElementById(`comment_input-${id}`).value
             //const user = document.getElementById(`comment_input-${id}`).value
@@ -158,11 +158,6 @@
                 WriteHandleResponse();
             }
         }
-    
-    
-    
-    
-    
     
         const WriteHandleResponse = () => {
             if (requestComment.status < 400){
@@ -190,7 +185,8 @@
         };
     
     
-    
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         const onClickDel = (id) => {
             const url = "/preview/1/del_comment/";
             requestDel.open("POST", url, true);
