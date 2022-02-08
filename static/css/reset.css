@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
 }
@@ -7,7 +6,6 @@
 @import url(business_detail.css);
 @import url(business_search.css);
 @import url(base.css);
-
 
 html,
 body,
@@ -137,7 +135,6 @@ table {
   border-spacing: 0;
 }
 
-
 button {
   background: inherit;
   border: none;
@@ -177,10 +174,12 @@ button:focus,
 button:active {
   box-shadow: none;
   outline: none;
+}
 
 input:focus {
   outline: none;
 }
+
 a {
   color: inherit;
   color: black !important;
@@ -198,5 +197,4 @@ a:visited {
 a:hover {
   color: black;
   text-decoration: none !important;
-
 }
