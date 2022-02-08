@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}?after"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}?after"> 
     <!--font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
@@ -28,7 +33,7 @@
         <div class="nav_right">
             <a href="{% url 'theater:chart_list' %}">영화 차트</a>
             <a>영화 리뷰</a>
-            <a>온라인 시사회</a>
+            <a href="{% url 'theater:preview' %}">>온라인 시사회</a>
             <a  href="{% url 'theater:business_list' %}">지원사업 게시판</a>
             {% if user.is_authenticated %}
             <div class="dropdown event-dropdown">
@@ -37,7 +42,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="#">마이페이지</a></li>
-                    <li><a href="#">로그아웃</a></li>
+                    <li><a href="{% url 'account:logout' %}">로그아웃</a></li>
                 </ul>
             </div>
             {% else %}

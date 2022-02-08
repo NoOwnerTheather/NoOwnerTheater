@@ -1,0 +1,18 @@
+@import "reset.css";
+
+
+.preview_detail_image{
+
+    display: flex;
+
+    flex-direction: row;
+
+  
+  
+
+}
+
+.preview_detail_image_item{
+
+    background-color: aqua;
+}

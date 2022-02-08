@@ -1,8 +1,14 @@
+
+* {
+  box-sizing: border-box;
+}
+
 @import url(business_list.css);
 @import url(business_detail.css);
 @import url(business_search.css);
 @import url(chart_list.css);
 @import url(base.css);
+
 
 html,
 body,
@@ -92,7 +98,9 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
+
 article,
 aside,
 details,
@@ -124,10 +132,53 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+
+button {
+  background: inherit;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+/* 방문한 적 있는 링크 */
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+input {
+  -webkit-appearance: none; /* Safari and Chrome */
+  -moz-appearance: none; /* Firefox */
+  appearance: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input:focus,
+input:active,
+button:focus,
+button:active {
+  box-shadow: none;
+  outline: none;
+
 input:focus {
   outline: none;
 }
@@ -148,4 +199,5 @@ a:visited {
 a:hover {
   color: black;
   text-decoration: none !important;
+
 }
