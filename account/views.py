@@ -35,7 +35,7 @@ def login_view(request):
       )
 
       if user is not None:
-        auth.login(request, user)
+        auth.login(request, user,  backend='django.contrib.auth.backends.ModelBackend')
         return redirect('theater:main')
 
     
@@ -58,7 +58,7 @@ def signup_view(request):
     form = SignupForm(request.POST)
     if form.is_valid():
       user = form.save()
-      auth.login(request, user)
+      auth.login(request, user,  backend='django.contrib.auth.backends.ModelBackend')
       return redirect('theater:main')
     return redirect('account:signup')
 

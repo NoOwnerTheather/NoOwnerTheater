@@ -1,3 +1,10 @@
+@import url(business_list.css);
+@import url(business_detail.css);
+@import url(chart_list.css);
+@import url(login.css);
+@import url(form.css);
+
+
 .navbar {
   display: flex;
   padding: 2rem 0;

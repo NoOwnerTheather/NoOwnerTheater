@@ -1,0 +1,118 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+
+.enroll{
+    font-family: 'Pretendard';
+    background-color: #F5F4F2;
+}
+
+.enroll{
+    margin-left:1rem;
+}
+.title{
+    font-size: 3.8rem;
+    color:rgb(112,112,112);
+    font-weight: bold;
+    margin-bottom:1rem;
+}
+
+.main_text{
+    font-size: 2.7rem;
+    color:rgb(112,112,112);
+    font-weight: bold;
+    margin-bottom:1rem;
+    max-width: 50rem;
+}
+
+.plus_text{
+    font-size:1.4rem;
+    color:rgb(112,112,112);
+    opacity: 47%;
+    
+}
+.sub_text{
+    font-size:2.1rem;
+    margin-bottom:0.8rem;
+    max-width: 80rem;
+}
+.form_text{
+    margin:2rem 0;
+    padding-left:20rem;
+    text-align: center;
+}
+.form_text .main_text{
+    padding-left:30rem;
+    color:#D151AF
+}
+.form_block{
+    height:17rem;
+    display: flex;
+    flex-direction: column;
+    margin-top:3rem;
+    font-family: 'Pretendard';
+}
+.form_block:after{
+   
+    content: "";
+    display: block;
+    width: 58rem;
+    border-bottom: 1px solid #bcbcbc;
+    margin-top: 3.6rem;
+    
+  }
+.form_line{
+    display:flex;
+    
+}
+.line_bottom{
+    content: "";
+    display: block;
+    width: 108rem;
+    border-bottom: 1px solid #bcbcbc;
+    height:1px;
+    
+}
+.cutline{
+    content: "";
+    display: block;
+    height: 10rem;
+    border-right: 1px solid #bcbcbc;
+    margin-right:5.6rem;
+    margin-top:5rem;
+    
+}
+.form_line .form_block:after{
+
+    opacity: 0%;
+}
+.form-input{
+    font-size:1.5rem;
+    height:4rem;
+}
+.form-contentinput{
+    font-size:1.5rem;
+    height:12rem;
+    
+}
+#id_poster{
+    max-width: 40rem;
+}
+/* .form_line:after{
+    content: "";
+    display: block;
+    width: 108rem;
+    border-bottom: 1px solid #bcbcbc;
+    margin: 20px 0px;
+    
+} */
+
+#no_enroll{
+    
+    width:7rem;
+}
+
+#yes_enroll{
+    
+    width:7rem;
+}
+

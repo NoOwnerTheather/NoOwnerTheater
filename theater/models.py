@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 TYPE_CHOICE = {('일반 사용자', '일반 사용자'), ('제작사', '제작사')}
 GENDER_CHOICE = {('남자', '남자'), ('여자', '여자')}
 class User(AbstractUser):
+
     nickname = models.CharField(verbose_name='닉네임', max_length=20)
     phone = models.CharField(verbose_name='휴대폰 번호', max_length=20)
     type = models.CharField(verbose_name='가입 유형', choices=TYPE_CHOICE, max_length=20)
@@ -84,7 +85,7 @@ class Business(models.Model):
     content = models.TextField(verbose_name='내용')
     hits = models.IntegerField(verbose_name='조회수', default=0)
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
-
+    image=models.ImageField(upload_to="poster/", null=True, blank=True, verbose_name="포스터")
     def __str__(self):
         return str(self.title)
 
