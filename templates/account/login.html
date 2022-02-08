@@ -1,12 +1,44 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
-<h1>로그인 페이지</h1>
-<form action="{% url 'account:login' %}" method="POST">
-  {% csrf_token %}
-  {{form.as_p}}
-  <button type="submit">로그인</button>
-</form>
 
+
+<!-- <div class="login-background">
+  <form action="{% url 'account:login' %}" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">로그인</button>
+  </form>
+  <a href="/accounts/naver/login/?process=login">네이버로그인</a> -->
+
+<div class="login-background">
+  <div class="d-flex justify-content-center align-items-center flex-column" style="margin: 00px 0px 50px 0px">
+    <img src="{% static 'img/logo.png' %}">
+  </div>
+  <div class="container card" style="height: 50rem; width: 80rem;">
+    <div class="d-flex justify-content-center align-items-center flex-column" style="height: 50rem;">
+        <form class="form-block text-center w-30" method="POST" action="{% url 'account:login' %}">
+            <div style="display:inline-flex; height:6rem; width:40rem;">
+              {% csrf_token %}
+              {%if form.errors%}
+                      {{ form.non_field_errors }}
+              {% endif %}
+            </div>
+
+            <div class="form-group mb-5">
+                <input class="form-control input-lg input-style" name="username" type="text" maxlength="30" placeholder="ID" style="height:6rem; width:40rem" required/>
+            </div>
+            <div class="form-group mb-5">
+                <input class="form-control input-lg input-style" name="password" type="password" maxlength="30" placeholder="PASSWORD" style="height:6rem; width:40rem" required/>
+            </div>
+            <button type="submit" class="mb-5 login-button" style="height: 5rem; width: 15rem;">로그인</button>
+        </form>
+        <div style="margin-bottom: 2rem; font-size: 1.8rem;">
+          <a href="/account/signup" style="color: #080808 !important; text-decoration: underline;">앗, 아직 계정이 없으신가요?</a>
+        </div>
+      <a href="/accounts/naver/login/?process=login"><img src="{% static 'img/naver_logo.png' %}" style="width:15rem;height:4rem;" ></a>
+    </div>
+  </div>
+</div>
 {% endblock %}

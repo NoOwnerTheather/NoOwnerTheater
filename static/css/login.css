@@ -1,0 +1,78 @@
+.login-background {
+    background-color: #f5f4f2;
+    height: 110vh;
+}
+
+.signup-background {
+    background-color: #f5f4f2;
+    height: 100rem;
+    width: auto;
+}
+
+.login-button{
+background-color: black;
+border: none;
+border-radius: 2.5rem;
+font-size: 20px;
+color:white;
+} 
+
+.card {
+    border-radius: 25px !important;
+    box-shadow: 6px 6px 20px rgb(209, 209, 209);
+}
+
+.input-style{
+    border-radius: 0px !important;
+    box-shadow: 3px 3px 10px rgb(209, 209, 209) !important;
+}
+
+.input-style-no-shadow{
+    border-radius: 0px !important;
+}
+
+.donate-now {
+    list-style-type: none;
+    margin: 25px 0 0 0;
+    padding: 0;
+  }
+  
+.donate-now li {
+    float: left;
+    width: 19rem;
+    height: 6.5rem;
+    position: relative;
+}
+
+.donate-now label,
+.donate-now input {
+    padding: 5px;
+    display: inline-flex;
+    position: absolute;
+    font-size: 18px;
+    font-weight: 400;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.donate-now input[type="radio"] {
+    opacity: 0.01;
+    z-index: 100;
+}
+
+.donate-now input[type="radio"]:checked+label,
+    .Checked+label {
+    background: #C1C1A0 !important;
+}
+
+.donate-now label {
+    border: 1px solid #CCC;
+    cursor: pointer;
+    z-index: 90;
+}
+
+.donate-now label:hover {
+    background: #DDD;
+}
