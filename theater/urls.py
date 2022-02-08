@@ -31,6 +31,9 @@ urlpatterns = [
    path('movie_list_popular/', views.movie_list_popular, name="movie_list_popular"),
    path('movie_list_recent/', views.movie_list_recent, name="movie_list_recent"),
    path('genre_order/', views.genre_order, name="genre_order"),
+   path('<int:pk>/movie_detail', view=views.movie_detail, name='movie_detail'),
+
+
 
 
    path('business_hits_ajax/',views.business_hits_ajax, name='business_hits_ajax'),

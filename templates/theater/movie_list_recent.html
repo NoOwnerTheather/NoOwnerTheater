@@ -25,6 +25,7 @@
               <img src="{{movie.poster.url}}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title text-center">{{movie.title}}</h5>
+                <span class="stars text-warning me-2 d-flex justify-content-center">{{movie.rating}}</span>
               </div>
             </div>
         </div>
@@ -32,4 +33,20 @@
         </div>
     </section>
     
+  <script>
+      const rating = document.querySelectorAll(".stars");
+      rating.forEach((value) => {
+      let ratingStars = "";
+      for (let i = 0; i < Math.floor(value.innerText); i++) {
+        ratingStars += '<i class="fas fa-star"></i>';
+      }
+      if (value.innerText % 1) {
+        ratingStars += '<i class="fas fa-star-half"></i>';
+      }
+      value.innerHTML = ratingStars;
+    });
+  </script>
+  
+
+
 {% endblock %}

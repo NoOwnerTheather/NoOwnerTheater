@@ -79,6 +79,7 @@ def review_fix(request,pk):
       ctx={'form':form}
       return render(request,template_name='theater/review.html',context=ctx)
       # redirect랑 render 주소는 임시
+      
 def review_delete(request,pk):
    post=get_object_or_404(Review,id=pk)
    post.delete()
@@ -294,12 +295,19 @@ def genre_order(request):
    else:
       content_list = Movie.objects.filter(comeout='개봉').order_by('?')[:20]
 
-
-
    ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3, 'so':sort}
 
    return render(request, template_name='theater/chart_list.html', context=ctx) 
    
+def movie_detail(request, pk):
+   movie = Movie.objects.get(id=pk)
+   reviews = movie.review_set.all()
+   ctx = {
+        'movie' : movie,
+        'reviews' : reviews,
+    }
+
+   return render(request, template_name='theater/movie_detail.html', context=ctx)
 
 
 

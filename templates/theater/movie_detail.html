@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    
+    
+    <p>감독 | {{ movie.director }}</p>
+    <p>장르 | {{ movie.genre }}</p>
+    <p>출연 | {{ movie.actor }}</p>
+    <p>개봉 | {{ movie.release_date }}</p>
+
+    <p>{{ movie.title }}</p>
+    <p>{{ movie.content }}</p>
+    <img src="{{movie.poster.url}}" alt="...">
+
+    <p>{{ movie.rating }}</p>
+    <a class="badge rounded-pill bg-light text-dark" href="{% if movie.video %} {{movie.video.url}} {% endif %}">예고편</a>
+    <h2><a href="{% url 'theater:review_enroll'%}">리뷰 작성</a></h2>
+    
+
+    <p>Review</p>
+    {% for idea in ideas %}
+        <p>{{review.title}}</p>
+        <p>{{review.user}}</p>
+    {% endfor %}
+    
+
+  
+  
+    
+    <a href="">전체 보기(리뷰)</a>
+    <a href="{% url 'theater:chart_list' %}">목록</a>
+
+
+
+
+
+
+
+
+{% endblock %}
