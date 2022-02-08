@@ -1,0 +1,61 @@
+@import url(form.css);
+.navbar {
+    display: flex;
+    padding: 20px 0;
+    font-weight: bold;
+    background-color: #f5f4f2;
+  }
+  
+  .nav_left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 30px;
+    font-weight: bold;
+  }
+  
+  .nav_left img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .nav_right {
+    display: flex;
+    flex-direction: row;
+  }
+  .nav_right a {
+    margin-left: 18px;
+  }
+  
+  .nav_right a:hover {
+    border-bottom: 1px solid black;
+  }
+  
+  
+  @media screen and (max-width: 1024px) {
+    html {
+      font-size: 62.5%;
+    }
+  }
+  
+  @media screen and (max-width: 900px) {
+    html {
+      font-size: 52.5%;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    html {
+      font-size: 42.5%;
+    }  
+  }
+  
+  @media screen and (max-width: 480px) {
+    html {
+      font-size: 22.5%;
+    }  
+  }
+  body{
+   background-color: #F5F4F2;
+  }
