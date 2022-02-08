@@ -51,7 +51,7 @@
         {% if user.is_authenticated %}
         <section class="input">
             <input id="comment_input-{{movie.id}}" placeholder="댓글을 남겨주세요" type="text"/>
-            <button class="btn" onclick="onClickComment({{movie.id}}, 'write')">작성</button>
+            <button class="btn" onclick="onClickComment({{movie.id}}, 'write', {{request.user}})">작성</button>
         </section>
         {% else %}
         로그인 후 이용할 수 있습니다.
@@ -92,7 +92,7 @@
 
     <a class="btn btn-dark" type="button" href="{% url 'theater:preview' %}">목록</a>
 
-    {% endblock %}
+    
 
 
 
@@ -101,7 +101,7 @@
     const requestLike = new XMLHttpRequest();
 
     const onClickLike = (id, type) => { //  id값 /like,dislike
-        const url = "/preview/<int:pk>/like_ajax/"; // 앞뒤로'/'이거 꼭 붙여줘야한다. 문법임!
+        const url = "/preview/1/like_ajax/"; // 앞뒤로'/'이거 꼭 붙여줘야한다. 문법임!
         requestLike.open("POST", url, true);
         requestLike.setRequestHeader(
             "Content-Type",
@@ -111,6 +111,8 @@
         requestLike.send(JSON.stringify({id: id, type: type})); //{'id':1, 'type':like}-->JSon형태로 바꿔서 보내준다
     };
 
+
+
     const likeHandleResponse = () => {
         //statue는 상태값, 오류가 있나 없나를 확인하기 위해 사용한 코드(아래).
         if (requestLike.status < 400) {
@@ -119,17 +121,6 @@
             const originHTML = element.innerHTML; //'like 0' <<0을 올려줘야 하니깐 스페이스바 기준으로 나눠서 배열 형식으로 바꿔줌
             const [buttonType, num] = originHTML.split(' '); //['like','0'] buttontye=like, num=0 다 string 형태임
             const count = Number(num) + 1; //string타입이라 "0" 에 +1 하면 에러나니깐 Number()로 숫자로 만들어준다
-            
-            let like="좋아요";
-            if(originHTML=="좋아요 하기"){
-                console.log("a");
-                like="좋아요 취소";
-            }
-            else{
-                console.log("b");
-                like="좋아요 하기";
-                
-            }
 
             element.innerHTML = `${like}`; //찾아놓은 innerHTML을 'like 1' 로 변환시켜서 사용자에게 보여준다
 
@@ -150,19 +141,21 @@
 
 
     
-    
         const requestComment = new XMLHttpRequest();
         const requestDel = new XMLHttpRequest();
     
-        const onClickComment = (id, type) => {
-            const url = "/preview/<int:pk>/write_comment/";
+        const onClickComment = (id, type, user) => {
+            const url = "/preview/1/write_comment/";
+            console.log("hii")
             const content = document.getElementById(`comment_input-${id}`).value
+            //const user = document.getElementById(`comment_input-${id}`).value
             requestComment.open("POST", url, true);
             requestComment.setRequestHeader(
                 "Content-Type", "application/x-www-form-urlencoded"
             );
-            requestComment.send(JSON.stringify({id: id, type: type, content: content}))
+            requestComment.send(JSON.stringify({id: id, type: type, content: content, user:user}))
         }
+
     
         requestComment.onreadystatechange = () => {
             if(requestComment.readyState === XMLHttpRequest.DONE){
@@ -203,7 +196,7 @@
     
     
         const onClickDel = (id) => {
-            const url = "/preview/<int:pk>/del_comment/";
+            const url = "/preview/1/del_comment/";
             requestDel.open("POST", url, true);
             requestDel.setRequestHeader(
                 "Content-Type", "application/x-www-form-urlencoded"
@@ -212,7 +205,7 @@
         }
     
         const DelHandleResponse = () => {
-            if (requestComment.status < 400){
+            if (requestDel.status < 400){
                 const {id} = JSON.parse(requestDel.response)
     
                 const element = document.querySelector(`.comment-${id}`)
@@ -227,6 +220,8 @@
             }
         }
     </script>
+
+    {% endblock %}
 
 
     
