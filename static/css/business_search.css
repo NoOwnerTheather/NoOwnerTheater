@@ -22,6 +22,7 @@
   border-bottom: 1px solid #707070;
   margin-bottom: 4rem;
   width: 200px;
+  display: flex;
 }
 
 .board-search input {
@@ -32,6 +33,11 @@
 .board-search i {
   cursor: pointer;
 }
+.board-search button {
+  background-color: #f5f4f2;
+  border: none;
+}
+
 .board-header-count {
   display: flex;
   justify-content: flex-start;

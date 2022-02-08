@@ -2,6 +2,8 @@ from re import template
 from multiprocessing import context
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
+from django.db.models import Q
+
 from .forms import MovieForm,ReviewForm,InfoForm
 def main(request):
    return render(request, template_name='theater/main.html')
@@ -126,6 +128,18 @@ def business_detail(request, pk):
 
    return render(request, template_name='theater/business_detail.html', context=ctx) 
 
+def business_search(request):
+   if request.method == 'POST':
+      searched = request.POST['searched']        
+      if not searched:
+         return redirect('theater:business_list')         
+      businesses = Business.objects.filter(Q(title__contains=searched)|Q(content__contains=searched)).order_by('-id')
+      ctx = {'searched': searched, 'businesses': businesses}
+      return render(request, 'theater/business_search.html', context=ctx)
+
+   else:
+      return render(request, 'theater/business_search.html', {})
+
 def chart_list(request):
    rows1 = Movie.objects.filter(comeout='개봉').order_by('-rating')[:20]
    rows2 = Movie.objects.filter(comeout='개봉').order_by('?')[:20]
@@ -162,7 +176,7 @@ def genre_order(request):
    rows1 = Movie.objects.filter(comeout='개봉').order_by('-rating')[:20]
    rows3 = Movie.objects.filter(comeout='개봉').order_by('-release_date')[:20]
 
-   sort = request.GET.get('sort','')
+   sort = request.GET.get('so','')
    if sort == '1':
       content_list = Movie.objects.filter(comeout='개봉', genre='드라마').order_by('-id')[:20]
    elif sort ==  '2':
@@ -202,7 +216,7 @@ def genre_order(request):
 
 
 
-   ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3}
+   ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3, 'so':sort}
 
    return render(request, template_name='theater/chart_list.html', context=ctx) 
    
