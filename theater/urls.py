@@ -11,7 +11,7 @@ urlpatterns = [
    path('review_enroll/',views.review_enroll,name='review_enroll'),
    path('<int:pk>/review_fix/',views.review_fix,name='review_fix'),
    path('<int:pk>/review_delete/',views.review_delete,name='review_delete'),
-   path('info_enroll',views.info_enroll,name="info_enroll"),
+   path('info_enroll/',views.info_enroll,name="info_enroll"),
    path('<int:pk>/info_fix/',views.info_fix,name='info_fix'),
    path('<int:pk>/info_delete/',views.info_delete,name='info_delete')
 ]

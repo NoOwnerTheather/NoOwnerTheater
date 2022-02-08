@@ -21,6 +21,7 @@
     color:rgb(112,112,112);
     font-weight: bold;
     margin-bottom:1rem;
+    max-width: 50rem;
 }
 
 .plus_text{
@@ -32,8 +33,17 @@
 .sub_text{
     font-size:2.1rem;
     margin-bottom:0.8rem;
+    max-width: 80rem;
 }
-
+.form_text{
+    margin:2rem 0;
+    padding-left:20rem;
+    text-align: center;
+}
+.form_text .main_text{
+    padding-left:30rem;
+    color:#D151AF
+}
 .form_block{
     height:17rem;
     display: flex;
@@ -95,3 +105,13 @@
     margin: 20px 0px;
     
 } */
+
+#no_enroll{
+    
+    width:7rem;
+}
+
+#yes_enroll{
+    
+    width:7rem;
+}

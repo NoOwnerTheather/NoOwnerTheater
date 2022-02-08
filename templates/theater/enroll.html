@@ -57,11 +57,12 @@
     <div class="sub_text">영상의 개봉 여부를 적어주세요! 영상이 개봉되었다면 차트 페이지에, 개봉되지 않았다면 온라인 시사회로 올라갑니다!</div>
     {{form.comeout}}
 </div>
-<div class="form_block">
+<div class="form_text">
 <div class="main_text">거의 끝났습니다!</div>
 <div class="sub_text">지금까지의 내용만으로도 영화 등록은 가능합니다.</div><p></p>
 <div class="sub_text">하지만 영상을 쉽게 파악하고 좋은 인상을 받을 수 있도록 추가 항목을 작성해주세요!</div>
 </div>
+<div class="line_bottom"></div> 
 <div class="form_block">
     <div class="main_text">영상 소개</div>
     <div class="sub_text">영상을 소개하거나 영상에 대한 정보를 담고 있는 소개를 작성해주세요!</div>
@@ -89,14 +90,21 @@
     <div class="sub_text">영상을 시청 또는 펀딩할 수있는 링크가 있다면 올려주세요! 영상을 구매할 수 있는 바로가기 링크도 좋습니다!</div>
     {{form.url}}
 </div>
-</div>
-
-<div class="form_block">
+    <div class="form_text">
     <div class="main_text">끝났습니다!</div>
     <div class="sub_text">저희 주인없는 영화관에 영상을 등록해주신 점에 대해 다시 한번 감사의 말씀을 표합니다</div><p></p>
     <div class="sub_text">영상은 약간의 검수과정만 거치고 최대한 빠른 시일내에 영상 차트에 올라갈 예정입니다!</div>
-    </div>
-<input type="submit" value="등록하기">
+</div>
+
+
+<div class="button_area">
+<input id="no_enroll" type="button" value="취소하기" onClick="history.go(-1)"> 
+<input id="yes_enroll"type="submit" value="등록하기">
+
+
+</div>
+</div>
 </form>
+
 
 {% endblock%}
