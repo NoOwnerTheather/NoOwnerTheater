@@ -1,0 +1,7 @@
+@import "reset.css";
+
+.previewcard{
+    display: flex;
+    flex-wrap:wrap;
+
+}

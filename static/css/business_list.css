@@ -13,7 +13,7 @@
 .board-header-title {
   display: flex;
   justify-content: center;
-  font-size: 36px;
+  font-size: 3.6rem;
   font-weight: bold;
   margin-bottom: 4rem;
 }
@@ -21,7 +21,8 @@
 .board-search {
   border-bottom: 1px solid #707070;
   margin-bottom: 4rem;
-  width: 200px;
+  width: 20rem;
+  display: flex;
 }
 
 .board-search input {
@@ -72,7 +73,7 @@ tbody > tr {
 .business_create button {
   background-color: #c1c1a0;
   color: #fff;
-  font-size: 15px;
+  font-size: 1.5rem;
   font-weight: bold;
   border: none;
   padding: 0.5rem 2rem;

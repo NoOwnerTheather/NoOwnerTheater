@@ -13,7 +13,7 @@
 .board-header-title {
   display: flex;
   justify-content: center;
-  font-size: 36px;
+  font-size: 4rem;
   font-weight: bold;
   margin-bottom: 4rem;
 }
@@ -24,8 +24,8 @@
   justify-content: space-between;
   border-top: 3px solid #707070;
   border-bottom: 3px solid #707070;
-  padding: 8px 0px;
-  font-size: 14px;
+  padding: 1rem 0px;
+  font-size: 1.4rem;
   align-items: center;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .business_detail_left {
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 
 .business_detail_right {
@@ -43,15 +43,15 @@
 }
 
 .business_detail_right p {
-  margin-left: 8px;
+  margin-left: 0.8rem;
 }
 
 .business_detail_right i {
-  margin-right: 4px;
+  margin-right: 0.4rem;
 }
 
 .business_detail_content {
-  padding: 12px 0;
+  padding: 1.2rem 0;
 }
 .business_list {
   display: flex;
@@ -61,7 +61,7 @@
 .business_list button {
   background-color: #c1c1a0;
   color: #fff;
-  font-size: 15px;
+  font-size: 1.5rem;
   font-weight: bold;
   border: none;
   padding: 0.5rem 2rem;

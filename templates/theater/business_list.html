@@ -28,7 +28,7 @@
                 {% for business in businesses %}
                 <tr>
                     <th scope="row">{{business.id}}</th>
-                    <td><a href="{% url 'theater:business_detail' pk=business.pk %}">{{business.title}}</a></td>
+                    <td><a href="{% url 'theater:business_detail' pk=business.pk %}" onclick="onClickTitle({{ business.id }})" ">{{business.title}}</a></td>
                     <td>{{business.user}}</td>
                     <td>{{business.created_at|date:'Y-m-d'}}</td>
                     <td>{{business.hits}}</td>
@@ -55,4 +55,12 @@
         </div>
     </div>
 </div>
-{% endblock content %}
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const onClickTitle = async (id) => {
+            const url = "/business_hits_ajax/";
+            const {data} = await axios.post(url,{id});
+        }
+    </script>
+{% endblock %}
