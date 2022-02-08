@@ -63,7 +63,7 @@ def like_ajax(request,pk):
 
 @csrf_exempt
 def write_comment(request,pk):
-   print("hi")
+   #print("hi")
    req = json.loads(request.body)
    id = req['id']
    type = req['type']
