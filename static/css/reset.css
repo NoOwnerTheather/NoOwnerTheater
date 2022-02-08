@@ -1,6 +1,13 @@
+
 * {
   box-sizing: border-box;
 }
+
+@import url(business_list.css);
+@import url(business_detail.css);
+@import url(business_search.css);
+@import url(base.css);
+
 
 html,
 body,
@@ -90,6 +97,9 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
+/* HTML5 display-role reset for older browsers */
+
 article,
 aside,
 details,
@@ -121,10 +131,12 @@ q:after {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
 
 button {
   background: inherit;
@@ -165,4 +177,26 @@ button:focus,
 button:active {
   box-shadow: none;
   outline: none;
+
+input:focus {
+  outline: none;
+}
+a {
+  color: inherit;
+  color: black !important;
+  text-decoration: none;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+  text-decoration: none !important;
+
 }

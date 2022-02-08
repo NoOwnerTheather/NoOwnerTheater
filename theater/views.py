@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
-from .forms import *
 
+from django.db.models import Q
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def main(request):
    return render(request, template_name='theater/main.html')
-
-
-
 
 def preview(request):
 
@@ -84,3 +84,37 @@ def del_comment(request,pk):
    comment = get_object_or_404(CommentPreview, id=comment_id)
    comment.delete()
    return JsonResponse({'id': comment_id})
+
+def business_list(request):
+   businesses = Business.objects.all().order_by('-id')
+   ctx = {'businesses' : businesses}
+
+   return render(request, template_name='theater/business_list.html', context=ctx)
+
+def business_detail(request, pk):
+   business = Business.objects.get(id=pk)
+   ctx = {'business' : business}
+
+   return render(request, template_name='theater/business_detail.html', context=ctx) 
+
+def business_search(request):
+   if request.method == 'POST':
+      searched = request.POST['searched']        
+      if not searched:
+         return redirect('theater:business_list')         
+      businesses = Business.objects.filter(Q(title__contains=searched)|Q(content__contains=searched)).order_by('-id')
+      ctx = {'searched': searched, 'businesses': businesses}
+      return render(request, 'theater/business_search.html', context=ctx)
+
+   else:
+      return render(request, 'theater/business_search.html', {})
+
+@csrf_exempt
+def business_hits_ajax(request):
+   req = json.loads(request.body)
+   business_id = req['id']
+   business = Business.objects.get(id = business_id)
+   business.hits += 1
+   business.save()
+   return 
+
