@@ -15,4 +15,5 @@ urlpatterns = [
    path('genre_order/', views.genre_order, name="genre_order"),
 
 
+   path('business_hits_ajax/',views.business_hits_ajax, name='business_hits_ajax'),
 ]

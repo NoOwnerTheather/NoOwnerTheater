@@ -2,6 +2,9 @@ from multiprocessing import context
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.db.models import Q
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 def main(request):
    return render(request, template_name='theater/main.html')
@@ -114,3 +117,12 @@ def genre_order(request):
 
 
    
+
+@csrf_exempt
+def business_hits_ajax(request):
+   req = json.loads(request.body)
+   business_id = req['id']
+   business = Business.objects.get(id = business_id)
+   business.hits += 1
+   business.save()
+   return 
