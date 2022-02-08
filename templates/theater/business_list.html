@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="background">
+    <div class="business"> 
+        <div class="board-header-title">영화제 지원사업 게시판</div>
+        <div style="display: flex; justify-content: flex-end; ">
+            <div class="board-search">
+                <input placeholder="검색어를 입력하시오" />
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="board-header-count">{{businesses.count}}개의 글</div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">번호</th>
+                    <th scope="col">제목</th>
+                    <th scope="col">작성자</th>
+                    <th scope="col">작성일</th>
+                    <th scope="col">조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for business in businesses %}
+                <tr>
+                    <th scope="row">{{business.id}}</th>
+                    <td><a href="{% url 'theater:business_detail' pk=business.pk %}">{{business.title}}</a></td>
+                    <td>{{business.user}}</td>
+                    <td>{{business.created_at}}</td>
+                    <td>{{business.hits}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a class="business_create"><button>글쓰기</button></a>
+        <div class="board-pagination">
+            <ul class="pagination">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" style="
+                    background-color: #f5f4f2;
+                    border: none;
+                    color: #707070;
+                ">&laquo;</a>
+                </li>
+                <li class="page-item active">
+                    <a class="page-link" href="#" style="
+                    background-color: #f5f4f2;
+                    border: none;
+                    color: #707070;
+                ">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" style="
+                    background-color: #f5f4f2;
+                    border: none;
+                    color: #707070;
+                ">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" style="
+                    background-color: #f5f4f2;
+                    border: none;
+                    color: #707070;
+                ">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock content %}

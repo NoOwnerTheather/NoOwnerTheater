@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 TYPE_CHOICE = {('일반 사용자', '일반 사용자'), ('제작사', '제작사')}
 GENDER_CHOICE = {('남자', '남자'), ('여자', '여자')}
 class User(AbstractUser):
+
     nickname = models.CharField(verbose_name='닉네임', max_length=20)
     phone = models.CharField(verbose_name='휴대폰 번호', max_length=20)
     type = models.CharField(verbose_name='가입 유형', choices=TYPE_CHOICE, max_length=20)

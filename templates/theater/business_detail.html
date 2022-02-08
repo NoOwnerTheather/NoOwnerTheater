@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="background">
+    <div class="business">
+        <div class="board-header-title">영화제 지원사업 게시판</div>
+        <div class="business_detail">
+            <p class="business_detail_left">{{business.title}}<p>
+            <div class="business_detail_right">
+                <p><i class="far fa-user"></i>{{business.user}}<p>
+                <p>{{business.created_at}}<p>
+                <p><i class="far fa-eye"></i>{{business.hits}}<p>
+            </div>
+        </div>
+        <div class="business_detail_content">{{business.content}}</div>
+        <a class="business_list" href="{% url 'theater:business_list' %}"><button>게시판으로 돌아기기</button></a>
+    </div>
+</div>
+
+{% endblock content %}
