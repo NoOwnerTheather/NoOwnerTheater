@@ -88,7 +88,7 @@ class ReviewForm(forms.ModelForm):
                 }),
             'rating': NumberInput(attrs={
                 'class': "form-input",
-                'style': 'max-width: 200px;',
+                'style': 'max-width: 300px;',
                 'placeholder': '영화 평점을 적어주세요 0~5'
                 
                 }),

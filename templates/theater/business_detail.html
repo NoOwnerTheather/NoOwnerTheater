@@ -15,7 +15,11 @@
         <div>{{business.image}}</div>
         <div class="business_detail_content">{{business.content}}</div>
         <a class="business_list" href="{% url 'theater:business_list' %}"><button>게시판으로 돌아기기</button></a>
+        <a class="business_list" href="{% url 'theater:info_fix'  pk=business.id%}"><button>수정하기</button></a>
+        <a class="business_list" href="{% url 'theater:info_delete'  pk=business.id %}"><button>삭제하기</button></a>
+        
     </div>
 </div>
+
 
 {% endblock content %}
