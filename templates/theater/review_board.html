@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+{% load review_filter %}
+{% load static %}
+{% block content %}
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+<section class="page-section" style="background-color: #C1C1A0;" id="">
+    <div class="container text-dark p-4">
+        <div class="text-dark pb-2">
+          <div class="vl"></div>
+          <h5 class="section-heading mx-3">인기 글</h5>
+        </div>
+        
+        <div class="row mx-auto my-auto">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {% for review in review_list_hot %}
+                    <div class="swiper-slide">
+                        <div class="card" style="width: 100%">
+                            <div class="card-body">
+                              <h5 class="card-title text-center">{{ review.title }}</h5>
+                              <ul>
+                                <li>{{ review.user }}</li>
+                                <li>{{ review.movie }}</li>
+                                <li>{{ review.like }}</li>
+                                <li>{{ review.content }}</li>
+                                <li>{{ review.rating }}</li>
+                              </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- 네비게이션 -->
+                <div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+                <div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+            
+                <!-- 페이징 -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- {% if review_list_hot %}
+    <ul>
+    {% for review in review_list_hot %}
+        <li>{{ review.user }}</li>
+        <li>{{ review.title }}</li>
+        <li>{{ review.movie }}</li>
+        <li>{{ review.like }}</li>
+        <li>{{ review.content }}</li>
+        <li>{{ review.rating }}</li>
+
+    {% endfor %}
+    </ul>
+{% else %}
+    <p> 리뷰가 없습니다.</p>
+
+{% endif %} -->
+
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <th>최신글</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if review_list_pub %}
+        {% for review in review_list_pub %}
+        <tr>
+            <td>
+                <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                {{ review_list_pub.paginator.count|sub:review_list_pub.start_index|sub:forloop.counter0|add:1 }}
+            </td>
+            <td>
+                {{ review.movie }}
+            </td>
+            <td>
+                {{ review.title}}
+                
+                <span class="text-danger small ml-2">[{{ review.commentreview_set.count }}]</span>
+                
+            </td>
+            <td>
+                {{ review.user }}
+            </td>
+            <td>
+                {{ review.like }}
+            </td>
+            
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">리뷰가 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if review_list_pub.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ review_list_pub.previous_page_number }}">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in review_list_pub.paginator.page_range %}
+        {% if page_number >= review_list_pub.number|add:-5 and page_number <= review_list_pub.number|add:5 %}
+            {% if page_number == review_list_pub.number %}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if review_list_pub.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ review_list_pub.next_page_number }}">다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+</div>
+
+<script>
+
+
+new Swiper('.swiper-container', {
+
+slidesPerView : 4, // 동시에 보여줄 슬라이드 갯수
+spaceBetween : 30, // 슬라이드간 간격
+slidesPerGroup : 4, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+
+// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+loopFillGroupWithBlank : true,
+
+loop : true, // 무한 반복
+
+pagination : { // 페이징
+    el : '.swiper-pagination',
+    clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+},
+navigation : { // 네비게이션
+    nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+    prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+},
+});
+
+
+$(document).ready(function(){
+
+    $(".so").on('change', function() {
+        $("#so").val($(this).val());
+        // $("#page").val(1);
+        $("#searchForm").submit();
+    });
+});
+
+
+
+</script>
+
+{% endblock %}
+
+

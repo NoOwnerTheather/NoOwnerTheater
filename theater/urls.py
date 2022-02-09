@@ -34,4 +34,7 @@ urlpatterns = [
 
 
    path('business_hits_ajax/',views.business_hits_ajax, name='business_hits_ajax'),
+
+   path('review_board/',views.review_board, name='review_board'),
+   
 ]

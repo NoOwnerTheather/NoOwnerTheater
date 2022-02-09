@@ -9,6 +9,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import MovieForm,ReviewForm,InfoForm
+
+from django.core.paginator import Paginator  
+
 def main(request):
    return render(request, template_name='theater/main.html')
 
@@ -314,3 +317,19 @@ def business_hits_ajax(request):
    business.save()
    return 
 
+
+def review_board(request):
+   
+   page = request.GET.get('page', '1')  # 페이지
+
+   review_list_pub = Review.objects.order_by('-created_at')
+   review_list_hot = Review.objects.order_by('-like')
+
+   paginator = Paginator(review_list_pub, 10)  # 페이지당 10개씩 보여주기
+   page_obj = paginator.get_page(page)
+
+   context = {
+      'review_list_hot': review_list_hot,
+      'review_list_pub': page_obj,
+               }
+   return render(request, template_name='theater/review_board.html', context=context)
