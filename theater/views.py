@@ -198,22 +198,22 @@ def del_comment(request,pk):
    return JsonResponse({'id': comment_id})
 
 def business_list(request):
-   businesses = Business.objects.all().order_by('-id')
-   ctx = {'businesses' : businesses}
+   business_list = Business.objects.all().order_by('-id')
+   page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+   paginator = Paginator(business_list, '2') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+   paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
+   ctx = {'business_list':business_list,'paginated_business_lists':paginated_business_lists}
 
    return render(request, template_name='theater/business_list.html', context=ctx)
 
-def business_pagination(request):
-   business_list = Business.objects.all() 
-   page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
-   paginator = Paginator(business_list, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
-   page_obj = paginator.page(page) #페이지 번호를 받아 해당 페이지를 리턴 get_page 권장
-   ctx = {'page_obj':page_obj}
-   return render(request,template_name='theater/business_list.html', context=ctx) 
    
 def business_detail(request, pk):
    business = Business.objects.get(id=pk)
-   ctx = {'business' : business}
+   business_list = Business.objects.all().order_by('-id')
+   page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+   paginator = Paginator(business_list, '2') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+   paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
+   ctx = {'business' : business ,'paginated_business_lists':paginated_business_lists }
 
    return render(request, template_name='theater/business_detail.html', context=ctx) 
 
@@ -222,8 +222,12 @@ def business_search(request):
       searched = request.POST['searched']        
       if not searched:
          return redirect('theater:business_list')         
-      businesses = Business.objects.filter(Q(title__contains=searched)|Q(content__contains=searched)).order_by('-id')
-      ctx = {'searched': searched, 'businesses': businesses}
+      business_list = Business.objects.filter(Q(title__contains=searched)|Q(content__contains=searched)).order_by('-id')
+      page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+      paginator = Paginator(business_list, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+      paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
+      ctx = {'searched': searched, 'business_list':business_list, 'paginated_business_lists':paginated_business_lists}
+
       return render(request, 'theater/business_search.html', context=ctx)
 
    else:

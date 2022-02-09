@@ -13,7 +13,8 @@
                 </div>
             </form>
         </div>
-        <div class="board-header-count">{{businesses.count}}개의 글</div>
+        <h2>'{{searched}}'로 검색한 결과입니다.</h2>
+        <div class="board-header-count">총 {{business_list.count}}개의 글</div>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -25,39 +26,71 @@
                 </tr>
             </thead>
             <tbody>
-                {% if businesses %} 
-                {% for business in businesses %}
+                {% if paginated_business_lists %} 
+                {% for paginated_business_list in paginated_business_lists %}
                 <tr>
-                    <th scope="row">{{business.id}}</th>
-                    <td><a href="{% url 'theater:business_detail' pk=business.pk %}">{{business.title}}</a></td>
-                    <td>{{business.user}}</td>
-                    <td>{{business.created_at}}</td>
-                    <td>{{business.hits}}</td>
+                    <th scope="row">{{paginated_business_list.id}}</th>
+                <td><a href="{% url 'theater:business_detail' pk=paginated_business_list.pk %}" onclick="onClickTitle({{ paginated_business_list.id }})" ">{{paginated_business_list.title}}</a></td>
+                    <td>{{paginated_business_list.user}}</td>
+                    <td>{{paginated_business_list.created_at|date:'Y-m-d'}}</td>
+                    <td>{{paginated_business_list.hits}}</td>
                 </tr>
                 {% endfor %}
                 {% else %}
-                <h5 class="text-center">검색결과가 없습니다.</h5>
+                <td class="text-center">검색결과가 없습니다.<td>
                 {% endif %}
             </tbody>
         </table>
-        <a class="business_create"><button>글쓰기</button></a>
+        <a class="business_create" href="{% url 'theater:business_enroll' %}"><button >글쓰기</button></a>
         <div class="board-pagination">
             <ul class="pagination">
+                <!-- 이전페이지 -->
+                {% if paginated_business_lists.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" tabindex="-1"  href="?page={{ paginated_business_lists.previous_page_number }}">&laquo;</a>
+                </li>
+                {% else %}
                 <li class="page-item disabled">
                     <a class="page-link" href="#">&laquo;</a>
                 </li>
-                <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                </li>
+                {% endif %}
+                <!-- 페이지리스트 -->
+                {% for page_number in paginated_business_lists.paginator.page_range %}
+                    {{page.number}}
+                    <!--현재 페이지일 때는 active-->
+                    {% if page_number == paginated_business_lists.number %} 
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                <!-- 다음페이지 -->
+                {% if paginated_business_lists.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="#">2</a>
+                    <a class="page-link" href="?page={{ business_lists.next_page_number }}">&raquo;</a>
                 </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">&raquo;</a>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" href="#">&raquo;</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
+        <a href="#" style="display: flex; align-items: center; ">
+            <p>top</p>
+            <i class="fas fa-caret-up"></i>
+        </a>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const onClickTitle = async (id) => {
+        const url = "/business_hits_ajax/";
+        const {data} = await axios.post(url,{id});
+    }
+</script>
 {% endblock %}
