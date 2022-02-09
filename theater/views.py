@@ -90,11 +90,20 @@ def info_enroll(request):
         form=InfoForm(request.POST,request.FILES)
         
         if form.is_valid():
-            post=form.save()
+            user=User.objects.get(username=request.user)
+            
+            business=Business(
+               title=form.cleaned_data['title'],
+               content=form.cleaned_data['content'],
+               image=form.cleaned_data['image'],
+               user=user,
+            )
+            business.save()
             return redirect('theater:main')
 
     else:
         form=InfoForm()
+        
         ctx={'form':form}
         return render(request,template_name='theater/info_enroll.html',context=ctx)
 

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
-
+<a href="{% url 'theater:enroll'%}">영화작성</a>
 <div class="pt-5" style="display: flex; justify-content: center; align-items: center; background-color: #f5f4f2">
     <form  method="POST" action="{% url 'theater:movie_search' %}">
         {% csrf_token %}     

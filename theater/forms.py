@@ -100,7 +100,7 @@ class InfoForm(forms.ModelForm):
     class Meta:
         model=Business
 
-        fields=('title','content','image')
+        fields=['title','content','image']
         widgets={
             'title': TextInput(attrs={
                 'class': "form-input",
@@ -117,6 +117,18 @@ class InfoForm(forms.ModelForm):
                 }),
 
         }
+        def clean(self):
+            cleaned_data=super().clean()
+
+            title=cleaned_data.get('title','')
+            content=cleaned_data.get('contents','')
+            if title=='':
+                self.add_error('title','글 제목을 입력하세요')
+            elif content=='':
+                self.add_error('contents','글 내용을 입력하세요!')
+            else:
+                self.title=title
+                self.content=content
 
 from django import forms
 from .models import *
