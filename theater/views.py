@@ -11,6 +11,11 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import MovieForm,ReviewForm,InfoForm
 
 from django.core.paginator import Paginator  
+import json
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+
 
 def main(request):
    return render(request, template_name='theater/main.html')
@@ -333,3 +338,21 @@ def review_board(request):
       'review_list_pub': page_obj,
                }
    return render(request, template_name='theater/review_board.html', context=context)
+
+
+@login_required
+@require_POST
+def review_like(request):
+    pk = request.POST.get('pk', None)
+    review = get_object_or_404(Review, pk=pk)
+    user = request.user
+
+    if review.likes_user.filter(id=user.id).exists():
+        review.likes_user.remove(user)
+        message = '좋아요 취소'
+    else:
+        review.likes_user.add(user)
+        message = '좋아요'
+
+    context = {'likes_count':review.count_likes_user(), 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")

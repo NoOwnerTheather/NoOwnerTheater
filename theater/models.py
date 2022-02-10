@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.conf import settings
 
 # Create your models here.
 TYPE_CHOICE = {('일반 사용자', '일반 사용자'), ('제작사', '제작사')}
@@ -61,7 +62,15 @@ class Review(models.Model):
     content = models.TextField(verbose_name='내용')
     rating = models.IntegerField(verbose_name='평점')
     like = models.IntegerField(verbose_name='좋아요', default=0)
+    likes_user = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, # this is preferred than just 'User'
+        blank=True, # blank is allowed
+        related_name='likes_user'
+    ) # likes_user field
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
+
+    def count_likes_user(self): # total likes_user
+        return self.likes_user.count()
 
     def __str__(self):
         return str(self.title)
