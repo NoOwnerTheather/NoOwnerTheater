@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
+
+<img src="{{user.user_img.url}}"  class="card-img-top" alt="...">
 <h1>{{user}}님</h1>
 <h3>닉네임 : {{user.nickname}}</h3>
 <h3>{{user.mileage}} 포인트</h3>
