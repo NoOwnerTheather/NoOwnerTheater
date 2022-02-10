@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 TYPE_CHOICE = {('일반 사용자', '일반 사용자'), ('제작사', '제작사')}
 GENDER_CHOICE = {('남자', '남자'), ('여자', '여자')}
@@ -23,7 +24,7 @@ class Movie(models.Model):
     release_date = models.DateField(verbose_name='개봉')
     director = models.CharField(verbose_name='감독', max_length=50)
     actor = models.CharField(verbose_name='배우', max_length=100)
-    content = models.TextField(verbose_name='개요',null=True)
+    content =models.TextField()
     # grade = models.CharField(verbose_name='등급', choices=GRADE_CHOICE, max_length=20)
     # company = models.CharField(max_length=50 ,verbose_name='배급사') 배급사는 제작사 유저로 하면 될 것 같아!
     rating = models.FloatField(verbose_name='평점', default=0)
@@ -82,7 +83,7 @@ class CommentPreview(models.Model):
 class Business(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(verbose_name='제목', max_length=100)
-    content = models.TextField(verbose_name='내용')
+    content = models.TextField()
     hits = models.IntegerField(verbose_name='조회수', default=0)
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
     image=models.ImageField(upload_to="poster/", null=True, blank=True, verbose_name="포스터")
@@ -90,6 +91,5 @@ class Business(models.Model):
         return str(self.title)
 
 
-    
 
     

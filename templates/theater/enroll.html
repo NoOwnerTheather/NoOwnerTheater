@@ -63,10 +63,14 @@
 <div class="sub_text">하지만 영상을 쉽게 파악하고 좋은 인상을 받을 수 있도록 추가 항목을 작성해주세요!</div>
 </div>
 <div class="line_bottom"></div> 
-<div class="form_block">
+<div class="form_block" style="height:33rem;">
     <div class="main_text">영상 소개</div>
     <div class="sub_text">영상을 소개하거나 영상에 대한 정보를 담고 있는 소개를 작성해주세요!</div>
-    {{form.content}}
+    {% csrf_token %}
+    {{form.media}}
+    {{ form.content}}
+    <p></p>
+    
 </div>
 <div class="form_line">
 <div class="form_block">
