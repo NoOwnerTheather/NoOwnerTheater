@@ -3,7 +3,6 @@
 {% block content %}
 <div class="background">
     <div class="business"> 
-        <div class="board-header-title">영화제 지원사업 게시판</div>
         <div style="display: flex; justify-content: flex-end;">
             <form  method="POST" action="{% url 'theater:business_search' %}">
                 {% csrf_token %}     
@@ -13,7 +12,9 @@
                 </div>
             </form>
         </div>
-        <h2>'{{searched}}'로 검색한 결과입니다.</h2>
+        <div style="display: flex; justify-content: center;">
+            <p>'{{searched}}' 검색어로 검색한 결과입니다.</p>
+        </div>
         <div class="board-header-count">총 {{business_list.count}}개의 글</div>
         <table class="table table-hover">
             <thead>
@@ -42,6 +43,12 @@
             </tbody>
         </table>
         <a class="business_create" href="{% url 'theater:business_enroll' %}"><button >글쓰기</button></a>
+        <div class="top" style="display: flex; justify-content: flex-end;">
+            <a href="#" style="display: flex; align-items: center; ">
+                <p style="margin: 0;">top</p>
+                <i class="fas fa-caret-up"></i>
+            </a>
+        </div>
         <div class="board-pagination">
             <ul class="pagination">
                 <!-- 이전페이지 -->
@@ -80,10 +87,6 @@
                 {% endif %}
             </ul>
         </div>
-        <a href="#" style="display: flex; align-items: center; ">
-            <p>top</p>
-            <i class="fas fa-caret-up"></i>
-        </a>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

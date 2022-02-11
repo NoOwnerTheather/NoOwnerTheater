@@ -3,7 +3,6 @@
 {% block content %}
 <div class="background">
     <div class="business">
-        <div class="board-header-title">영화제 지원사업 게시판</div>
         <div class="business_detail">
             <p class="business_detail_left">{{business.title}}<p>
             <div class="business_detail_right">
@@ -13,6 +12,12 @@
             </div>
         </div>
         <div class="business_detail_content">{{business.content}}</div>
+        <div class="top" style="display: flex; justify-content: flex-end;">
+            <a href="#" style="display: flex; align-items: center; ">
+                <p style="margin: 0;">top</p>
+                <i class="fas fa-caret-up"></i>
+            </a>
+        </div>
         <a class="business_list" onClick="history.go(-1)"><button>게시판으로 돌아기기</button></a>
     </div>
 </div>

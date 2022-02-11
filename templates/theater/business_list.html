@@ -3,7 +3,6 @@
 {% block content %}
 <div class="background">
     <div class="business"> 
-        <div class="board-header-title">영화제 지원사업 게시판</div>
         <div style="display: flex; justify-content: flex-end;">
             <form  method="POST" action="{% url 'theater:business_search' %}">
                 {% csrf_token %}     
@@ -37,6 +36,12 @@
             </tbody>
         </table>
         <a class="business_create" href="{% url 'theater:business_enroll' %}"><button >글쓰기</button></a>
+        <div class="top" style="display: flex; justify-content: flex-end;">
+            <a href="#" style="display: flex; align-items: center; ">
+                <p style="margin: 0;">top</p>
+                <i class="fas fa-caret-up"></i>
+            </a>
+        </div>
         <div class="board-pagination">
             <ul class="pagination">
                 <!-- 이전페이지 -->
@@ -75,10 +80,6 @@
                 {% endif %}
             </ul>
         </div>
-        <a href="#" style="display: flex; align-items: center; ">
-            <p>top</p>
-            <i class="fas fa-caret-up"></i>
-        </a>
     </div>
 </div>
 
