@@ -242,7 +242,9 @@ def chart_list(request):
    rows1 = Movie.objects.filter(comeout='개봉').order_by('-rating')[:20]
    rows2 = Movie.objects.filter(comeout='개봉').order_by('?')[:20]
    rows3 = Movie.objects.filter(comeout='개봉').order_by('-release_date')[:20]
-   ctx = {'rows1':rows1, 'rows2':rows2, 'rows3':rows3}
+   ctx = {'rows1':rows1, 'rows2':rows2, 'rows3':rows3,
+   'current_user':request.user,
+   'blame':'성인물(에로)'}
 
    return render(request, template_name='theater/chart_list.html', context=ctx) 
 
@@ -260,13 +262,14 @@ def movie_search(request):
 
 def movie_list_popular(request):
    movies = Movie.objects.filter(comeout='개봉').order_by('-rating')
-   ctx = {'movies' : movies}
+   ctx = {'movies' : movies,
+   'current_user':request.user}
 
    return render(request, template_name='theater/movie_list_popular.html', context=ctx)
 
 def movie_list_recent(request):
    movies = Movie.objects.filter(comeout='개봉').order_by('-release_date')
-   ctx = {'movies' : movies}
+   ctx = {'movies' : movies,'current_user':request.user}
 
    return render(request, template_name='theater/movie_list_recent.html', context=ctx)
 
