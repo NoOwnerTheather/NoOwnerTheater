@@ -139,17 +139,30 @@
     
         const requestComment = new XMLHttpRequest();
         const requestDel = new XMLHttpRequest();
+
+        //var pk=`${pk}`
+        //var pk= $(`pk`).val();
     
         const onClickComment = (id, type, user) => {
-            const url = "/preview/<int:pk>/write_comment/";
-            console.log("hii")
+            //const url = "/preview/{{pk}}/write_comment/";
+
+            var url= "{% url 'theater:write_comment' movie.id %}"
+            //console.log("hii")
+            //console.log({pk}+"gg")
+            //console.log({user})
+
+            //var comid=`${comment_id}`
+            //var comid=`${comment_id}`
+            //var comid= $(`pk`).val();
+            //console.log(comid)
+
             const content = document.getElementById(`comment_input-${id}`).value
             //const user = document.getElementById(`comment_input-${id}`).value
             requestComment.open("POST", url, true);
             requestComment.setRequestHeader(
                 "Content-Type", "application/x-www-form-urlencoded"
             );
-            requestComment.send(JSON.stringify({id: id, type: type, content: content, user:user}))
+            requestComment.send(JSON.stringify({id: id, type: type, content: content, user:user}));
         }
 
     

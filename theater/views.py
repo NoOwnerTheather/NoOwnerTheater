@@ -161,9 +161,11 @@ def like_ajax(request,pk):
 
     if button_type=='like':
         comment.like+=1
+        button_type='dislike'
 
     else:
         comment.like-=1
+        button_type='like'
 
 
     comment.save()
