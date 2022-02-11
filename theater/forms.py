@@ -59,7 +59,7 @@ class MovieForm(forms.ModelForm):
                 'style': 'max-width: 500px;',
                 'placeholder': '영상의 러닝타임을 적어주세요'
                 }),
-             'content': SummernoteWidget(),
+             'content': SummernoteWidget(attrs={'summernote': {'width': '800px', 'height': '380px'}}),
         }
 class ReviewForm(forms.ModelForm):
 
@@ -111,7 +111,7 @@ class InfoForm(forms.ModelForm):
                 'placeholder': '''텍스트 에디터적용 예정'
                 '''
                 }),
-            'content': SummernoteWidget(),
+            'content': SummernoteWidget(attrs={'summernote': {'width': '800px', 'height': '380px'}}),
 
 
         }
