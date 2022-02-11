@@ -4,7 +4,7 @@
 
 <style>
     .vl {
-    border-left: 6px solid #f5f4f2;
+    border-left: 6px solid #000000;
     height: 30px;
     position: absolute;
     margin-left: -3px;
@@ -12,12 +12,16 @@
   }
   
   .ve {
-    border-left: 6px solid #C1C1A0;
+    border-left: 6px solid #000000;
     height: 30px;
     position: absolute;
     margin-left: -3px;
     top: 1;
   }
+
+
+  
+
 </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
@@ -34,13 +38,14 @@
     </form>
 </div>
 
-<section class="page-section" style="background-color: #C1C1A0;" id="">
+<section class="page-section" style="background-color: #f5f4f2;" id="">
     <div class="container text-dark p-4">
         <div class="text-dark pb-2">
           <div class="vl"></div>
           <h5 class="section-heading mx-3">지금 인기 있는 영화</h5>
           <div class="d-flex justify-content-end">
-            <a class="badge rounded-pill bg-light text-dark" href="{% url 'theater:movie_list_popular' %}">전체 보기</a>
+            <a href="{% url 'theater:movie_list_popular' %}" class="btn-more all">전체보기 > </a>
+            <!-- <a class="badge rounded-pill bg-light text-dark" href="{% url 'theater:movie_list_popular' %}">전체 보기</a> -->
           </div>
         </div>
         
@@ -54,7 +59,7 @@
                             <img src="{{row1.poster.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title text-center">{{row1.title}}</h5>
-                              <span class="stars text-warning me-2 d-flex justify-content-center">{{row1.rating}}</span>
+                              <span class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
                             </div>
                         </div>
                         </a>
@@ -115,7 +120,7 @@
                             <img src="{{row2.poster.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title text-center">{{row2.title}}</h5>
-                              <span class="stars text-warning me-2 d-flex justify-content-center">{{row2.rating}}</span>
+                              <span class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
                             </div>
                         </div>
                         </a>
@@ -139,15 +144,14 @@
 </form>
 
 
-<section class="page-section" style="background-color: #C1C1A0;" id="">
+<section class="page-section" style="background-color: #f5f4f2;" id="">
     <div class="container text-dark p-4">
         <div class="text-dark pb-2">
           <div class="vl"></div>
           <h5 class="section-heading mx-3">최근 개봉한 영화</h5>
           <div class="d-flex justify-content-end">
-            <a class="badge rounded-pill bg-light text-dark" href="{% url 'theater:movie_list_recent' %}">전체 보기</a>
-          </div>
-        </div>
+            <a href="{% url 'theater:movie_list_popular' %}" class="btn-more all">전체보기 > </a>          </div>
+           </div>
         <div class="row mx-auto my-auto">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
@@ -158,7 +162,7 @@
                             <img src="{{row3.poster.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title text-center">{{row3.title}}</h5>
-                              <span class="stars text-warning me-2 d-flex justify-content-center">{{row3.rating}}</span>
+                              <span class="stars text-dark me-2 d-flex justify-content-center">{{row3.rating}}</span>
                             </div>
                         </div>
                         </a>
