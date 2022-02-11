@@ -69,7 +69,7 @@
                         <div>
                             <h5 class="text-start">Synopsis</h5>
                             <hr style="height:1px;border:none;color:#333;background-color:#333;">
-                            <p class="text-center" style="line-height: 2.0;">{{ movie.content }}</p>
+                            <p class="text-center" style="line-height: 2.0;">{% autoescape on %}{{movie.content|safe}}{% endautoescape %}</p>
                             <br><br>
                             <h5 class="text-start">Review</h5>
                             <hr style="height:1px;border:none;color:#333;background-color:#333;">
@@ -112,7 +112,7 @@
 
     <p>{{ movie.rating }}</p>
     <a class="badge rounded-pill bg-light text-dark" href="{% if movie.video %} {{movie.video.url}} {% endif %}">예고편</a>
-    <h2><a href="{% url 'theater:review_enroll'%}">리뷰 작성</a></h2>
+    <h2><a href="{% url 'theater:review_enroll' pk=movie.id%}">리뷰 작성</a></h2>
     
 
     <p>Review</p>
@@ -145,6 +145,9 @@ rating.forEach((value) => {
 </script>
 
 
+
+
+\
 
 
 
