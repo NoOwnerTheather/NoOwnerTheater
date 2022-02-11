@@ -14,6 +14,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
 from random import *
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from . import models as m
+
+
+
 
 def login_user(request): # 로그인 중인 Profile object
     return User.objects.get(user=request.user)
@@ -86,3 +93,24 @@ def detail(request,pk):
     'user':user
   }
   return render(request, 'account/detail.html',context=ctx)
+class AuthSMS(APIView):
+   def post(self, request):
+      try:
+         p_num = request.data['phone_number']
+      except KeyError:
+         return Response({'message': 'Bad Request'}, status=status.HTTP_400_BAD_REQUEST)
+      else:
+         m.AuthSMS.objects.update_or_create(phone_number=p_num)
+         return Response({'message': 'OK'})
+
+   def get(self, request):
+      try:
+         p_num = request.query_params['phone_number']
+         a_num = request.query_params['auth_number']
+      except KeyError:
+         return Response({'message': 'Bad Request'}, status=status.HTTP_400_BAD_REQUEST)
+      else:
+         result = m.AuthSMS.check_auth_number(p_num, a_num)
+         return Response({'message': 'OK', 'result': result})
+
+
