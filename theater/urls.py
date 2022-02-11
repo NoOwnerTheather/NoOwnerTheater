@@ -37,5 +37,6 @@ urlpatterns = [
 
    path('review_board/',views.review_board, name='review_board'),
    path('review_like/', views.review_like, name='review_like'),
+   path('review_detail/<int:pk>/', views.review_detail, name='review_detail'),
 
 ]

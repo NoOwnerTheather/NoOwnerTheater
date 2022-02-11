@@ -79,7 +79,11 @@
     <table class="table">
         <thead>
         <tr class="thead-dark">
-            <th>최신글</th>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+            <th>조회수</th>
         </tr>
         </thead>
         <tbody>
@@ -90,22 +94,18 @@
                 <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
                 {{ review_list_pub.paginator.count|sub:review_list_pub.start_index|sub:forloop.counter0|add:1 }}
             </td>
-            <td>
-                {{ review.movie }}
-            </td>
-            <td>
-                {{ review.title}}
+            <td >
+                <a href="{% url 'theater:review_detail' review.id %}">{{ review.title}}</a>
                 
                 <span class="text-danger small ml-2">[{{ review.commentreview_set.count }}]</span>
-                
             </td>
             <td>
                 {{ review.user }}
             </td>
             <td>
-                {{ review.likes_user.all.count }}
+                {{ review.created_at|date:'Y-m-d' }}
             </td>
-            
+
         </tr>
         {% endfor %}
         {% else %}

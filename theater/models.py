@@ -61,6 +61,7 @@ class Review(models.Model):
     title = models.CharField(verbose_name='한 줄 제목', max_length=200)
     content = models.TextField(verbose_name='내용')
     rating = models.IntegerField(verbose_name='평점')
+    hits = models.IntegerField(verbose_name='조회수', default=0)
     like = models.IntegerField(verbose_name='좋아요', default=0)
     likes_user = models.ManyToManyField(
         settings.AUTH_USER_MODEL, # this is preferred than just 'User'

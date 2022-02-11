@@ -356,3 +356,13 @@ def review_like(request):
 
     context = {'likes_count':review.count_likes_user(), 'message': message}
     return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+def review_detail(request, pk):
+    
+    review = Review.objects.get(id=pk)
+    context = {'review': review}
+    return render(request, 'theater/review_detail.html', context)
+
+
+

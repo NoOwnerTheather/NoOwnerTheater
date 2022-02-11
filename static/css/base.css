@@ -3,6 +3,7 @@
 @import url(chart_list.css);
 @import url(login.css);
 @import url(form.css);
+@import url(review_detail);
 
 
 .navbar {
@@ -50,3 +51,4 @@ ul {
   background-color: #000000;
   color: #fff;
 }
+
