@@ -95,8 +95,9 @@
                 {{ review_list_pub.paginator.count|sub:review_list_pub.start_index|sub:forloop.counter0|add:1 }}
             </td>
             <td >
-                <a href="{% url 'theater:review_detail' review.id %}">{{ review.title}}</a>
                 
+                <a href="{% url 'theater:review_detail' review.id %}" onclick="onClickTitle({{ review.id }})" ">{{review.title}}</a>
+
                 <span class="text-danger small ml-2">[{{ review.commentreview_set.count }}]</span>
             </td>
             <td>
@@ -104,6 +105,9 @@
             </td>
             <td>
                 {{ review.created_at|date:'Y-m-d' }}
+            </td>
+            <td>
+                {{ review.hits }}
             </td>
 
         </tr>
@@ -212,6 +216,13 @@ $(document).ready(function(){
             },
         });
     })
+</script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const onClickTitle = async (id) => {
+        const url = "/review_hits_ajax/";
+        const {data} = await axios.post(url,{id});
+    }
 </script>
 {% endblock %}
 

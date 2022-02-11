@@ -23,8 +23,41 @@
                             <p id="count-{{ review.id }}" style="font:bold 1em; margin-top: 3px">
                                 좋아요&nbsp;{{ review.likes_user.all.count }}개</p>
                         </div>
-                        <li>리뷰내용:{{ review.content }}</li>                    
+                        <li>리뷰내용:{{ review.content }}</li>
+                        <li>작성일:{{ review.created_at }}</li>                    
                     </ul>
+                    <div class="movie-comment">
+                        <h3>커뮤니티</h3>
+                        <hr>
+                
+                        {% if user.is_authenticated %}
+                        <section class="input">
+                            <input id="comment_input-{{review.id}}" placeholder="댓글을 남겨주세요" type="text"/>
+                            <button class="btn" onclick="onClickComment({{review.id}}, 'write', '{{request.user}}')">작성</button>
+                        </section>
+                        {% else %}
+                        로그인 후 이용할 수 있습니다.
+                        {% endif %}                            
+                            <table class="comment-table-{{review.id}}">
+                                {% for comment in review.commentreview_set.all %}
+                                <tr class = "comment-{{comment.id}}">
+                                    <td>{{comment.user}} </td>
+                                    <td>{{comment.content}} </td>
+                                    <td>{{comment.created_at}} </td>
+                                    <td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>
+                
+                                    {% if user == comment.user %}
+                                    <td>
+                                        <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
+                                    </td>
+                                    {% else %}
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </table>
+                            <a class="btn btn-dark" type="button" href="{% url 'theater:review_board' %}">목록</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,6 +88,133 @@
         });
     })
 </script>
+<script>
+    
+const requestLike = new XMLHttpRequest();
+
+const onClickLike = (id, type) => { //  id값 /like,dislike
+const url = "/preview/1/like_ajax/"; // 앞뒤로'/'이거 꼭 붙여줘야한다. 문법임!
+requestLike.open("POST", url, true);
+requestLike.setRequestHeader(
+    "Content-Type",
+    "application/x-www-form-urlencoded"
+);
+
+requestLike.send(JSON.stringify({id: id, type: type})); //{'id':1, 'type':like}-->JSon형태로 바꿔서 보내준다
+};
+
+
+
+const likeHandleResponse = () => {
+//statue는 상태값, 오류가 있나 없나를 확인하기 위해 사용한 코드(아래).
+if (requestLike.status < 400) {
+    const {id, type} = JSON.parse(requestLike.response); //JSON으로 변환
+    const element = document.querySelector(`.comment-${id} .post__like`); 
+    const originHTML = element.innerHTML; //'like 0' <<0을 올려줘야 하니깐 스페이스바 기준으로 나눠서 배열 형식으로 바꿔줌
+    const [buttonType, num] = originHTML.split(' '); //['like','0'] buttontye=like, num=0 다 string 형태임
+    const count = Number(num) + 1; //string타입이라 "0" 에 +1 하면 에러나니깐 Number()로 숫자로 만들어준다
+    element.innerHTML = `${buttonType} ${count}`; //찾아놓은 innerHTML을 'like 1' 로 변환시켜서 사용자에게 보여준다
+
+}
+};
+
+//응답 받을 준비 완료됐을때
+
+requestLike.onreadystatechange = () => {
+if (requestLike.readyState === XMLHttpRequest.DONE) {
+    //console.log("aaa");
+    likeHandleResponse();
+}
+}; //readyState는 리퀘스트가 초기화 됐는지, 연결됐는지, (ppt 부분) 응답할 준비가 되었는지 상태를 의미
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const requestComment = new XMLHttpRequest();
+const requestDel = new XMLHttpRequest();
+
+const onClickComment = (id, type, user) => {
+    // const url = "/preview/<int:pk>/write_comment/";
+    var url= "{% url 'theater:write_review_comment' review.id %}"
+    
+    console.log("hii")
+    const content = document.getElementById(`comment_input-${id}`).value
+    //const user = document.getElementById(`comment_input-${id}`).value
+    requestComment.open("POST", url, true);
+    requestComment.setRequestHeader(
+        "Content-Type", "application/x-www-form-urlencoded"
+    );
+    requestComment.send(JSON.stringify({id: id, type: type, content: content, user:user}))
+}
+
+
+requestComment.onreadystatechange = () => {
+    if(requestComment.readyState === XMLHttpRequest.DONE){
+        WriteHandleResponse();
+    }
+}
+
+const WriteHandleResponse = () => {
+    if (requestComment.status < 400){
+        const {id, type, content, comment_id} = JSON.parse(requestComment.response);
+        const element = document.querySelector(`.comment-table-${id}`);
+        const new_comment = document.createElement("tr");
+        const comment_content = document.createElement("td");    
+        const del = document.createElement("td");
+        
+
+        new_comment.setAttribute("class", `comment-${comment_id}`);
+
+        comment_content.innerHTML = `${content}`;
+
+        del.innerHTML = `<button onclick="onClickDel(${comment_id})">삭제</button>`;
+    
+
+        document.getElementById(`comment_input-${id}`).value = '';
+        
+
+        element.append(new_comment);
+        new_comment.appendChild(comment_content);
+        new_comment.appendChild(del);
+    };
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const onClickDel = (id) => {
+    const url = "/review/1/del_comment/";
+    requestDel.open("POST", url, true);
+    requestDel.setRequestHeader(
+        "Content-Type", "application/x-www-form-urlencoded"
+    );
+    requestDel.send(JSON.stringify({id: id}))
+}
+
+const DelHandleResponse = () => {
+    if (requestDel.status < 400){
+        const {id} = JSON.parse(requestDel.response)
+
+        const element = document.querySelector(`.comment-${id}`)
+        element.remove();
+
+    }
+}
+
+requestDel.onreadystatechange = () => {
+    if(requestDel.readyState === XMLHttpRequest.DONE){
+        DelHandleResponse();
+    }
+}
+</script>
+
+    
+
+
+    
+</body>
+</html>
 {% endblock %}
 
 

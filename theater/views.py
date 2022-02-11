@@ -182,16 +182,17 @@ def like_ajax(request,pk):
 
 @csrf_exempt
 def write_comment(request,pk):
-   #print("hi")
+   print("hi")
    req = json.loads(request.body)
    id = req['id']
    type = req['type']
    content = req['content']
    user=req['user']
-
    movie = Movie.objects.get(id=id)
-   comment = CommentPreview.objects.create(movie=movie, content=content, user=user)
-   #print(comment)
+   print(movie)
+   
+   comment = CommentPreview.objects.create(movie=movie, content=content, user=request.user)
+   
    comment.save()
    return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
 
@@ -359,10 +360,41 @@ def review_like(request):
 
 
 def review_detail(request, pk):
-    
-    review = Review.objects.get(id=pk)
-    context = {'review': review}
-    return render(request, 'theater/review_detail.html', context)
+   
+   review = Review.objects.get(pk=pk)
+   context = {'review': review,
+               }
+   return render(request, 'theater/review_detail.html', context)
+
+@csrf_exempt
+def write_review_comment(request,pk):
+   print("hi")
+   req = json.loads(request.body)
+   id = req['id']
+   type = req['type']
+   content = req['content']
+   user=req['user']
+   review = Review.objects.get(id=id)
+   
+   comment = CommentReview.objects.create(review=review, content=content, user=request.user)
+   
+   comment.save()
+   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
 
 
+@csrf_exempt
+def del_comment(request,pk):
+   req = json.loads(request.body)
+   comment_id = req['id']
+   comment = get_object_or_404(CommentReview, id=comment_id)
+   comment.delete()
+   return JsonResponse({'id': comment_id})
 
+@csrf_exempt
+def review_hits_ajax(request):
+   req = json.loads(request.body)
+   review_id = req['id']
+   review = Review.objects.get(id = review_id)
+   review.hits += 1
+   review.save()
+   return 
