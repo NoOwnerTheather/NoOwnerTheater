@@ -170,8 +170,13 @@ def like_ajax(request,pk):
 
 
     comment.save()
+    
+    print(comment.like)
+    print(button_type)
 
     return JsonResponse({'id':post_id, 'type':button_type})
+
+
 
 
 @csrf_exempt
