@@ -2,6 +2,24 @@
 
 {% block content %}
 
+<style>
+    .vl {
+    border-left: 6px solid #f5f4f2;
+    height: 30px;
+    position: absolute;
+    margin-left: -3px;
+    top: 1;
+  }
+  
+  .ve {
+    border-left: 6px solid #C1C1A0;
+    height: 30px;
+    position: absolute;
+    margin-left: -3px;
+    top: 1;
+  }
+</style>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
@@ -31,12 +49,15 @@
                 <div class="swiper-wrapper">
                     {% for row1 in rows1 %}
                     <div class="swiper-slide">
+                        <a href="{% url 'theater:movie_detail' row1.id %}">
                         <div class="card" style="width: 100%">
                             <img src="{{row1.poster.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title text-center">{{row1.title}}</h5>
+                              <span class="stars text-warning me-2 d-flex justify-content-center">{{row1.rating}}</span>
                             </div>
                         </div>
+                        </a>
                     </div>
                     {% endfor %}
                 </div>
@@ -89,12 +110,15 @@
                 <div class="swiper-wrapper">
                     {% for row2 in rows2 %}
                     <div class="swiper-slide">
+                        <a href="{% url 'theater:movie_detail' row2.id %}">
                         <div class="card" style="width: 100%">
                             <img src="{{row2.poster.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title text-center">{{row2.title}}</h5>
+                              <h5 class="card-title text-center">{{row2.title}}</h5>
+                              <span class="stars text-warning me-2 d-flex justify-content-center">{{row2.rating}}</span>
                             </div>
                         </div>
+                        </a>
                     </div>
                     {% endfor %}
                 </div>
@@ -129,12 +153,15 @@
                 <div class="swiper-wrapper">
                     {% for row3 in rows3 %}
                     <div class="swiper-slide">
+                        <a href="{% url 'theater:movie_detail' row3.id %}">
                         <div class="card" style="width: 100%">
                             <img src="{{row3.poster.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title text-center">{{row3.title}}</h5>
+                              <span class="stars text-warning me-2 d-flex justify-content-center">{{row3.rating}}</span>
                             </div>
                         </div>
+                        </a>
                     </div>
                     {% endfor %}
                 </div>
@@ -181,11 +208,22 @@ $(document).ready(function(){
 
     $(".so").on('change', function() {
         $("#so").val($(this).val());
-        // $("#page").val(1);
         $("#searchForm").submit();
     });
 });
 
+
+const rating = document.querySelectorAll(".stars");
+rating.forEach((value) => {
+  let ratingStars = "";
+  for (let i = 0; i < Math.floor(value.innerText); i++) {
+    ratingStars += '<i class="fas fa-star"></i>';
+  }
+  if (value.innerText % 1) {
+    ratingStars += '<i class="fas fa-star-half"></i>';
+  }
+  value.innerHTML = ratingStars;
+});
 
 
 </script>
