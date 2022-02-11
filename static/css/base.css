@@ -1,25 +1,29 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 @import url(business_list.css);
 @import url(business_detail.css);
+@import url(business_search.css);
 @import url(chart_list.css);
 @import url(login.css);
 @import url(form.css);
-
+@import url(base.css);
 
 .navbar {
-  display: flex;
-  padding: 2rem 0;
+  margin: 0 !important;
+  padding: 2rem 5rem !important;
   font-weight: bold;
   background-color: #f5f4f2;
 }
 
-.navbar_title {
-  font-size: 2rem;
+.navbar::before,
+.navbar::after {
+  content: none !important;
 }
+
 .nav_left {
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: bold;
 }
 
@@ -32,19 +36,28 @@
 .nav_right {
   display: flex;
   flex-direction: row;
+  font-size: 1.5rem;
 }
 .nav_right a {
+  padding-bottom: 0.4rem;
   margin-left: 4rem;
 }
 
 .nav_right a:hover {
-  border-bottom: 1px solid black;
+  border-bottom: 0.2rem solid black;
 }
 
 ul {
   list-style: none;
 }
 
+.dropdown-menu {
+  min-width: 100px !important;
+}
+
+.dropdown-menu a {
+  margin: 0;
+}
 .footer {
   padding: 1rem;
   background-color: #000000;
