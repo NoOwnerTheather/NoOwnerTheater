@@ -50,13 +50,22 @@ def movie_delete(request,pk):
    return redirect("theater:main")
 
    
-def review_enroll(request):
+def review_enroll(request,pk):
    
    if request.method=="POST":
       form=ReviewForm(request.POST)
       
       if form.is_valid():
-         post=form.save()
+         user=User.objects.get(username=request.user)
+         movie=Movie.objects.get(id=pk)
+         review=Review(
+               title=form.cleaned_data['title'],
+               content=form.cleaned_data['content'],
+               rating=form.cleaned_data['rating'],
+               user=user,
+               movie=movie
+            )
+         review.save()
          return redirect('theater:main') 
          #임시용 코드
 
@@ -65,22 +74,22 @@ def review_enroll(request):
       ctx={'form':form}
       return render(request,template_name='theater/review_enroll.html',context=ctx)
 
-def review_fix(request,pk):
-   post=get_object_or_404(Review,id=pk)
+def review_fix(request,pk,gk):
+   post=get_object_or_404(Review,id=gk)
    if request.method=="POST":
       form=ReviewForm(request.POST,instance=post)
         
       if form.is_valid():
          post=form.save()
-         return redirect('theater:main',pk)
+         return redirect('theater:main')
 
    else:
       form=ReviewForm(instance=post)
       ctx={'form':form}
-      return render(request,template_name='theater/review.html',context=ctx)
+      return render(request,template_name='theater/review_enroll.html',context=ctx)
       # redirect랑 render 주소는 임시
-def review_delete(request,pk):
-   post=get_object_or_404(Review,id=pk)
+def review_delete(request,pk,gk):
+   post=get_object_or_404(Review,id=gk)
    post.delete()
    return redirect("theater:main")
 
@@ -90,11 +99,20 @@ def info_enroll(request):
         form=InfoForm(request.POST,request.FILES)
         
         if form.is_valid():
-            post=form.save()
+            user=User.objects.get(username=request.user)
+            
+            business=Business(
+               title=form.cleaned_data['title'],
+               content=form.cleaned_data['content'],
+               image=form.cleaned_data['image'],
+               user=user,
+            )
+            business.save()
             return redirect('theater:main')
 
     else:
         form=InfoForm()
+        
         ctx={'form':form}
         return render(request,template_name='theater/info_enroll.html',context=ctx)
 
@@ -106,7 +124,7 @@ def info_fix(request,pk):
         
       if form.is_valid():
          post=form.save()
-         return redirect('theater:main',pk)
+         return redirect('theater:business_list')
 
    else:
       form=InfoForm(instance=post)
@@ -294,12 +312,19 @@ def genre_order(request):
    else:
       content_list = Movie.objects.filter(comeout='개봉').order_by('?')[:20]
 
-
-
    ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3, 'so':sort}
 
    return render(request, template_name='theater/chart_list.html', context=ctx) 
    
+def movie_detail(request, pk):
+   movie = Movie.objects.get(id=pk)
+   reviews = movie.review_set.all()
+   ctx = {
+        'movie' : movie,
+        'reviews' : reviews,
+    }
+
+   return render(request, template_name='theater/movie_detail.html', context=ctx)
 
 
 

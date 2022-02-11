@@ -5,7 +5,7 @@ from theater.models import User
 class SignupForm(UserCreationForm):
   class Meta:
     model = User
-    fields = ['username', 'password1', 'password2', 'nickname', 'phone','type','gender','email']
+    fields = ['username', 'password1', 'password2', 'nickname', 'phone','type','gender','email','age']
     labels={
             'username':'아이디',
     }

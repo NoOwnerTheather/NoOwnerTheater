@@ -1,6 +1,8 @@
+from pickle import FALSE
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 TYPE_CHOICE = {('일반 사용자', '일반 사용자'), ('제작사', '제작사')}
 GENDER_CHOICE = {('남자', '남자'), ('여자', '여자')}
@@ -11,7 +13,7 @@ class User(AbstractUser):
     type = models.CharField(verbose_name='가입 유형', choices=TYPE_CHOICE, max_length=20)
     mileage = models.IntegerField(verbose_name='마일리지', default=0)
     gender = models.CharField(verbose_name='성별', choices=GENDER_CHOICE, max_length=20)
-
+    age=models.IntegerField(verbose_name="나이")
 
 GENRE_CHOICE = {('액션', '액션'), ('애니메이션', '애니메이션'), ('드라마', '드라마'), ('스릴러', '스릴러'), ('코미디', '코미디'), ('멜로/로맨스', '멜로/로맨스'), ('범죄', '범죄'), ('공포(호러)', '공포(호러)'), ('미스터리', '미스터리'), ('성인물(에로)', '성인물(에로)'), ('SF', 'SF'), ('사극', '사극'), ('판타지', '판타지'), ('전쟁', '전쟁'), ('다큐멘터리', '다큐멘터리'), ('뮤지컬', '뮤지컬'), ('가족', '가족')}
 # GRADE_CHOICE = {('전체 관람가', '전체 관람가'), ('12세', '12세'), ('15세', '15세'), ('청소년 관람불가', '청소년 관람불가')}
@@ -23,7 +25,7 @@ class Movie(models.Model):
     release_date = models.DateField(verbose_name='개봉')
     director = models.CharField(verbose_name='감독', max_length=50)
     actor = models.CharField(verbose_name='배우', max_length=100)
-    content = models.TextField(verbose_name='개요',null=True)
+    content =models.TextField()
     # grade = models.CharField(verbose_name='등급', choices=GRADE_CHOICE, max_length=20)
     # company = models.CharField(max_length=50 ,verbose_name='배급사') 배급사는 제작사 유저로 하면 될 것 같아!
     rating = models.FloatField(verbose_name='평점', default=0)
@@ -82,7 +84,7 @@ class CommentPreview(models.Model):
 class Business(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(verbose_name='제목', max_length=100)
-    content = models.TextField(verbose_name='내용')
+    content = models.TextField()
     hits = models.IntegerField(verbose_name='조회수', default=0)
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
     image=models.ImageField(upload_to="poster/", null=True, blank=True, verbose_name="포스터")
@@ -90,6 +92,5 @@ class Business(models.Model):
         return str(self.title)
 
 
-    
 
     

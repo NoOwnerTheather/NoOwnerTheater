@@ -31,10 +31,7 @@
   .nav_right a:hover {
     border-bottom: 1px solid black;
   }
-  html {
-    font-size: 62.5%;
-  }
-  
+
   @media screen and (max-width: 1024px) {
     html {
       font-size: 62.5%;

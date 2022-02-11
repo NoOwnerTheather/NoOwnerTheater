@@ -9,7 +9,7 @@
   <button type="submit">회원가입</button>
 </form> -->
 
-<div class="signup-background">
+<div class="signup-background" >
   <div class="d-flex justify-content-center align-items-center flex-column" style="margin: 00px 0px 50px 0px">
     <img src="{% static 'img/logo.png' %}">
   </div>
@@ -22,7 +22,7 @@
                       {{ form.non_field_errors }}
               {% endif %}
             </div>
-            <div class="donate-now mb-3" style="margin-top: 150px;" >
+            <div class="donate-now mb-3" style="margin-top: 250px;" >
               <li style="margin-right: 20px;">
                 <input type="radio" id="common_user" name="type" value="일반 사용자">
                 <label style="max-width: none; justify-content: center; align-items: center; color: #999999" for="common_user">일반 사용자</label>
@@ -48,6 +48,9 @@
             </div>
             <div class="form-group mb-3">
               <input class="form-control input-lg input-style-no-shadow" name="email" type="email" maxlength="30" placeholder="email" style="height:6rem; width:40rem" required/>
+            </div>
+            <div class="form-group mb-3">
+              <input class="form-control input-lg input-style-no-shadow" name="age" type="age" maxlength="30" placeholder="나이" style="height:6rem; width:40rem" required/>
             </div>
             <div class="form-group ">
               <input class="form-control input-lg input-style-no-shadow" name="phone" type="tel" maxlength="30" placeholder="휴대폰 번호" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" style="height:6rem; width:40rem" required/>

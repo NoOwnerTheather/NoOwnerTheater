@@ -37,7 +37,8 @@
 
         <h3>시놉시스</h3>
         <hr>
-        <h5>{{movie.content}}</h5>
+        
+        <h5>{% autoescape on %}{{movie.content|safe}}{% endautoescape %}</h5>
 
     </div>
 
