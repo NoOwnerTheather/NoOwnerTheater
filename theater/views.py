@@ -7,8 +7,8 @@ from django.db.models import Q
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 
-from .forms import MovieForm,ReviewForm,InfoForm
 
 from django.core.paginator import Paginator  
 import json
@@ -17,6 +17,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
 
+from .forms import MovieForm,ReviewForm,BusinessForm
 def main(request):
    return render(request, template_name='theater/main.html')
 
@@ -101,10 +102,10 @@ def review_delete(request,pk,gk):
    post.delete()
    return redirect("theater:main")
 
-def info_enroll(request):
+def business_enroll(request):
 
     if request.method=="POST":
-        form=InfoForm(request.POST,request.FILES)
+        form=BusinessForm(request.POST,request.FILES)
         
         if form.is_valid():
             user=User.objects.get(username=request.user)
@@ -122,28 +123,28 @@ def info_enroll(request):
         form=InfoForm()
         
         ctx={'form':form}
-        return render(request,template_name='theater/info_enroll.html',context=ctx)
+        return render(request,template_name='theater/business_enroll.html',context=ctx)
 
 
-def info_fix(request,pk):
+def business_fix(request,pk):
    post=get_object_or_404(Business,id=pk)
    if request.method=="POST":
-      form=InfoForm(request.POST,request.FILES,instance=post)
+      form=BusinessForm(request.POST,request.FILES,instance=post)
         
       if form.is_valid():
          post=form.save()
          return redirect('theater:business_list')
 
    else:
-      form=InfoForm(instance=post)
+      form=BusinessForm(instance=post)
       ctx={'form':form}
-      return render(request,template_name='theater/info_enroll.html',context=ctx)
+      return render(request,template_name='theater/business_enroll.html',context=ctx)
       # redirect랑 render 주소는 임시
 
-def info_delete(request,pk):
+def business_delete(request,pk):
    post=get_object_or_404(Business,id=pk)
    post.delete()
-   return redirect("theater:main")
+   return redirect("theater:business_list")
 
 
 def preview(request):
@@ -159,6 +160,7 @@ def preview_detail(request,pk):
 
     #movie=Movie.objects.get(id=pk)
     movie = get_object_or_404(Movie, pk=pk)
+    
     #print(movie.comment_set.all())
     #preview_form = CommentPreviewForm()
     #preview_comments = movie.commentpreview_set.all()
@@ -177,6 +179,14 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
+'''import json
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from .models import *'''
+
+
 @csrf_exempt
 def like_ajax(request,pk):
     req=json.loads(request.body) # json 임퐅, {'id':1, 'type':'like'} 파이썬 딕셔너리 형태로 변환하여 req변수에 담아준다
@@ -187,14 +197,20 @@ def like_ajax(request,pk):
 
     if button_type=='like':
         comment.like+=1
+        button_type='dislike'
 
     else:
         comment.like-=1
+        button_type='like'
 
 
     comment.save()
+    
+    print(comment.like)
+    print(button_type)
 
     return JsonResponse({'id':post_id, 'type':button_type})
+
 
 
 
@@ -215,23 +231,46 @@ def write_comment(request,pk):
    return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
 
 
+
+
+
 @csrf_exempt
 def del_comment(request,pk):
    req = json.loads(request.body)
    comment_id = req['id']
    comment = get_object_or_404(CommentPreview, id=comment_id)
    comment.delete()
+
+   print("(-)마일리지") #####
+   print(request.user) #####
+   print(request.user.mileage) #####
+   
+   request.user.mileage=request.user.mileage-5 #####
+
+   request.user.save() #####
+
+   print(request.user.mileage) #####
+
+
    return JsonResponse({'id': comment_id})
 
 def business_list(request):
-   businesses = Business.objects.all().order_by('-id')
-   ctx = {'businesses' : businesses}
+   business_list = Business.objects.all().order_by('-id')
+   page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+   paginator = Paginator(business_list, '2') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+   paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
+   ctx = {'business_list':business_list,'paginated_business_lists':paginated_business_lists}
 
    return render(request, template_name='theater/business_list.html', context=ctx)
 
+   
 def business_detail(request, pk):
    business = Business.objects.get(id=pk)
-   ctx = {'business' : business}
+   business_list = Business.objects.all().order_by('-id')
+   page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+   paginator = Paginator(business_list, '2') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+   paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
+   ctx = {'business' : business ,'paginated_business_lists':paginated_business_lists }
 
    return render(request, template_name='theater/business_detail.html', context=ctx) 
 
@@ -240,8 +279,12 @@ def business_search(request):
       searched = request.POST['searched']        
       if not searched:
          return redirect('theater:business_list')         
-      businesses = Business.objects.filter(Q(title__contains=searched)|Q(content__contains=searched)).order_by('-id')
-      ctx = {'searched': searched, 'businesses': businesses}
+      business_list = Business.objects.filter(Q(title__contains=searched)|Q(content__contains=searched)).order_by('-id')
+      page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+      paginator = Paginator(business_list, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+      paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
+      ctx = {'searched': searched, 'business_list':business_list, 'paginated_business_lists':paginated_business_lists}
+
       return render(request, 'theater/business_search.html', context=ctx)
 
    else:

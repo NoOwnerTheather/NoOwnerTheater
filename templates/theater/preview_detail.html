@@ -35,7 +35,7 @@
     <div>
         <a class="btn btn-dark" type="button" href="{{movie.url}}">펀딩링크</a>
 
-        <h3>시놉시스</h3>
+        <h1>시놉시스</h1>
         <hr>
         
         <h5>{% autoescape on %}{{movie.content|safe}}{% endautoescape %}</h5>
@@ -46,7 +46,7 @@
     
     
     <div class="movie-comment">
-        <h3>커뮤니티</h3>
+        <h1>커뮤니티</h1>
         <hr>
 
         {% if user.is_authenticated %}
@@ -55,7 +55,11 @@
             <button class="btn" onclick="onClickComment({{movie.id}}, 'write', '{{request.user}}')">작성</button>
         </section>
         {% else %}
-        로그인 후 이용할 수 있습니다.
+
+        <section class="input">
+            <input id="comment_input-{{movie.id}}" placeholder="로그인 후 이용할 수 있습니다." type="text"/>
+            <button class="btn">작성</button>
+        </section>
         {% endif %}
 
             
@@ -65,11 +69,18 @@
                     <td>{{comment.user}} </td>
                     <td>{{comment.content}} </td>
                     <td>{{comment.created_at}} </td>
+
+                    {% if user.is_authenticated %}
                     <td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>
+                    {% else %}
+                    <td class="btn post__like">좋아요 {{ comment.like }}</td>
+                    {% endif %}
+
 
                     {% if user == comment.user %}
                     <td>
                         <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
+                        <button class="del-btn" onclick="onClickModi({{comment.id}})">수정</button>
                     </td>
                     {% else %}
                     {% endif %}
@@ -140,19 +151,39 @@
     
         const requestComment = new XMLHttpRequest();
         const requestDel = new XMLHttpRequest();
+
+        //var pk=`${pk}`
+        //var pk= $(`pk`).val();
     
         const onClickComment = (id, type, user) => {
-            // const url = "/preview/<int:pk>/write_comment/";
+            //const url = "/preview/{{pk}}/write_comment/";
+
             var url= "{% url 'theater:write_comment' movie.id %}"
+            //console.log("hii")
+            //console.log({pk}+"gg")
+            //console.log({user})
+
+            //var point = {{request.user.mileage}}
+
+            //point = point + 5
+
+            //console.log(point)
             
-            console.log("hii")
+
+
+
+            //var comid=`${comment_id}`
+            //var comid=`${comment_id}`
+            //var comid= $(`pk`).val();
+            //console.log(comid)
+
             const content = document.getElementById(`comment_input-${id}`).value
             //const user = document.getElementById(`comment_input-${id}`).value
             requestComment.open("POST", url, true);
             requestComment.setRequestHeader(
                 "Content-Type", "application/x-www-form-urlencoded"
             );
-            requestComment.send(JSON.stringify({id: id, type: type, content: content, user:user}))
+            requestComment.send(JSON.stringify({id: id, type: type, content: content, user:user}));
         }
 
     
@@ -222,3 +253,4 @@
     
 </body>
 </html>
+© 2022 GitHub, Inc.

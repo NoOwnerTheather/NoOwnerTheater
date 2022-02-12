@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}?after"> 
     <link rel="stylesheet" href="{% static 'css/base.css' %}?after"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
@@ -20,15 +21,17 @@
     crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"></link>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     
     <title>주인없는영화관</title>
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}?after"> 
 </head>
 <body> 
-    <div class="navbar" style="margin: 0;padding: 20px 0;">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="nav_left">
             <img src="{% static 'img/logo.png' %}">
             <a  href="{% url 'theater:main' %}" class="navbar_title">주인없는영화관</a>
@@ -52,8 +55,65 @@
             <a href="{% url 'account:login' %}">로그인</a>
             <a href="{% url 'account:signup' %}">회원가입</a>
             {% endif %}
+    
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+        aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse d-flex" id="basicExampleNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item p-0 m-2 mx-4">
+                    <a class="nav-link p-0 m-0" href="{% url 'theater:chart_list' %}">영화 차트</a> 
+                </li>
+                <li class="nav-item p-0 m-2 mx-4">
+                    <a class="nav-link p-0 m-0" href="#">영화 리뷰</a>
+                </li>
+                <li class="nav-item  p-0 m-2 mx-4">
+                    <a class="nav-link p-0 m-0" href="{% url 'theater:preview' %}">온라인 시사회</a>
+                </li>
+                <li class="nav-item  p-0 m-2 mx-4">
+                    <a class="nav-link p-0 m-0" href="{% url 'theater:business_list' %}">지원사업 게시판</a>
+                </li>
+                {% if user.is_authenticated %}
+                    {% if user.type == "일반 사용자" %}
+                    <li class="nav-item  p-0 m-2 mx-4 dropdown">
+                        <div class="dropdown event-dropdown">
+                            <a class="nav-link p-0 m-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-user"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'account:detail' user.id %}">마이페이지</a>
+                                <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
+                            </div>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item  p-0 m-2 mx-4 dropdown">
+                        <div class="dropdown event-dropdown">
+                            <a class="nav-link p-0 m-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-user"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'account:detail' user.id %}">마이페이지</a>
+                                <a class="dropdown-item" href="{% url 'theater:enroll' %}">영화등록</a>
+                                <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
+                            </div>
+                        </div>
+                    </li>
+                    {% endif %}
+                {% else %}
+                <li class="nav-item  p-0 m-2 mx-4">
+                    <a class="nav-link p-0 m-0" href="{% url 'account:login' %}">로그인</a>
+                </li>
+                <li class="nav-item  p-0 m-2 mx-4">
+                    <a class="nav-link p-0 m-0" href="{% url 'account:signup' %}">회원가입</a>
+                </li>
+                {% endif %}
+            </ul>
         </div>
-    </div>
+    </nav>
+    
     {% block content %}
         <!-- extend -->
     {% endblock %}
