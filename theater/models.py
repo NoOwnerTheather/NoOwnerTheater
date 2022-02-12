@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from random import *
 import random
+from django.conf import settings
 
 # Create your models here.
 TYPE_CHOICE = {('일반 사용자', '일반 사용자'), ('제작사', '제작사')}
@@ -43,6 +44,9 @@ class Movie(models.Model):
     def __str__(self):
         return str(self.title)
 
+    def count_movie(self): 
+        return user.title.count()
+
 # class UnreleasedMovie(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)
 #     title = models.CharField(max_length=50 ,verbose_name='제목')
@@ -75,6 +79,9 @@ class Review(models.Model):
     def __str__(self):
         return str(self.title)
 
+    def count_review(self): 
+        return user.title.count()
+
 class CommentReview(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
@@ -85,8 +92,20 @@ class CommentPreview(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE) 
     content = models.TextField(verbose_name='내용')
+
     like = models.IntegerField(verbose_name='좋아요', default=0)
+    
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
+
+
+    '''likes_user = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, # this is preferred than just 'User'
+        blank=True, # blank is allowed
+        related_name='likes_user'
+    ) # likes_user field
+
+    def count_likes_user(self): # total likes_user
+        return self.likes_user.count()'''
 
 class Business(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
