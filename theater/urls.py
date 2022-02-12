@@ -11,9 +11,9 @@ urlpatterns = [
    path('review_enroll/',views.review_enroll,name='review_enroll'),
    path('<int:pk>/review_fix/',views.review_fix,name='review_fix'),
    path('<int:pk>/review_delete/',views.review_delete,name='review_delete'),
-   path('info_enroll/',views.info_enroll,name="info_enroll"),
-   path('<int:pk>/info_fix/',views.info_fix,name='info_fix'),
-   path('<int:pk>/info_delete/',views.info_delete,name='info_delete'),
+   path('business_enroll/',views.business_enroll,name="business_enroll"),
+   path('<int:pk>/business_fix/',views.business_fix,name='business_fix'),
+   path('<int:pk>/business_delete/',views.business_delete,name='business_delete'),
    path('preview/',views.preview,name="preview"), #시사회 페이지
    path('preview/<int:pk>/',views.preview_detail,name='preview_detail'), #시사회 디테일페이지
 
