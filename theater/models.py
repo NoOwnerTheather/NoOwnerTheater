@@ -20,7 +20,10 @@ class User(AbstractUser):
     mileage = models.IntegerField(verbose_name='마일리지', default=0)
     gender = models.CharField(verbose_name='성별', choices=GENDER_CHOICE, max_length=20)
     age=models.IntegerField(verbose_name="나이",null=True)
-
+    
+    username = models.CharField(max_length=30, unique=True)
+    email =  models.EmailField(max_length=45,unique=True)
+    
     user_img = models.FileField(default=img, verbose_name="유저사진") ###추가한부분
 
 

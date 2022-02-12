@@ -16,10 +16,17 @@
   <div class="container card" style="height: 70rem; width: 80rem;">
     <div class="d-flex justify-content-center align-items-center flex-column" style="height: 50rem;">
         <form class="form-block text-center w-30" method="POST" action="{% url 'account:signup' %}">
-            <div style="display:inline-flex; height:6rem; width:40rem;">
+            <div style="float: left ; height:6rem; width:40rem;">
               {% csrf_token %}
-              {%if form.errors%}
-                      {{ form.non_field_errors }}
+              {% if form.errors %}
+                  <div class="alert alert-danger" role="alert">
+                  {% for field in form %}
+                      {% if field.errors %}
+                      <strong>{{ field.label }}</strong>
+                      {{ field.errors }}
+                      {% endif %}
+                  {% endfor %}
+                  </div>
               {% endif %}
             </div>
             <div class="donate-now mb-3" style="margin-top: 250px;" >
