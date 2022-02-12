@@ -28,7 +28,7 @@
                                 <h5 class="text-center">{{review.movie.title}}</h5>
                                 <h5 class="text-center">{{review.title}}</h5>
                                 <h6 class="text-right">{{review.created_at}}</h6>
-                                <a href="#" class="btn btn-dark" type="button">리뷰바로가기</a>
+                                <a href="{% url 'theater:review_detail' pk=review.pk %}" class="btn btn-dark" type="button">리뷰바로가기</a>
                             </div>
                     </div>
 
