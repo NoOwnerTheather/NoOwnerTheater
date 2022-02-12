@@ -95,12 +95,12 @@ class ReviewForm(forms.ModelForm):
                 
         }
 
-class InfoForm(forms.ModelForm):
+class BusinessForm(forms.ModelForm):
 
     class Meta:
         model=Business
 
-        fields=('title','content','image')
+        fields=('user','title','content','image')
         widgets={
             'title': TextInput(attrs={
                 'class': "form-input",

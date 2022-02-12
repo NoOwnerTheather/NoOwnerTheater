@@ -10,14 +10,6 @@
   width: 80%;
 }
 
-.board-header-title {
-  display: flex;
-  justify-content: center;
-  font-size: 3.6rem;
-  font-weight: bold;
-  margin-bottom: 4rem;
-}
-
 .board-search {
   border-bottom: 1px solid #707070;
   margin-bottom: 4rem;
@@ -33,9 +25,15 @@
 .board-search i {
   cursor: pointer;
 }
+.board-search button {
+  background-color: #f5f4f2;
+  border: none;
+}
+
 .board-header-count {
   display: flex;
   justify-content: flex-start;
+  margin-bottom: 0.5rem;
 }
 
 thead {
@@ -77,5 +75,9 @@ tbody > tr {
   font-weight: bold;
   border: none;
   padding: 0.5rem 2rem;
-  border-radius: 6%;
+  border-radius: 3rem;
+}
+
+.top {
+  margin: 1rem;
 }

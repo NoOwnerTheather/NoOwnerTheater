@@ -1,14 +1,13 @@
-
 * {
   box-sizing: border-box;
 }
 
-@import url(business_list.css);
-@import url(business_detail.css);
-@import url(business_search.css);
-@import url(chart_list.css);
-@import url(base.css);
-
+html {
+  font-size: 62.5%;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif !important;
+}
 
 html,
 body,
@@ -94,8 +93,6 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 
@@ -137,7 +134,6 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
 
 button {
   background: inherit;
@@ -182,6 +178,7 @@ button:active {
 input:focus {
   outline: none;
 }
+
 a {
   color: inherit;
   color: black !important;
@@ -199,5 +196,4 @@ a:visited {
 a:hover {
   color: black;
   text-decoration: none !important;
-
 }

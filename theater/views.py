@@ -7,8 +7,9 @@ from django.db.models import Q
 import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
 
-from .forms import MovieForm,ReviewForm,InfoForm
+from .forms import MovieForm,ReviewForm,BusinessForm
 def main(request):
    return render(request, template_name='theater/main.html')
 
@@ -84,40 +85,40 @@ def review_delete(request,pk):
    post.delete()
    return redirect("theater:main")
 
-def info_enroll(request):
+def business_enroll(request):
 
     if request.method=="POST":
-        form=InfoForm(request.POST,request.FILES)
+        form=BusinessForm(request.POST,request.FILES)
         
         if form.is_valid():
             post=form.save()
-            return redirect('theater:main')
+            return redirect('theater:business_list')
 
     else:
-        form=InfoForm()
+        form=BusinessForm()
         ctx={'form':form}
-        return render(request,template_name='theater/info_enroll.html',context=ctx)
+        return render(request,template_name='theater/business_enroll.html',context=ctx)
 
 
-def info_fix(request,pk):
+def business_fix(request,pk):
    post=get_object_or_404(Business,id=pk)
    if request.method=="POST":
-      form=InfoForm(request.POST,request.FILES,instance=post)
+      form=BusinessForm(request.POST,request.FILES,instance=post)
         
       if form.is_valid():
          post=form.save()
-         return redirect('theater:main',pk)
+         return redirect('theater:business_detail',pk)
 
    else:
-      form=InfoForm(instance=post)
+      form=BusinessForm(instance=post)
       ctx={'form':form}
-      return render(request,template_name='theater/info_enroll.html',context=ctx)
+      return render(request,template_name='theater/business_enroll.html',context=ctx)
       # redirect랑 render 주소는 임시
 
-def info_delete(request,pk):
+def business_delete(request,pk):
    post=get_object_or_404(Business,id=pk)
    post.delete()
-   return redirect("theater:main")
+   return redirect("theater:business_list")
 
 
 def preview(request):
@@ -242,14 +243,22 @@ def del_comment(request,pk):
    return JsonResponse({'id': comment_id})
 
 def business_list(request):
-   businesses = Business.objects.all().order_by('-id')
-   ctx = {'businesses' : businesses}
+   business_list = Business.objects.all().order_by('-id')
+   page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+   paginator = Paginator(business_list, '2') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+   paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
+   ctx = {'business_list':business_list,'paginated_business_lists':paginated_business_lists}
 
    return render(request, template_name='theater/business_list.html', context=ctx)
 
+   
 def business_detail(request, pk):
    business = Business.objects.get(id=pk)
-   ctx = {'business' : business}
+   business_list = Business.objects.all().order_by('-id')
+   page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+   paginator = Paginator(business_list, '2') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+   paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
+   ctx = {'business' : business ,'paginated_business_lists':paginated_business_lists }
 
    return render(request, template_name='theater/business_detail.html', context=ctx) 
 
@@ -258,8 +267,12 @@ def business_search(request):
       searched = request.POST['searched']        
       if not searched:
          return redirect('theater:business_list')         
-      businesses = Business.objects.filter(Q(title__contains=searched)|Q(content__contains=searched)).order_by('-id')
-      ctx = {'searched': searched, 'businesses': businesses}
+      business_list = Business.objects.filter(Q(title__contains=searched)|Q(content__contains=searched)).order_by('-id')
+      page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
+      paginator = Paginator(business_list, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+      paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
+      ctx = {'searched': searched, 'business_list':business_list, 'paginated_business_lists':paginated_business_lists}
+
       return render(request, 'theater/business_search.html', context=ctx)
 
    else:
