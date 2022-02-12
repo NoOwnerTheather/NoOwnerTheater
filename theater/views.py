@@ -268,6 +268,29 @@ def del_comment(request,pk):
 
    return JsonResponse({'id': comment_id})
 
+
+
+#####수정 ajax#######
+@csrf_exempt
+def replyUpdate(request,pk):
+   jsonObject = json.loads(request.body)
+   reply=CommentPreview.objects.filter(id=jsonObject.get('id'))
+   context={
+      'result':'no'
+   }
+
+   if reply is not None:
+      reply.update(content=jsonObject.get('content'))
+      context={
+         'result':'ok'
+      }
+      return JsonResponse(context)
+   
+   return JsonResponse(context)
+
+
+
+
 def business_list(request):
    business_list = Business.objects.all().order_by('-id')
    page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터

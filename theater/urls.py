@@ -49,5 +49,9 @@ urlpatterns = [
    path("review/<int:pk>/del_comment/", views.del_comment, name='del_comment'),
    path('review_hits_ajax/',views.review_hits_ajax, name='review_hits_ajax'),
 
+   #path('review/<int:pk>/replyUpdate/', views.replyUpdate, name='replyUpdate'),
+   path("review/<int:pk>/replyUpdate/", views.replyUpdate, name='replyUpdate'),
+   
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

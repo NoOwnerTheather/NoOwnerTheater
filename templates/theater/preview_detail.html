@@ -66,7 +66,9 @@
                 {% for comment in movie.commentpreview_set.all %}
                 <tr class = "comment-{{comment.id}}">
                     <td>{{comment.user}} </td>
-                    <td>{{comment.content}} </td>
+                    <td><input type="text" class="replyContent{{ comment.id }}" value="{{ comment.content }}" readonly></td>
+
+                    <!--<td>{{comment.content}} </td>-->
                     <td>{{comment.created_at}} </td>
 
                     {% if user.is_authenticated %}
@@ -80,7 +82,7 @@
                     <td>
                         <button class="tdReplyDelete{{comment.id}} del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
                         <td class="tdReplyUpdate{{ comment.id }}"><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>
-                        <td class="tdReplySubmit{{ comment.id }}"  style="display:none"><input type="button"  value="진짜 수정" onclick="replySubmit({{ comment.id }})"></td>
+                        <td class="tdReplySubmit{{ comment.id }}"  style="display:none"><input type="button"  value="확인" onclick="replySubmit({{ comment.id }})"></td>
                         <td class="tdReplyUpdateCancel{{ comment.id }}"  style="display:none"><input type="button"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></td>
 
                     </td>
@@ -250,17 +252,81 @@
 
         ////////////////////////////
         const replyUpdate = (id) => {
-        let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
-        let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
-        let tdReplySubmit = document.querySelector(`.tdReplySubmit${id}`);
-        let tdReplyUpdateCancel = document.querySelector(`.tdReplyUpdateCancel${id}`);
+            let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
+            let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
+            let tdReplySubmit = document.querySelector(`.tdReplySubmit${id}`);
+            let tdReplyUpdateCancel = document.querySelector(`.tdReplyUpdateCancel${id}`);
 
-        console.log(tdReplyUpdate);
-        tdReplyUpdate.style.display = 'none';
-        tdReplyDelete.style.display = 'none';
-        tdReplySubmit.style.display = 'inline-block';
-        tdReplyUpdateCancel.style.display = 'inline-block';
-}
+            let replyContent=document.querySelector(`.replyContent${id}`);
+
+            console.log(tdReplyUpdate);
+            tdReplyUpdate.style.display = 'none';
+            tdReplyDelete.style.display = 'none';
+            tdReplySubmit.style.display = 'inline-block';
+            tdReplyUpdateCancel.style.display = 'inline-block';
+
+            replyContent.readOnly=false;
+        }
+
+        const replySubmit = (id) => {
+            let replyContent = document.querySelector(`.replyContent${id}`).value;
+            let param = {
+            'id': id,
+            'content': replyContent
+            }
+
+            $.ajax({
+                url : "{% url 'theater:replyUpdate' movie.id %}",
+                type : 'POST',
+                headers:{
+                    'X-CSRFTOKEN' : '{{ csrf_token}}'
+
+                },
+                data : JSON.stringify(param),
+                success:function(data){
+                    console.log(data);
+
+                    if(data.result=='ok'){
+                        let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
+                        let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
+                        let tdReplySubmit = document.querySelector(`.tdReplySubmit${id}`);
+                        let tdReplyUpdateCancel = document.querySelector(`.tdReplyUpdateCancel${id}`);
+                        let replyContent=document.querySelector(`.replyContent${id}`);
+
+                        tdReplyUpdate.style.display = 'inline-block';
+                        tdReplyDelete.style.display = 'inline-block';
+                        tdReplySubmit.style.display = 'none';
+                        tdReplyUpdateCancel.style.display = 'none';
+                        replyContent.readOnly=true;
+                    }
+                },
+                error:function(){
+                    alert('안돼');
+                }
+
+
+            });
+            
+        }
+
+        const replyUpdateCancel = (id) => {
+            let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
+            let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
+            let tdReplySubmit = document.querySelector(`.tdReplySubmit${id}`);
+            let tdReplyUpdateCancel = document.querySelector(`.tdReplyUpdateCancel${id}`);
+
+            let replyContent=document.querySelector(`.replyContent${id}`);
+
+            console.log(tdReplyUpdate);
+            tdReplyUpdate.style.display = 'inline-block';
+            tdReplyDelete.style.display = 'inline-block';
+            tdReplySubmit.style.display = 'none';
+            tdReplyUpdateCancel.style.display = 'none';
+
+            replyContent.readOnly=false;
+        }
+
+
     </script>
 
     {% endblock %}
