@@ -79,10 +79,10 @@
                     {% if user == comment.user %}
                     <td>
                         <button class="tdReplyDelete{{comment.id}} del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
-                        <button class="tdReplyUpdate{{comment.id}} del-btn" onclick="replyUpdate({{comment.id}})">수정</button>
+                        <td class="tdReplyUpdate{{ comment.id }}"><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>
+                        <td class="tdReplySubmit{{ comment.id }}"  style="display:none"><input type="button"  value="진짜 수정" onclick="replySubmit({{ comment.id }})"></td>
+                        <td class="tdReplyUpdateCancel{{ comment.id }}"  style="display:none"><input type="button"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></td>
 
-                        <button class="toReplySubmit{{comment.id}} del-btn" style="display:none" onclick="replySubmit({{comment.id}})">진짜수정</button>
-                        <button class="tdReplyUpdateCancel{{comment.id}} del-btn" style="display:none" onclick="replyUpdateCancel({{comment.id}})">취소</button>
                     </td>
                     {% else %}
                     {% endif %}
