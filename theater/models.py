@@ -1,3 +1,4 @@
+from pickle import FALSE
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from random import *
@@ -18,6 +19,7 @@ class User(AbstractUser):
     type = models.CharField(verbose_name='가입 유형', choices=TYPE_CHOICE, max_length=20)
     mileage = models.IntegerField(verbose_name='마일리지', default=0)
     gender = models.CharField(verbose_name='성별', choices=GENDER_CHOICE, max_length=20)
+    age=models.IntegerField(verbose_name="나이",null=True)
 
     user_img = models.FileField(default=img, verbose_name="유저사진") ###추가한부분
 
@@ -33,7 +35,7 @@ class Movie(models.Model):
     release_date = models.DateField(verbose_name='개봉')
     director = models.CharField(verbose_name='감독', max_length=50)
     actor = models.CharField(verbose_name='배우', max_length=100)
-    content = models.TextField(verbose_name='개요',null=True)
+    content =models.TextField()
     # grade = models.CharField(verbose_name='등급', choices=GRADE_CHOICE, max_length=20)
     # company = models.CharField(max_length=50 ,verbose_name='배급사') 배급사는 제작사 유저로 하면 될 것 같아!
     rating = models.FloatField(verbose_name='평점', default=0)
@@ -73,8 +75,17 @@ class Review(models.Model):
     title = models.CharField(verbose_name='한 줄 제목', max_length=200)
     content = models.TextField(verbose_name='내용')
     rating = models.IntegerField(verbose_name='평점')
+    hits = models.IntegerField(verbose_name='조회수', default=0)
     like = models.IntegerField(verbose_name='좋아요', default=0)
+    likes_user = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, # this is preferred than just 'User'
+        blank=True, # blank is allowed
+        related_name='likes_user'
+    ) # likes_user field
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
+
+    def count_likes_user(self): # total likes_user
+        return self.likes_user.count()
 
     def __str__(self):
         return str(self.title)
@@ -110,14 +121,13 @@ class CommentPreview(models.Model):
 class Business(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(verbose_name='제목', max_length=100)
-    content = models.TextField(verbose_name='내용')
+    content = models.TextField()
     hits = models.IntegerField(verbose_name='조회수', default=0)
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
-    image=models.ImageField(upload_to="poster/", null=True, blank=True, verbose_name="포스터")
+    image=models.ImageField(upload_to="poster/", null=True, blank=True, verbose_name="이미지")
     def __str__(self):
         return str(self.title)
 
 
-    
 
     
