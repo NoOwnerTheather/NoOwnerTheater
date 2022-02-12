@@ -35,7 +35,7 @@
         </div>
         <div class="nav_right">
             <a href="{% url 'theater:chart_list' %}">영화 차트</a>
-            <a>영화 리뷰</a>
+            <a href="{% url 'theater:review_board' %}">영화 리뷰</a>
             <a href="{% url 'theater:preview' %}">온라인 시사회</a>
             <a  href="{% url 'theater:business_list' %}">지원사업 게시판</a>
             {% if user.is_authenticated %}
