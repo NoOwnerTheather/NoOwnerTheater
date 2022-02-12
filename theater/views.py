@@ -456,10 +456,10 @@ def write_review_comment(request,pk):
 
 
 @csrf_exempt
-def del_comment(request,pk):
+def del_review_comment(request,pk):
    req = json.loads(request.body)
    comment_id = req['id']
-   comment = get_object_or_404(CommentPreview, id=comment_id)
+   comment = get_object_or_404(CommentReview, id=comment_id)
    comment.delete()
 
    print("(-)마일리지") #####
