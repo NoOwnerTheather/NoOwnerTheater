@@ -24,6 +24,7 @@
                 </tr>
             </thead>
             <tbody>
+                {% if business_list %}
                 {% for paginated_business_list in paginated_business_lists %}
                 <tr>
                     <th scope="row">{{paginated_business_list.id}}</th>
@@ -33,6 +34,11 @@
                     <td>{{paginated_business_list.hits}}</td>
                 </tr>
                 {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">게시글이 없습니다.</td>
+                </tr>
+                {% endif %}
             </tbody>
         </table>
         <a class="business_create" href="{% url 'theater:business_enroll' %}"><button >글쓰기</button></a>
