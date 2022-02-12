@@ -1,39 +1,83 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
-<h1>{{user}}님</h1>
-<h3>닉네임 : {{user.nickname}}</h3>
-<h3>{{user.mileage}} 포인트</h3>
 
-<h1>내가 쓴 리뷰</h1>
+{% if user.type == '일반 사용자'  %}
 
-<!--제작사 user 디테일 페이지도 만들어야함-->
+    <img src="{{user.user_img.url}}"  class="card-img-top" alt="...">
+    <h1>{{user}}님</h1>
+    <h3>닉네임 : {{user.nickname}}</h3>
+    <h3>{{user.mileage}} 포인트</h3>
+
+    <h1>내가 쓴 리뷰</h1>
+
+    <!--제작사 user 디테일 페이지도 만들어야함-->
 
 
-<div class="container">
+    <div class="container">
 
-    <div class="row"></div>
+        <div class="row"></div>
 
-        {% for review in user.review_set.all %}
-            <div class="col-md-3">
+            {% for review in user.review_set.all %}
+                <div class="col-md-3">
 
-                <div class="" style="width: 100%">
-                    <img src="{{review.movie.poster.url}}"  class="card-img-top" alt="...">
-                        <div class="d-grid gap-2">
-                            <h5 class="text-center">{{review.movie.title}}</h5>
-                            <h5 class="text-center">{{review.title}}</h5>
-                            <h6 class="text-right">{{review.created_at}}</h6>
-                            <a href="#" class="btn btn-dark" type="button">리뷰바로가기</a>
-                        </div>
+                    <div class="" style="width: 100%">
+                        <img src="{{review.movie.poster.url}}"  class="card-img-top" alt="...">
+                            <div class="d-grid gap-2">
+                                <h5 class="text-center">{{review.movie.title}}</h5>
+                                <h5 class="text-center">{{review.title}}</h5>
+                                <h6 class="text-right">{{review.created_at}}</h6>
+                                <a href="#" class="btn btn-dark" type="button">리뷰바로가기</a>
+                            </div>
+                    </div>
+
                 </div>
+                
 
-            </div>
-            
-
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
-</div>
+
+{% endif %}
+
+
+
+
+
+{% if user.type == '제작사'  %}
+
+    <img src="{{user.user_img.url}}"  class="card-img-top" alt="...">
+    <h1>{{user}}님</h1>
+    <h3>제작사 : {{user.nickname}}</h3>
+
+    <h1>등록한 영화</h1>
+
+    <div class="container">
+
+        <div class="row"></div>
+
+            {% for movie in user.movie_set.all %}
+                <div class="col-md-3">
+
+                    <div class="" style="width: 100%">
+                        <img src="{{movie.poster.url}}"  class="card-img-top" alt="...">
+                            <div class="d-grid gap-2">
+                                <h5 class="text-center">{{movie.title}}</h5>
+                                <a href="{% url 'theater:preview_detail' pk=movie.pk %}" class="btn btn-dark" type="button">영화 디테일로 바로가기</a>
+                            </div>
+                    </div>
+
+                </div>
+                
+
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+{% endif %}
 
 
 {% endblock %}

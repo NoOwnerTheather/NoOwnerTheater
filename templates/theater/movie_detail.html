@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+
+    .text-start {
+        font-weight: bold;
+        font-size:xx-large;
+    }
+
+    .review_title {
+        font-weight: 550;
+    }
+   .diagonal {
+    width: 5px;
+    height: 100px;
+    background-color: black;
+    transform: rotate(75deg);
+    }
+    .floating { 
+        position: fixed; 
+        left: 0; 
+        top: 7rem; 
+        margin-right: -720px; 
+        text-align:center; 
+        width: 120px; 
+    }
+    .rating {
+        background-color: #F89501;
+    }
+
+
+
+    
+</style>
+<div style="background-color: #f5f4f2;">
+
+    <div class="floating">
+        <div class="rating d-flex flex-column py-3" style="height: 10rem;">
+            <h3 class="text-start">{{ movie.rating }}</h3>
+            <hr class="diagonal">
+            <h3 class="text-start">5.0</h3>
+        </div>
+        <div class="d-flex flex-column">
+            <a class="badge rounded-pill bg-dark text-light py-2" href="{% if movie.video %} {{movie.video.url}} {% endif %}">예고편</a>
+            <a class="badge rounded-pill bg-dark text-light py-2" href="{% url 'theater:review_enroll'}">리뷰 작성</a>
+        </div>    
+    </div>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 100%">
+
+                <div class="jb-wrap">
+                    <div class="text-center jb-image">
+                        <img class="img-fluid" src="{{movie.poster.url}}"  alt="...">
+                    </div>
+                </div>
+
+                    <div class="card-body">
+                        <div>
+                            <h5 class="text-start">Synopsis</h5>
+                            <hr style="height:1px;border:none;color:#333;background-color:#333;">
+                            <div class="display-4" style="border:bold;">
+                                <h2>{{ movie.title }}</h2>
+                            </div>
+                            <div class="card my-3" style="width: 100%">
+                                <div class="card-body m-2">
+                                    <p>감독 | {{ movie.director }}</p>
+                                    <p>장르 | {{ movie.genre }}</p>
+                                    <p>출연 | {{ movie.actor }}</p>
+                                    <p>개봉 | {{ movie.release_date }}</p>
+                                </div>
+                            </div>
+                            <p class="text-center" style="line-height: 2.0;">{% autoescape on %}{{movie.content|safe}}{% endautoescape %}</p>
+                            <br><br>
+                            <h5 class="text-start">Review</h5>
+                            <hr style="height:1px;border:none;color:#333;background-color:#333;">
+                        
+                            <div class="container mb-5">
+                                <div class="row">
+                                    {% for review in reviews %}
+                                    <div class="col-md-3">
+                                        <div class="card text-center" style="width: 100%">
+                                            <h3 class="review_title text-center mt-3">{{review.title}}</h3>
+                                            <div class="card-body">
+                                              <span class="stars text-dark me-2 d-flex justify-content-center">{{review.rating}}</span>
+                                              <p class="mt-3">{{request.user}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <a href="{% url 'theater:chart_list' %}">
+                                    <button type="button" class="btn btn-dark my-5 text-center">목록</button>
+                                </a>
+                            </div>
+
+                        </div>
+                    
+                    </div>
+
+                    
+
+                </div>  
+            </div>
+        </div>
+    </div>
+      
+</div>
+
+
+
+<script>
+const rating = document.querySelectorAll(".stars");
+rating.forEach((value) => {
+  let ratingStars = "";
+  for (let i = 0; i < Math.floor(value.innerText); i++) {
+    ratingStars += '<i class="fas fa-star"></i>';
+  }
+  if (value.innerText % 1) {
+    ratingStars += '<i class="fas fa-star-half"></i>';
+  }
+  value.innerHTML = ratingStars;
+});
+
+</script>
+
+
+
+
+
+{% endblock %}
