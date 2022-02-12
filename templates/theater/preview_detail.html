@@ -78,8 +78,11 @@
 
                     {% if user == comment.user %}
                     <td>
-                        <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
-                        <button class="del-btn" onclick="onClickModi({{comment.id}})">수정</button>
+                        <button class="tdReplyDelete{{comment.id}} del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
+                        <button class="tdReplyUpdate{{comment.id}} del-btn" onclick="replyUpdate({{comment.id}})">수정</button>
+
+                        <button class="toReplySubmit{{comment.id}} del-btn" style="display:none" onclick="replySubmit({{comment.id}})">진짜수정</button>
+                        <button class="tdReplyUpdateCancel{{comment.id}} del-btn" style="display:none" onclick="replyUpdateCancel({{comment.id}})">취소</button>
                     </td>
                     {% else %}
                     {% endif %}
@@ -244,6 +247,20 @@
                 DelHandleResponse();
             }
         }
+
+        ////////////////////////////
+        const replyUpdate = (id) => {
+        let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
+        let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
+        let tdReplySubmit = document.querySelector(`.tdReplySubmit${id}`);
+        let tdReplyUpdateCancel = document.querySelector(`.tdReplyUpdateCancel${id}`);
+
+        console.log(tdReplyUpdate);
+        tdReplyUpdate.style.display = 'none';
+        tdReplyDelete.style.display = 'none';
+        tdReplySubmit.style.display = 'inline-block';
+        tdReplyUpdateCancel.style.display = 'inline-block';
+}
     </script>
 
     {% endblock %}

@@ -168,6 +168,7 @@ def preview_detail(request,pk):
 
     ctx = {
        'movie': movie,
+       #'counting':counting,
        #'preview_form':preview_form,
        #'preview_comments':preview_comments,
        }
