@@ -9,6 +9,14 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import MovieForm,ReviewForm,InfoForm
+
+from django.core.paginator import Paginator  
+import json
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+
+
 def main(request):
    return render(request, template_name='theater/main.html')
 
@@ -192,16 +200,17 @@ def like_ajax(request,pk):
 
 @csrf_exempt
 def write_comment(request,pk):
-   #print("hi")
+   print("hi")
    req = json.loads(request.body)
    id = req['id']
    type = req['type']
    content = req['content']
    user=req['user']
-
    movie = Movie.objects.get(id=id)
-   comment = CommentPreview.objects.create(movie=movie, content=content, user=user)
-   #print(comment)
+   print(movie)
+   
+   comment = CommentPreview.objects.create(movie=movie, content=content, user=request.user)
+   
    comment.save()
    return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
 
@@ -344,3 +353,78 @@ def business_hits_ajax(request):
 
 
 
+
+def review_board(request):
+   
+   page = request.GET.get('page', '1')  # 페이지
+
+   review_list_pub = Review.objects.order_by('-created_at')
+   review_list_hot = Review.objects.order_by('-like')
+
+   paginator = Paginator(review_list_pub, 10)  # 페이지당 10개씩 보여주기
+   page_obj = paginator.get_page(page)
+
+   context = {
+      'review_list_hot': review_list_hot,
+      'review_list_pub': page_obj,
+               }
+   return render(request, template_name='theater/review_board.html', context=context)
+
+
+@login_required
+@require_POST
+def review_like(request):
+    pk = request.POST.get('pk', None)
+    review = get_object_or_404(Review, pk=pk)
+    user = request.user
+
+    if review.likes_user.filter(id=user.id).exists():
+        review.likes_user.remove(user)
+        message = '좋아요 취소'
+    else:
+        review.likes_user.add(user)
+        message = '좋아요'
+
+    context = {'likes_count':review.count_likes_user(), 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+
+def review_detail(request, pk):
+   
+   review = Review.objects.get(pk=pk)
+   context = {'review': review,
+               }
+   return render(request, 'theater/review_detail.html', context)
+
+@csrf_exempt
+def write_review_comment(request,pk):
+   print("hi")
+   req = json.loads(request.body)
+   id = req['id']
+   type = req['type']
+   content = req['content']
+   user=req['user']
+   review = Review.objects.get(id=id)
+   
+   comment = CommentReview.objects.create(review=review, content=content, user=request.user)
+   
+   comment.save()
+   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
+
+
+@csrf_exempt
+def del_comment(request,pk):
+   req = json.loads(request.body)
+   comment_id = req['id']
+   comment = get_object_or_404(CommentReview, id=comment_id)
+   comment.delete()
+   return JsonResponse({'id': comment_id})
+
+@csrf_exempt
+def review_hits_ajax(request):
+   req = json.loads(request.body)
+   review_id = req['id']
+   review = Review.objects.get(id = review_id)
+   review.hits += 1
+   review.save()
+   return 

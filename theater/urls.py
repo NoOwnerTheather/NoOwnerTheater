@@ -41,5 +41,13 @@ urlpatterns = [
 
 
    path('business_hits_ajax/',views.business_hits_ajax, name='business_hits_ajax'),
+
+   path('review_board/',views.review_board, name='review_board'),
+   path('review_like/', views.review_like, name='review_like'),
+   path('review_detail/<int:pk>/', views.review_detail, name='review_detail'),
+   path("review/<int:pk>/write_review_comment/", views.write_review_comment, name='write_review_comment'),
+   path("review/<int:pk>/del_comment/", views.del_comment, name='del_comment'),
+   path('review_hits_ajax/',views.review_hits_ajax, name='review_hits_ajax'),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

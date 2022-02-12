@@ -1,8 +1,8 @@
 from pickle import FALSE
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from ckeditor.fields import RichTextField
-from ckeditor_uploader.fields import RichTextUploadingField
+from django.conf import settings
+
 # Create your models here.
 TYPE_CHOICE = {('일반 사용자', '일반 사용자'), ('제작사', '제작사')}
 GENDER_CHOICE = {('남자', '남자'), ('여자', '여자')}
@@ -62,8 +62,17 @@ class Review(models.Model):
     title = models.CharField(verbose_name='한 줄 제목', max_length=200)
     content = models.TextField(verbose_name='내용')
     rating = models.IntegerField(verbose_name='평점')
+    hits = models.IntegerField(verbose_name='조회수', default=0)
     like = models.IntegerField(verbose_name='좋아요', default=0)
+    likes_user = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, # this is preferred than just 'User'
+        blank=True, # blank is allowed
+        related_name='likes_user'
+    ) # likes_user field
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
+
+    def count_likes_user(self): # total likes_user
+        return self.likes_user.count()
 
     def __str__(self):
         return str(self.title)

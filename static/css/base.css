@@ -3,6 +3,9 @@
 @import url(business_detail.css);
 @import url(business_list.css);
 @import url(business_search.css);
+@import url(review_detail);
+
+
 .navbar {
   display: flex;
   padding: 2rem 0;
@@ -51,3 +54,4 @@ ul {
 html{
   font-size: 62.5%;
 }
+
