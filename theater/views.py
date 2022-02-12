@@ -315,7 +315,7 @@ def genre_order(request):
    else:
       content_list = Movie.objects.filter(comeout='개봉').order_by('?')[:20]
 
-   ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3, 'so':sort}
+   ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3, 'so':sort,'current_user':request.user}
 
    return render(request, template_name='theater/chart_list.html', context=ctx) 
    
@@ -341,4 +341,6 @@ def business_hits_ajax(request):
    business.hits += 1
    business.save()
    return 
+
+
 
