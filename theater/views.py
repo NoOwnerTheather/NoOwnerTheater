@@ -213,7 +213,6 @@ def like_ajax(request,pk):
 
 
 
-
 @csrf_exempt
 def write_comment(request,pk):
    print("hi")
@@ -223,7 +222,21 @@ def write_comment(request,pk):
    content = req['content']
    user=req['user']
    movie = Movie.objects.get(id=id)
-   print(movie)
+   
+
+   movie = get_object_or_404(Movie, pk=pk) 
+
+   print("(+)마일리지") #####
+   print(request.user) #####
+   print(request.user.mileage) #####
+   
+   request.user.mileage=request.user.mileage+5 #####
+
+   request.user.save() #####
+
+   print(request.user.mileage) #####
+
+
    
    comment = CommentPreview.objects.create(movie=movie, content=content, user=request.user)
    
