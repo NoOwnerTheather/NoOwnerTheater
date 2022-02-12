@@ -64,7 +64,12 @@
                         <img src="{{movie.poster.url}}"  class="card-img-top" alt="...">
                             <div class="d-grid gap-2">
                                 <h5 class="text-center">{{movie.title}}</h5>
+
+                                {% if movie.comeout == '미개봉 및 제작중' %}
                                 <a href="{% url 'theater:preview_detail' pk=movie.pk %}" class="btn btn-dark" type="button">영화 디테일로 바로가기</a>
+                                {% else %}
+                                <a href="{% url 'theater:movie_detail' pk=movie.id %}" class="btn btn-dark" type="button">영화 디테일로 바로가기</a>
+                                {% endif %}
                             </div>
                     </div>
 
