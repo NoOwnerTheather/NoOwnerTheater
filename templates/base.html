@@ -36,25 +36,7 @@
             <img src="{% static 'img/logo.png' %}">
             <a  href="{% url 'theater:main' %}" class="navbar_title">주인없는영화관</a>
         </div>
-        <div class="nav_right">
-            <a href="{% url 'theater:chart_list' %}">영화 차트</a>
-            <a href="{% url 'theater:review_board' %}">영화 리뷰</a>
-            <a href="{% url 'theater:preview' %}">온라인 시사회</a>
-            <a  href="{% url 'theater:business_list' %}">지원사업 게시판</a>
-            {% if user.is_authenticated %}
-            <div class="dropdown event-dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="far fa-user"></i>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="{% url 'account:detail' user.id %}">마이페이지</a></li>
-                    <li><a href="{% url 'account:logout' %}">로그아웃</a></li>
-                </ul>
-            </div>
-            {% else %}
-            <a href="{% url 'account:login' %}">로그인</a>
-            <a href="{% url 'account:signup' %}">회원가입</a>
-            {% endif %}
+       
     
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
         aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +49,7 @@
                     <a class="nav-link p-0 m-0" href="{% url 'theater:chart_list' %}">영화 차트</a> 
                 </li>
                 <li class="nav-item p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="#">영화 리뷰</a>
+                    <a class="nav-link p-0 m-0" href="{% url 'theater:review_board' %}">영화 리뷰</a>
                 </li>
                 <li class="nav-item  p-0 m-2 mx-4">
                     <a class="nav-link p-0 m-0" href="{% url 'theater:preview' %}">온라인 시사회</a>

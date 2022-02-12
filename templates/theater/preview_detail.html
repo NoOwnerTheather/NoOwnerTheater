@@ -37,8 +37,7 @@
 
         <h1>시놉시스</h1>
         <hr>
-        
-        <h5>{% autoescape on %}{{movie.content|safe}}{% endautoescape %}</h5>
+        <h5>{{movie.content}}</h5>
 
     </div>
 
@@ -222,7 +221,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         const onClickDel = (id) => {
-            const url = "/preview/1/del_comment/";
+            const url = "{% url 'theater:del_comment' movie.id %}";
             requestDel.open("POST", url, true);
             requestDel.setRequestHeader(
                 "Content-Type", "application/x-www-form-urlencoded"

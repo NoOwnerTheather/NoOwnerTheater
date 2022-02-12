@@ -8,6 +8,7 @@
 @import url(chart_list.css);
 @import url(movie_detail.css);
 @import url(base.css);
+@import url(preview.css);
 html {
   font-size: 62.5%;
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
