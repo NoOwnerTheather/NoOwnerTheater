@@ -16,6 +16,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
+from django.db.models import Avg
 
 from .forms import MovieForm,ReviewForm,BusinessForm
 def main(request):
@@ -75,6 +76,11 @@ def review_enroll(request,pk):
                movie=movie
             )
          review.save()
+
+         movie.rating = Review.objects.filter(movie=movie).aggregate(Avg('rating'))['rating__avg']
+         movie.rating = round(movie.rating, 2)
+         movie.save()
+
          return redirect('theater:main') 
          #임시용 코드
 

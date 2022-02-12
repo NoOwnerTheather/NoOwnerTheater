@@ -44,7 +44,7 @@
         </div>
         <div class="d-flex flex-column">
             <a class="badge rounded-pill bg-dark text-light py-2" href="{% if movie.video %} {{movie.video.url}} {% endif %}">예고편</a>
-            <a class="badge rounded-pill bg-dark text-light py-2" href="{% url 'theater:review_enroll'}">리뷰 작성</a>
+            <a class="badge rounded-pill bg-dark text-light py-2" href="{% url 'theater:review_enroll' pk=movie.id %}">리뷰 작성</a>
         </div>    
     </div>
 
