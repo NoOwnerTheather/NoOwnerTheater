@@ -134,6 +134,7 @@ def preview_detail(request,pk):
 
     #movie=Movie.objects.get(id=pk)
     movie = get_object_or_404(Movie, pk=pk)
+    
     #print(movie.comment_set.all())
     #preview_form = CommentPreviewForm()
     #preview_comments = movie.commentpreview_set.all()
@@ -162,31 +163,55 @@ def like_ajax(request,pk):
 
     if button_type=='like':
         comment.like+=1
+        button_type='dislike'
 
     else:
         comment.like-=1
+        button_type='like'
 
 
     comment.save()
+    
+    print(comment.like)
+    print(button_type)
 
     return JsonResponse({'id':post_id, 'type':button_type})
 
 
 
+
 @csrf_exempt
 def write_comment(request,pk):
-   #print("hi")
+   print("hi")
    req = json.loads(request.body)
    id = req['id']
    type = req['type']
    content = req['content']
    user=req['user']
-
    movie = Movie.objects.get(id=id)
-   comment = CommentPreview.objects.create(movie=movie, content=content, user=user)
-   #print(comment)
+   
+
+   movie = get_object_or_404(Movie, pk=pk) 
+
+   print("(+)마일리지") #####
+   print(request.user) #####
+   print(request.user.mileage) #####
+   
+   request.user.mileage=request.user.mileage+5 #####
+
+   request.user.save() #####
+
+   print(request.user.mileage) #####
+
+
+   
+   comment = CommentPreview.objects.create(movie=movie, content=content, user=request.user)
+   
    comment.save()
    return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
+
+
+
 
 
 @csrf_exempt
@@ -195,6 +220,18 @@ def del_comment(request,pk):
    comment_id = req['id']
    comment = get_object_or_404(CommentPreview, id=comment_id)
    comment.delete()
+
+   print("(-)마일리지") #####
+   print(request.user) #####
+   print(request.user.mileage) #####
+   
+   request.user.mileage=request.user.mileage-5 #####
+
+   request.user.save() #####
+
+   print(request.user.mileage) #####
+
+
    return JsonResponse({'id': comment_id})
 
 def business_list(request):

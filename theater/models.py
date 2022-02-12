@@ -1,10 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from random import *
+import random
 
 # Create your models here.
 TYPE_CHOICE = {('일반 사용자', '일반 사용자'), ('제작사', '제작사')}
 GENDER_CHOICE = {('남자', '남자'), ('여자', '여자')}
 class User(AbstractUser):
+
+    IMG_CHOICE = ['imgs/1.PNG','imgs/2.PNG','imgs/3.PNG','imgs/4.PNG','imgs/5.PNG'] ###추가한부분
+
+    img=random.choice(IMG_CHOICE) ###추가한부분
 
     nickname = models.CharField(verbose_name='닉네임', max_length=20)
     phone = models.CharField(verbose_name='휴대폰 번호', max_length=20)
@@ -12,11 +18,14 @@ class User(AbstractUser):
     mileage = models.IntegerField(verbose_name='마일리지', default=0)
     gender = models.CharField(verbose_name='성별', choices=GENDER_CHOICE, max_length=20)
 
+    user_img = models.FileField(default=img, verbose_name="유저사진") ###추가한부분
+
 
 GENRE_CHOICE = {('액션', '액션'), ('애니메이션', '애니메이션'), ('드라마', '드라마'), ('스릴러', '스릴러'), ('코미디', '코미디'), ('멜로/로맨스', '멜로/로맨스'), ('범죄', '범죄'), ('공포(호러)', '공포(호러)'), ('미스터리', '미스터리'), ('성인물(에로)', '성인물(에로)'), ('SF', 'SF'), ('사극', '사극'), ('판타지', '판타지'), ('전쟁', '전쟁'), ('다큐멘터리', '다큐멘터리'), ('뮤지컬', '뮤지컬'), ('가족', '가족')}
 # GRADE_CHOICE = {('전체 관람가', '전체 관람가'), ('12세', '12세'), ('15세', '15세'), ('청소년 관람불가', '청소년 관람불가')}
 COMEOUT_CHOICE={('개봉','개봉'),('미개봉 및 제작중','미개봉 및 제작중')}
 class Movie(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE) ###추가한부분
     title = models.CharField(verbose_name='제목', max_length=50)
     genre = models.CharField(verbose_name='장르', choices=GENRE_CHOICE, max_length=100)
     running_time = models.IntegerField(verbose_name='러닝타임',null=True)
