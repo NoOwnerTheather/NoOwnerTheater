@@ -65,7 +65,7 @@
             <table class="comment-table-{{movie.id}}">
                 {% for comment in movie.commentpreview_set.all %}
                 <tr class = "comment-{{comment.id}}">
-                    <td>{{comment.user}} </td>
+                    <td id="comment_inputuser-{{movie.id}}">{{comment.user}} </td>
                     <td><input type="text" class="replyContent{{ comment.id }}" value="{{ comment.content }}" readonly></td>
 
                     <!--<td>{{comment.content}} </td>-->
@@ -182,7 +182,12 @@
             //console.log(comid)
 
             const content = document.getElementById(`comment_input-${id}`).value
-            //const user = document.getElementById(`comment_input-${id}`).value
+
+            //const user=1
+
+            //let user = 1;
+            
+            //const user = document.getElementById(`comment_inputuser-${id}`).value ////유저
             requestComment.open("POST", url, true);
             requestComment.setRequestHeader(
                 "Content-Type", "application/x-www-form-urlencoded"
@@ -199,26 +204,69 @@
     
         const WriteHandleResponse = () => {
             if (requestComment.status < 400){
-                const {id, type, content, comment_id} = JSON.parse(requestComment.response);
+                const {id, type, content, comment_id, user} = JSON.parse(requestComment.response);
                 const element = document.querySelector(`.comment-table-${id}`);
                 const new_comment = document.createElement("tr");
                 const comment_content = document.createElement("td");    
                 const del = document.createElement("td");
-                
+
+                const comment_user = document.createElement("td");  ///3
+
+                //const update = document.getElementsByClassName("tdReplyUpdate${ comment.id }$"); //4
+                //var x = document.getElementsByClassName("example");
+                //class="tdReplyUpdate{{ comment.id }}"
+
+                const update = document.createElement("td"); //4!!!수정필요
+                //const update = document.createElement("td").style.display='inline-block'; //4
+
+                const like = document.createElement("td"); //4!!!수정필요
+
+                ///.
+
+                let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
+                let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
+
+                let replyContent=document.querySelector(`.replyContent${id}`);
+                ///.            
     
                 new_comment.setAttribute("class", `comment-${comment_id}`);
+
+
+                //.
+                comment_user.innerHTML = `${user}`; //3
+                comment_content.innerHTML = `${content}`; //1
     
-                comment_content.innerHTML = `${content}`;
-    
-                del.innerHTML = `<button onclick="onClickDel(${comment_id})">삭제</button>`;
-            
+                del.innerHTML = `<button onclick="onClickDel(${comment_id})">삭제</button>`; //1
+                //update.innerHTML = `<button onclick="replyUpdate(${comment_id})">수정</button>`; //1
+                update.innerHTML =`<td class="tdReplyUpdate(${comment_id})"><input type="button" value="수정" onclick="replyUpdate(${comment_id})"></td>`
+
+                like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요</button>`;
+                //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요 ${ like }</button>`;
+
+                //<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>
+                //comment_content.innerHTML = `${user}`; //2
+
+                ///tdReplyUpdate.innerHTML=`<button onclick="replyUpdate(${comment_id})">수정</button>`; //2
+
+                //tdReplyUpdate.innerHTML=`<td><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>`; //2
+
+
+                //.
     
                 document.getElementById(`comment_input-${id}`).value = '';
                 
     
                 element.append(new_comment);
+                new_comment.appendChild(comment_user);//3
                 new_comment.appendChild(comment_content);
+
+                new_comment.appendChild(like);
+
                 new_comment.appendChild(del);
+                new_comment.appendChild(update);
+                ///new_comment.appendChild(tdReplyUpdate);
+
+                
             };
         };
     
