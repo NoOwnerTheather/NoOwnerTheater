@@ -19,8 +19,8 @@
             </a>
         </div>
         <a class="business_list" onClick="history.go(-1)"><button>게시판으로 돌아기기</button></a>
-        <a class="business_list" href="{% url 'theater:info_fix'  pk=business.id%}"><button>수정하기</button></a>
-        <a class="business_list" href="{% url 'theater:info_delete'  pk=business.id %}"><button>삭제하기</button></a>
+        <a class="business_list" href="{% url 'theater:business_fix'  pk=business.id%}"><button>수정하기</button></a>
+        <a class="business_list" href="{% url 'theater:business_delete'  pk=business.id %}"><button>삭제하기</button></a>
     </div>
 </div>
 

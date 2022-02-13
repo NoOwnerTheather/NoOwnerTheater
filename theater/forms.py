@@ -96,7 +96,7 @@ class BusinessForm(forms.ModelForm):
     class Meta:
         model=Business
 
-        fields=('user','title','content','image')
+        fields=('title','content','image')
         widgets={
             'title': TextInput(attrs={
                 'class': "form-input",
@@ -105,12 +105,7 @@ class BusinessForm(forms.ModelForm):
                 
                 }),
             
-            'content': TextInput(attrs={
-                'class': "form-contentinput",
-                'style': 'max-width: 800px;',
-                'placeholder': '''텍스트 에디터적용 예정'
-                '''
-                }),
+            
             'content': SummernoteWidget(attrs={'summernote': {'width': '800px', 'height': '380px'}}),
 
 
