@@ -11,6 +11,11 @@
     <h3>{{user.mileage}} 포인트</h3>
 
     <h1>내가 쓴 리뷰</h1>
+    <!--<h2>{{ user.commentpreview_set.all}}개</h2>-->
+    <!--<h2>{{ comment.reviews.all.count }}개</h2>-->
+
+    <h2>{{user.review_set.all.count}}개</h2>
+
 
     <!--제작사 user 디테일 페이지도 만들어야함-->
 
@@ -53,6 +58,8 @@
 
     <h1>등록한 영화</h1>
     <!--<h2>1 {{user.movie_set.all}}</h2>-->
+    <h2>{{user.movie_set.all.count}}개</h2>
+
 
     <div class="container">
 
