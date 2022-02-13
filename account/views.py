@@ -89,10 +89,22 @@ def detail(request,pk):
 
 def detail(request,pk):
   user = get_object_or_404(User, pk=pk)
+
+  #counting=Movie.objects.count()
+
+  #counted=User.movie_set.count()
+  #print(counted)
+  #MyUser.follower.all()
+
+  #print(counting)
+  
   ctx={
-    'user':user
+    'user':user, #'counitng':counting
   }
   return render(request, 'account/detail.html',context=ctx)
+
+
+
 class AuthSMS(APIView):
    def post(self, request):
       try:

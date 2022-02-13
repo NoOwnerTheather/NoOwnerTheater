@@ -193,6 +193,7 @@ def preview_detail(request,pk):
 
     ctx = {
        'movie': movie,
+       #'counting':counting,
        #'preview_form':preview_form,
        #'preview_comments':preview_comments,
        }
@@ -237,6 +238,23 @@ def like_ajax(request,pk):
     return JsonResponse({'id':post_id, 'type':button_type})
 
 
+@login_required
+@require_POST
+def likes_ajax(request):
+    pk = request.POST.get('pk', None)
+    preview = get_object_or_404(CommentPreview, pk=pk)
+    user = request.user
+
+    if preview.likes.filter(id=user.id).exists():
+        preview.likes.remove(user)
+        message = '좋아요 취소'
+    else:
+        preview.likes.add(user)
+        message = '좋아요'
+
+    context = {'likes_count':preview.count_likes_user(), 'message': message} #제대로 전달이 되어야함 오타조심, html에선 url도 잘연결되어있어야함
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
 
 
 @csrf_exempt
@@ -248,12 +266,26 @@ def write_comment(request,pk):
    content = req['content']
    user=req['user']
    movie = Movie.objects.get(id=id)
-   print(movie)
+   
+
+   movie = get_object_or_404(Movie, pk=pk) 
+
+   print("(+)마일리지") #####
+   print(request.user) #####
+   print(request.user.mileage) #####
+   
+   request.user.mileage=request.user.mileage+5 #####
+
+   request.user.save() #####
+
+   print(request.user.mileage) #####
+
+
    
    comment = CommentPreview.objects.create(movie=movie, content=content, user=request.user)
    
    comment.save()
-   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
+   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id, 'user':user})
 
 
 
@@ -278,6 +310,29 @@ def del_comment(request,pk):
 
 
    return JsonResponse({'id': comment_id})
+
+
+
+#####수정 ajax#######
+@csrf_exempt
+def replyUpdate(request,pk):
+   jsonObject = json.loads(request.body)
+   reply=CommentPreview.objects.filter(id=jsonObject.get('id'))
+   context={
+      'result':'no'
+   }
+
+   if reply is not None:
+      reply.update(content=jsonObject.get('content'))
+      context={
+         'result':'ok'
+      }
+      return JsonResponse(context)
+   
+   return JsonResponse(context)
+
+
+
 
 def business_list(request):
    business_list = Business.objects.all().order_by('-id')
