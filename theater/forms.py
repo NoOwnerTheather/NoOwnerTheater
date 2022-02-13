@@ -82,12 +82,12 @@ class ReviewForm(forms.ModelForm):
                 'placeholder': '''텍스트 에디터적용 예정'
                 '''
                 }),
-            'rating': NumberInput(attrs={
-                'class': "form-input",
-                'style': 'max-width: 300px;',
-                'placeholder': '영화 평점을 적어주세요 0~5'
+            # 'rating': NumberInput(attrs={
+            #     'class': "form-input",
+            #     'style': 'max-width: 300px;',
+            #     'placeholder': '영화 평점을 적어주세요 0~5'
                 
-                }),
+            #     }),
                 
         }
 

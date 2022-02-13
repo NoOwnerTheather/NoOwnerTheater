@@ -74,7 +74,8 @@ class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     title = models.CharField(verbose_name='한 줄 제목', max_length=200)
     content = models.TextField(verbose_name='내용')
-    rating = models.IntegerField(verbose_name='평점')
+    RATING_CHOICES = [(0.5*i, 0.5*i) for i in range(1, 11)] 
+    rating = models.FloatField(verbose_name='평점', choices=RATING_CHOICES)
     hits = models.IntegerField(verbose_name='조회수', default=0)
     like = models.IntegerField(verbose_name='좋아요', default=0)
     likes_user = models.ManyToManyField(
