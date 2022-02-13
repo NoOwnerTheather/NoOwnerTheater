@@ -39,7 +39,7 @@ class MovieForm(forms.ModelForm):
                 'release_date': DateInput(attrs={
                 'class': "form-input",
                 'style': 'max-width: 300px;',
-                'placeholder': '영상의 개봉일을 적어주세요'
+                'placeholder': '개봉일을 2022-01-01 형식으로 적어주세요!'
                 
                 }),
                 'comeout': Select(attrs={

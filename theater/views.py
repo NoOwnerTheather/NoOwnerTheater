@@ -30,8 +30,27 @@ def movie_enroll(request):
         form=MovieForm(request.POST,request.FILES)
         
         if form.is_valid():
-            post=form.save()
-            return redirect('theater:main')
+
+            user=User.objects.get(username=request.user)
+            
+            movie=Movie(
+               title=form.cleaned_data['title'],
+               genre=form.cleaned_data['genre'],
+               running_time=form.cleaned_data['running_time'],
+               release_date=form.cleaned_data['release_date'],
+               actor=form.cleaned_data['actor'],
+               content=form.cleaned_data['content'],
+               
+               poster=form.cleaned_data['poster'],
+               video=form.cleaned_data['video'],
+               url=form.cleaned_data['url'],
+               comeout=form.cleaned_data['comeout'],
+               
+               user=user,
+            )
+            movie.save()
+            
+            return redirect('theater:chart_list')
 
     else:
         form=MovieForm()
