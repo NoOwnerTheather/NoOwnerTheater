@@ -67,7 +67,6 @@ def signup_view(request):
       user = form.save()
       auth.login(request, user,  backend='django.contrib.auth.backends.ModelBackend')
       return redirect('theater:main')
-    return redirect('account:signup')
 
   else:
     form = SignupForm()
