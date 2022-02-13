@@ -442,6 +442,16 @@ def review_detail(request, pk):
 @csrf_exempt
 def write_review_comment(request,pk):
    print("hi")
+   print("(+)마일리지") #####
+   print(request.user) #####
+   print(request.user.mileage) #####
+   
+   request.user.mileage=request.user.mileage+5 #####
+
+   request.user.save() #####
+
+   print(request.user.mileage) #####
+
    req = json.loads(request.body)
    id = req['id']
    type = req['type']
