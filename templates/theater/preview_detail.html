@@ -85,7 +85,7 @@
                     <!--<td class="btn post__like">좋아요 {{ comment.like }}</td>-->
 
                     <td>
-                        <input type="button" class="btn btn-info btn-sm" name="{{ comment.id }}" value="Like" style="margin-top: 7px">
+                        <input type="button" class="btn" name="{{ comment.id }}" value="Like" style="margin-top: 7px">
                         <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px">좋아요&nbsp;{{ comment.likes.all.count }}개</p>
                     </td>
                     {% endif %}
