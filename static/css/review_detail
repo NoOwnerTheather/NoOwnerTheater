@@ -1,0 +1,25 @@
+h1{
+    font-size:30px;
+    text-align:center;
+}
+.container:after{
+    display: block; 
+    content: ''; 
+    clear:both;
+}
+.container{
+    background-color:#eee;
+    height:100px;
+}
+.divBox{
+    background-color:pink;
+}
+.floatBox{
+    background-color:skyblue;
+}
+.left{
+    float:left;
+}
+.right{
+    float:right;
+}
