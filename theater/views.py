@@ -16,6 +16,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
+from django.db.models import Avg
 
 from .forms import MovieForm,ReviewForm,BusinessForm
 def main(request):
@@ -30,8 +31,27 @@ def movie_enroll(request):
         form=MovieForm(request.POST,request.FILES)
         
         if form.is_valid():
-            post=form.save()
-            return redirect('theater:main')
+
+            user=User.objects.get(username=request.user)
+            
+            movie=Movie(
+               title=form.cleaned_data['title'],
+               genre=form.cleaned_data['genre'],
+               running_time=form.cleaned_data['running_time'],
+               release_date=form.cleaned_data['release_date'],
+               actor=form.cleaned_data['actor'],
+               content=form.cleaned_data['content'],
+               
+               poster=form.cleaned_data['poster'],
+               video=form.cleaned_data['video'],
+               url=form.cleaned_data['url'],
+               comeout=form.cleaned_data['comeout'],
+               
+               user=user,
+            )
+            movie.save()
+            
+            return redirect('theater:chart_list')
 
     else:
         form=MovieForm()
@@ -75,6 +95,11 @@ def review_enroll(request,pk):
                movie=movie
             )
          review.save()
+
+         movie.rating = Review.objects.filter(movie=movie).aggregate(Avg('rating'))['rating__avg']
+         movie.rating = round(movie.rating, 2)
+         movie.save()
+
          return redirect('theater:main') 
          #임시용 코드
 
@@ -168,6 +193,7 @@ def preview_detail(request,pk):
 
     ctx = {
        'movie': movie,
+       #'counting':counting,
        #'preview_form':preview_form,
        #'preview_comments':preview_comments,
        }
@@ -212,6 +238,23 @@ def like_ajax(request,pk):
     return JsonResponse({'id':post_id, 'type':button_type})
 
 
+@login_required
+@require_POST
+def likes_ajax(request):
+    pk = request.POST.get('pk', None)
+    preview = get_object_or_404(CommentPreview, pk=pk)
+    user = request.user
+
+    if preview.likes.filter(id=user.id).exists():
+        preview.likes.remove(user)
+        message = '좋아요 취소'
+    else:
+        preview.likes.add(user)
+        message = '좋아요'
+
+    context = {'likes_count':preview.count_likes_user(), 'message': message} #제대로 전달이 되어야함 오타조심, html에선 url도 잘연결되어있어야함
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
 
 
 @csrf_exempt
@@ -223,12 +266,26 @@ def write_comment(request,pk):
    content = req['content']
    user=req['user']
    movie = Movie.objects.get(id=id)
-   print(movie)
+   
+
+   movie = get_object_or_404(Movie, pk=pk) 
+
+   print("(+)마일리지") #####
+   print(request.user) #####
+   print(request.user.mileage) #####
+   
+   request.user.mileage=request.user.mileage+5 #####
+
+   request.user.save() #####
+
+   print(request.user.mileage) #####
+
+
    
    comment = CommentPreview.objects.create(movie=movie, content=content, user=request.user)
    
    comment.save()
-   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
+   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id, 'user':user})
 
 
 
@@ -253,6 +310,29 @@ def del_comment(request,pk):
 
 
    return JsonResponse({'id': comment_id})
+
+
+
+#####수정 ajax#######
+@csrf_exempt
+def replyUpdate(request,pk):
+   jsonObject = json.loads(request.body)
+   reply=CommentPreview.objects.filter(id=jsonObject.get('id'))
+   context={
+      'result':'no'
+   }
+
+   if reply is not None:
+      reply.update(content=jsonObject.get('content'))
+      context={
+         'result':'ok'
+      }
+      return JsonResponse(context)
+   
+   return JsonResponse(context)
+
+
+
 
 def business_list(request):
    business_list = Business.objects.all().order_by('-id')
@@ -442,6 +522,16 @@ def review_detail(request, pk):
 @csrf_exempt
 def write_review_comment(request,pk):
    print("hi")
+   print("(+)마일리지") #####
+   print(request.user) #####
+   print(request.user.mileage) #####
+   
+   request.user.mileage=request.user.mileage+5 #####
+
+   request.user.save() #####
+
+   print(request.user.mileage) #####
+
    req = json.loads(request.body)
    id = req['id']
    type = req['type']
@@ -456,10 +546,10 @@ def write_review_comment(request,pk):
 
 
 @csrf_exempt
-def del_comment(request,pk):
+def del_review_comment(request,pk):
    req = json.loads(request.body)
    comment_id = req['id']
-   comment = get_object_or_404(CommentPreview, id=comment_id)
+   comment = get_object_or_404(CommentReview, id=comment_id)
    comment.delete()
 
    print("(-)마일리지") #####

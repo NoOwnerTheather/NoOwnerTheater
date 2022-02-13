@@ -39,7 +39,7 @@ class MovieForm(forms.ModelForm):
                 'release_date': DateInput(attrs={
                 'class': "form-input",
                 'style': 'max-width: 300px;',
-                'placeholder': '영상의 개봉일을 적어주세요'
+                'placeholder': '개봉일을 2022-01-01 형식으로 적어주세요!'
                 
                 }),
                 'comeout': Select(attrs={
@@ -82,12 +82,12 @@ class ReviewForm(forms.ModelForm):
                 'placeholder': '''텍스트 에디터적용 예정'
                 '''
                 }),
-            'rating': NumberInput(attrs={
-                'class': "form-input",
-                'style': 'max-width: 300px;',
-                'placeholder': '영화 평점을 적어주세요 0~5'
+            # 'rating': NumberInput(attrs={
+            #     'class': "form-input",
+            #     'style': 'max-width: 300px;',
+            #     'placeholder': '영화 평점을 적어주세요 0~5'
                 
-                }),
+            #     }),
                 
         }
 
@@ -96,7 +96,7 @@ class BusinessForm(forms.ModelForm):
     class Meta:
         model=Business
 
-        fields=('user','title','content','image')
+        fields=('title','content','image')
         widgets={
             'title': TextInput(attrs={
                 'class': "form-input",
@@ -105,12 +105,7 @@ class BusinessForm(forms.ModelForm):
                 
                 }),
             
-            'content': TextInput(attrs={
-                'class': "form-contentinput",
-                'style': 'max-width: 800px;',
-                'placeholder': '''텍스트 에디터적용 예정'
-                '''
-                }),
+            
             'content': SummernoteWidget(attrs={'summernote': {'width': '800px', 'height': '380px'}}),
 
 

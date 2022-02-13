@@ -67,7 +67,6 @@ def signup_view(request):
       user = form.save()
       auth.login(request, user,  backend='django.contrib.auth.backends.ModelBackend')
       return redirect('theater:main')
-    return redirect('account:signup')
 
   else:
     form = SignupForm()
@@ -89,10 +88,22 @@ def detail(request,pk):
 
 def detail(request,pk):
   user = get_object_or_404(User, pk=pk)
+
+  #counting=Movie.objects.count()
+
+  #counted=User.movie_set.count()
+  #print(counted)
+  #MyUser.follower.all()
+
+  #print(counting)
+  
   ctx={
-    'user':user
+    'user':user, #'counitng':counting
   }
   return render(request, 'account/detail.html',context=ctx)
+
+
+
 class AuthSMS(APIView):
    def post(self, request):
       try:

@@ -20,7 +20,10 @@ class User(AbstractUser):
     mileage = models.IntegerField(verbose_name='마일리지', default=0)
     gender = models.CharField(verbose_name='성별', choices=GENDER_CHOICE, max_length=20)
     age=models.IntegerField(verbose_name="나이",null=True)
-
+    
+    username = models.CharField(max_length=30, unique=True)
+    email =  models.EmailField(max_length=45,unique=True)
+    
     user_img = models.FileField(default=img, verbose_name="유저사진") ###추가한부분
 
 
@@ -46,8 +49,8 @@ class Movie(models.Model):
     def __str__(self):
         return str(self.title)
 
-    def count_movie(self): 
-        return user.title.count()
+    # def count_movie(self): 
+    #     return user.title.count()
 
 # class UnreleasedMovie(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -74,7 +77,8 @@ class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     title = models.CharField(verbose_name='한 줄 제목', max_length=200)
     content = models.TextField(verbose_name='내용')
-    rating = models.IntegerField(verbose_name='평점')
+    RATING_CHOICES = [(0.5*i, 0.5*i) for i in range(1, 11)] 
+    rating = models.FloatField(verbose_name='평점', choices=RATING_CHOICES)
     hits = models.IntegerField(verbose_name='조회수', default=0)
     like = models.IntegerField(verbose_name='좋아요', default=0)
     likes_user = models.ManyToManyField(
@@ -90,8 +94,8 @@ class Review(models.Model):
     def __str__(self):
         return str(self.title)
 
-    def count_review(self): 
-        return user.title.count()
+    # def count_review(self): 
+    #     return user.title.count()
 
 class CommentReview(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -105,6 +109,15 @@ class CommentPreview(models.Model):
     content = models.TextField(verbose_name='내용')
 
     like = models.IntegerField(verbose_name='좋아요', default=0)
+
+    likes = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, # this is preferred than just 'User'
+        blank=True, # blank is allowed
+        related_name='likes'
+    ) # likes_user field
+
+    def count_likes_user(self): # total likes_user
+        return self.likes.count()
     
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
 

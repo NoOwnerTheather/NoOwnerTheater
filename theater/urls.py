@@ -12,9 +12,9 @@ urlpatterns = [
    path('movie_enroll/',views.movie_enroll,name='enroll'),
    path('<int:pk>/movie_fix/',views.movie_fix,name='movie_fix'),
    path('<int:pk>/movie_delete/',views.movie_delete,name='movie_delete'),
-   path('review_enroll/',views.review_enroll,name='review_enroll'),
-   path('<int:pk>/review_fix/',views.review_fix,name='review_fix'),
-   path('<int:pk>/review_delete/',views.review_delete,name='review_delete'),
+   path('<int:pk>/review_enroll/',views.review_enroll,name='review_enroll'),
+   path('<int:pk>/<int:gk>/review_fix/',views.review_fix,name='review_fix'),
+   path('<int:pk>/<int:gk>/review_delete/',views.review_delete,name='review_delete'),
    path('business_enroll/',views.business_enroll,name="business_enroll"),
    path('<int:pk>/business_fix/',views.business_fix,name='business_fix'),
    path('<int:pk>/business_delete/',views.business_delete,name='business_delete'),
@@ -46,8 +46,17 @@ urlpatterns = [
    path('review_like/', views.review_like, name='review_like'),
    path('review_detail/<int:pk>/', views.review_detail, name='review_detail'),
    path("review/<int:pk>/write_review_comment/", views.write_review_comment, name='write_review_comment'),
-   path("review/<int:pk>/del_comment/", views.del_comment, name='del_comment'),
+   path("review/<int:pk>/del_review_comment/", views.del_review_comment, name='del_review_comment'),
    path('review_hits_ajax/',views.review_hits_ajax, name='review_hits_ajax'),
+
+   #path('review/<int:pk>/replyUpdate/', views.replyUpdate, name='replyUpdate'),
+   path("preview/<int:pk>/replyUpdate/", views.replyUpdate, name='replyUpdate'),
+
+   path('likes_ajax/', views.likes_ajax, name='likes_ajax'),
+   #path('preview/<int:pk>/likes_ajax/', views.likes_ajax, name='likes_ajax'),
+
+   #path('review_likes/', views.review_likes, name='review_likes'),
+   
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
