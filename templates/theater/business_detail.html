@@ -3,7 +3,6 @@
 {% block content %}
 <div class="background" style="height: auto;">
     <div class="business">
-        <div class="board-header-title">영화제 지원사업 게시판</div>
         <div class="business_detail">
             <p class="business_detail_left">{{business.title}}<p>
             <div class="business_detail_right">
@@ -12,16 +11,16 @@
                 <p><i class="far fa-eye"></i>{{business.hits}}<p>
             </div>
         </div>
-        <div>{{business.image}}</div>
-        
-    
-
-    <div class="business_detail_content"  escapeXml="true">{% autoescape on %}{{business.content|safe}}{% endautoescape %}</div>
-        
-        <a class="business_list" href="{% url 'theater:business_list' %}"><button>게시판으로 돌아기기</button></a>
-        <a class="business_list" href="{% url 'theater:info_fix'  pk=business.id%}"><button>수정하기</button></a>
-        <a class="business_list" href="{% url 'theater:info_delete'  pk=business.id %}"><button>삭제하기</button></a>
-        
+        <div class="business_detail_content">{% autoescape on %}{{business.content|safe}}{% endautoescape %}</div>
+        <div class="top" style="display: flex; justify-content: flex-end;">
+            <a href="#" style="display: flex; align-items: center; ">
+                <p style="margin: 0;">top</p>
+                <i class="fas fa-caret-up"></i>
+            </a>
+        </div>
+        <a class="business_list" onClick="history.go(-1)"><button>게시판으로 돌아기기</button></a>
+        <a class="business_list" href="{% url 'theater:business_fix'  pk=business.id%}"><button>수정하기</button></a>
+        <a class="business_list" href="{% url 'theater:business_delete'  pk=business.id %}"><button>삭제하기</button></a>
     </div>
 </div>
 

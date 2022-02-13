@@ -9,4 +9,5 @@ urlpatterns = [
    path("logout/", views.logout, name="logout"),
 
    path('<int:pk>/', views.detail, name = 'detail'),
+   # path('check_check/',views.AuthSMS,name='check_check')
 ]

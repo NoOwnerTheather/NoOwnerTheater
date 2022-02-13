@@ -6,14 +6,15 @@
 {% csrf_token %}
 
 <div class="enroll">
+    <div class="title">영상 등록</div>
 <table>
     <div class="form_block">
-        <div class="main_text">리뷰 타이틀</div>
+        <div class="main_text">리뷰 타이틀📌</div>
         <div class="sub_text">리뷰 글의 타이틀, 제목을 적어주세요</div>
        {{form.title}}
    </div>
 <div class="form_block"> 
-    <div class="main_text">영상 평점</div>
+    <div class="main_text">영상 평점🖐</div>
     <div class="sub_text">영화를 보시고 난 후의 평점을 기록해주세요!</div>
     
     {{form.rating}}
@@ -21,7 +22,7 @@
 </div>
 
 <div class="form_block">
-    <div class="main_text">영화 리뷰</div>
+    <div class="main_text">영화 리뷰🖐</div>
     <div class="sub_text">영화를 보시고 난 후의, 영화 리뷰를 작성해주세요!</div>
     {{form.content}}
 </div>
