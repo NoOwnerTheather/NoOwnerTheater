@@ -213,6 +213,24 @@ def like_ajax(request,pk):
     return JsonResponse({'id':post_id, 'type':button_type})
 
 
+@login_required
+@require_POST
+def likes_ajax(request):
+    pk = request.POST.get('pk', None)
+    preview = get_object_or_404(CommentPreview, pk=pk)
+    user = request.user
+
+    if preview.likes.filter(id=user.id).exists():
+        preview.likes.remove(user)
+        message = '좋아요 취소'
+    else:
+        preview.likes.add(user)
+        message = '좋아요'
+
+    context = {'likes_count':preview.count_likes_user(), 'message': message}
+    return HttpResponse(json.dumps(context), content_type="application/json")
+
+
 
 @csrf_exempt
 def write_comment(request,pk):

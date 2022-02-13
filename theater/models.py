@@ -105,6 +105,15 @@ class CommentPreview(models.Model):
     content = models.TextField(verbose_name='내용')
 
     like = models.IntegerField(verbose_name='좋아요', default=0)
+
+    likes = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, # this is preferred than just 'User'
+        blank=True, # blank is allowed
+        related_name='likes'
+    ) # likes_user field
+
+    def count_likes_user(self): # total likes_user
+        return self.likes.count()
     
     created_at = models.DateTimeField(verbose_name='작성일', auto_now_add=True)
 

@@ -50,7 +50,12 @@ urlpatterns = [
    path('review_hits_ajax/',views.review_hits_ajax, name='review_hits_ajax'),
 
    #path('review/<int:pk>/replyUpdate/', views.replyUpdate, name='replyUpdate'),
-   path("review/<int:pk>/replyUpdate/", views.replyUpdate, name='replyUpdate'),
+   path("preview/<int:pk>/replyUpdate/", views.replyUpdate, name='replyUpdate'),
+
+   path('likes_ajax/', views.likes_ajax, name='likes_ajax'),
+   #path('preview/<int:pk>/likes_ajax/', views.likes_ajax, name='likes_ajax'),
+
+   #path('review_likes/', views.review_likes, name='review_likes'),
    
 
 ]
