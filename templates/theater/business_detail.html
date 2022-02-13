@@ -11,7 +11,7 @@
                 <p><i class="far fa-eye"></i>{{business.hits}}<p>
             </div>
         </div>
-        <div class="business_detail_content">{{business.content}}</div>
+        <div class="business_detail_content">{% autoescape on %}{{business.content|safe}}{% endautoescape %}</div>
         <div class="top" style="display: flex; justify-content: flex-end;">
             <a href="#" style="display: flex; align-items: center; ">
                 <p style="margin: 0;">top</p>
