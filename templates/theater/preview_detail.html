@@ -76,7 +76,7 @@
 
 
                     <td>
-                        <input type="button" class="btn like" name="{{ comment.id }}" value="좋아요" style="margin-top: 7px">
+                        <input type="button" class="btn like" name="{{ comment.id }}" value="♥" style="margin-top: 7px">
                         <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
                     </td>
 
@@ -86,7 +86,7 @@
 
                     <td>
                         <input type="button" class="btn" name="{{ comment.id }}" value="Like" style="margin-top: 7px">
-                        <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px">좋아요&nbsp;{{ comment.likes.all.count }}개</p>
+                        <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px">♥&nbsp;{{ comment.likes.all.count }}개</p>
                     </td>
                     {% endif %}
 
@@ -273,6 +273,7 @@
 
 
                 //.
+                //console.log({user});
                 comment_user.innerHTML = `${user}`; //3
                 comment_content.innerHTML = `${content}`; //1
     
@@ -282,7 +283,7 @@
 
                 //like.innerHTML = `<td class="like"><button>좋아요</button></td>`;
                 like.innerHTML=`<td>
-                        <input type="button" class="btn like" name="(${comment_id})" value="좋아요" style="margin-top: 7px">
+                        <input type="button" class="btn like" name="(${comment_id})" value="♥" style="margin-top: 7px">
                         <p id="count-(${comment_id})" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
                     </td>`;
                 //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요</button>`;
