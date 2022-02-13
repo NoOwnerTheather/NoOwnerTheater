@@ -159,7 +159,8 @@
             "application/x-www-form-urlencoded"
         );
         
-        requestLike.send(JSON.stringify({id: id, type: type})); //{'id':1, 'type':like}-->JSon형태로 바꿔서 보내준다
+        requestLike.send(JSON.stringify({id: id, type: type})); 
+        //{'id':1, 'type':like}-->JSon형태로 바꿔서 보내준다
     };
 
 
@@ -258,6 +259,8 @@
 
                 const like = document.createElement("td"); //4!!!수정필요
 
+                const date = document.createElement("td"); //4!!!수정필요
+
                 ///.
 
                 let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
@@ -273,11 +276,17 @@
                 comment_user.innerHTML = `${user}`; //3
                 comment_content.innerHTML = `${content}`; //1
     
-                del.innerHTML = `<button onclick="onClickDel(${comment_id})">삭제</button>`; //1
+                del.innerHTML = `<td><button onclick="onClickDel(${comment_id})">삭제</button></td>`; //1
                 //update.innerHTML = `<button onclick="replyUpdate(${comment_id})">수정</button>`; //1
                 update.innerHTML =`<td class="tdReplyUpdate(${comment_id})"><input type="button" value="수정" onclick="replyUpdate(${comment_id})"></td>`
 
-                like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요</button>`;
+                //like.innerHTML = `<td class="like"><button>좋아요</button></td>`;
+                like.innerHTML=`<td>
+                        <input type="button" class="btn like" name="(${comment_id})" value="좋아요" style="margin-top: 7px">
+                        <p id="count-(${comment_id})" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
+                    </td>`;
+                //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요</button>`;
+                
                 //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요 ${ like }</button>`;
 
                 //<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>
@@ -286,7 +295,8 @@
                 ///tdReplyUpdate.innerHTML=`<button onclick="replyUpdate(${comment_id})">수정</button>`; //2
 
                 //tdReplyUpdate.innerHTML=`<td><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>`; //2
-
+                
+                date.innerHTML= `${user}`; //3
 
                 //.
     
@@ -296,6 +306,8 @@
                 element.append(new_comment);
                 new_comment.appendChild(comment_user);//3
                 new_comment.appendChild(comment_content);
+
+                new_comment.appendChild(date);//3
 
                 new_comment.appendChild(like);
 

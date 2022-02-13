@@ -227,7 +227,7 @@ def likes_ajax(request):
         preview.likes.add(user)
         message = '좋아요'
 
-    context = {'likes_count':preview.count_likes_user(), 'message': message}
+    context = {'likes_count':preview.count_likes_user(), 'message': message} #제대로 전달이 되어야함 오타조심, html에선 url도 잘연결되어있어야함
     return HttpResponse(json.dumps(context), content_type="application/json")
 
 
