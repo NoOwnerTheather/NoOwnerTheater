@@ -46,8 +46,8 @@ class Movie(models.Model):
     def __str__(self):
         return str(self.title)
 
-    def count_movie(self): 
-        return user.title.count()
+    # def count_movie(self): 
+    #     return user.title.count()
 
 # class UnreleasedMovie(models.Model):
 #     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -90,8 +90,8 @@ class Review(models.Model):
     def __str__(self):
         return str(self.title)
 
-    def count_review(self): 
-        return user.title.count()
+    # def count_review(self): 
+    #     return user.title.count()
 
 class CommentReview(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
