@@ -86,7 +86,7 @@ def detail(request,pk):
   return render(request, 'account/detail.html',context=ctx)
   '''
 
-def detail(request,pk):
+def mypage(request,pk):
   user = get_object_or_404(User, pk=pk)
 
   #counting=Movie.objects.count()
@@ -100,7 +100,7 @@ def detail(request,pk):
   ctx={
     'user':user, #'counitng':counting
   }
-  return render(request, 'account/detail.html',context=ctx)
+  return render(request, 'account/mypage.html',context=ctx)
 
 
 
