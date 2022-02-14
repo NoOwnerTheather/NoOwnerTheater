@@ -15,7 +15,23 @@ border: none;
 border-radius: 2.5rem;
 font-size: 20px;
 color:white;
-} 
+height: 5rem; 
+width: 15rem;
+}
+
+.login-margin{
+    margin: 0px 0px 50px 0px;
+}
+.login-container{
+    width: 80rem !important; 
+}
+.login-container-content{
+    height: 50rem;
+}
+.login-field{
+    display:inline-flex;
+    height:6rem; width:40rem;
+}
 
 .card {
     border-radius: 25px !important;
@@ -25,11 +41,14 @@ color:white;
 .input-style{
     border-radius: 0px !important;
     box-shadow: 3px 3px 10px rgb(209, 209, 209) !important;
+    height:6rem !important; 
+    width:40rem !important;
 }
 
 .input-style-no-shadow{
     border-radius: 0px !important;
 }
+
 
 .donate-now {
     list-style-type: none;

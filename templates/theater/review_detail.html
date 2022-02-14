@@ -7,29 +7,30 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
-<section class="page-section" style="background-color: #C1C1A0;" id="">
-    <div class="container text-dark p-4">
-        <div class="row mx-auto my-auto">
-            <div class="card" style="width: 100%">
-                <div class="card-body">
+<section class="page-section-background">
+    <div class="like-container">
+        <div class="mx-auto my-auto col-md-7">
+            <div class="card review_card mt-5">
+                <div class="card-body review-card-body">
                     <ul>
-                        <li>{{ review.title }}</li>
-                        <li>유저 :{{ review.user }}</li>
-                        <li>영화제목:{{ review.movie }}</li>
-                        <!-- <li>좋아요:{{ review.like }}</li> -->
-                        <div>
-                            <input type="button" class="btn btn-info btn-sm like" name="{{ review.id }}" value="Like"
-                                style="margin-top: 7px">
-                            <p id="count-{{ review.id }}" style="font:bold 1em; margin-top: 3px">
-                                좋아요&nbsp;{{ review.likes_user.all.count }}개</p>
-                        </div>
-                        <li>리뷰내용:{{ review.content }}</li>
-                        <li>작성일:{{ review.created_at }}</li>                    
-                    </ul>
-                    <div class="movie-comment">
-                        <h3>커뮤니티</h3>
+                        <li class="floatBox-left user-position"> {{ review.user.user_img }}</li>
+                        <li class="floatBox-left user-position">{{ review.user }}</li>
+                        <li class="floatBox-right movie-position movie-button">{{ review.movie }}</li>
+                        <br>
                         <hr>
-                
+                        <li class="col-md-12 h3" style="float:none; margin:0 auto;">{{ review.title }}</li>
+                        <br>
+                        <li class="col-md-12" style="float: none; margin:0 auto;">{{ review.content }}</li>
+                        <div class="like-container like-position">
+                            <input type="image" src="{% static 'img/like.png' %}" class="like" name="{{ review.id }}" value="Like">
+                            <p id="count-{{ review.id }}" class="like-count"> {{ review.likes_user.all.count }}</p>
+                        </div>
+                    </ul>
+                    <div class="movie-review-comment">
+                        <div class="floatBox-left comment-position h3" >댓글창</div>
+                        <div class="floatBox-right posted-at">posted at {{ review.created_at|date:'Y-m-d' }}</div>
+                        <br>
+                        <hr>
                         {% if user.is_authenticated %}
                         <section class="input">
                             <input id="comment_input-{{review.id}}" placeholder="댓글을 남겨주세요" type="text"/>
@@ -68,6 +69,8 @@
 
 
 
+
+
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     $(".like").click(function () { // .like 버튼을 클릭 감지
@@ -79,57 +82,16 @@
             dataType: "json",
             success: function (response) { // 성공
                 alert(response.message);
-                $("#count-" + pk).html("좋아요&nbsp;" + response.likes_count + "개"); // 좋아요 개수 변경
+                $("#count-" + pk).html(response.likes_count); // 좋아요 개수 변경
             },
             error: function (request, status, error) { // 실패
-                alert("로그인이 필요합니다.")
-                window.location.replace("/account/login/") // 로그인 페이지로 넘어가기
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                window.location.replace("/account/login/"); // 로그인 페이지로 넘어가기
             },
         });
     })
 </script>
 <script>
-    
-const requestLike = new XMLHttpRequest();
-
-const onClickLike = (id, type) => { //  id값 /like,dislike
-const url = "/preview/1/like_ajax/"; // 앞뒤로'/'이거 꼭 붙여줘야한다. 문법임!
-requestLike.open("POST", url, true);
-requestLike.setRequestHeader(
-    "Content-Type",
-    "application/x-www-form-urlencoded"
-);
-
-requestLike.send(JSON.stringify({id: id, type: type})); //{'id':1, 'type':like}-->JSon형태로 바꿔서 보내준다
-};
-
-
-
-const likeHandleResponse = () => {
-//statue는 상태값, 오류가 있나 없나를 확인하기 위해 사용한 코드(아래).
-if (requestLike.status < 400) {
-    const {id, type} = JSON.parse(requestLike.response); //JSON으로 변환
-    const element = document.querySelector(`.comment-${id} .post__like`); 
-    const originHTML = element.innerHTML; //'like 0' <<0을 올려줘야 하니깐 스페이스바 기준으로 나눠서 배열 형식으로 바꿔줌
-    const [buttonType, num] = originHTML.split(' '); //['like','0'] buttontye=like, num=0 다 string 형태임
-    const count = Number(num) + 1; //string타입이라 "0" 에 +1 하면 에러나니깐 Number()로 숫자로 만들어준다
-    element.innerHTML = `${buttonType} ${count}`; //찾아놓은 innerHTML을 'like 1' 로 변환시켜서 사용자에게 보여준다
-
-}
-};
-
-//응답 받을 준비 완료됐을때
-
-requestLike.onreadystatechange = () => {
-if (requestLike.readyState === XMLHttpRequest.DONE) {
-    //console.log("aaa");
-    likeHandleResponse();
-}
-}; //readyState는 리퀘스트가 초기화 됐는지, 연결됐는지, (ppt 부분) 응답할 준비가 되었는지 상태를 의미
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const requestComment = new XMLHttpRequest();
 const requestDel = new XMLHttpRequest();
@@ -209,10 +171,6 @@ requestDel.onreadystatechange = () => {
 }
 </script>
 
-    
-
-
-    
 </body>
 </html>
 {% endblock %}

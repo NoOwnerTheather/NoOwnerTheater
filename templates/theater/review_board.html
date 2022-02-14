@@ -24,6 +24,7 @@
                             <div class="card-body">
                               <h5 class="card-title text-center">{{ review.title }}</h5>
                               <ul>
+                                <li>{{ review.user.user_img }}</li>  
                                 <li>유저 :{{ review.user }}</li>
                                 <li>영화제목:{{ review.movie }}</li>
                                 <!-- <li>좋아요:{{ review.like }}</li> -->
@@ -50,9 +51,6 @@
                 <div class="swiper-pagination"></div>
             </div>
         </div>
-        
-        
-        
     </div>
 </section>
 
@@ -158,6 +156,9 @@
     </ul>
     <!-- 페이징처리 끝 -->
 </div>
+
+
+
 
 <script>
 

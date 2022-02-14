@@ -8,6 +8,6 @@ urlpatterns = [
    path('login/', views.login_view, name= 'login'),
    path("logout/", views.logout, name="logout"),
 
-   path('<int:pk>/', views.detail, name = 'detail'),
+   path('<int:pk>/', views.mypage, name = 'mypage'),
    # path('check_check/',views.AuthSMS,name='check_check')
 ]

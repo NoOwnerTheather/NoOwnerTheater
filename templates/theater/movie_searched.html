@@ -1,45 +1,90 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    {% if movies %}  
-    <div class="pt-5" style="display: flex; justify-content: center; align-items: center; background-color: #f5f4f2">
+    <div class="section pt-5">
         <form  method="POST" action="{% url 'theater:movie_search' %}">
             {% csrf_token %}     
-            <div class="board-search">
+            <div class="movie_board-search">
                 <input value="{{searched}}" name="searched"/ >
                 <button type="submit"><i class="fas fa-search"></i></button>
             </div>
         </form>
-      </div>
-    <section class="page-section" style="background-color: #C1C1A0;" id="">
-        <div class="container text-dark p-4">
-        {% for movie in movies %}       
+    </div>    
+
+    {% if movies %}  
+    <section class="page-section" id="">
+        <div class="container text-dark p-4">         
+        {% for movie in movies %}
+        {%if movie.genre == '성인물(에로)' and request.user.age <= 19%}       
         <div class="col-md-4">
-            <div class="card" style="width: 100%">
+          <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
+            <div class="card my-3" style="width: 100%">
               <img src="{{movie.poster.url}}" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title text-center">{{movie.title}}</h5>
+                <span class="stars text-dark me-2 d-flex justify-content-center">{{movie.rating}}</span>
               </div>
             </div>
         </div>
-        {% endfor %}
-        </div>
-    </section>
-    {% else %}
-    <div class="pt-5" style="display: flex; justify-content: center; align-items: center; background-color: #f5f4f2">
-        <form  method="POST" action="{% url 'theater:movie_search' %}">
-            {% csrf_token %}     
-            <div class="board-search">
-                <input value="{{searched}}" name="searched"/ >
-                <button type="submit"><i class="fas fa-search"></i></button>
+      </a>
+        {%else%}
+        <div class="col-md-4">
+          <a href="{% url 'theater:movie_detail' movie.id %}">
+            <div class="card my-3" style="width: 100%">
+              <img src="{{movie.poster.url}}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title text-center">{{movie.title}}</h5>
+                <span class="stars text-dark me-2 d-flex justify-content-center">{{movie.rating}}</span>
+              </div>
             </div>
-        </form>
+        </div>
+      </a>
+        {%endif%}
+        {% endfor %}
       </div>
-    
-    <section class="page-section py-5" style="background-color: #C1C1A0;" id="">
+    </section>
+
+    {% else %}
+    <section class="page-section py-5" id="">
         <i class="fas fa-exclamation-circle d-flex justify-content-center"></i>
         <h1 class="text-center">검색된 영화가 없습니다.</h1>
     </section>
     {% endif %}
+
+<script>
+    const rating = document.querySelectorAll(".stars");
+    rating.forEach((value) => {
+    let ratingStars = "";
+    for (let i = 0; i < Math.floor(value.innerText); i++) {
+        ratingStars += '<i class="fas fa-star"></i>';
+    }
+    if (value.innerText % 1) {
+        ratingStars += '<i class="fas fa-star-half"></i>';
+    }
+    value.innerHTML = ratingStars;
+    });
+</script>
+<div class="modal fade" id="Modalwhite">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <div class="modal-body">
+                    <span>방금 클릭한 영화는 19세 이용가 입니다.</span>
+                    <br><br>
+                    <span style="color:red">만 19세 이하의 사용자는 열람이 불가능합니다.</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  
+    
+
 {% endblock %}
