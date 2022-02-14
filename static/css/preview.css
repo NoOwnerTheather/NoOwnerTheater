@@ -1,7 +1,3 @@
-@import "reset.css";
-
-.previewcard{
-    display: flex;
-    flex-wrap:wrap;
-
+.previewbackground{
+    background-color: #f5f4f2;
 }
