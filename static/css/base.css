@@ -11,6 +11,7 @@
 @import url(review_detail);
 @import url(base.css);
 @import url(preview.css);
+@import url(mypage.css);
 .navbar {
   margin: 0 !important;
   padding: 0.5rem 5rem !important;
@@ -62,7 +63,6 @@ ul {
   background-color: #000000;
   color: #fff;
 }
-html{
+html {
   font-size: 62.5%;
 }
-

@@ -57,7 +57,7 @@
                                 <i class="far fa-user"></i>
                             </a>
                             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="{% url 'account:detail' user.id %}">마이페이지</a>
+                                <a class="dropdown-item" href="{% url 'account:mypage' user.id %}">마이페이지</a>
                                 <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                                 <i class="far fa-user"></i>
                             </a>
                             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="{% url 'account:detail' user.id %}">마이페이지</a>
+                                <a class="dropdown-item" href="{% url 'account:mypage' user.id %}">마이페이지</a>
                                 <a class="dropdown-item" href="{% url 'theater:enroll' %}">영화등록</a>
                                 <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
                             </div>

@@ -10,7 +10,7 @@ TYPE_CHOICE = {('일반 사용자', '일반 사용자'), ('제작사', '제작�
 GENDER_CHOICE = {('남자', '남자'), ('여자', '여자')}
 class User(AbstractUser):
 
-    IMG_CHOICE = ['imgs/1.PNG','imgs/2.PNG','imgs/3.PNG','imgs/4.PNG','imgs/5.PNG'] ###추가한부분
+    IMG_CHOICE = ['static/img/user1.PNG','static/img/user2.PNG','static/img/user3.PNG','static/img/user4.PNG','static/img/user5.PNG'] ###추가한부분
 
     img=random.choice(IMG_CHOICE) ###추가한부분
 
