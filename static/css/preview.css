@@ -1,3 +1,29 @@
 .previewbackground{
     background-color: #f5f4f2;
 }
+
+.previewbtncolor{
+    background-color: rgb(0, 0, 0);
+    text-decoration-color:rgb(255, 255, 255);
+    font-family: 'Pretendard';
+    font-size:2rem !important;
+
+}
+
+.previewmargin{
+    margin:1rem;
+}
+
+.previewbtnmargin{
+    margin-bottom: 1rem;
+}
+
+.previewtext{
+    font-family: 'Pretendard';
+}
+
+.previewtextmargin{
+    font-family: 'Pretendard';
+    margin-top:1rem;
+    color:black;
+}
