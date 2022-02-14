@@ -1,0 +1,97 @@
+.floatBox-left{
+    float:left !important;
+}
+
+.floatBox-right{
+    float:right !important;
+}
+
+.center{
+    float:center;
+}
+
+
+.comment-position{
+    position:relative;
+    top:-20px;
+}
+.movie-position{
+    position:relative;
+    top: -36px;
+    left: 10px;
+    
+}
+.user-position{
+    position:relative;
+    top:5px;
+    left: 2rem;
+}
+
+.like-container{
+    display: flex;
+    justify-content: center;
+}
+
+.page-section-background{
+    background-color: #F5F4F2;
+    min-height: 110vh;
+    height: 100%;
+}
+
+.review_card{
+    min-height: 500px;
+    height: auto;
+}
+
+.review-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-review-comment {
+  margin-top: auto;
+}
+
+.like-position{
+    position:relative;
+    top:180px;
+}
+.like{
+    width: 72px;
+    height: 64px;
+    position:relative;
+    top:-20px;
+    
+}
+@media (max-width: 600px) {
+    .like {
+        top: -40px;
+    }
+}
+.like-count{
+    font-size:28px;
+    position:relative;
+    top:0px;
+    right: 15px;
+}
+.posted-at{
+    color: #939698;
+}
+
+.movie-button{
+    display:inline-block;
+    background-color: black;
+    border: none;
+    border-radius: 2.5rem;
+    color:white;
+    margin: 15px;
+    padding: 5px 10px 5px 10px;
+
+    
+    clear:both;
+    text-align: center;
+    
+    
+    
+    
+} 

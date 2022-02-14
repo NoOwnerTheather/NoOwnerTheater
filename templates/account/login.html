@@ -13,13 +13,13 @@
   <a href="/accounts/naver/login/?process=login">네이버로그인</a> -->
 
 <div class="login-background">
-  <div class="d-flex justify-content-center align-items-center flex-column" style="margin: 00px 0px 50px 0px">
+  <div class="d-flex justify-content-center align-items-center flex-column login-margin">
     <img src="{% static 'img/logo.png' %}">
   </div>
-  <div class="container card" style="height: 50rem; width: 80rem;">
-    <div class="d-flex justify-content-center align-items-center flex-column" style="height: 50rem;">
+  <div class="container card login-container">
+    <div class="d-flex justify-content-center align-items-center flex-column login-container-content" >
         <form class="form-block text-center w-30" method="POST" action="{% url 'account:login' %}">
-            <div style="display:inline-flex; height:6rem; width:40rem;">
+            <div class="login-field">
               {% csrf_token %}
               {%if form.errors%}
                       {{ form.non_field_errors }}
@@ -27,12 +27,12 @@
             </div>
 
             <div class="form-group mb-5">
-                <input class="form-control input-lg input-style" name="username" type="text" maxlength="30" placeholder="ID" style="height:6rem; width:40rem" required/>
+                <input class="form-control input-lg input-style" name="username" type="text" maxlength="30" placeholder="ID"  required/>
             </div>
             <div class="form-group mb-5">
-                <input class="form-control input-lg input-style" name="password" type="password" maxlength="30" placeholder="PASSWORD" style="height:6rem; width:40rem" required/>
+                <input class="form-control input-lg input-style" name="password" type="password" maxlength="30" placeholder="PASSWORD" required/>
             </div>
-            <button type="submit" class="mb-5 login-button" style="height: 5rem; width: 15rem;">로그인</button>
+            <button type="submit" class="mb-5 login-button">로그인</button>
         </form>
         <div style="margin-bottom: 2rem; font-size: 1.8rem;">
           <a href="/account/signup" style="color: #080808 !important; text-decoration: underline;">앗, 아직 계정이 없으신가요?</a>

@@ -8,7 +8,8 @@
 @import url(business_detail.css);
 @import url(business_list.css);
 @import url(business_search.css);
-@import url(review_detail);
+@import url(review_detail.css);
+@import url(base.css);
 @import url(preview.css);
 @import url(base.css);
 .navbar {
