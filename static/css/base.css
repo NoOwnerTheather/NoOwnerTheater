@@ -3,6 +3,7 @@
 @import url(business_detail.css);
 @import url(business_search.css);
 @import url(chart_list.css);
+@import url(movie_detail.css);
 @import url(login.css);
 @import url(form.css);
 @import url(business_detail.css);
@@ -11,6 +12,7 @@
 @import url(review_detail);
 @import url(base.css);
 @import url(preview.css);
+
 .navbar {
   margin: 0 !important;
   padding: 0.5rem 5rem !important;

@@ -42,7 +42,7 @@ class Movie(models.Model):
     # grade = models.CharField(verbose_name='등급', choices=GRADE_CHOICE, max_length=20)
     # company = models.CharField(max_length=50 ,verbose_name='배급사') 배급사는 제작사 유저로 하면 될 것 같아!
     rating = models.FloatField(verbose_name='평점', default=0)
-    poster = models.ImageField(upload_to="poster/", null=True, blank=True, verbose_name="포스터")
+    poster = models.ImageField(upload_to="poster/", verbose_name="포스터")
     video = models.FileField(upload_to='videos/', null=True, blank=True, verbose_name="예고편")
     url= models.URLField(verbose_name='링크',null=True)
     comeout=models.CharField(verbose_name="개봉여부",choices=COMEOUT_CHOICE,max_length=100)
