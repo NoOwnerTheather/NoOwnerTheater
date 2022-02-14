@@ -41,7 +41,7 @@ cursor: pointer;
   background-color: #f5f4f2;
 }
 
-.swiper-pagination-bullet-active {
+/* .swiper-pagination-bullet-active {
   opacity: 1;
   background: #70777F;
 }
@@ -59,4 +59,4 @@ cursor: pointer;
 .swiper-button-next::after,
 .swiper-button-prev::after {
   display: none;
-}
+} */
