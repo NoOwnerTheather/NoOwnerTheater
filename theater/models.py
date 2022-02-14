@@ -10,7 +10,7 @@ TYPE_CHOICE = {('일반 사용자', '일반 사용자'), ('제작사', '제작�
 GENDER_CHOICE = {('남자', '남자'), ('여자', '여자')}
 class User(AbstractUser):
 
-    IMG_CHOICE = ['imgs/1.PNG','imgs/2.PNG','imgs/3.PNG','imgs/4.PNG','imgs/5.PNG'] ###추가한부분
+    IMG_CHOICE = ['/static/img/user1.PNG','/static/img/user2.PNG','/static/img/user3.PNG','/static/img/user4.PNG','/static/img/user5.PNG'] ###추가한부분
 
     img=random.choice(IMG_CHOICE) ###추가한부분
 
@@ -24,7 +24,7 @@ class User(AbstractUser):
     username = models.CharField(max_length=30, unique=True)
     email =  models.EmailField(max_length=45,unique=True)
     
-    user_img = models.FileField(default=img, verbose_name="유저사진") ###추가한부분
+    user_img = models.TextField(default=img, verbose_name="유저사진") ###추가한부분
 
 
 GENRE_CHOICE = {('액션', '액션'), ('애니메이션', '애니메이션'), ('드라마', '드라마'), ('스릴러', '스릴러'), ('코미디', '코미디'), ('멜로/로맨스', '멜로/로맨스'), ('범죄', '범죄'), ('공포(호러)', '공포(호러)'), ('미스터리', '미스터리'), ('성인물(에로)', '성인물(에로)'), ('SF', 'SF'), ('사극', '사극'), ('판타지', '판타지'), ('전쟁', '전쟁'), ('다큐멘터리', '다큐멘터리'), ('뮤지컬', '뮤지컬'), ('가족', '가족')}

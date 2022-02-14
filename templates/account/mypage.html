@@ -6,7 +6,7 @@
 {% if user.type == '일반 사용자'  %}
     <div class="detail-background">
         <div class="detail-info-panel">
-            <img src="{{user.user_img.url}}"  class="detail-user-img" alt="...">
+            <img src="{{user.user_img}}"  class="detail-user-img" alt="...">
             <div class="detail-user-name">{{user}}<p>님</p></div>
             <div class="detail-user-nickname">{{user.nickname}}</div>
             <div class="detail-user-mileage">{{user.mileage}}<i class="fas fa-coins"></i></div>
@@ -36,7 +36,7 @@
 {% if user.type == '제작사'  %}
     <div class="detail-background">
         <div class="detail-info-panel">
-            <img src="{{user.user_img.url}}"  class="detail-user-img" alt="...">
+            <img src="{{user.user_img}}"  class="detail-user-img" alt="...">
             <div class="detail-user-name">{{user}}<p>님</p></div>
             <div class="detail-user-nickname">{{user.nickname}}</div>
         </div>    

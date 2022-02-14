@@ -10,7 +10,11 @@
   align-items: center;
   margin-bottom: 1rem;
 }
-
+.detail-user-img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+}
 .detail-user-name {
   display: flex;
   font-size: 2rem;

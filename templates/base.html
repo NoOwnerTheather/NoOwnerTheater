@@ -54,7 +54,7 @@
                     <li class="nav-item  p-0 m-2 mx-4 dropdown">
                         <div class="dropdown event-dropdown">
                             <a class="nav-link p-0 m-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-user"></i>
+                                <img class="user_icon" src="{{user.user_img}}" />
                             </a>
                             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{% url 'account:mypage' user.id %}">마이페이지</a>
@@ -66,7 +66,7 @@
                     <li class="nav-item  p-0 m-2 mx-4 dropdown">
                         <div class="dropdown event-dropdown">
                             <a class="nav-link p-0 m-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-user"></i>
+                                <img class="user_icon" src="{{user.user_img}}" />
                             </a>
                             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{% url 'account:mypage' user.id %}">마이페이지</a>

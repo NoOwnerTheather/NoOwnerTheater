@@ -51,6 +51,11 @@ ul {
   list-style: none;
 }
 
+.user_icon {
+  width: 2rem;
+  height: 2rem;
+}
+
 .dropdown-menu {
   min-width: 100px !important;
 }
