@@ -45,7 +45,7 @@
                                     <p>개봉 | {{ movie.release_date }}</p>
                                 </div>
                             </div>
-                            <p class="text-center py-5 mx-5 px-5">{{movie.content}}</p>
+                            <p class="text-center py-5 mx-5 px-5" id="movie_content">{% autoescape on %}{{movie.content|safe}}{% endautoescape %}</p>
                             <h5 class="text-start">Review</h5>
                             <hr class="movie_detail_hr">
                                     {% for review in reviews %}
