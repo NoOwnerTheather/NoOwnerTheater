@@ -10,7 +10,7 @@
 @import url(base.css);
 @import url(preview.css);
 html {
-  font-size: 62.5%;
+  
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
     "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
     "Malgun Gothic", sans-serif !important;
@@ -209,3 +209,27 @@ a:hover {
 html{
   font-size: 62.5%;
 }
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 52.5%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 42.5%;
+  }  
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 22.5%;
+  }  }
+
+  /* 10px=1rem */
