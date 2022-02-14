@@ -1,3 +1,20 @@
+.preback1{
+    background-image: url("img/");
+    /*background-color:rgb(90, 90, 90);*/
+    margin-left:0rem;
+    margin-right:0rem;
+    width: 100%;
+}
+
+
+.preback2{
+    background-color:rgba(252, 252, 252, 0.5);
+    border-style: solid;
+    border-top-width: 0.5rem;
+    border-color:#000000;
+}
+
+
 .previewbackground{
     background-color: #f5f4f2;
 }
@@ -15,11 +32,12 @@
 }
 
 .previewbtnmargin{
-    margin-bottom: 1rem;
+    margin-bottom: 5rem;
 }
 
 .previewtext{
     font-family: 'Pretendard';
+    color:black !important;
 }
 
 .previewtextmargin{
