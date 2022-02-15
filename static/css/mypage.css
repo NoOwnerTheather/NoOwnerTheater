@@ -39,6 +39,12 @@
   margin-left: 0.5rem;
 }
 
+.user-fix {
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .detail-user-count {
   background-color: #f5f4f2;
   font-size: 2rem;

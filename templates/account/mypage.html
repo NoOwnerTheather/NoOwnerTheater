@@ -6,16 +6,17 @@
 {% if user.type == '일반 사용자'  %}
     <div class="detail-background">
         {% if request.user == user %}
-        <div class="d-flex justify-content-end">
-            <a href="{% url 'account:user_fix' %}"><button class="user-fix-btn">회원정보수정</button></a>
-        </div>
+
         {% endif %}
         <div class="detail-info-panel">
             <img src="{{user.user_img}}"  class="detail-user-img" alt="...">
             <div class="detail-user-name">{{user}}<p>님</p></div>
             <div class="detail-user-nickname">{{user.nickname}}</div>
             <div class="detail-user-mileage">{{user.mileage}}<i class="fas fa-coins"></i></div>
-        </div>    
+        </div> 
+        <div class="user-fix">
+            <a href="{% url 'account:user_fix' %}"><button class="user-fix-btn">회원정보수정</button></a>
+        </div>   
         <div class="detail-user-count">
             <div>내가 쓴 리뷰</div>
             <div>({{user.review_set.all.count}})</div>
