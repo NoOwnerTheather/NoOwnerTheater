@@ -14,6 +14,7 @@
 @import url(preview.css);
 @import url(mypage.css);
 @import url(reset.css);
+@import url(user_fix.css);
 
 .navbar {
   margin: 0 !important;
