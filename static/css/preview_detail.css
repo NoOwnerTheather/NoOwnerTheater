@@ -160,7 +160,8 @@
     color: #212529;
     background-color: #fff;
     background-clip:padding-box;
-    border:1px solid #ced4da;
+    /*border:1px solid #ced4da;*/
+    border:0px solid #ced4da;
     appearance: none;
     float:left;
 }
@@ -192,14 +193,13 @@
     border: none;
 
     background-color: rgba(0, 0, 0, 0);
-    border-radius: 50rem;
     color:black !important;
     font-family: 'Pretendard';
     padding-left: 0rem;
     padding-right: 0rem;
     padding-bottom: 0.2rem;
     padding-top:  0.2rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     letter-spacing: 0.2rem;
 
     margin-top:2.5rem; /*위에 txt랑 간격 조절*/
@@ -207,6 +207,8 @@
     height: 3rem;
 
     float:center;
+
+    
 
 }
 

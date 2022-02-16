@@ -47,7 +47,7 @@
 
                     <div class="predeform center-block">
                         <div class="input">
-                            <input id="comment_input-{{movie.id}}" class="predeformsize" placeholder="댓글을 남겨주세요" type="text"/>
+                            <input id="comment_input-{{movie.id}}" class="predeformsize" placeholder="기대평을 남겨주세요!" type="text"/>
                             <button class="predewritebtn" onclick="onClickComment({{movie.id}}, 'write', '{{request.user}}')">작성</button>
                         </div>
                     </div>
@@ -81,12 +81,27 @@
                                 </td>
 
 
-                                <td><input type="text" class="replyContent{{ comment.id }}" value="{{ comment.content }}" style="border:0 solid black; background-color: rgba(255, 255, 255, 0.466);" readonly>
-                                    <p>{{comment.created_at}} </p>
+                                <td><input type="text" class="replyContent{{ comment.id }}" value="{{ comment.content }}" style="width:100%; border:0 solid black; background-color: rgba(255, 255, 255, 0.466);" readonly>
+                                    <p>
+                                        <span class="prefont">{{comment.created_at}}</span> 
+                                        {% if user == comment.user %}
+                                        <span style="margin-left: 1rem;"></span>
+                                        <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel({{comment.id}})">삭제</button>
+                                        <span>|</span>
+                                        <button class="tdReplyUpdate{{ comment.id }}"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate({{ comment.id }})"></button>
+                                        <button class="tdReplySubmit{{ comment.id }}" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit({{ comment.id }})"></button>
+                                        <button class="tdReplyUpdateCancel{{ comment.id }}" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></button>
+
+                                        {% else %}
+                                        {% endif %}
+
+
+                                    </p>
+                                    
                                 </td>
                                 
 
-                                {% if user == comment.user %}
+                                <!--{% if user == comment.user %}
                                 <td>
                                     <p><button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel({{comment.id}})">삭제</button></p>
                                     <td class="tdReplyUpdate{{ comment.id }}"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate({{ comment.id }})"></td>
@@ -95,7 +110,7 @@
             
                                 </td>
                                 {% else %}
-                                {% endif %}
+                                {% endif %} -->
 
 
                                 <!--<td>{{comment.content}} </td>-->
