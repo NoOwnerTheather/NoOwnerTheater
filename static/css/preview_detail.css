@@ -187,6 +187,23 @@
     
 }
 
+.prededelmodibtn{
+
+    color:black;
+
+}
+
+.rgy-reply {
+
+    display: flex;
+
+    flex-direction: column-reverse;
+
+    -webkit-flex-direction: column-reverse;
+
+}
+
+
 
 /*.predebtnlike:hover{
 
