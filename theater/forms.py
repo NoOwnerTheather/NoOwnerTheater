@@ -100,13 +100,29 @@ class BusinessForm(forms.ModelForm):
         widgets={
             'title': TextInput(attrs={
                 'class': "form-input",
-                'style': 'max-width: 300px;',
-                'placeholder': '글의 제목을 적어주세요'
+                'style': 'max-width: 300rem;border:',
+                'placeholder': '  글의 제목을 적어주세요'
                 
                 }),
             
             
-            'content': SummernoteWidget(attrs={'summernote': {'width': '800px', 'height': '380px'}}),
+            'content': SummernoteWidget(attrs={'summernote': {
+                'width': '800px', 
+                'height': '380px',
+                'placeholder':'''게시물에 들어가야할 항목들은 아래와 같습니다!<br><br><br>
+
+
+🎤 정확한 날짜
+<br><br>
+
+🎤 연락처
+<br><br>
+
+🎤 지원사업 혹은 행사에 대한 정보
+<br><br>
+'''
+
+                }}),
 
 
         }

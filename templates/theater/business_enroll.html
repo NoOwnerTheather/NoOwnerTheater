@@ -4,9 +4,9 @@
 
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
-
+<div class="title">영화제 지원사업 게시판</div>
 <div class="enroll">
-    <div class="title">게시물 등록</div>
+    
 <table>
     <div class="form_block">
         <div class="main_text">제목📌</div>
@@ -23,7 +23,7 @@
 </div> -->
 
 <div class="form_block" style="height:60rem;">
-    <div class="main_text" style="margin-top: 7rem;">내용🖐</div>
+    <div class="main_text" style="margin-top: 2rem;">내용🖐</div>
     <div class="sub_text" style="margin-bottom: 2rem;">영화제 혹은 지원사업과 관련된 정보를 담고 있는 내용물을 작성해주세요!</div>
     {% csrf_token %}
     {{form.media}}
