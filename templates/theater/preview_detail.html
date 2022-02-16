@@ -85,8 +85,8 @@
             
             
                                 <td>
-                                    <input type="button" class="predebtnlike like prefont" name="{{ comment.id }}" value="♥">
-                                    <p id="count-{{ comment.id }}" clasee="prefont" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
+                                    <input type="button" class="predebtnlike like prefont" name="{{ comment.id }}" value="♥" style="padding-top: 30px;">
+                                    <p id="count-{{ comment.id }}" clasee="prefont" style="font:bold 1em;margin-top: 3px;width: 70px;">&nbsp;{{ comment.likes.all.count }}</p>
                                 </td>
             
             
@@ -94,8 +94,8 @@
                                 <!--<td class="btn post__like">좋아요 {{ comment.like }}</td>-->
             
                                 <td>
-                                    <input type="button" class="btn prefont" name="{{ comment.id }}" value="♥" style="">
-                                    <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
+                                    <input type="button" class="btn prefont" name="{{ comment.id }}" value="♥" style="padding-top: 30px;">
+                                    <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px;width: 70px;">&nbsp;{{ comment.likes.all.count }}</p>
                                 </td>
                                 {% endif %}
             
@@ -308,7 +308,7 @@
 
                 //like.innerHTML = `<td class="like"><button>좋아요</button></td>`;
                 like.innerHTML=`<td>
-                        <input type="button" class="btn like" name="(${comment_id})" value="♥" style="margin-top: 7px">
+                        <input type="button" class="predebtnlike like prefont" name="(${comment_id})" value="♥" style="padding-top: 30px;">
                         <p id="count-(${comment_id})" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
                     </td>`;
                 //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요</button>`;
