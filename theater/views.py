@@ -105,11 +105,14 @@ def review_enroll(request,pk):
 
    else:
       form=ReviewForm()
-      ctx={'form':form}
+      movie=get_object_or_404(Movie,id=pk)
+      ctx={'form':form,
+      'movie':movie}
       return render(request,template_name='theater/review_enroll.html',context=ctx)
 
 def review_fix(request,pk,gk):
    post=get_object_or_404(Review,id=gk)
+  
    if request.method=="POST":
       form=ReviewForm(request.POST,instance=post)
         
@@ -119,7 +122,9 @@ def review_fix(request,pk,gk):
 
    else:
       form=ReviewForm(instance=post)
-      ctx={'form':form}
+      movie=get_object_or_404(Movie,id=pk)
+      ctx={'form':form,
+      'movie':movie}
       return render(request,template_name='theater/review_enroll.html',context=ctx)
       # redirect랑 render 주소는 임시
 def review_delete(request,pk,gk):
@@ -174,7 +179,8 @@ def business_delete(request,pk):
 
 def preview(request):
 
-    movie = Movie.objects.all()
+    #movie = Movie.objects.all()
+    movie=Movie.objects.all().order_by('-id')
 
     ctx = {'movie': movie}
 
@@ -337,7 +343,7 @@ def replyUpdate(request,pk):
 def business_list(request):
    business_list = Business.objects.all().order_by('-id')
    page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
-   paginator = Paginator(business_list, '2') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+   paginator = Paginator(business_list, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
    paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
    ctx = {'business_list':business_list,'paginated_business_lists':paginated_business_lists}
 
@@ -348,7 +354,7 @@ def business_detail(request, pk):
    business = Business.objects.get(id=pk)
    business_list = Business.objects.all().order_by('-id')
    page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
-   paginator = Paginator(business_list, '2') #Paginator(분할될 객체, 페이지 당 담길 객체수)
+   paginator = Paginator(business_list, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
    paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
    ctx = {'business' : business ,'paginated_business_lists':paginated_business_lists }
 
@@ -472,7 +478,7 @@ def business_hits_ajax(request):
    business = Business.objects.get(id = business_id)
    business.hits += 1
    business.save()
-   return 
+   return HttpResponse('hits')
 
 
 
@@ -482,7 +488,7 @@ def review_board(request):
    page = request.GET.get('page', '1')  # 페이지
 
    review_list_pub = Review.objects.order_by('-created_at')
-   review_list_hot = Review.objects.order_by('-like')
+   review_list_hot = Review.objects.order_by('-hits')
 
    paginator = Paginator(review_list_pub, 10)  # 페이지당 10개씩 보여주기
    page_obj = paginator.get_page(page)

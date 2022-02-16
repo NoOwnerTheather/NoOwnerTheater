@@ -21,23 +21,7 @@
     background-color:#333;
 }
 
-p{
-    text-align: center!important;
+.sd {
+    box-shadow: none;
 }
-/* .diagonal {
-width: 5px;
-height: 100px;
-background-color: black;
-transform: rotate(75deg);
-}
-.floating { 
-    position: fixed; 
-    left: 0; 
-    top: 7rem; 
-    margin-right: -720px; 
-    text-align:center; 
-    width: 120px; 
-}
-.rating {
-    background-color: #F89501;
-} */
+

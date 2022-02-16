@@ -4,9 +4,32 @@
 
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
-
+<div class="totalform">
+<div class="left_bar">
+<div class="left_text">
+<div class="left_main">
+리뷰 등록 중입니다!
+</div>
+<div class="left_sub">
+    영화 리뷰를 작성하게 되면,<br>
+    10포인트를 얻게 되시고<br>
+    작성한 리뷰는 바로 리뷰 게시판과<br>
+    그 영화의 리뷰로 올라가게 됩니다
+</div>
+</div>
+<div class="left_movie">
+    <div class="left_main">현재 영화는?</div>
+    <div class="left_main">{{movie.title}}</div>
+    <div class="left_sub">
+        개봉 | {{movie.release_date}}<br>
+        장르 | {{movie.genre}}<br>
+        러닝타임 | {{movie.running_time}}분<br>
+        감독 | {{movie.actor}}<br>
+        </div>
+</div>
+</div>
 <div class="enroll">
-    <div class="title">영상 등록</div>
+    <div class="title">리뷰 등록</div>
 <table>
     <div class="form_block">
         <div class="main_text">리뷰 타이틀📌</div>
@@ -33,5 +56,6 @@
     
     
     </div></form>
-{% endblock%}
 </div>
+</div>
+{% endblock%}

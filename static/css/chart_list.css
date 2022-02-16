@@ -41,22 +41,12 @@ cursor: pointer;
   background-color: #f5f4f2;
 }
 
-/* .swiper-pagination-bullet-active {
+.swiper-pagination-bullet-active {
   opacity: 1;
-  background: #70777F;
+  background: #6A7A84 !important;
 }
 
-.swiper-button-next {
-  background: url(/img/swiper_arrow.png) no-repeat;
-  background-size: 50% auto;
-  background-position: center;
+.sw{
+  background-image: none !important;
 }
 
-.swiper-button-prev {
-  background: url(/godiva/img/common/prev.png) no-repeat;
-}
-
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  display: none;
-} */
