@@ -2,24 +2,17 @@
 {% load static %}
 {% block content %}
 
-<!-- <h1>회원가입 페이지</h1>
-<form action="{% url 'account:signup' %}" method="POST">
-  {% csrf_token %}
-  {{form.as_p}}
-  <button type="submit">회원가입</button>
-</form> -->
-
 <div class="signup-background" >
-  <div class="d-flex justify-content-center align-items-center flex-column" style="margin: 00px 0px 50px 0px">
+  <div class="d-flex justify-content-center align-items-center flex-colum mb-5">
     <img src="{% static 'img/logo.png' %}">
   </div>
-  <div class="container card" style="height: 70rem; width: 80rem;">
-    <div class="d-flex justify-content-center align-items-center flex-column" style="height: 50rem;">
-        <form class="form-block text-center w-30" method="POST" action="{% url 'account:signup' %}">
-            <div style="float: left ; height:6rem; width:40rem;">
+  <div class="signup-container container card col-md-4">
+    <div class="d-flex justify-content-center align-items-center flex-column signup-height" >
+        <form class="text-center" method="POST" action="{% url 'account:signup' %}">
+            <div class="signup-alert-content">
               {% csrf_token %}
               {% if form.errors %}
-                  <div class="alert alert-danger" role="alert">
+                  <div class="alert alert-danger alert-position" role="alert">
                   {% for field in form %}
                       {% if field.errors %}
                       <strong>{{ field.label }}</strong>
@@ -29,51 +22,63 @@
                   </div>
               {% endif %}
             </div>
-            <div class="donate-now mb-3" style="margin-top: 250px;" >
-              <li style="margin-right: 20px;">
+            <div class="donate-now mb-3 donate-margin-top">
+              <li class="donate-margin-right">
                 <input type="radio" id="common_user" name="type" value="일반 사용자">
-                <label style="max-width: none; justify-content: center; align-items: center; color: #999999" for="common_user">일반 사용자</label>
+                <label class="radio-button-style" for="common_user">일반 사용자</label>
               </li>
             
               <li>
                 <input type="radio" id="pro" name="type" value="제작사">
-                <label style="max-width: none; justify-content:center ; align-items: center; color: #999999" for="pro">제작사</label>
+                <label class="radio-button-style" for="pro">제작사</label>
               </li>
             </div>
-            
             <div class="form-group mb-3">
-                <input class="form-control input-lg input-style-no-shadow" name="username" type="text" maxlength="30" placeholder="ID" style="height:6rem; width:40rem" required/>
+                <input class="form-control input-lg input-style-no-shadow" name="username" type="text" maxlength="30" placeholder="ID" required/>
             </div>
             <div class="form-group mb-3">
-                <input class="form-control input-lg input-style-no-shadow" name="password1" type="password" maxlength="30" placeholder="PASSWORD" style="height:6rem; width:40rem" required/>
+                <input class="form-control input-lg input-style-no-shadow" name="password1" type="password" maxlength="30" placeholder="PASSWORD" required/>
             </div>
             <div class="form-group mb-3">
-              <input class="form-control input-lg input-style-no-shadow" name="password2" type="password" maxlength="30" placeholder="PASSWORD CONFIRM" style="height:6rem; width:40rem" required/>
+              <input class="form-control input-lg input-style-no-shadow" name="password2" type="password" maxlength="30" placeholder="PASSWORD CONFIRM" required/>
             </div>
             <div class="form-group mb-3">
-              <input class="form-control input-lg input-style-no-shadow" name="nickname" type="text" maxlength="30" placeholder="별명" style="height:6rem; width:40rem" required/>
+              <input class="form-control input-lg input-style-no-shadow" name="nickname" type="text" maxlength="30" placeholder="별명" required/>
             </div>
             <div class="form-group mb-3">
-              <input class="form-control input-lg input-style-no-shadow" name="email" type="email" maxlength="30" placeholder="email" style="height:6rem; width:40rem" required/>
+              <input class="form-control input-lg input-style-no-shadow" name="email" type="email" maxlength="30" placeholder="email" required/>
             </div>
             <div class="form-group mb-3">
-              <input class="form-control input-lg input-style-no-shadow" name="age" type="age" maxlength="30" placeholder="나이" style="height:6rem; width:40rem" required/>
+              <input class="form-control input-lg input-style-no-shadow" name="age" type="age" maxlength="30" placeholder="나이" required/>
             </div>
             <div class="form-group ">
-              <input class="form-control input-lg input-style-no-shadow" name="phone" type="tel" maxlength="30" placeholder="휴대폰 번호" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" style="height:6rem; width:40rem" required/>
+              <input class="form-control input-lg input-style-no-shadow" name="phone" type="tel" maxlength="30" placeholder="휴대폰 번호" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required/>
             </div>
-            <div class="donate-now" style="margin-top: -5px;">
-              <li style="margin-right: 20px;">
+            
+            <div class="donate-now gender-margin-top">
+              <li class="donate-margin-right">
                 <input type="radio" id="male" name="gender" value="남자">
-                <label style="max-width: none; justify-content: center; align-items: center; color: #999999" for="male">남자</label>
+                <label class="radio-button-style" for="male">남자</label>
               </li>
               <li>
                 <input type="radio" id="female" name="gender" value="여자">
-                <label style="max-width: none; justify-content:center ; align-items: center; color: #999999" for="female">여자</label>
+                <label class="radio-button-style" for="female">여자</label>
               </li>
             </div>
-            
-            <!-- <label for="gender">성별</label>
+            <button type="submit" class="mb-5 login-button">회원가입</button>
+        </form>
+        
+    </div>
+  </div>
+</div>
+
+<!-- <h1>회원가입 페이지</h1>
+<form action="{% url 'account:signup' %}" method="POST">
+  {% csrf_token %}
+  {{form.as_p}}
+  <button type="submit">회원가입</button>
+</form> -->
+<!-- <label for="gender">성별</label>
             <select name="gender" id="gender">
               <option value="남자">남자</option>
               <option value="여자">여자</option>
@@ -90,14 +95,4 @@
             
             <!-- <label><input type="radio" name="type" value="일반 사용자"> 일반 사용자</label>
             <label><input type="radio" name="type" value="제작사"> 제작사</label> -->
-            
-            
-            <button type="submit" class="mb-5 login-button" style="height: 5rem; width: 15rem; margin-top: 20px;">회원가입</button>
-        </form>
-        
-    </div>
-  </div>
-</div>
-
-
 {% endblock %}

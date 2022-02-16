@@ -488,7 +488,7 @@ def review_board(request):
    page = request.GET.get('page', '1')  # 페이지
 
    review_list_pub = Review.objects.order_by('-created_at')
-   review_list_hot = Review.objects.order_by('-like')
+   review_list_hot = Review.objects.order_by('-hits')
 
    paginator = Paginator(review_list_pub, 10)  # 페이지당 10개씩 보여주기
    page_obj = paginator.get_page(page)
