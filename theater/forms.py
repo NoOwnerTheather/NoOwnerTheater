@@ -100,7 +100,7 @@ class BusinessForm(forms.ModelForm):
         widgets={
             'title': TextInput(attrs={
                 'class': "form-input",
-                'style': 'max-width: 300rem;border:',
+                'style': 'max-width: 30rem;',
                 'placeholder': '  글의 제목을 적어주세요'
                 
                 }),

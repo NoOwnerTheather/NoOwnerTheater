@@ -105,11 +105,14 @@ def review_enroll(request,pk):
 
    else:
       form=ReviewForm()
-      ctx={'form':form}
+      movie=get_object_or_404(Movie,id=pk)
+      ctx={'form':form,
+      'movie':movie}
       return render(request,template_name='theater/review_enroll.html',context=ctx)
 
 def review_fix(request,pk,gk):
    post=get_object_or_404(Review,id=gk)
+  
    if request.method=="POST":
       form=ReviewForm(request.POST,instance=post)
         
@@ -119,7 +122,9 @@ def review_fix(request,pk,gk):
 
    else:
       form=ReviewForm(instance=post)
-      ctx={'form':form}
+      movie=get_object_or_404(Movie,id=pk)
+      ctx={'form':form,
+      'movie':movie}
       return render(request,template_name='theater/review_enroll.html',context=ctx)
       # redirect랑 render 주소는 임시
 def review_delete(request,pk,gk):

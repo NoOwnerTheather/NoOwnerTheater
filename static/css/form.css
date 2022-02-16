@@ -68,6 +68,23 @@ html{
     margin-top: 3.6rem;
     
   }
+.reviewform_block{
+    height:17rem;
+    display: flex;
+    flex-direction: column;
+    margin-top:3rem;
+    font-family: 'Pretendard';
+    width: 80rem;
+}
+.reviewform_block:after{
+   
+    content: "";
+    display: block;
+    width: 80rem;
+    border-bottom: 1px solid #bcbcbc;
+    margin-top: 3.6rem;
+    
+  }
 .form_line{
     display:flex;
     
@@ -136,3 +153,33 @@ html{
     border: 0.1rem solid;
     
 }
+.totalform{
+    display: flex;
+    flex-direction: row;
+    background-color: #F5F4F2;
+}
+.left_bar{
+    width:38rem;
+}
+@media screen and (max-width: 1024px) {
+    html {
+      font-size: 62.5%!important;
+    }
+  }
+  
+  @media screen and (max-width: 900px) {
+    html {
+      font-size: 52.5%!important;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    html {
+      font-size: 42.5%!important;
+    }  
+  }
+  
+  @media screen and (max-width: 480px) {
+    html {
+      font-size: 22.5%!important;
+    }  }

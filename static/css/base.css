@@ -74,3 +74,25 @@ ul {
 html {
   font-size: 62.5%;
 }
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 52.5%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 42.5%;
+  }  
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 22.5%;
+  }  }
