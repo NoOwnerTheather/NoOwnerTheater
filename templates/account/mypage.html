@@ -21,20 +21,22 @@
             <div>내가 쓴 리뷰</div>
             <div>({{user.review_set.all.count}})</div>
         </div>
-        <div class="container gx-5">
-            {% for review in user.review_set.all %}
-                <div class="col-md-3 col-sm-4 col-xs-6 detail-card">
-                    <div class="detail-movie">
-                        <img src="{{review.movie.poster.url}}"  class="card-img-top" alt="...">
-                        <div class="d-grid gap-2 detail-card-info">
+        <section class="page-section py-4" id="gallery">
+            <div class="container">
+                <div class="row">
+                {% for review in user.review_set.all %}
+                    <div class="col-lg-3 col-sm-6 mb-4  d-flex flex-column mypage-card">
+                        <img class="" src="{{review.movie.poster.url}}" alt="" style="width: 200px; height: 250px; ">
+                        <div class=" detail-card-info d-flex align-items-center justify-content-center " style="width: 200px;">
                             <div class="movie-title">{{review.movie.title}}</div>
                             <div class="movie-review-title">{{review.title}}</div>
                             <a href="{% url 'theater:review_detail' pk=review.pk %}"><button class="detail-review">리뷰바로가기</button></a>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+                </div>  
+            </div>
+        </section>
     </div>
 {% endif %}
 
@@ -55,25 +57,26 @@
             <div>등록한영화</div>
             <div>({{user.movie_set.all.count}})</div>
         </div>
-        <div class="container">
-            <div class="row gx-5">
+        <section class="page-section py-4" id="gallery">
+            <div class="container">
+                <div class="row">
                 {% for movie in user.movie_set.all %}
-                    <div class="col-md-3 col-sm-4 col-xs-6 detail-card">
-                        <div class="detail-movie">
-                            <img src="{{movie.poster.url}}"  class="card-img-top" alt="...">
-                            <div class="d-grid gap-2 detail-card-info">
-                                <div class="movie-title">{{movie.title}}</div>
-                                {% if movie.comeout == '미개봉 및 제작중' %}
-                                <a href="{% url 'theater:preview_detail' pk=movie.pk %}"><button class="detail-review">영화 디테일로 바로가기</button></a>
-                                {% else %}
-                                <a href="{% url 'theater:movie_detail' pk=movie.id  %}"><button class="detail-review">영화 디테일로 바로가기</button></a>
-                                {% endif %}
-                            </div>
+                    <div class="col-lg-3 col-sm-6 mb-4  d-flex flex-column mypage-card">
+                        <img class="" src="{{movie.poster.url}}" alt="" style="width: 200px; height: 250px; ">
+                        <div class=" detail-card-info d-flex align-items-center justify-content-center " style="width: 200px;">
+                            <div class="movie-title">{{review.movie.title}}</div>
+                            <div class="movie-review-title">{{review.title}}</div>
+                            {% if movie.comeout == '미개봉 및 제작중' %}
+                            <a href="{% url 'theater:preview_detail' pk=movie.pk %}"><button class="detail-review">영화 디테일로 바로가기</button></a>
+                            {% else %}
+                            <a href="{% url 'theater:movie_detail' pk=movie.id  %}"><button class="detail-review">영화 디테일로 바로가기</button></a>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}
+                </div>  
             </div>
-        </div>
+        </section>
     </div>
 {% endif %}
 

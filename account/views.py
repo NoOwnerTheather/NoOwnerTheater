@@ -130,18 +130,18 @@ def user_fix(request):
 
 @login_required
 def change_password(request):
-    if request.method == 'POST':
-        password_change_form = PasswordChangeForm(request.user, request.POST)
+  if request.method == 'POST':
+    password_change_form = PasswordChangeForm(request.user, request.POST)
 
-        if password_change_form.is_valid():
-            user = password_change_form.save()
-            update_session_auth_hash(request, user) #비밀번호 수정해도 로그아웃되지않게
-            return redirect('account:mypage', request.user.id)
-    
-    else:
-        password_change_form = PasswordChangeForm(request.user)
-        ctx = {'form':password_change_form}
-    return render(request, 'account/change_password.html', context=ctx)
+    if password_change_form.is_valid():
+      user = password_change_form.save()
+      update_session_auth_hash(request, user) #비밀번호 수정해도 로그아웃되지않게
+      return redirect('theater:main', request.user.id)
+  
+  else:
+    password_change_form = PasswordChangeForm(request.user)
+    ctx = {'form':password_change_form}
+  return render(request, 'account/change_password.html', context=ctx)
 
 class AuthSMS(APIView):
    def post(self, request):
