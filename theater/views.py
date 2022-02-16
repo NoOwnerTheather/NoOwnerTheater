@@ -174,7 +174,8 @@ def business_delete(request,pk):
 
 def preview(request):
 
-    movie = Movie.objects.all()
+    #movie = Movie.objects.all()
+    movie=Movie.objects.all().order_by('-id')
 
     ctx = {'movie': movie}
 

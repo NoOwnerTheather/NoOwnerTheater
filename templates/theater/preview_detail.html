@@ -5,131 +5,146 @@
 
         <div class="img-responsive center-block" style="background-image: url({{movie.poster.url}}); width: 90rem; height:40rem;" ></div>   
         
-        <div class="predesize center-block" style=" padding-bottom: 5rem; background-color: white;">
+        <div>
 
-            <div class="" style="margin-top: 2rem !important;">
-                <span class="preview_detail_image_item prefont predemargin" >{{movie.title}}</span >
-                <span class="prefont predefontsize" style="margin-top: 1rem !important;">감독 | {{movie.director}}</span>
-                <h3 class="prefont predefontsize" style="margin-top: 1rem !important;">장르 | {{movie.genre}}</h3>
-                <span class="prefont predefontsize" style="margin-top: 1rem !important;">출연 | {{movie.actor}}</span>
-                <span class="predebtn fundinglink predefontsize" type="button" href="{{movie.url}}">펀딩링크</span>
-
-            </div>
         
-            <div>
-                
+            <div class="predesize center-block" style=" padding-bottom: 5rem; background-color: white;">
 
-                <h1 class="prefont predetitle">Synopsis</h1>
-                <hr class="prede_hr">
-                <h5 class="text-center">{{movie.content}}</h5>
-
-            </div>
-
-            <!--<h2>커뮤니티</h2>-->
-            
-            
-            <div class="movie-comment">
-                <h1 class="prefont predetitle">Community</h1>
-                <hr class="prede_hr">
-
-                {% if user.is_authenticated %}
-
-                <div class="predeform center-block">
-                    <div class="input">
-                        <input id="comment_input-{{movie.id}}" class="predeformsize" placeholder="댓글을 남겨주세요" type="text"/>
-                        <button class="predewritebtn" onclick="onClickComment({{movie.id}}, 'write', '{{request.user}}')">작성</button>
-                    </div>
-                </div>
-
-
-
-                {% else %}
-                <div>
-                    <section class="input">
-                        <input id="comment_input-{{movie.id}}" placeholder="로그인 후 이용할 수 있습니다." type="text"/>
-                        <button class="btn">작성</button>
-                    </section>
+                <div class="" style="margin-top: 2rem !important;">
+                    <span class="preview_detail_image_item prefont predemargin" >{{movie.title}}</span >
+                    <span class="prefont predefontsize" style="margin-top: 1rem !important;">감독 | {{movie.director}}</span>
+                    <h3 class="prefont predefontsize" style="margin-top: 1rem !important;">장르 | {{movie.genre}}</h3>
+                    <span class="prefont predefontsize" style="margin-top: 1rem !important;">출연 | {{movie.actor}}</span>
+                    <span class="predebtn fundinglink predefontsize" type="button" href="{{movie.url}}">펀딩링크</span>
 
                 </div>
-
-                
-                {% endif %}
-
-
-
-
+            
                 <div>
-
                     
-                    <table class="comment-table-{{movie.id}}">
-                        {% for comment in movie.commentpreview_set.all %}
-                        <div>
 
-                            <tr class = "comment-{{comment.id}}">
-                                <td id="comment_inputuser-{{movie.id}}">{{comment.user}} </td>
-                                <td><input type="text" class="replyContent{{ comment.id }}" value="{{ comment.content }}" style="border:0 solid black; background-color: rgba(255, 255, 255, 0.466);" readonly></td>
-    
-                                <!--<td>{{comment.content}} </td>-->
-                                <td>{{comment.created_at}} </td>
-    
-                                {% if user.is_authenticated %}
-                                <!--<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>-->
-    
-    
-                                <td>
-                                    <input type="button" class="btn like" name="{{ comment.id }}" value="♥" style="margin-top: 7px">
-                                    <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
-                                </td>
-    
-    
-                                {% else %}
-                                <!--<td class="btn post__like">좋아요 {{ comment.like }}</td>-->
-    
-                                <td>
-                                    <input type="button" class="btn" name="{{ comment.id }}" value="Like" style="margin-top: 7px">
-                                    <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px">♥&nbsp;{{ comment.likes.all.count }}개</p>
-                                </td>
-                                {% endif %}
-    
-    
-                                {% if user == comment.user %}
-                                <td>
-                                    <button class="tdReplyDelete{{comment.id}} del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
-                                    <td class="tdReplyUpdate{{ comment.id }}"><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>
-                                    <td class="tdReplySubmit{{ comment.id }}"  style="display:none"><input type="button"  value="확인" onclick="replySubmit({{ comment.id }})"></td>
-                                    <td class="tdReplyUpdateCancel{{ comment.id }}"  style="display:none"><input type="button"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></td>
-    
-                                </td>
-                                {% else %}
-                                {% endif %}
-                                
-    
-                                
-                            </tr>
-                            
+                    <h1 class="prefont predetitle">Synopsis</h1>
+                    <hr class="prede_hr">
+                    <h5 class="text-center predecolor">{{movie.content}}</h5>
 
+                </div>
+
+                <!--<h2>커뮤니티</h2>-->
+                
+                
+                <div class="movie-comment">
+                    <h1 class="prefont predetitle">Community</h1>
+                    <hr class="prede_hr">
+
+                    {% if user.is_authenticated %}
+
+                    <div class="predeform center-block">
+                        <div class="input">
+                            <input id="comment_input-{{movie.id}}" class="predeformsize" placeholder="댓글을 남겨주세요" type="text"/>
+                            <button class="predewritebtn" onclick="onClickComment({{movie.id}}, 'write', '{{request.user}}')">작성</button>
                         </div>
-                        
-                        {% endfor %}
-                    </table>
+                    </div>
+
+
+
+                    {% else %}
+                    <div>
+                        <section class="input">
+                            <input id="comment_input-{{movie.id}}" placeholder="로그인 후 이용할 수 있습니다." type="text"/>
+                            <button class="btn">작성</button>
+                        </section>
+
+                    </div>
 
                     
+                    {% endif %}
+
+
+
+
+                    <div>
+
+                        
+                        <table class="comment-table-{{movie.id}}">
+                            {% for comment in movie.commentpreview_set.all %}
+                            <div>
+
+                                
+
+                                <div class = "comment-{{comment.id}} predeform predeform2 center-block">
+                                    <div>
+                                        <img src="{{comment.user.user_img}}"  class="detail-user-img" alt="...">
+                                        <span id="comment_inputuser-{{movie.id}}" class="prefont">{{comment.user}} </span> 
+                                        <span><input type="text" class="replyContent{{ comment.id }} prefont" value="{{ comment.content }}" style="border:0 solid black; background-color: rgba(255, 255, 255, 0.466);" readonly></span>
+                                        <span class="prefont">{{comment.created_at}} </span>
+
+                                    <!--<tr class = "comment-{{comment.id}}" style="border-color: rgba(0, 0, 0, 0.1)!important;">-->
+                                        
+                                        <!--<td id="comment_inputuser-{{movie.id}}">{{comment.user}} </td>-->
+                                        <!--<td><input type="text" class="replyContent{{ comment.id }}" value="{{ comment.content }}" style="border:0 solid black; background-color: rgba(255, 255, 255, 0.466);" readonly></td>-->
+            
+                                        <!--XXX<td>{{comment.content}} </td> XXX-->
+                                        <!--<td>{{comment.created_at}} </td>-->
+            
+                                        {% if user.is_authenticated %}
+                                        <!--<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>-->
+            
+                                        
+                                        <!--<td>-->
+                                        <input type="button" class="predebtnlike like prefont" name="{{ comment.id }}" value="♥">
+                                        <p id="count-{{ comment.id }}" clasee="prefont" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
+                                        <!--</td>-->
+            
+            
+                                        {% else %}
+                                        <!--<td class="btn post__like">좋아요 {{ comment.like }}</td>-->
+            
+                                        <!--<td>-->
+                                        <input type="button" class="btn prefont" name="{{ comment.id }}" value="♥" style="">
+                                        <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
+                                        <!--</td>-->
+                                        {% endif %}
+            
+            
+                                        {% if user == comment.user %}
+                                        <td>
+                                            <button class="tdReplyDelete{{comment.id}} del-btn prefont" onclick="onClickDel({{comment.id}})">삭제</button>
+                                            <td class="tdReplyUpdate{{ comment.id }} prefont "><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>
+                                            <td class="tdReplySubmit{{ comment.id }} prefont "  style="display:none"><input type="button"  value="확인" onclick="replySubmit({{ comment.id }})"></td>
+                                            <td class="tdReplyUpdateCancel{{ comment.id }} prefont"  style="display:none"><input type="button"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></td>
+            
+                                        </td>
+                                        {% else %}
+                                        {% endif %}
+                                    
+        
+                                    
+                                    <!--</tr>-->
+                                </div>
+                                
+
+                            </div>
+                            
+                            {% endfor %}
+                        </table>
+
+                        
+                    </div>
+                        
+                        
+
                 </div>
-                    
-                    
+
+                <!--<button><a class="predelistbtn" href="{% url 'theater:preview' %}">목록</a></button>-->
+
+                <!--<div class="predelistbtn" type="button" href="{% url 'theater:preview' %}">목록</div>-->
+
+                <a class="predelistbtn" type="button" href="{% url 'theater:preview' %}">목록</a>
+
+
+                
+                
 
             </div>
-
-            <!--<button><a class="predelistbtn" href="{% url 'theater:preview' %}">목록</a></button>-->
-
-            <!--<div class="predelistbtn" type="button" href="{% url 'theater:preview' %}">목록</div>-->
-
-            <a class="predelistbtn" type="button" href="{% url 'theater:preview' %}">목록</a>
-
-
-            
-            
-
         </div>
         
 

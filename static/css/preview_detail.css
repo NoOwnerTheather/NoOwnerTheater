@@ -1,6 +1,8 @@
 .predesize{
 
     width:90rem;
+    
+    
 
 }
 
@@ -34,10 +36,12 @@
     display: flex;
 
     flex-direction: row;
-
-  
   
 
+}
+
+.predecolor{
+    color:black;
 }
 
 .preview_detail_image_item{
@@ -133,6 +137,9 @@
 
 }
 
+.predeform2{
+    margin-top:2rem;
+}
 
 .predeformsize{
 
@@ -157,3 +164,30 @@
     appearance: none;
     float:left;
 }
+
+.predebtnlike{
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    outline: 0;
+    font-size: 3rem;
+    color: #BEB0FF;
+
+    /*
+    color:white;
+    
+    text-shadow: -1px 0 #BEB0FF, 0 1px #BEB0FF, 1px 0 #BEB0FF, 0 -1px #BEB0FF;*/
+    
+    
+}
+
+
+/*.predebtnlike:hover{
+
+    color: #BEB0FF;
+
+    animation-name:contact_click_btn;
+    animation-duration: 0.5s;
+    animation-fill-mode: backwards
+
+
+}*/
