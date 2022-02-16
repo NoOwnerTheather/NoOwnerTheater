@@ -10,7 +10,11 @@
   align-items: center;
   margin-bottom: 1rem;
 }
-
+.detail-user-img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+}
 .detail-user-name {
   display: flex;
   font-size: 2rem;
@@ -35,6 +39,12 @@
   margin-left: 0.5rem;
 }
 
+.user-fix {
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .detail-user-count {
   background-color: #f5f4f2;
   font-size: 2rem;
@@ -50,20 +60,12 @@
   padding: 0 !important;
 }
 
-.detail-card {
-  background-color: #fff;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 0 !important;
-  margin: 0.5rem 0;
-}
-
-.detail-movie {
-  width: 100%;
-}
+/* .mypage-card {
+  box-shadow: 6px 6px 20px rgb(209 209 209);
+} */
 
 .detail-card-info {
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -77,7 +79,6 @@
   padding: 0.2rem 1.5rem;
   border-radius: 3rem;
   margin-bottom: 1.5rem;
-  margin-left: 1rem;
 }
 
 .movie-title {
@@ -89,4 +90,14 @@
 .movie-review-title {
   margin-top: 0.5rem;
   font-size: 1rem;
+}
+
+.user-fix-btn {
+  margin-top: 0.5rem;
+  color: white;
+  background-color: black;
+  padding: 0.2rem 1.5rem;
+  border-radius: 3rem;
+  margin-bottom: 1.5rem;
+  margin-left: 1rem;
 }

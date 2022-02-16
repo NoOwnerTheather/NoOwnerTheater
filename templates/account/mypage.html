@@ -6,29 +6,36 @@
 {% if user.type == '일반 사용자'  %}
     <div class="detail-background">
         <div class="detail-info-panel">
-            <img src="{{user.user_img.url}}"  class="detail-user-img" alt="...">
+            <img src="{{user.user_img}}"  class="detail-user-img" alt="...">
             <div class="detail-user-name">{{user}}<p>님</p></div>
             <div class="detail-user-nickname">{{user.nickname}}</div>
             <div class="detail-user-mileage">{{user.mileage}}<i class="fas fa-coins"></i></div>
-        </div>    
+        </div> 
+        {% if request.user == user %}
+            <div class="user-fix">
+                <a href="{% url 'account:user_fix' %}"><button class="user-fix-btn">회원정보수정</button></a>
+            </div>
+        {% endif %}
         <div class="detail-user-count">
             <div>내가 쓴 리뷰</div>
             <div>({{user.review_set.all.count}})</div>
         </div>
-        <div class="container">
-            {% for review in user.review_set.all %}
-                <div class="col-md-3 col-sm-4 col-xs-6 detail-card">
-                    <div class="detail-movie">
-                        <img src="{{review.movie.poster.url}}"  class="card-img-top" alt="...">
-                        <div class="d-grid gap-2 detail-card-info">
+        <section class="page-section py-4" id="gallery">
+            <div class="container">
+                <div class="row">
+                {% for review in user.review_set.all %}
+                    <div class="col-lg-3 col-sm-6 mb-4  d-flex flex-column mypage-card">
+                        <img class="" src="{{review.movie.poster.url}}" alt="" style="width: 200px; height: 250px; ">
+                        <div class=" detail-card-info d-flex align-items-center justify-content-center " style="width: 200px;">
                             <div class="movie-title">{{review.movie.title}}</div>
                             <div class="movie-review-title">{{review.title}}</div>
                             <a href="{% url 'theater:review_detail' pk=review.pk %}"><button class="detail-review">리뷰바로가기</button></a>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+                </div>  
+            </div>
+        </section>
     </div>
 {% endif %}
 
@@ -36,21 +43,28 @@
 {% if user.type == '제작사'  %}
     <div class="detail-background">
         <div class="detail-info-panel">
-            <img src="{{user.user_img.url}}"  class="detail-user-img" alt="...">
+            <img src="{{user.user_img}}"  class="detail-user-img" alt="...">
             <div class="detail-user-name">{{user}}<p>님</p></div>
             <div class="detail-user-nickname">{{user.nickname}}</div>
-        </div>    
+        </div>
+        {% if request.user == user %}
+            <div class="user-fix">
+                <a href="{% url 'account:user_fix' %}"><button class="user-fix-btn">회원정보수정</button></a>
+            </div>
+        {% endif %}    
         <div class="detail-user-count">
             <div>등록한영화</div>
             <div>({{user.movie_set.all.count}})</div>
         </div>
-        <div class="container">
-            {% for movie in user.movie_set.all %}
-                <div class="col-md-3 col-sm-4 col-xs-6 detail-card">
-                    <div class="detail-movie">
-                        <img src="{{movie.poster.url}}"  class="card-img-top" alt="...">
-                        <div class="d-grid gap-2 detail-card-info">
-                            <div class="movie-title">{{movie.title}}</div>
+        <section class="page-section py-4" id="gallery">
+            <div class="container">
+                <div class="row">
+                {% for movie in user.movie_set.all %}
+                    <div class="col-lg-3 col-sm-6 mb-4  d-flex flex-column mypage-card">
+                        <img class="" src="{{movie.poster.url}}" alt="" style="width: 200px; height: 250px; ">
+                        <div class=" detail-card-info d-flex align-items-center justify-content-center " style="width: 200px;">
+                            <div class="movie-title">{{review.movie.title}}</div>
+                            <div class="movie-review-title">{{review.title}}</div>
                             {% if movie.comeout == '미개봉 및 제작중' %}
                             <a href="{% url 'theater:preview_detail' pk=movie.pk %}"><button class="detail-review">영화 디테일로 바로가기</button></a>
                             {% else %}
@@ -58,9 +72,10 @@
                             {% endif %}
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
+                {% endfor %}
+                </div>  
+            </div>
+        </section>
     </div>
 {% endif %}
 
