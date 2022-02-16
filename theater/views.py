@@ -573,4 +573,4 @@ def review_hits_ajax(request):
    review = Review.objects.get(id = review_id)
    review.hits += 1
    review.save()
-   return 
+   return HttpResponse('hits')

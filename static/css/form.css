@@ -97,22 +97,23 @@
 #id_poster{
     max-width: 40rem;
 }
-/* .form_line:after{
-    content: "";
-    display: block;
-    width: 108rem;
-    border-bottom: 1px solid #bcbcbc;
-    margin: 20px 0px;
-    
-} */
 
 #no_enroll{
     
-    width:7rem;
+    width: 15rem !important;;
+    height: 5rem !important;
+    font-size: 2rem;
+    border-radius: 1rem;
+    font-weight: bold;
 }
 
 #yes_enroll{
     
-    width:7rem;
+    width: 15rem!important;;
+    height: 5rem !important;
+    font-size: 2rem;
+    border-radius: 1rem;
+    border-color: #707070;
+    font-weight: bold;
 }
 

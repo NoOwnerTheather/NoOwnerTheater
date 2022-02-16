@@ -1,0 +1,103 @@
+.detail-background {
+  background-color: #f5f4f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.detail-info-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.detail-user-img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+}
+.detail-user-name {
+  display: flex;
+  font-size: 2rem;
+  font-weight: bold;
+  align-items: center;
+}
+
+.detail-user-name p {
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.detail-user-nickname {
+  font-size: 1rem;
+}
+
+.detail-user-mileage {
+  display: flex;
+}
+.detail-user-mileage i {
+  margin-left: 0.5rem;
+}
+
+.user-fix {
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.detail-user-count {
+  background-color: #f5f4f2;
+  font-size: 2rem;
+  display: flex;
+  border-top: 4px solid #707070;
+  border-bottom: 4px solid #707070;
+  width: 80%;
+  padding: 0.7rem;
+  margin-bottom: 3rem;
+}
+
+.container {
+  padding: 0 !important;
+}
+
+/* .mypage-card {
+  box-shadow: 6px 6px 20px rgb(209 209 209);
+} */
+
+.detail-card-info {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-review {
+  margin-top: 0.5rem;
+  color: white;
+  background-color: black;
+  padding: 0.2rem 1.5rem;
+  border-radius: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.movie-title {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.movie-review-title {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+}
+
+.user-fix-btn {
+  margin-top: 0.5rem;
+  color: white;
+  background-color: black;
+  padding: 0.2rem 1.5rem;
+  border-radius: 3rem;
+  margin-bottom: 1.5rem;
+  margin-left: 1rem;
+}

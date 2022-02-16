@@ -1,16 +1,62 @@
-.vl {
-    border-left: 6px solid #f5f4f2;
-    height: 30px;
-    position: absolute;
-    margin-left: -3px;
-    top: 1;
-  }
-  
-  .ve {
-    border-left: 6px solid #C1C1A0;
-    height: 30px;
-    position: absolute;
-    margin-left: -3px;
-    top: 1;
-  }
+section {
+  background-color: #f5f4f2;
+}
 
+.section {
+  background-color: #f5f4f2;
+  display: flex; 
+  justify-content: center;
+}
+
+.movie_vl {
+  border-left: 6px solid #000000;
+  height: 20px;
+  position: absolute;
+  margin-left: -3px;
+}
+
+.flex {
+  display:flex;
+  justify-content: space-between;
+}
+
+.movie_board-search {
+  border-bottom: 1px solid #707070;
+  margin-bottom: 4rem;
+  width: 13rem;
+  display: flex;
+}
+
+.movie_board-search i {
+cursor: pointer;
+}
+
+.movie_board-search button {
+  background-color: #f5f4f2;
+  border: none;
+}
+
+.movie_board-search input {
+  border: none;
+  background-color: #f5f4f2;
+}
+
+/* .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #70777F;
+}
+
+.swiper-button-next {
+  background: url(/img/swiper_arrow.png) no-repeat;
+  background-size: 50% auto;
+  background-position: center;
+}
+
+.swiper-button-prev {
+  background: url(/godiva/img/common/prev.png) no-repeat;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+} */

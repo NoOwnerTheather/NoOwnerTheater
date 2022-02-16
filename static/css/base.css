@@ -1,16 +1,22 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-@import url(business_list.css);
+@import url();
 @import url(business_detail.css);
 @import url(business_search.css);
 @import url(chart_list.css);
+@import url(movie_detail.css);
 @import url(login.css);
 @import url(form.css);
 @import url(business_detail.css);
 @import url(business_list.css);
 @import url(business_search.css);
-@import url(review_detail);
+@import url(review_detail.css);
 @import url(base.css);
 @import url(preview.css);
+@import url(mypage.css);
+@import url(reset.css);
+@import url(user_fix.css);
+@import url(change_password.css);
+
 .navbar {
   margin: 0 !important;
   padding: 0.5rem 5rem !important;
@@ -50,6 +56,11 @@ ul {
   list-style: none;
 }
 
+.user_icon {
+  width: 2rem;
+  height: 2rem;
+}
+
 .dropdown-menu {
   min-width: 100px !important;
 }
@@ -62,7 +73,6 @@ ul {
   background-color: #000000;
   color: #fff;
 }
-html{
+html {
   font-size: 62.5%;
 }
-
