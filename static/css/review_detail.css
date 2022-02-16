@@ -16,53 +16,53 @@
 
 .comment-position{
     position:relative;
-    top:-20px;
+    top:-2rem;
 }
 .movie-position{
     position:relative;
-    top: -45px;
-    left: 10px;
+    top: -4.5rem;
+    left: 1rem;
     
 }
 .user-position{
     position:relative;
-    top:5px;
+    top:0.5rem;
     left: 1rem;
 }
 
 .user-position-or{
     position:relative;
-    top:5px;
+    top:0.5rem;
     left: 2rem;
 }
 
 .user-icon-position{
     position:relative;
-    top:5px;
+    top:0.5rem;
     left: 0.5rem;
 }
 
 .review_detail_user_icon{
     position: relative;
-    top: -3px;
+    top: -0.3rem;
     width: 3rem;
     height: 3rem;
 }
 
 
 #next,#prev{
-    width: 25px !important;
-    height: 25px !important;
+    width: 2.5rem !important;
+    height: 2.5rem !important;
 }
 .prev-button-position{
     position:relative;
-    top:-160px;
-    left: -15px;
+    top:-16rem;
+    left: -1.5rem;
 }
 .next-button-position{
     position:relative;
-    top:-160px;
-    right: -15px;
+    top:-16rem;
+    right: -1.5rem;
 }
 
 
@@ -78,7 +78,7 @@
 }
 
 .review_detail_card{
-    min-height: 500px;
+    min-height: 50rem;
     height: auto;
 }
 
@@ -93,19 +93,19 @@
 
 .like-position{
     position:relative;
-    top:180px;
+    top:18rem;
 }
 .like{
-    width: 54px;
-    height: 42px;
+    width: 5.4rem;
+    height: 4.2rem;
     
 }
 
 .like-count{
-    font-size:28px;
+    font-size:2.8rem;
     position:relative;
-    top:0px;
-    right: 15px;
+    top:0rem;
+    right: 1.5rem;
 }
 .posted-at{
     color: #939698;
@@ -117,10 +117,8 @@
     border: none;
     border-radius: 2.5rem;
     color:white;
-    margin: 15px;
-    padding: 5px 10px 5px 10px;
-
-    
+    margin: 1.5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     clear:both;
     text-align: center;
       
@@ -129,9 +127,9 @@
 .d-inline{
     display: inline;
     position: relative;
-    font-size: 20px;
-    top: -13px;
-    right: 10px;
+    font-size: 2rem;
+    top: -1.3rem;
+    right: 1rem;
 
 }
 
@@ -139,7 +137,7 @@
 /* review_board */
 
 .review_board_card{
-    min-height: 280px;
+    min-height: 28rem;
     height: auto;
 }
 
@@ -153,7 +151,7 @@
 }
 
 .swiper-container {
-	max-height:320px;
+	max-height:32rem;
     height: 100%;
 }
 
@@ -189,34 +187,34 @@ display: none;
 
 @media (max-width: 499px) {
     .txt_line {
-      max-width: 150px;
+      max-width: 15rem;
     }
 }
 @media (min-width: 500px) and (max-width: 575px) {
     .txt_line {
-      max-width: 250px;
+      max-width: 25rem;
     }
 }
 @media (min-width: 576px) and (max-width: 767px) {
     .txt_line {
-      max-width: 250px;
+      max-width: 25rem;
     }
     
 }
 @media (min-width: 768px) and (max-width: 991px) {
     .txt_line {
-      max-width: 160px;
+      max-width: 16rem;
     }
     
 }
 @media (min-width: 992px) and (max-width: 1199px) {
     .txt_line {
-      max-width: 130px;
+      max-width: 13rem;
     }
     
 }
 @media (min-width: 1200px) {
     .txt_line {
-      max-width: 100px;
+      max-width: 10rem;
     }
 }    

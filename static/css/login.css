@@ -5,23 +5,23 @@
 }
 .login-position {
     position: relative; 
-    top: 30px;
+    top: 3rem;
 }
 
 .login-button{
 background-color: black;
 border: none;
 border-radius: 2.5rem;
-font-size: 20px;
+font-size: 2rem;
 color:white;
 height: 5rem; 
 width: 15rem;
-margin-top: 10px; 
-margin-bottom: 10px;
+margin-top: 1rem; 
+margin-bottom: 1rem;
 }
 
 .login-margin{
-    margin: 0px 0px 50px 0px;
+    margin: 0px 0px 5rem 0px;
 }
 /* .login-container{
     max-width: 49.3rem !important; 
@@ -41,12 +41,12 @@ margin-bottom: 10px;
 }
 
 .card {
-    border-radius: 25px !important;
+    border-radius: 2.5rem !important;
     /* box-shadow: 6px 6px 20px rgb(209, 209, 209); */
 }
 
 .input-style{
-    border-radius: 0px !important;
+    border-radius: 0rem !important;
     /* box-shadow: 3px 3px 10px rgb(209, 209, 209) !important; */
     height:6rem !important; 
     width:100% !important;
@@ -67,7 +67,7 @@ margin-bottom: 10px;
       min-width: 40rem !important;
     }
     .container {
-        min-width: 480px !important;
+        min-width: 48rem !important;
     }
     
 }
@@ -76,7 +76,7 @@ margin-bottom: 10px;
       min-width: 40rem;
     }
     .container {
-        min-width: 480px !important;
+        min-width: 48rem !important;
     }
     
 }
@@ -85,7 +85,7 @@ margin-bottom: 10px;
       min-width: 40rem;
     }
     .container {
-        min-width: 480px !important;
+        min-width: 48rem !important;
     }
     
 }
@@ -94,14 +94,14 @@ margin-bottom: 10px;
       min-width: 40rem;
     }
     .container {
-        min-width: 480px !important;
+        min-width: 48rem !important;
     }
     
 }
 
 
 .input-style-no-shadow{
-    border-radius: 0px !important;
+    border-radius: 0rem !important;
     height:6rem !important; 
     width:40rem !important;
 }
@@ -114,7 +114,7 @@ margin-bottom: 10px;
 
 .donate-now {
     list-style-type: none;
-    margin: 25px 0 0 0;
+    margin: 2.5rem 0 0 0;
     padding: 0;
   }
   
@@ -127,10 +127,10 @@ margin-bottom: 10px;
 
 .donate-now label,
 .donate-now input {
-    padding: 5px;
+    padding: 0.5rem;
     display: inline-flex;
     position: absolute;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 400;
     top: 0;
     left: 0;
@@ -149,7 +149,7 @@ margin-bottom: 10px;
 }
 
 .donate-now label {
-    border: 1px solid #CCC;
+    border: 0.1rem solid #CCC;
     cursor: pointer;
     z-index: 90;
 }
@@ -172,13 +172,13 @@ margin-bottom: 10px;
 }
 .alert-position{
     position:relative !important;  
-    top:70px !important;
+    top:7rem !important;
 }
 .donate-margin-top{
-    margin-top: 250px !important;
+    margin-top: 25rem !important;
 }
 .donate-margin-right{
-    margin-right: 20px !important;
+    margin-right: 2rem !important;
 }
 .radio-button-style{
     max-width: none ;
@@ -187,11 +187,11 @@ margin-bottom: 10px;
     color: #999999
 }
 .gender-margin-top{
-    margin-top: -5px;
+    margin-top: -0.5rem;
 }
 
 
 .user-icon-position{
     position:relative; 
-    right:15px;
+    right:1.5rem;
 }
