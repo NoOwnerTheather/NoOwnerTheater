@@ -1,4 +1,34 @@
-@import "reset.css";
+.predesize{
+
+    width:90rem;
+    
+    
+
+}
+
+.prefont{
+    font-family: 'Pretendard';
+
+
+}
+
+.predebtn{
+    background-color: black;
+    border-radius: 50rem;
+    color:white !important;
+    font-family: 'Pretendard';
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    font-size: 2rem;
+    letter-spacing: 0.2rem;
+    text-align: right !important;
+    float: right;
+
+
+}
+
 
 
 .preview_detail_image{
@@ -6,13 +36,165 @@
     display: flex;
 
     flex-direction: row;
-
-  
   
 
+}
+
+.predecolor{
+    color:black;
 }
 
 .preview_detail_image_item{
 
-    background-color: aqua;
+    color:black;
+
+    /*background-color: aqua;*/
+
+    text-align: right;
+    float: right;
+    font-size: 4.5rem !important;
+    font-weight:bolder;
+    margin-right:1rem;
+
 }
+
+.fundinglink{
+    text-align: right;
+    margin-right: 1rem;
+}
+
+.predefontsize{
+    font-size: 2rem !important;
+    font-weight:300;
+    margin-left:1rem;
+}
+
+.predetitle{
+
+    font-size: 3rem !important;
+    font-weight:bolder;
+    margin-right:1rem;
+    margin-left:1rem;
+    margin-top: 5rem;
+
+}
+
+.prede_hr{
+    width: 98%;
+    height:1px;
+    border:none;
+    /*background-color: #f5f4f2;*/
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.predelistbtn{
+
+    background-color: black;
+    margin-top:5rem;
+    margin-left: 37rem;
+    margin-right:37rem;
+    border-radius: 50rem;
+    color:white !important;
+    font-family: 'Pretendard';
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+    text-align: center !important;
+}
+
+.predewritebtn{
+
+    background-color: black;
+    border-radius: 50rem;
+    color:white !important;
+    font-family: 'Pretendard';
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 0.2rem;
+    padding-top:  0.2rem;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+
+    margin-top:2.5rem; /*위에 txt랑 간격 조절*/
+
+    height: 3rem;
+
+    float:center;
+
+}
+
+.predeform{
+
+    text-align: center !important;
+    width: 98%;
+    border:0.05rem;
+    border-style:solid;
+    border-color: rgba(0, 0, 0, 0.1);
+    height: 8rem;
+
+}
+
+.predeform2{
+    margin-top:2rem;
+}
+
+.predeformsize{
+
+
+
+    margin-top:1.5rem; /*위에 txt랑 간격 조절*/
+    margin-left:1.5rem;
+
+
+    font-size:15px;
+    border-radius: 0;
+
+    width:85%; /*가로길이 조절*/
+    height:5rem;
+    padding:0.375rem 0.75rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip:padding-box;
+    border:1px solid #ced4da;
+    appearance: none;
+    float:left;
+}
+
+.predebox{
+    position:absolute;
+    left: 14%; 
+    z-index: 1;
+
+}
+
+.predebtnlike{
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    outline: 0;
+    font-size: 3rem;
+    color: #BEB0FF;
+
+    /*
+    color:white;
+    
+    text-shadow: -1px 0 #BEB0FF, 0 1px #BEB0FF, 1px 0 #BEB0FF, 0 -1px #BEB0FF;*/
+    
+    
+}
+
+
+/*.predebtnlike:hover{
+
+    color: #BEB0FF;
+
+    animation-name:contact_click_btn;
+    animation-duration: 0.5s;
+    animation-fill-mode: backwards
+
+
+}*/
