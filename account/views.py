@@ -6,7 +6,6 @@ from .forms import *
 from django.contrib.auth import get_user_model
 
 
-
 from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
@@ -18,12 +17,18 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from . import models as m
+from django.contrib.auth.decorators import login_required
 
+from django.views.decorators.http import require_POST
 
-
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 def login_user(request): # 로그인 중인 Profile object
     return User.objects.get(user=request.user)
+
+
+
 
 
 
@@ -102,7 +107,41 @@ def mypage(request,pk):
   }
   return render(request, 'account/mypage.html',context=ctx)
 
+@require_POST
+@login_required
+def user_delete(request):
+    request.user.delete()
+    return redirect('theater:main')
 
+
+@login_required
+def user_fix(request):
+  post=get_object_or_404(User,id=request.user.id)
+  if request.method == 'POST':
+    form = CustomUserChangeForm(request.POST, instance=post)
+    if form.is_valid():
+      form.save()
+      return redirect('account:mypage',request.user.id)
+    
+  else:
+    form = CustomUserChangeForm(instance =post)
+    ctx={'form':form}
+    return render(request, 'account/user_fix.html', context=ctx)
+
+@login_required
+def change_password(request):
+  if request.method == 'POST':
+    password_change_form = PasswordChangeForm(request.user, request.POST)
+
+    if password_change_form.is_valid():
+      user = password_change_form.save()
+      update_session_auth_hash(request, user) #비밀번호 수정해도 로그아웃되지않게
+      return redirect('theater:main', request.user.id)
+  
+  else:
+    password_change_form = PasswordChangeForm(request.user)
+    ctx = {'form':password_change_form}
+  return render(request, 'account/change_password.html', context=ctx)
 
 class AuthSMS(APIView):
    def post(self, request):
