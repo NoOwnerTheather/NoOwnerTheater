@@ -13,7 +13,7 @@
         <div class="container floatBox-center text-dark p-4">
             <h5 class="section-heading mx-3">인기 글</h5>    
             <div class="row mx-auto my-auto">
-                <div class="swiper-container">
+                <div id="swiper-container" class="swiper-container">
                     <div class="swiper-wrapper">
                         {% for review in review_list_hot %}
                         <div class="swiper-slide">
@@ -31,7 +31,7 @@
                                 </ul>
                                     <div>
                                         <div class="floatBox-center">
-                                            <input type="image" src="{% static 'img/like.png' %}" class="like" name="{{ review.id }}" value="Like">    
+                                            <input type="image" src="{% static 'img/like.png' %}" class="like-review" name="{{ review.id }}" value="Like">    
                                             <p id="count-{{ review.id }}" class="d-inline"> {{ review.likes_user.all.count }}</p>
                                         </div>
                                     </div>
@@ -185,7 +185,7 @@ $('#prev').click(function(){
 $('#next').click(function(){
     myswiper.slideNext()
 });
-$(".like").click(function () { // .like 버튼을 클릭 감지
+$(".like-review").click(function () { // .like 버튼을 클릭 감지
     var pk = $(this).attr('name')
     $.ajax({ // ajax로 서버와 통신
         type: "POST", // 데이터를 전송하는 방법

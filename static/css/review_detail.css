@@ -95,7 +95,7 @@
     position:relative;
     top:18rem;
 }
-.like{
+.like-review{
     width: 5.4rem;
     height: 4.2rem;
     
@@ -150,7 +150,8 @@
     -webkit-box-orient: vertical;
 }
 
-.swiper-container {
+
+swiper-container {
 	max-height:32rem;
     height: 100%;
 }
