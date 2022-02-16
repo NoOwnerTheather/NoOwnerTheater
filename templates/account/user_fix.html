@@ -13,9 +13,7 @@
         <div class="d-flex flex-column align-items-center ">
             <form method="POST">
                 {% csrf_token %}
-                <div class="form-group mb-3">
-                    <input class="form-control input-lg input-style-no-shadow" type="text" maxlength="30" placeholder={{form.username}}
-                </div>
+                
                 <div class="form-group mb-3">
                     <input class="form-control input-lg input-style-no-shadow" type="text" maxlength="30" placeholder={{form.nickname}}
                 </div>

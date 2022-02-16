@@ -15,7 +15,7 @@ class SignupForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = get_user_model()
-        fields = ['username','password', 'nickname','phone','email']
+        fields = ['password', 'nickname','phone','email']
 
 class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, request=None, *args, **kwargs):

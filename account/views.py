@@ -136,7 +136,7 @@ def change_password(request):
     if password_change_form.is_valid():
       user = password_change_form.save()
       update_session_auth_hash(request, user) #비밀번호 수정해도 로그아웃되지않게
-      return redirect('theater:main', request.user.id)
+      return redirect('account:mypage', request.user.id)
   
   else:
     password_change_form = PasswordChangeForm(request.user)
