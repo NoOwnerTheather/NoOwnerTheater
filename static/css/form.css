@@ -34,7 +34,7 @@ html{
     background-color: #F5F4F2;
     text-align: center;
     padding-top: 5rem;
-    padding-right: 101rem;
+    padding-right: 99rem;
 }
 
 .main_text{
@@ -168,6 +168,7 @@ html{
 .button_area{
     width:60rem;
     display: flex;
+    margin-top:2rem;
     margin-bottom: 2rem;
     justify-content: space-around;
 }
@@ -224,6 +225,12 @@ textarea{
 @media screen and (max-width: 1024px) {
     html {
       font-size: 62.5%!important;
+      
+    }
+    .note-editor{
+        width: 800px;
+       
+        
     }
   }
   
@@ -231,15 +238,34 @@ textarea{
     html {
       font-size: 52.5%!important;
     }
+    .note-editor{
+        width: 600px ;
+        
+    }
   }
   
   @media screen and (max-width: 768px) {
     html {
       font-size: 42.5%!important;
     }  
-  }
+    .note-editor{
+        width: 400px;
+        
+    }
   
   @media screen and (max-width: 480px) {
     html {
       font-size: 22.5%!important;
-    }  }
+      
+    } 
+    .note-editor{
+        width: 200px;
+       
+    }
+ }
+  }
+.alertcard{
+    position: absolute;
+    margin-left:41%;
+    margin-top:21%;
+}

@@ -6,16 +6,19 @@
         <div class=" center-block predebox" style="width:72%;  height:50rem;"></div>
 
 
-        <div class=" center-block" style="width:72%;  height:50rem;">
+       
+            
+           
 
-            <div class="img-responsive center-block" style="background-image: url({{movie.poster.url}}); width: 90rem; height:50rem;" ></div>
+            <!-- <div class="img-responsive center-block" style="background-image: url(); width: 90rem; height:50rem;" ></div> -->
         
-        </div>
-
+    
                   
         <div class="predesize center-block" style="width:72%; padding-bottom: 5rem; background-color: white; padding-top:1rem;">
 
-        
+            <div style="display: flex;justify-content: center;">
+                <img src="{{ movie.poster.url }}" style="max-width:120rem;max-height:70rem;">
+            </div>
             <div class="predesize center-block" style=" padding-bottom: 5rem; background-color: white;">
 
                 <div class="" style="margin-top: 2rem !important;">
@@ -32,7 +35,7 @@
 
                     <h1 class="prefont predetitle">Synopsis</h1>
                     <hr class="prede_hr">
-                    <h5 class="text-center predecolor">{{movie.content}}</h5>
+                    <h5 class="text-center predecolor">{% autoescape on %}{{movie.content|safe}}{% endautoescape %}</h5>
 
                 </div>
 
@@ -184,7 +187,7 @@
                     //$("#count-" + pk).html("좋아요&nbsp;" + response.likes_count + "개"); // 좋아요 개수 변경
                     alert("!!")
                     //window.location.replace("preview/<int:pk>/") // 로그인 페이지로 넘어가기
-                    window.locationreload()	
+                    window.locationreload()   
                 },
             });
         })
@@ -287,69 +290,8 @@
     
         const WriteHandleResponse = () => {
             if (requestComment.status < 400){
-                const {id, type, content, comment_id, user} = JSON.parse(requestComment.response);
-                const element = document.querySelector(`.comment-table-${id}`);
-                const new_comment = document.createElement("tr");
-                const comment_content = document.createElement("td");    
-                const del = document.createElement("td");
 
-                const comment_user = document.createElement("td");  ///3
-
-                //const update = document.getElementsByClassName("tdReplyUpdate${ comment.id }$"); //4
-                //var x = document.getElementsByClassName("example");
-                //class="tdReplyUpdate{{ comment.id }}"
-
-                const update = document.createElement("td"); //4!!!수정필요
-                //const update = document.createElement("td").style.display='inline-block'; //4
-
-                const like = document.createElement("td"); //4!!!수정필요
-
-                const date = document.createElement("td"); //4!!!수정필요
-
-                ///.
-
-                let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
-                let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
-
-                let replyContent=document.querySelector(`.replyContent${id}`);
-                ///.            
-    
-                new_comment.setAttribute("class", `comment-${comment_id}`);
-
-
-                //.
-                //console.log({user});
-                comment_user.innerHTML = `${user}`; //3
-                comment_content.innerHTML = `${content}`; //1
-
-                /*if(`${content}`==null){
-
-                    alert("댓글입력해주세요");
-                    console.log("댓글X");
-                    
-                }*/
-    
-                del.innerHTML = `<td><button onclick="onClickDel(${comment_id})">삭제</button></td>`; //1
-                //update.innerHTML = `<button onclick="replyUpdate(${comment_id})">수정</button>`; //1
-                update.innerHTML =`<td class="tdReplyUpdate(${comment_id})"><input type="button" value="수정" onclick="replyUpdate(${comment_id})"></td>`
-
-                //like.innerHTML = `<td class="like"><button>좋아요</button></td>`;
-                like.innerHTML=`<td>
-                        <input type="button" class="predebtnlike like prefont" name="(${comment_id})" value="♥" style="padding-top: 30px;">
-                        <p id="count-(${comment_id})" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
-                    </td>`;
-                //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요</button>`;
                 
-                //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요 ${ like }</button>`;
-
-                //<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>
-                //comment_content.innerHTML = `${user}`; //2
-
-                ///tdReplyUpdate.innerHTML=`<button onclick="replyUpdate(${comment_id})">수정</button>`; //2
-
-                //tdReplyUpdate.innerHTML=`<td><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>`; //2
-                
-
                 Date.prototype.format = function (f) {
 
                     if (!this.valueOf()) return " ";
@@ -408,7 +350,7 @@
 
                     });
 
-                };
+                    };
 
 
 
@@ -421,6 +363,104 @@
 
                 var _today = new Date(); // 예제 기준 시간 : 2000-01-01 13:12:12
 
+
+
+                const {id, type, content, comment_id, user, user_img} = JSON.parse(requestComment.response);
+                const element = document.querySelector(`.comment-table-${id}`);
+                const new_comment = document.createElement("tr");
+                const comment_content = document.createElement("td");    
+                const del = document.createElement("td");
+
+                const comment_user = document.createElement("td");  ///3
+
+                const comment_user_img=document.createElement("td");//5
+
+                //const update = document.getElementsByClassName("tdReplyUpdate${ comment.id }$"); //4
+                //var x = document.getElementsByClassName("example");
+                //class="tdReplyUpdate{{ comment.id }}"
+
+                const update = document.createElement("td"); //4!!!수정필요
+                //const update = document.createElement("td").style.display='inline-block'; //4
+
+                const like = document.createElement("td"); //4!!!수정필요
+
+                const date = document.createElement("td"); //4!!!수정필요
+
+                ///.
+
+                let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
+                let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
+
+                let replyContent=document.querySelector(`.replyContent${id}`);
+                ///.            
+    
+                new_comment.setAttribute("class", `comment-${comment_id} writehandletr`);
+
+
+                //.
+                //console.log({user});
+
+                
+                
+
+
+                comment_user.innerHTML = `<td id="comment_inputuser-{{movie.id}}" style="width:10%">
+                                            <img src="${user_img}"  class="detail-user-img" alt="...">
+                                            <p>${user} </p>
+                                    
+                                          </td>`; //3
+
+                //comment_user.innerHTML = `${user}`; //3
+
+                comment_content.innerHTML = `<td style="width:75%"><input type="text" class="replyContent{{ comment.id }} prefont" value="${content}" style="width:100%; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
+                                    <p>
+                                        <span class="prefont">${_today.format('NS월 dd, yyyy, hh:mm a/p')}</span>
+                                        <span style="margin-left: 1rem;"></span>
+                                        <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel({{comment.id}})">삭제</button>
+                                        <span>|</span>
+                                        <button class="tdReplyUpdate{{ comment.id }}"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate({{ comment.id }})"></button>
+                                        <button class="tdReplySubmit{{ comment.id }}" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit({{ comment.id }})"></button>
+                                        <button class="tdReplyUpdateCancel{{ comment.id }}" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></button>
+
+
+
+                                    </p>
+                                    
+                                </td>`; //1
+
+                //comment_content.innerHTML = `${content}`; //1
+
+                //comment_user_img.innerHTML = `<img src="${user_img}"  class="detail-user-img" alt="...">`; //3
+
+                /*if(`${content}`==null){
+
+                    alert("댓글입력해주세요");
+                    console.log("댓글X");
+                    
+                }*/
+    
+                del.innerHTML = `<td><button onclick="onClickDel(${comment_id})">삭제</button></td>`; //1
+                //update.innerHTML = `<button onclick="replyUpdate(${comment_id})">수정</button>`; //1
+                update.innerHTML =`<td class="tdReplyUpdate(${comment_id})"><input type="button" value="수정" onclick="replyUpdate(${comment_id})"></td>`
+
+                //like.innerHTML = `<td class="like"><button>좋아요</button></td>`;
+                like.innerHTML=`<td class="predewidth70">
+                        <input type="button" class="predebtnlike like prefont" name="(${comment_id})" value="♥" style="padding-top: 30px;">
+                        <p id="count-(${comment_id})" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
+                    </td>`;
+                //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요</button>`;
+                
+                //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요 ${ like }</button>`;
+
+                //<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>
+                //comment_content.innerHTML = `${user}`; //2
+
+                ///tdReplyUpdate.innerHTML=`<button onclick="replyUpdate(${comment_id})">수정</button>`; //2
+
+                //tdReplyUpdate.innerHTML=`<td><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>`; //2
+                
+
+                
 
 
                 console.log(_today.format('yyyy-MM-dd'));
@@ -441,7 +481,12 @@
 
                 //var now = new Date();
 
-                date.innerHTML= `${_today.format('NS월 dd, yyyy, hh:mm a/p')}`; //3
+                date.innerHTML= `<td class="predewidth15">
+                                    <input type="button" class="predebtnlike like prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
+                                    <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em;margin-top: 3px;width: 70px; margin-left:1rem;">&nbsp;{{ comment.likes.all.count }}</p>
+                                </td>`; //3
+                
+                //date.innerHTML= `${_today.format('NS월 dd, yyyy, hh:mm a/p')}`; //3
                 //date.innerHTML= `${user}`; //3
 
                 //.
@@ -450,15 +495,19 @@
                 
     
                 element.append(new_comment);
+
                 new_comment.appendChild(comment_user);//3
+                new_comment.appendChild(comment_user_img);//3
                 new_comment.appendChild(comment_content);
 
                 new_comment.appendChild(date);//3
 
-                new_comment.appendChild(like);
+                
 
-                new_comment.appendChild(del);
-                new_comment.appendChild(update);
+                //new_comment.appendChild(del);
+                //new_comment.appendChild(update);
+
+                //new_comment.appendChild(like);
                 ///new_comment.appendChild(tdReplyUpdate);
 
                 
