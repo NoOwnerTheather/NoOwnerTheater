@@ -362,7 +362,7 @@
 
 
 
-                const {id, type, content, comment_id, user} = JSON.parse(requestComment.response);
+                const {id, type, content, comment_id, user, user_img} = JSON.parse(requestComment.response);
                 const element = document.querySelector(`.comment-table-${id}`);
                 const new_comment = document.createElement("tr");
                 const comment_content = document.createElement("td");    
@@ -427,7 +427,7 @@
 
                 //comment_content.innerHTML = `${content}`; //1
 
-                comment_user_img.innerHTML=`${user}`; //3
+                comment_user_img.innerHTML = `<img src="${user_img}"  class="detail-user-img" alt="...">`; //3
 
                 /*if(`${content}`==null){
 
@@ -494,6 +494,7 @@
                 element.append(new_comment);
 
                 new_comment.appendChild(comment_user);//3
+                new_comment.appendChild(comment_user_img);//3
                 new_comment.appendChild(comment_content);
 
                 new_comment.appendChild(date);//3
