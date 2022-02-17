@@ -11,6 +11,7 @@
 <div class="background ">
     <div class="container card">
         <div class="d-flex flex-column align-items-center ">
+            <div class="fix-title ">회원정보수정</div>
             <form method="POST">
                 {% csrf_token %}
                 
@@ -23,11 +24,12 @@
                 <div class="form-group mb-3">
                     <input class="form-control input-lg input-style-no-shadow" type="text" maxlength="30" placeholder={{form.email}}
                 </div>
+                
+            </form>
+            <div>
                 <button class="user-fix-btn" type="submit">수정완료</button>
                 <a href="{% url 'account:change_password' %}"><button class="user-fix-btn">비밀밀호 변경</button></a>
-            </form>
-            
-            
+            </div>
             <form action="{% url 'account:user_delete' %}" method="POST">
                 {% csrf_token %}
                 <button class="user-fix-btn">회원탈퇴</button>
