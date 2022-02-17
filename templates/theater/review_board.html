@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load review_filter %}
+{% load static %}
+{% block content %}
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+<section class="page-section">
+    <div class="container">
+        <div class="container floatBox-center text-dark p-4">
+            <h5 class="section-heading mx-3">인기 글</h5>    
+            <div class="row mx-auto my-auto">
+                <div id="swiper-container" class="swiper-container">
+                    <div class="swiper-wrapper">
+                        {% for review in review_list_hot %}
+                        <div class="swiper-slide">
+                            <div class="card review_board_card">
+                                <div class="card-body review-card-body">
+                                <ul>
+                                    <li class="floatBox-left user-icon-position"> <img class="review_detail_user_icon" src="{{review.user.user_img}}" /></li>
+                                    <li class="floatBox-left user-position">{{ review.user }}</li>
+                                    <li class="floatBox-right movie-position movie-button txt_line">{{ review.movie }}</li>
+                                    <br>
+                                    <hr>
+                                    <li class="col-md-12 h3" style="float:none; margin:0 auto;">{{ review.title }}</li>
+                                    <br>
+                                    <li class="col-md-12 cut-text" style="float: none; margin:0 auto;">{{ review.content }}</li>
+                                </ul>
+                                    <div>
+                                        <div class="floatBox-center">
+                                            <input type="image" src="{% static 'img/like.png' %}" class="like-review" name="{{ review.id }}" value="Like">    
+                                            <p id="count-{{ review.id }}" class="d-inline"> {{ review.likes_user.all.count }}</p>
+                                        </div>
+                                    </div>
+                                </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- 페이징 -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+        <!-- 커스텀 네비게이션 -->
+        <div class="controls">
+            <input type="image" src="{% static 'img/next.png' %}"  id="next" class="floatBox-right next-button-position">
+            <input type="image" src="{% static 'img/prev.png' %}"  id="prev" class="floatBox-left prev-button-position">
+        </div>
+    </div>
+    <div class="container my-3">
+        <table class="table">
+            <thead>
+            <tr class="thead-dark">
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+                <th>조회수</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if review_list_pub %}
+            {% for review in review_list_pub %}
+            <tr>
+                <td>
+                    <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                    {{ review_list_pub.paginator.count|sub:review_list_pub.start_index|sub:forloop.counter0|add:1 }}
+                </td>
+                <td >
+                    
+                    <a href="{% url 'theater:review_detail' review.id %}" onclick="onClickTitle({{ review.id }})" ">{{review.title}}</a>
+    
+                    <span class="text-danger small ml-2">[{{ review.commentreview_set.count }}]</span>
+                </td>
+                <td>
+                    {{ review.user }}
+                </td>
+                <td>
+                    {{ review.created_at|date:'Y-m-d' }}
+                </td>
+                <td>
+                    {{ review.hits }}
+                </td>
+    
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="3">리뷰가 없습니다.</td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
+        <!-- 페이징처리 시작 -->
+        <ul class="pagination pagination-center">
+            <!-- 이전페이지 -->
+            {% if review_list_pub.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ review_list_pub.previous_page_number }}">이전</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+            </li>
+            {% endif %}
+            <!-- 페이지리스트 -->
+            {% for page_number in review_list_pub.paginator.page_range %}
+            {% if page_number >= review_list_pub.number|add:-5 and page_number <= review_list_pub.number|add:5 %}
+                {% if page_number == review_list_pub.number %}
+                <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                </li>
+                {% endif %}
+            {% endif %}
+            {% endfor %}
+            <!-- 다음페이지 -->
+            {% if review_list_pub.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ review_list_pub.next_page_number }}">다음</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+            </li>
+            {% endif %}
+        </ul>
+        <!-- 페이징처리 끝 -->
+    </div>
+</section>
+
+
+
+
+
+
+<script>
+myswiper = new Swiper('.swiper-container', {
+
+slidesPerView : 4, // 동시에 보여줄 슬라이드 갯수
+spaceBetween : 30, // 슬라이드간 간격
+slidesPerGroup : 4, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+
+
+// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+loopFillGroupWithBlank : true,
+
+loop : true, // 무한 반복
+
+pagination : { // 페이징
+    el : '.swiper-pagination',
+    clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+},
+navigation : { // 네비게이션
+    nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+    prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+},
+breakpoints: { //반응형 조건 속성
+        768: { //500 미만일경우
+          slidesPerView: 1, //레이아웃 1열
+          slidesPerGroup : 1.
+        },
+        992: { //640 미만일경우
+          slidesPerView: 2, //레이아웃 2열
+          slidesPerGroup : 2,
+        },
+        1200: { // 768 미만일경우
+          slidesPerView: 3,
+          slidesPerGroup : 3,
+        },
+      },
+});
+$('#prev').click(function(){
+    myswiper.slidePrev()
+    });
+$('#next').click(function(){
+    myswiper.slideNext()
+});
+$(".like-review").click(function () { // .like 버튼을 클릭 감지
+    var pk = $(this).attr('name')
+    $.ajax({ // ajax로 서버와 통신
+        type: "POST", // 데이터를 전송하는 방법
+        url: "{% url 'theater:review_like' %}", // 통신할 url을 지정
+        data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, // 서버로 데이터 전송시 옵션, pk를 넘겨야 어떤 review인지 알 수 있음
+        dataType: "json",
+        success: function (response) { // 성공
+            alert(response.message);
+            $("#count-" + pk).html(response.likes_count); // 좋아요 개수 변경
+            myswiper.update()
+        },
+        error: function (request, status, error) { // 실패
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            $(window.location).replace("/account/login/"); // 로그인 페이지로 넘어가기
+        },
+    });
+})
+</script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const onClickTitle = async (id) => {
+        const url = "/review_hits_ajax/";
+        const {data} = await axios.post(url,{id});
+    }
+</script>
+{% endblock %}
+
+

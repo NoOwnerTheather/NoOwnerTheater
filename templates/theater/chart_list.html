@@ -1,49 +1,75 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<a href="{% url 'theater:enroll'%}">영화작성</a>
 
-
-<div class="pt-5" style="display: flex; justify-content: center; align-items: center; background-color: #f5f4f2">
+<div class="section pt-5">
     <form  method="POST" action="{% url 'theater:movie_search' %}">
         {% csrf_token %}     
-        <div class="board-search">
-            <input placeholder="검색어를 입력하시오" name="searched"/ >
+        <div class="movie_board-search">
+            <input placeholder="검색어를 입력하시오" name="searched" />
             <button type="submit"><i class="fas fa-search"></i></button>
         </div>
     </form>
 </div>
 
-<section class="page-section" style="background-color: #C1C1A0;" id="">
+<section class="page-section" id="">
     <div class="container text-dark p-4">
-        <div class="text-dark pb-2">
-          <div class="vl"></div>
+        <div class="flex text-dark pb-2">
+          <div class="movie_vl"></div>
           <h5 class="section-heading mx-3">지금 인기 있는 영화</h5>
           <div class="d-flex justify-content-end">
-            <a class="badge rounded-pill bg-light text-dark" href="{% url 'theater:movie_list_popular' %}">전체 보기</a>
+            <a href="{% url 'theater:movie_list_popular' %}" class="btn-more all">전체보기 > </a>
           </div>
         </div>
         
-        <div class="row mx-auto my-auto">
+        <div class="sw row mx-auto my-auto">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     {% for row1 in rows1 %}
+                    {%if row1.genre == '성인물(에로)' and current_user.age <= 19%}
+                    
                     <div class="swiper-slide">
+                      <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
+                      <div class="card my-3" style="width: 100%">
+                        <img src="{{row1.poster.url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">{{row1.title}}</h5>
+                          <span class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
+                        </div>
+                      </div>
+                      </a>
+                  </div>
+
+                    {%else%}
+                    <div class="swiper-slide">
+                        <a href="{% url 'theater:movie_detail' row1.id %}">
                         <div class="card" style="width: 100%">
                             <img src="{{row1.poster.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
                               <h5 class="card-title text-center">{{row1.title}}</h5>
+                              <span class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
                             </div>
                         </div>
+                        </a>
                     </div>
+                    {%endif%}
+                    
                     {% endfor %}
                 </div>
 
                 <!-- 네비게이션 -->
-                <div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-                <div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+                <div class="sw swiper-button-next me-2">
+                  <input type="image" src="{% static 'img/next.png' %}"  class="next">
+                </div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+                <div class="sw swiper-button-prev">
+                  <input type="image" src="{% static 'img/prev.png' %}"  class="prev">
+                </div><!-- 이전 버튼 -->
             
                 <!-- 페이징 -->
                 <div class="swiper-pagination"></div>
@@ -52,14 +78,12 @@
     </div>
 </section>
 
-
-<section class="page-section" style="background-color: #f5f4f2;" id="">
+<section class="page-section" id="">
     <div class="container text-dark p-4">
-        <div class="text-dark pb-2">
-          <div class="ve"></div>
+        <div class="flex text-dark pb-2">
+          <div class="movie_vl"></div>
           <h5 class="section-heading mx-3">장르별 영화</h5>
           <div class="order-container d-flex justify-content-end">
-            <!-- <form method="GET" action="{% url 'theater:genre_order' %}"> -->
             <select name="sort" id="sort" class="form-select w-auto so" aria-label="Default select example">
               <option value="0" {% if so == '0' %}selected{% endif %}>--- 정렬 기준 ---</option>
               <option value="1" {% if so == '1' %}selected{% endif %}>드라마</option>
@@ -71,38 +95,59 @@
               <option value="7" {% if so == '7' %}selected{% endif %}>미스터리</option>
               <option value="8" {% if so == '8' %}selected{% endif %}>스릴러</option>
               <option value="9" {% if so == '9' %}selected{% endif %}>범죄</option>
-              <option value="10 {% if so == '10' %}selected{% endif %}">공포(호러)</option>
-              <option value="11 {% if so == '11' %}selected{% endif %}">SF</option>
-              <option value="12 {% if so == '12' %}selected{% endif %}">판타지</option>
-              <option value="13 {% if so == '13' %}selected{% endif %}">성인물(에로)</option>
-              <option value="14 {% if so == '14' %}selected{% endif %}">전쟁</option>
-              <option value="15 {% if so == '15' %}selected{% endif %}">애니메이션</option>
-              <option value="16 {% if so == '16' %}selected{% endif %}">사극</option>
-              <option value="17 {% if so == '17' %}selected{% endif %}">뮤지컬</option>
+              <option value="10" {% if so == '10' %}selected{% endif %}>공포(호러)</option>
+              <option value="11" {% if so == '11' %}selected{% endif %}>SF</option>
+              <option value="12" {% if so == '12' %}selected{% endif %}>판타지</option>
+              <option value="13" {% if so == '13' %}selected{% endif %}>성인물(에로)</option>
+              <option value="14" {% if so == '14' %}selected{% endif %}>전쟁</option>
+              <option value="15" {% if so == '15' %}selected{% endif %}>애니메이션</option>
+              <option value="16" {% if so == '16' %}selected{% endif %}>사극</option>
+              <option value="17" {% if so == '17' %}selected{% endif %}>뮤지컬</option>
             </select>
-            <!-- <button class="btn btn-primary" type="submit" value="">정렬</button> -->
-            <!-- </form> -->
           </div>
         </div>
         <div class="row mx-auto my-auto">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
+              
                     {% for row2 in rows2 %}
+                    {%if row2.genre == '성인물(에로)' and current_user.age <= 19%}
                     <div class="swiper-slide">
+                      <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
+                      <div class="card" style="width: 100%">
+                          <img src="{{row2.poster.url}}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title text-center">{{row2.title}}</h5>
+                            <span class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
+                          </div>
+                      </div>
+                      </a>
+                  </div>
+
+                    {%else%}
+                    <div class="swiper-slide">
+                        <a href="{% url 'theater:movie_detail' row2.id %}">
                         <div class="card" style="width: 100%">
                             <img src="{{row2.poster.url}}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <h5 class="card-title text-center">{{row2.title}}</h5>
+                              <h5 class="card-title text-center">{{row2.title}}</h5>
+                              <span class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
                             </div>
                         </div>
+                        </a>
                     </div>
+                    {%endif%}
                     {% endfor %}
                 </div>
 
                 <!-- 네비게이션 -->
-                <div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-                <div class="swiper-button-prev"></div><!-- 이전 버튼 -->
-            
+                <div class="sw swiper-button-next me-2">
+                  <input type="image" src="{% static 'img/next.png' %}"  class="next">
+                </div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+                <div class="sw swiper-button-prev">
+                  <input type="image" src="{% static 'img/prev.png' %}"  class="prev">
+                </div><!-- 이전 버튼 -->
+
                 <!-- 페이징 -->
                 <div class="swiper-pagination"></div>
             </div>
@@ -114,34 +159,57 @@
     <input type="hidden" id="so" name="so" value="{{ so }}">
 </form>
 
-
-<section class="page-section" style="background-color: #C1C1A0;" id="">
+<section class="page-section" id="">
     <div class="container text-dark p-4">
-        <div class="text-dark pb-2">
-          <div class="vl"></div>
+        <div class="flex text-dark pb-2">
+          <div class="movie_vl"></div>
           <h5 class="section-heading mx-3">최근 개봉한 영화</h5>
           <div class="d-flex justify-content-end">
-            <a class="badge rounded-pill bg-light text-dark" href="{% url 'theater:movie_list_recent' %}">전체 보기</a>
-          </div>
-        </div>
+            <a href="{% url 'theater:movie_list_recent' %}" class="btn-more all">전체보기 > </a>          </div>
+           </div>
         <div class="row mx-auto my-auto">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    {% for row3 in rows3 %}
-                    <div class="swiper-slide">
-                        <div class="card" style="width: 100%">
-                            <img src="{{row3.poster.url}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                              <h5 class="card-title text-center">{{row3.title}}</h5>
-                            </div>
+                  {% for row3 in rows3 %}
+                  {%if row3.genre == '성인물(에로)' and current_user.age <= 19%}
+                  
+                  <div class="swiper-slide">
+                    <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
+                    <div class="card" style="width: 100%">
+                        <img src="{{row3.poster.url}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                          <h5 class="card-title text-center">{{row3.title}}</h5>
+                          <span class="stars text-dark-2 d-flex justify-content-center">{{row3.rating}}</span>
                         </div>
                     </div>
-                    {% endfor %}
+                    </a>
+                </div>
+
+
+                  {%else%}
+                  <div class="swiper-slide">
+                      <a href="{% url 'theater:movie_detail' row3.id %}">
+                      <div class="card" style="width: 100%">
+                          <img src="{{row3.poster.url}}" class="card-img-top" alt="...">
+                          <div class="card-body">
+                            <h5 class="card-title text-center">{{row3.title}}</h5>
+                            <span class="stars text-dark me-2 d-flex justify-content-center">{{row3.rating}}</span>
+                          </div>
+                      </div>
+                      </a>
+                  </div>
+                  {%endif%}
+                  
+                  {% endfor %}
                 </div>
 
                 <!-- 네비게이션 -->
-                <div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-                <div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+                <div class="sw swiper-button-next me-2">
+                  <input type="image" src="{% static 'img/next.png' %}"  class="next">
+                </div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+                <div class="sw swiper-button-prev">
+                  <input type="image" src="{% static 'img/prev.png' %}"  class="prev">
+                </div><!-- 이전 버튼 -->
             
                 <!-- 페이징 -->
                 <div class="swiper-pagination"></div>
@@ -152,7 +220,6 @@
 
 
 <script>
-
 
 new Swiper('.swiper-container', {
 
@@ -170,25 +237,54 @@ pagination : { // 페이징
     el : '.swiper-pagination',
     clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
 },
+
 navigation : { // 네비게이션
     nextEl : '.swiper-button-next', // 다음 버튼 클래스명
     prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
 },
 });
 
-
 $(document).ready(function(){
-
     $(".so").on('change', function() {
         $("#so").val($(this).val());
-        // $("#page").val(1);
         $("#searchForm").submit();
     });
 });
 
-
+const rating = document.querySelectorAll(".stars");
+rating.forEach((value) => {
+  let ratingStars = "";
+  for (let i = 0; i < Math.floor(value.innerText); i++) {
+    ratingStars += '<i class="fas fa-star"></i>';
+  }
+  if (value.innerText % 1) {
+    ratingStars += '<i class="fas fa-star-half"></i>';
+  }
+  value.innerHTML = ratingStars;
+});
 
 </script>
+
+<div class="modal fade" id="Modalwhite">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              
+              <div class="modal-body">
+                  <span>방금 클릭한 영화는 19세 이용가 입니다.</span>
+                  <br><br>
+                  <span style="color:red">만 19세 이하의 사용자는 열람이 불가능합니다.</span>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+          </div>
+      </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
 
 
 {% endblock content %}

@@ -1,39 +1,120 @@
 .login-background {
     background-color: #f5f4f2;
-    height: 110vh;
+    min-height: 110vh;
+    height: 100%;
 }
-
-.signup-background {
-    background-color: #f5f4f2;
-    height: 100rem;
-    width: auto;
+.login-position {
+    position: relative; 
+    top: 3rem;
 }
 
 .login-button{
 background-color: black;
 border: none;
 border-radius: 2.5rem;
-font-size: 20px;
+font-size: 2rem;
 color:white;
-} 
+height: 5rem; 
+width: 15rem;
+margin-top: 1rem; 
+margin-bottom: 1rem;
+}
+
+.login-margin{
+    margin: 0px 0px 5rem 0px;
+}
+/* .login-container{
+    max-width: 49.3rem !important; 
+} */
+
+.signup-container{
+    max-width: 49.3rem !important; 
+    float: none !important; 
+    margin:0 auto !important;
+    height: 72rem;
+}
+.login-container-content{
+    height: 50rem;
+}
+.login-field{
+    height:6rem; 
+}
 
 .card {
-    border-radius: 25px !important;
-    box-shadow: 6px 6px 20px rgb(209, 209, 209);
+    border-radius: 2.5rem !important;
+    /* box-shadow: 6px 6px 20px rgb(209, 209, 209); */
 }
 
 .input-style{
-    border-radius: 0px !important;
-    box-shadow: 3px 3px 10px rgb(209, 209, 209) !important;
+    border-radius: 0rem !important;
+    /* box-shadow: 3px 3px 10px rgb(209, 209, 209) !important; */
+    height:6rem !important; 
+    width:100% !important;
 }
 
+@media (min-width: 499px) {
+    .input-style {
+      min-width: 35rem;
+    }
+}
+@media (min-width: 500px) and (max-width: 575px) {
+    .input-style {
+      min-width: 40rem;
+    }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+    .input-style {
+      min-width: 40rem !important;
+    }
+    .container {
+        min-width: 48rem !important;
+    }
+    
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .input-style {
+      min-width: 40rem;
+    }
+    .container {
+        min-width: 48rem !important;
+    }
+    
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .input-style {
+      min-width: 40rem;
+    }
+    .container {
+        min-width: 48rem !important;
+    }
+    
+}
+@media (min-width: 1200px) {
+    .input-style {
+      min-width: 40rem;
+    }
+    .container {
+        min-width: 48rem !important;
+    }
+    
+}
+
+
 .input-style-no-shadow{
-    border-radius: 0px !important;
+    border-radius: 0rem !important;
+    height:6rem !important; 
+    width:40rem !important;
+}
+
+.signup-background {
+    background-color: #f5f4f2;
+    min-height: 125vh;
+    height: 100%;
 }
 
 .donate-now {
     list-style-type: none;
-    margin: 25px 0 0 0;
+    margin: 2.5rem 0 0 0;
     padding: 0;
   }
   
@@ -46,10 +127,10 @@ color:white;
 
 .donate-now label,
 .donate-now input {
-    padding: 5px;
+    padding: 0.5rem;
     display: inline-flex;
     position: absolute;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-weight: 400;
     top: 0;
     left: 0;
@@ -68,11 +149,49 @@ color:white;
 }
 
 .donate-now label {
-    border: 1px solid #CCC;
+    border: 0.1rem solid #CCC;
     cursor: pointer;
     z-index: 90;
 }
 
 .donate-now label:hover {
     background: #DDD;
+}
+
+.signup-height{
+    height: 50rem !important; 
+}
+.signup-link-style{
+    margin-bottom: 2rem !important;
+    font-size: 1.8rem !important;
+}
+.signup-alert-content{
+    float: left !important ; 
+    height:6rem !important; 
+    width:40rem !important;
+}
+.alert-position{
+    position:relative !important;  
+    top:7rem !important;
+}
+.donate-margin-top{
+    margin-top: 25rem !important;
+}
+.donate-margin-right{
+    margin-right: 2rem !important;
+}
+.radio-button-style{
+    max-width: none ;
+    justify-content:center;
+    align-items: center; 
+    color: #999999
+}
+.gender-margin-top{
+    margin-top: -0.5rem;
+}
+
+
+.user-icon-position{
+    position:relative; 
+    right:1.5rem;
 }

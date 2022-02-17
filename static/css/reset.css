@@ -2,8 +2,8 @@
   box-sizing: border-box;
 }
 
+
 html {
-  font-size: 62.5%;
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
     "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
     "Malgun Gothic", sans-serif !important;
@@ -197,3 +197,31 @@ a:hover {
   color: black;
   text-decoration: none !important;
 }
+html {
+  font-size: 62.5%;
+}
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 52.5%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 42.5%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 22.5%;
+  }
+}
+
+/* 10px=1rem */

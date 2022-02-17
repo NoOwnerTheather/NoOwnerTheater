@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+
+<section class="page-section-background">
+    <div class="like-container">
+        <div class="mx-auto my-auto col-md-5">
+            <div class="card review_detail_card mt-5">
+                <div class="card-body review-card-body">
+                    <ul>
+                        <li class="floatBox-left user-icon-position"> <img class="review_detail_user_icon" src="{{review.user.user_img}}" /></li>
+                        <li class="floatBox-left user-position">{{ review.user }}</li>
+                        <li class="floatBox-right movie-position movie-button">{{ review.movie }}</li>
+                        <br>
+                        <hr>
+                        <li class="col-md-12 h3" style="float:none; margin:0 auto;">{{ review.title }}</li>
+                        <br>
+                        <li class="col-md-12" style="float: none; margin:0 auto;">{{ review.content }}</li>
+                    </ul>
+                        
+                        <div class="movie-review-comment">
+                            <div id="container">
+                                <div class="floatBox-center">
+                                    <input type="image" src="{% static 'img/like.png' %}" class="like-review" name="{{ review.id }}" value="Like">    
+                                    <p id="count-{{ review.id }}" class="d-inline"> {{ review.likes_user.all.count }}</p>
+                                </div>
+                                <div class="floatBox-left"  >댓글창</div>
+                                <div class="floatBox-right">posted at {{ review.created_at|date:'Y-m-d' }}</div>
+                            </div>
+                            <br>
+                            <hr>
+                            {% if user.is_authenticated %}
+                            <section class="input">
+                                <input id="comment_input-{{review.id}}" placeholder="댓글을 남겨주세요" type="text"/>
+                                <button class="btn" onclick="onClickComment({{review.id}}, 'write', '{{request.user}}')">작성</button>
+                            </section>
+                            {% else %}
+                            로그인 후 이용할 수 있습니다.
+                            {% endif %}                            
+                                <table class="comment-table-{{review.id}}">
+                                    {% for comment in review.commentreview_set.all %}
+                                    <tr class = "comment-{{comment.id}}">
+                                        <td>{{comment.user}} </td>
+                                        <td>{{comment.content}} </td>
+                                        <td>{{comment.created_at}} </td>
+                                        <td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like-review')">좋아요 {{ comment.like }}</td>
+                    
+                                        {% if user == comment.user %}
+                                        <td>
+                                            <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
+                                        </td>
+                                        {% else %}
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                                <a class="btn btn-dark" type="button" href="{% url 'theater:review_board' %}">목록</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(".like-review").click(function () { // .like 버튼을 클릭 감지
+        var pk = $(this).attr('name')
+        $.ajax({ // ajax로 서버와 통신
+            type: "POST", // 데이터를 전송하는 방법
+            url: "{% url 'theater:review_like' %}", // 통신할 url을 지정
+            data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, // 서버로 데이터 전송시 옵션, pk를 넘겨야 어떤 review인지 알 수 있음
+            dataType: "json",
+            success: function (response) { // 성공
+                alert(response.message);
+                $("#count-" + pk).html(response.likes_count); // 좋아요 개수 변경
+            },
+            error: function (request, status, error) { // 실패
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                window.location.replace("/account/login/"); // 로그인 페이지로 넘어가기
+            },
+        });
+    })
+</script>
+<script>
+
+const requestComment = new XMLHttpRequest();
+const requestDel = new XMLHttpRequest();
+
+const onClickComment = (id, type, user) => {
+    // const url = "/preview/<int:pk>/write_comment/";
+    var url= "{% url 'theater:write_review_comment' review.id %}"
+    
+    console.log("hii")
+    const content = document.getElementById(`comment_input-${id}`).value
+    //const user = document.getElementById(`comment_input-${id}`).value
+    requestComment.open("POST", url, true);
+    requestComment.setRequestHeader(
+        "Content-Type", "application/x-www-form-urlencoded"
+    );
+    requestComment.send(JSON.stringify({id: id, type: type, content: content, user:user}))
+}
+
+
+requestComment.onreadystatechange = () => {
+    if(requestComment.readyState === XMLHttpRequest.DONE){
+        WriteHandleResponse();
+    }
+}
+
+const WriteHandleResponse = () => {
+    if (requestComment.status < 400){
+        const {id, type, content, comment_id} = JSON.parse(requestComment.response);
+        const element = document.querySelector(`.comment-table-${id}`);
+        const new_comment = document.createElement("tr");
+        const comment_content = document.createElement("td");    
+        const del = document.createElement("td");
+        
+
+        new_comment.setAttribute("class", `comment-${comment_id}`);
+
+        comment_content.innerHTML = `${content}`;
+
+        del.innerHTML = `<button onclick="onClickDel(${comment_id})">삭제</button>`;
+    
+
+        document.getElementById(`comment_input-${id}`).value = '';
+        
+
+        element.append(new_comment);
+        new_comment.appendChild(comment_content);
+        new_comment.appendChild(del);
+    };
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const onClickDel = (id) => {
+    const url = "/review/1/del_review_comment/";
+    requestDel.open("POST", url, true);
+    requestDel.setRequestHeader(
+        "Content-Type", "application/x-www-form-urlencoded"
+    );
+    requestDel.send(JSON.stringify({id: id}))
+}
+
+const DelHandleResponse = () => {
+    if (requestDel.status < 400){
+        const {id} = JSON.parse(requestDel.response)
+
+        const element = document.querySelector(`.comment-${id}`)
+        element.remove();
+
+    }
+}
+
+requestDel.onreadystatechange = () => {
+    if(requestDel.readyState === XMLHttpRequest.DONE){
+        DelHandleResponse();
+    }
+}
+</script>
+
+</body>
+</html>
+{% endblock %}
+
+

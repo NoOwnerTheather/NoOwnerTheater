@@ -1,0 +1,27 @@
+.text-start {
+    font-weight: bold;
+    font-size:xx-large;
+}
+
+.text-center {
+    line-height: 2.0;
+}
+
+.review_title{
+    font-weight: 550;
+}
+
+.movie_title {
+    font-weight: 450;
+}
+
+.movie_detail_hr {
+    height:1px;
+    border:none;
+    background-color:#333;
+}
+
+.sd {
+    box-shadow: none;
+}
+

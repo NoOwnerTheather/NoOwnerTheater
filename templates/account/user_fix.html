@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- <div>아이디: {{form.username}}</div>
+<div>별명:{{form.nickname}}</div>
+<div>전화번호:{{form.phone}}</div>
+<div>이메일:{{form.email}}</div>
+<input type="submit" value="submit"/>
+<button type="submit" class="btn btn-primary">등록</button> -->
+<div class="background ">
+    <div class="container card">
+        <div class="d-flex flex-column align-items-center ">
+            <div class="fix-title ">회원정보수정</div>
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="form-group mb-3">
+                    <input class="form-control input-lg input-style-no-shadow" type="text" maxlength="30" placeholder={{form.nickname}}
+                </div>
+                <div class="form-group mb-3">
+                    <input class="form-control input-lg input-style-no-shadow" type="text" maxlength="30" placeholder={{form.phone}}
+                </div>
+                <div class="form-group mb-3">
+                    <input class="form-control input-lg input-style-no-shadow" type="text" maxlength="30" placeholder={{form.email}}
+                </div>
+                
+            </form>
+            <div>
+                <button class="user-fix-btn" type="submit">수정완료</button>
+                <a href="{% url 'account:change_password' %}"><button class="user-fix-btn">비밀밀호 변경</button></a>
+            </div>
+            <form action="{% url 'account:user_delete' %}" method="POST">
+                {% csrf_token %}
+                <button class="user-fix-btn">회원탈퇴</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

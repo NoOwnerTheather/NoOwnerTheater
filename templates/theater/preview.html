@@ -1,62 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="preview.css">
-    <title>온라인 시사</title>
-</head>
-<body>
-    {% extends 'base.html' %}
+{% extends 'base.html' %}
 
-    
-    {% block content %}
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5" style="background-color:rgba(224, 224, 224, 0.774)">
-          <div class="col-lg-8 col-md-8 mx-auto">
-            <h1 class="fw-light">시사회</h1>
-            <h3 class="fw-light">Online Preview</h3>
-            <p class="lead text-muted">제작측과 소비측의 유기적인 소통을 가능하게 하고 펀딩중이거나 미개봉 작품의 시사회 기능을 제공합니다. 
-                그 시사회 작품을 클라우드 펀딩 또는 신청을 통해 시청할 수 있으며 제작 측과 직접 채팅을 통해 커뮤니케이션이 가능합니다. 
-                이곳에서 제작측은 즉각적인 피드백을 받고, 사용자분들은 미리 독립 영화를 감상해 보세요!</p>
-
-          </div>
-        </div>
-    </section>
-
-    
-
-        <div class="container">
-
-            <div class="row"></div>
-
-                {%for movie in movie %}
-                    {% if movie.comeout == '미개봉 및 제작중' %}
-
-                        <div class="col-md-3">
-
-                                <div class="" style="width: 100%">
-                                    <img src="{{movie.poster.url}}"  class="card-img-top" alt="...">
-                                    <div class="d-grid gap-2">
-                                    <h5 class="text-center">{{movie.title}}</h5>
-                                    <a href="{% url 'theater:preview_detail' pk=movie.pk %}" class="btn btn-dark" type="button">PREVIEW</a>
-                                    </div>
-                                </div>
-
-
-                        </div>
-
-
-                    {% endif %}
-
-                {% endfor %}
-            </div>
-        </div>
-
-    {% endblock %}
+{% block content %}
+    <div class="previewbackground"> 
+        <div class="preback1">
+            <section class="py-5 text-center container">
+                <div class="row py-lg-5 preback2">
+                  <div class="col-lg-8 col-md-8 mx-auto">
+                    <h1 class="fw-light previewtext">시사회</h1>
+                    <h3 class="fw-light previewtext">Online Preview</h3>
+                    <h1 class="lead previewtext">제작측과 소비측의 유기적인 소통을 가능하게 하고 펀딩중이거나 미개봉 작품의 시사회 기능을 제공합니다. 
+                        그 시사회 작품을 클라우드 펀딩 또는 신청을 통해 시청할 수 있으며 제작 측과 직접 채팅을 통해 커뮤니케이션이 가능합니다. 
+                        이곳에서 제작측은 즉각적인 피드백을 받고, 사용자분들은 미리 독립 영화를 감상해 보세요!</h1>
         
-</body>
-</html>
+                  </div>
+                </div>
+            </section>
+        </div>
+        
+    
+        
+    
+            <div class="container">
+    
+                <div class="row previewmargin "></div>
+    
+                    {%for movie in movie %}
+                        {% if movie.comeout == '미개봉 및 제작중' %}
+    
+                            <div class="col-md-4 col-sm-10">
+    
+                                    <div class="justify-content-center" style="width: 80%; margin-left: 3.5rem;">
+                                        <img src="{{movie.poster.url}}"  class="card-img-top" alt="..." style="height:38rem;">
+                                        <div class="d-grid gap-2">
+                                        <h3 class="text-center previewtextmargin">{{movie.title}}</h3>
+                                        <div class="d-flex justify-content-center previewbtnmargin">
+                                            <a href="{% url 'theater:preview_detail' pk=movie.pk %}" class="previewbtncolor btn btn-block text-white" type="button">PREVIEW</a>
+                                        </div>
+                                        
+                                        </div>
+                                    </div>
+    
+    
+                            </div>
+    
+    
+                        {% endif %}
+    
+                    {% endfor %}
+                </div>
+            </div>
+    
+        
+    </div>
+
+{% endblock %}
 

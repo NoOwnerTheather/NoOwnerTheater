@@ -35,17 +35,27 @@
 }
 
 .business_list {
-  display: flex;
-  justify-content: center;
   margin-top: 2rem;
 }
 
 .business_list button {
-  background-color: #c1c1a0;
+  background-color: black;
   color: #fff;
   font-size: 1.5rem;
   font-weight: bold;
   border: none;
   padding: 0.5rem 2rem;
   border-radius: 3rem;
+}
+
+.business_detail_btn button {
+  background-color: black;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  padding: 0.2rem 1.5rem;
+  border-radius: 3rem;
+  margin-bottom: 1.5rem;
+  margin-left: 1rem;
 }

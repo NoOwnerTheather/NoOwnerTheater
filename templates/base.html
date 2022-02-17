@@ -5,14 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/reset.css' %}?after"> 
+    
     <link rel="stylesheet" href="{% static 'css/base.css' %}?after"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+    
     <!--font awesome-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <!--bootstrap-->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> -->
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"></link>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
@@ -21,22 +26,22 @@
 <body> 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="nav_left">
-            <img src="../static/img/logo.png"/>
+            <img src="{% static 'img/logo.png' %}">
             <a  href="{% url 'theater:main' %}" class="navbar_title">주인없는영화관</a>
         </div>
     
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Nav"
         aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     
-        <div class="collapse navbar-collapse d-flex" id="basicExampleNav">
+        <div class="collapse navbar-collapse" id="Nav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item p-0 m-2 mx-4">
                     <a class="nav-link p-0 m-0" href="{% url 'theater:chart_list' %}">영화 차트</a> 
                 </li>
                 <li class="nav-item p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="#">영화 리뷰</a>
+                    <a class="nav-link p-0 m-0" href="{% url 'theater:review_board' %}">영화 리뷰</a>
                 </li>
                 <li class="nav-item  p-0 m-2 mx-4">
                     <a class="nav-link p-0 m-0" href="{% url 'theater:preview' %}">온라인 시사회</a>
@@ -49,10 +54,10 @@
                     <li class="nav-item  p-0 m-2 mx-4 dropdown">
                         <div class="dropdown event-dropdown">
                             <a class="nav-link p-0 m-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-user"></i>
+                                <img class="user_icon" src="{{user.user_img}}" />
                             </a>
                             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="{% url 'account:detail' user.id %}">마이페이지</a>
+                                <a class="dropdown-item" href="{% url 'account:mypage' user.id %}">마이페이지</a>
                                 <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
                             </div>
                         </div>
@@ -61,10 +66,10 @@
                     <li class="nav-item  p-0 m-2 mx-4 dropdown">
                         <div class="dropdown event-dropdown">
                             <a class="nav-link p-0 m-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="far fa-user"></i>
+                                <img class="user_icon" src="{{user.user_img}}" />
                             </a>
                             <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="{% url 'account:detail' user.id %}">마이페이지</a>
+                                <a class="dropdown-item" href="{% url 'account:mypage' user.id %}">마이페이지</a>
                                 <a class="dropdown-item" href="{% url 'theater:enroll' %}">영화등록</a>
                                 <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
                             </div>
@@ -82,6 +87,7 @@
             </ul>
         </div>
     </nav>
+    
     
     {% block content %}
         <!-- extend -->

@@ -1,111 +1,198 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="preview_detail.css">
-    <title>온라인 시사</title></head>
-    
-<body class="bg-light">
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="previewbackground" style="padding-bottom: 10rem;padding-top:2rem;">
+
+        <div class=" center-block predebox" style="width:72%;  height:50rem;"></div>
 
 
-    {% extends 'base.html' %}
+        <div class=" center-block" style="width:72%;  height:50rem;">
 
-    {% block content %}
-
-    <div class="preview_detail_image" style="background-image: url({{movie.poster.url}}); width: 90rem; height:40rem;" >
+            <div class="img-responsive center-block" style="background-image: url({{movie.poster.url}}); width: 90rem; height:50rem;" ></div>
         
-        <div class="">
-
-          <h1 class="preview_detail_image_item">{{movie.title}}</h1>
-          
         </div>
 
-        <div class="">
-          
-            <p class="">감독 | {{movie.director}}</p>
-            <p class="">장르 | {{movie.genre}}</p>
-            <p class="">출연 | {{movie.actor}}</p>
+                  
+        <div class="predesize center-block" style="width:72%; padding-bottom: 5rem; background-color: white; padding-top:1rem;">
+
+        
+            <div class="predesize center-block" style=" padding-bottom: 5rem; background-color: white;">
+
+                <div class="" style="margin-top: 2rem !important;">
+                    <span class="preview_detail_image_item prefont predemargin" >{{movie.title}}</span >
+                    <span class="prefont predefontsize" style="margin-top: 1rem !important;">감독 | {{movie.director}}</span>
+                    <h3 class="prefont predefontsize" style="margin-top: 1rem !important;">장르 | {{movie.genre}}</h3>
+                    <span class="prefont predefontsize" style="margin-top: 1rem !important;">출연 | {{movie.actor}}</span>
+                    <a class="predebtn fundinglink predefontsize" type="button" href="{{movie.url}}">펀딩링크</a>
+
+                </div>
             
-        </div>
+                <div>
+                    
 
-    </div>
+                    <h1 class="prefont predetitle">Synopsis</h1>
+                    <hr class="prede_hr">
+                    <h5 class="text-center predecolor">{{movie.content}}</h5>
 
-    <div>
-        <a class="btn btn-dark" type="button" href="{{movie.url}}">펀딩링크</a>
+                </div>
 
-        <h1>시놉시스</h1>
-        <hr>
-        <h5>{{movie.content}}</h5>
-
-    </div>
-
-    <!--<h2>커뮤니티</h2>-->
-    
-    
-    <div class="movie-comment">
-        <h1>커뮤니티</h1>
-        <hr>
-
-        {% if user.is_authenticated %}
-        <section class="input">
-            <input id="comment_input-{{movie.id}}" placeholder="댓글을 남겨주세요" type="text"/>
-            <button class="btn" onclick="onClickComment({{movie.id}}, 'write', '{{request.user}}')">작성</button>
-        </section>
-        {% else %}
-
-        <section class="input">
-            <input id="comment_input-{{movie.id}}" placeholder="로그인 후 이용할 수 있습니다." type="text"/>
-            <button class="btn">작성</button>
-        </section>
-        {% endif %}
-
-            
-            <table class="comment-table-{{movie.id}}">
-                {% for comment in movie.commentpreview_set.all %}
-                <tr class = "comment-{{comment.id}}">
-                    <td>{{comment.user}} </td>
-                    <td>{{comment.content}} </td>
-                    <td>{{comment.created_at}} </td>
+                <!--<h2>커뮤니티</h2>-->
+                
+                
+                <div class="movie-comment">
+                    <h1 class="prefont predetitle">Community</h1>
+                    <hr class="prede_hr">
 
                     {% if user.is_authenticated %}
-                    <td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>
-                    {% else %}
-                    <td class="btn post__like">좋아요 {{ comment.like }}</td>
-                    {% endif %}
+
+                    <div class="predeform center-block">
+                        <div class="input">
+                            <input id="comment_input-{{movie.id}}" class="predeformsize" placeholder="기대평을 남겨주세요!" type="text"/>
+                            <button class="predewritebtn" onclick="onClickComment({{movie.id}}, 'write', '{{request.user}}')">작성</button>
+                        </div>
+                    </div>
 
 
-                    {% if user == comment.user %}
-                    <td>
-                        <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
-                        <button class="del-btn" onclick="onClickModi({{comment.id}})">수정</button>
-                    </td>
+
                     {% else %}
-                    {% endif %}
+                    <div>
+                        <section class="input">
+                            <input id="comment_input-{{movie.id}}" placeholder="로그인 후 이용할 수 있습니다." type="text"/>
+                            <button class="btn">작성</button>
+                        </section>
+
+                    </div>
 
                     
-                </tr>
-                {% endfor %}
-            </table>
+                    {% endif %}
 
+
+
+                    <div class="">
+
+                        
+                        <table class="comment-table-{{movie.id}} rgy-reply" style="width:900px !important; margin-left:1rem;">
+                            {% for comment in movie.commentpreview_set.all %}
+                            <tr class = "comment-{{comment.id}}" style="display:flex; justify-content: space-between; margin-top:2rem;">
+                                <td id="comment_inputuser-{{movie.id}}" style="width:15%">
+                                    <img src="{{comment.user.user_img}}"  class="detail-user-img" alt="...">
+                                    <p>{{comment.user}} </p>
+                                    
+                                </td>
+
+
+                                <td style="width:70%"><input type="text" class="replyContent{{ comment.id }} prefont" value="{{ comment.content }}" style="width:100%; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
+                                    <p>
+                                        <span class="prefont">{{comment.created_at}}</span> 
+                                        {% if user == comment.user %}
+                                        <span style="margin-left: 1rem;"></span>
+                                        <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel({{comment.id}})">삭제</button>
+                                        <span>|</span>
+                                        <button class="tdReplyUpdate{{ comment.id }}"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate({{ comment.id }})"></button>
+                                        <button class="tdReplySubmit{{ comment.id }}" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit({{ comment.id }})"></button>
+                                        <button class="tdReplyUpdateCancel{{ comment.id }}" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></button>
+
+                                        {% else %}
+                                        {% endif %}
+
+
+                                    </p>
+                                    
+                                </td>
+                                
+
+                                <!--{% if user == comment.user %}
+                                <td>
+                                    <p><button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel({{comment.id}})">삭제</button></p>
+                                    <td class="tdReplyUpdate{{ comment.id }}"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate({{ comment.id }})"></td>
+                                    <td class="tdReplySubmit{{ comment.id }}" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit({{ comment.id }})"></td>
+                                    <td class="tdReplyUpdateCancel{{ comment.id }}" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></td>
+            
+                                </td>
+                                {% else %}
+                                {% endif %} -->
+
+
+                                <!--<td>{{comment.content}} </td>-->
+                                
+            
+                                {% if user.is_authenticated %}
+                                <!--<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>-->
+            
+            
+                                <td stlye="width:15%">
+                                    <input type="button" class="predebtnlike like prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
+                                    <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em;margin-top: 3px;width: 70px; margin-left:1rem;">&nbsp;{{ comment.likes.all.count }}</p>
+                                </td>
+            
+            
+                                {% else %}
+                                <!--<td class="btn post__like">좋아요 {{ comment.like }}</td>-->
+            
+                                <td stlye="width:15%">
+                                    <input type="button" class="btn prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
+                                    <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em; margin-top: 3px;width: 70px;">&nbsp;{{ comment.likes.all.count }}</p>
+                                </td>
+                                {% endif %}
+            
+            
+                                
+            
+                                
+                            </tr>
+                            {% endfor %}
+                        </table>
+            
+                    </div>
+            
+            
+            
+            
+            
+            
+                </div>
+
+                <a class="predelistbtn" type="button" href="{% url 'theater:preview' %}">목록</a>
+
+
+                
+                
+
+            </div>
         </div>
+        
 
-
-
-
-
-
-    </div>
-
-
-    <a class="btn btn-dark" type="button" href="{% url 'theater:preview' %}">목록</a>
+</div>
 
     
 
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        $(".like").click(function () { // .like 버튼을 클릭 감지
+            var pk = $(this).attr('name')
+            $.ajax({ // ajax로 서버와 통신
+                type: "POST", // 데이터를 전송하는 방법 
+                url: "{% url 'theater:likes_ajax' %}", // 통신할 url을 지정
+                data: { 'pk': pk, 'csrfmiddlewaretoken': '{{ csrf_token }}' }, // 서버로 데이터 전송시 옵션, pk를 넘겨야 어떤 review인지 알 수 있음
+                dataType: "json",
+                success: function (response) { // 성공
+                    //alert(response.message);
+                    $("#count-" + pk).html("&nbsp;" + response.likes_count); // 좋아요 개수 변경
+                },
+                error: function (request, status, error) { // 실패
+                    //$("#count-" + pk).html("좋아요&nbsp;" + response.likes_count + "개"); // 좋아요 개수 변경
+                    alert("!!")
+                    //window.location.replace("preview/<int:pk>/") // 로그인 페이지로 넘어가기
+                    window.locationreload()	
+                },
+            });
+        })
+    </script>
 
 
     <script>
+
     
     const requestLike = new XMLHttpRequest();
 
@@ -117,7 +204,8 @@
             "application/x-www-form-urlencoded"
         );
         
-        requestLike.send(JSON.stringify({id: id, type: type})); //{'id':1, 'type':like}-->JSon형태로 바꿔서 보내준다
+        requestLike.send(JSON.stringify({id: id, type: type})); 
+        //{'id':1, 'type':like}-->JSon형태로 바꿔서 보내준다
     };
 
 
@@ -169,15 +257,20 @@
             //console.log(point)
             
 
-
-
             //var comid=`${comment_id}`
             //var comid=`${comment_id}`
             //var comid= $(`pk`).val();
             //console.log(comid)
 
             const content = document.getElementById(`comment_input-${id}`).value
-            //const user = document.getElementById(`comment_input-${id}`).value
+
+
+
+            //const user=1
+
+            //let user = 1;
+            
+            //const user = document.getElementById(`comment_inputuser-${id}`).value ////유저
             requestComment.open("POST", url, true);
             requestComment.setRequestHeader(
                 "Content-Type", "application/x-www-form-urlencoded"
@@ -194,26 +287,186 @@
     
         const WriteHandleResponse = () => {
             if (requestComment.status < 400){
-                const {id, type, content, comment_id} = JSON.parse(requestComment.response);
+                const {id, type, content, comment_id, user, user_img} = JSON.parse(requestComment.response);
                 const element = document.querySelector(`.comment-table-${id}`);
                 const new_comment = document.createElement("tr");
                 const comment_content = document.createElement("td");    
                 const del = document.createElement("td");
-                
+
+                const comment_user = document.createElement("td");  ///3
+                const comment_user_img = document.createElement("td");  ///3
+
+                //const update = document.getElementsByClassName("tdReplyUpdate${ comment.id }$"); //4
+                //var x = document.getElementsByClassName("example");
+                //class="tdReplyUpdate{{ comment.id }}"
+
+                const update = document.createElement("td"); //4!!!수정필요
+                //const update = document.createElement("td").style.display='inline-block'; //4
+
+                const like = document.createElement("td"); //4!!!수정필요
+
+                const date = document.createElement("td"); //4!!!수정필요
+
+                ///.
+
+                let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
+                let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
+
+                let replyContent=document.querySelector(`.replyContent${id}`);
+                ///.            
     
                 new_comment.setAttribute("class", `comment-${comment_id}`);
+
+
+                //.
+                //console.log({user});
+                comment_user.innerHTML = `${user}`; //3
+                // comment_user_img.innerHTML = `${user_img}`; //3
+                comment_user_img.innerHTML = `<img src="${user_img}"  class="detail-user-img" alt="...">`; //3
+                
+                comment_content.innerHTML = `${content}`; //1
+
+                /*if(`${content}`==null){
+
+                    alert("댓글입력해주세요");
+                    console.log("댓글X");
+                    
+                }*/
     
-                comment_content.innerHTML = `${content}`;
-    
-                del.innerHTML = `<button onclick="onClickDel(${comment_id})">삭제</button>`;
-            
+                del.innerHTML = `<td><button onclick="onClickDel(${comment_id})">삭제</button></td>`; //1
+                //update.innerHTML = `<button onclick="replyUpdate(${comment_id})">수정</button>`; //1
+                update.innerHTML =`<td class="tdReplyUpdate(${comment_id})"><input type="button" value="수정" onclick="replyUpdate(${comment_id})"></td>`
+
+                //like.innerHTML = `<td class="like"><button>좋아요</button></td>`;
+                like.innerHTML=`<td>
+                        <input type="button" class="predebtnlike like prefont" name="(${comment_id})" value="♥" style="padding-top: 30px;">
+                        <p id="count-(${comment_id})" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
+                    </td>`;
+                //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요</button>`;
+                
+                //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요 ${ like }</button>`;
+
+                //<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>
+                //comment_content.innerHTML = `${user}`; //2
+
+                ///tdReplyUpdate.innerHTML=`<button onclick="replyUpdate(${comment_id})">수정</button>`; //2
+
+                //tdReplyUpdate.innerHTML=`<td><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>`; //2
+                
+
+                Date.prototype.format = function (f) {
+
+                    if (!this.valueOf()) return " ";
+
+
+
+                    var weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+
+                    var weekKorShortName = ["일", "월", "화", "수", "목", "금", "토"];
+
+                    var weekEngName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+                    var weekEngShortName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+                    var weekNum = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+
+                    var d = this;
+
+
+
+                    return f.replace(/(yyyy|yy|MM|dd|KS|NS|KL|ES|EL|HH|hh|mm|ss|a\/p)/gi, function ($1) {
+
+                        switch ($1) {
+
+                            case "yyyy": return d.getFullYear(); // 년 (4자리)
+
+                            case "yy": return (d.getFullYear() % 1000).zf(2); // 년 (2자리)
+
+                            case "MM": return (d.getMonth() + 1).zf(2); // 월 (2자리)
+
+                            case "dd": return d.getDate().zf(2); // 일 (2자리)
+
+                            case "KS": return weekKorShortName[d.getDay()]; // 요일 (짧은 한글)
+
+                            case "NS" : return weekNum[d.getMonth()];
+
+                            case "KL": return weekKorName[d.getDay()]; // 요일 (긴 한글)
+
+                            case "ES": return weekEngShortName[d.getDay()]; // 요일 (짧은 영어)
+
+                            case "EL": return weekEngName[d.getDay()]; // 요일 (긴 영어)
+
+                            case "HH": return d.getHours().zf(2); // 시간 (24시간 기준, 2자리)
+
+                            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2); // 시간 (12시간 기준, 2자리)
+
+                            case "mm": return d.getMinutes().zf(2); // 분 (2자리)
+
+                            case "ss": return d.getSeconds().zf(2); // 초 (2자리)
+
+                            case "a/p": return d.getHours() < 12 ? "오전" : "오후"; // 오전/오후 구분
+
+                            default: return $1;
+
+                        }
+
+                    });
+
+                };
+
+
+
+                String.prototype.string = function (len) { var s = '', i = 0; while (i++ < len) { s += this; } return s; };
+
+                String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
+
+                Number.prototype.zf = function (len) { return this.toString().zf(len); };
+
+
+                var _today = new Date(); // 예제 기준 시간 : 2000-01-01 13:12:12
+
+
+
+                console.log(_today.format('yyyy-MM-dd'));
+
+
+
+                console.log(_today.format('HH:mm:ss'));
+
+
+
+                console.log(_today.format('yyyy-MM-dd(KS) HH:mm:ss'));
+
+
+
+                console.log(_today.format('yyyy-MM-dd a/p hh:mm:ss'));
+
+
+
+                //var now = new Date();
+
+                date.innerHTML= `${_today.format('NS월 dd, yyyy, hh:mm a/p')}`; //3
+                //date.innerHTML= `${user}`; //3
+
+                //.
     
                 document.getElementById(`comment_input-${id}`).value = '';
                 
     
                 element.append(new_comment);
+                new_comment.appendChild(comment_user);//3
+                new_comment.appendChild(comment_user_img);//3
                 new_comment.appendChild(comment_content);
+
+                new_comment.appendChild(date);//3
+
+                new_comment.appendChild(like);
+
                 new_comment.appendChild(del);
+                new_comment.appendChild(update);
+                ///new_comment.appendChild(tdReplyUpdate);
+
+                
             };
         };
     
@@ -221,7 +474,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         const onClickDel = (id) => {
-            const url = "/preview/1/del_comment/";
+            const url = "{% url 'theater:del_comment' movie.id %}";
             requestDel.open("POST", url, true);
             requestDel.setRequestHeader(
                 "Content-Type", "application/x-www-form-urlencoded"
@@ -244,12 +497,84 @@
                 DelHandleResponse();
             }
         }
+
+        ////////////////////////////
+        const replyUpdate = (id) => {
+            let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
+            let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
+            let tdReplySubmit = document.querySelector(`.tdReplySubmit${id}`);
+            let tdReplyUpdateCancel = document.querySelector(`.tdReplyUpdateCancel${id}`);
+
+            let replyContent=document.querySelector(`.replyContent${id}`);
+
+            console.log(tdReplyUpdate);
+            tdReplyUpdate.style.display = 'none';
+            tdReplyDelete.style.display = 'none';
+            tdReplySubmit.style.display = 'inline-block';
+            tdReplyUpdateCancel.style.display = 'inline-block';
+
+            replyContent.readOnly=false;
+        }
+
+        const replySubmit = (id) => {
+            let replyContent = document.querySelector(`.replyContent${id}`).value;
+            let param = {
+            'id': id,
+            'content': replyContent
+            }
+
+            $.ajax({
+                url : "{% url 'theater:replyUpdate' movie.id %}",
+                type : 'POST',
+                headers:{
+                    'X-CSRFTOKEN' : '{{ csrf_token}}'
+
+                },
+                data : JSON.stringify(param),
+                success:function(data){
+                    console.log(data);
+
+                    if(data.result=='ok'){
+                        let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
+                        let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
+                        let tdReplySubmit = document.querySelector(`.tdReplySubmit${id}`);
+                        let tdReplyUpdateCancel = document.querySelector(`.tdReplyUpdateCancel${id}`);
+                        let replyContent=document.querySelector(`.replyContent${id}`);
+
+                        tdReplyUpdate.style.display = 'inline-block';
+                        tdReplyDelete.style.display = 'inline-block';
+                        tdReplySubmit.style.display = 'none';
+                        tdReplyUpdateCancel.style.display = 'none';
+                        replyContent.readOnly=true;
+                    }
+                },
+                error:function(){
+                    alert('안돼');
+                }
+
+
+            });
+            
+        }
+
+        const replyUpdateCancel = (id) => {
+            let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
+            let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
+            let tdReplySubmit = document.querySelector(`.tdReplySubmit${id}`);
+            let tdReplyUpdateCancel = document.querySelector(`.tdReplyUpdateCancel${id}`);
+
+            let replyContent=document.querySelector(`.replyContent${id}`);
+
+            console.log(tdReplyUpdate);
+            tdReplyUpdate.style.display = 'inline-block';
+            tdReplyDelete.style.display = 'inline-block';
+            tdReplySubmit.style.display = 'none';
+            tdReplyUpdateCancel.style.display = 'none';
+
+            replyContent.readOnly=false;
+        }
+
+
     </script>
 
-    {% endblock %}
-
-
-    
-</body>
-</html>
-© 2022 GitHub, Inc.
+{% endblock %}

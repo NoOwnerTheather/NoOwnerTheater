@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'theater',
     'account',
-
+    'ckeditor',
+    'ckeditor_uploader',
+    'django_summernote',
     # sites 는 사이트 정보를 설정하기 위해 필요
     'django.contrib.sites',
 
@@ -150,7 +152,17 @@ AUTH_USER_MODEL = "theater.User"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
-
+# STATIC_ROOT=os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
-
+CKEDITOR_UPLOAD_PATH = 'uploads/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# settings.py
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'width': '100%',
+        'height': '480',
+    }
+}

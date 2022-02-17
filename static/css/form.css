@@ -4,20 +4,41 @@
 .enroll{
     font-family: 'Pretendard';
     background-color: #F5F4F2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.enroll{
-    margin-left:1rem;
+.movieenroll{
+    font-family: 'Pretendard';
+    background-color: #F5F4F2;
+    display: flex;
+    flex-direction: column;
+    
+}
+.movieenroll{
+    font-family: 'Pretendard';
+    background-color: #F5F4F2;
+    display: flex;
+    flex-direction: column;
+    
+}
+html{
+    background-color: #F5F4F2;
 }
 .title{
-    font-size: 3.8rem;
+    font-size: 2.9rem;
     color:rgb(112,112,112);
     font-weight: bold;
-    margin-bottom:1rem;
+    
+    background-color: #F5F4F2;
+    text-align: center;
+    padding-top: 5rem;
+    padding-right: 101rem;
 }
 
 .main_text{
-    font-size: 2.7rem;
+    font-size: 2.6rem;
     color:rgb(112,112,112);
     font-weight: bold;
     margin-bottom:1rem;
@@ -25,37 +46,64 @@
 }
 
 .plus_text{
-    font-size:1.4rem;
+    font-size:1.3rem;
     color:rgb(112,112,112);
     opacity: 47%;
     
 }
 .sub_text{
-    font-size:2.1rem;
+    font-size:1.9rem;
     margin-bottom:0.8rem;
     max-width: 80rem;
 }
 .form_text{
-    margin:2rem 0;
-    padding-left:20rem;
+    margin-bottom:4rem;
+    margin-top:1.5rem;
+    padding-left:11rem;
     text-align: center;
 }
 .form_text .main_text{
     padding-left:30rem;
     color:#D151AF
 }
-.form_block{
+.reviewform_block{
     height:17rem;
     display: flex;
     flex-direction: column;
     margin-top:3rem;
     font-family: 'Pretendard';
+    width: 80rem;
+}
+.form_block{
+    height:21rem;
+    display: flex;
+    flex-direction: column;
+    margin-top:3rem;
+    font-family: 'Pretendard';
+    width: 37rem;
 }
 .form_block:after{
    
     content: "";
     display: block;
     width: 58rem;
+    border-bottom: 1px solid #bcbcbc;
+    margin-top: 3.6rem;
+    
+  }
+.reviewform_block{
+    height:17rem;
+    display: flex;
+    flex-direction: column;
+    margin-top:3rem;
+    font-family: 'Pretendard';
+    width: 80rem;
+}
+.reviewform_block:after{
+   
+    content: "";
+    display: block;
+    width: 80rem;
     border-bottom: 1px solid #bcbcbc;
     margin-top: 3.6rem;
     
@@ -97,22 +145,101 @@
 #id_poster{
     max-width: 40rem;
 }
-/* .form_line:after{
-    content: "";
-    display: block;
-    width: 108rem;
-    border-bottom: 1px solid #bcbcbc;
-    margin: 20px 0px;
-    
-} */
 
 #no_enroll{
     
-    width:7rem;
+    width: 15rem !important;;
+    height: 5rem !important;
+    font-size: 2rem;
+    border-radius: 1.5rem;
+    font-weight: bold;
 }
 
 #yes_enroll{
     
-    width:7rem;
+    width: 15rem!important;;
+    height: 5rem !important;
+    font-size: 2rem;
+    border-radius: 1.5rem;
+    border-color: #707070;
+    font-weight: bold;
 }
 
+.button_area{
+    width:60rem;
+    display: flex;
+    margin-bottom: 2rem;
+    justify-content: space-around;
+}
+
+.form-input{
+    border: 0.1rem solid;
+    
+}
+.totalform{
+    display: flex;
+    flex-direction: row;
+    background-color: #F5F4F2;
+}
+.left_bar{
+    width:38rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 7rem;
+}
+.left_text{
+    width:25rem;
+    background-color: #FBFAF9;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-radius: 3.5rem;
+    border: 1px solid #707070;
+    min-height:20rem;
+    box-shadow: 1px 1px 1px 1px gray;
+    
+
+}
+.left_main{
+    padding-top: 2rem;;
+    font-size:2.1rem;
+    font-weight: bolder;
+    
+}
+
+.left_sub{
+    margin-top: 2rem;
+    font-size:1.4rem;
+}
+
+textarea{
+    width: 800px;
+    height: 380px;
+}
+
+.form_line{
+    width:110rem;
+}
+@media screen and (max-width: 1024px) {
+    html {
+      font-size: 62.5%!important;
+    }
+  }
+  
+  @media screen and (max-width: 900px) {
+    html {
+      font-size: 52.5%!important;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    html {
+      font-size: 42.5%!important;
+    }  
+  }
+  
+  @media screen and (max-width: 480px) {
+    html {
+      font-size: 22.5%!important;
+    }  }
