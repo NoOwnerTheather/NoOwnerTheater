@@ -231,6 +231,22 @@ tbody{
 }
 
 
+.writehandletr{
+    display:flex; 
+    justify-content: space-between; 
+    margin-top:2rem;
+}
+
+
+.predewidth15{
+    width:15%;
+
+}
+
+.predewidth70{
+
+    width:70%;
+}
 
 /*.predebtnlike:hover{
 
