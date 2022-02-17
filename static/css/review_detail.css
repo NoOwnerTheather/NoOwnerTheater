@@ -96,8 +96,8 @@
     top:18rem;
 }
 .like-review{
-    width: 5.4rem;
-    height: 4.2rem;
+    width: 5.4rem !important;
+    height: 4.2rem !important;
     
 }*/
 
@@ -151,7 +151,7 @@
 }
 
 
-swiper-container {
+#swiper-container {
 	max-height:32rem;
     height: 100%;
 }
