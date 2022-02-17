@@ -25,3 +25,13 @@
     box-shadow: none;
 }
 
+
+.movie_list_button{
+    background-color: black;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: none;
+    padding: 0.5rem 2rem;
+    border-radius: 3rem;
+  }

@@ -65,7 +65,7 @@
 } */
 
 .detail-card-info {
-  background-color: #fff;
+  background-color: rgb(250,250,250);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,14 +82,16 @@
 }
 
 .movie-title {
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom:1rem;
   font-weight: bold;
   font-size: 1.6rem;
 }
 
 .movie-review-title {
   margin-top: 0.5rem;
-  font-size: 1rem;
+  margin-bottom:1rem;
+  font-size: 1.5rem;
 }
 
 .user-fix-btn {
@@ -100,4 +102,6 @@
   border-radius: 3rem;
   margin-bottom: 1.5rem;
   margin-left: 1rem;
+  font-size: 1.7rem;
+
 }
