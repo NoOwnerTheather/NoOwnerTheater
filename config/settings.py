@@ -159,7 +159,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # settings.py
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
+from django.contrib.messages import constants as messages_constants
 
+MESSAGE_LEVEL = messages_constants.DEBUG
 SUMMERNOTE_CONFIG = {
     'summernote': {
         'width': '100%',

@@ -34,7 +34,7 @@ html{
     background-color: #F5F4F2;
     text-align: center;
     padding-top: 5rem;
-    padding-right: 101rem;
+    padding-right: 99rem;
 }
 
 .main_text{
@@ -243,3 +243,9 @@ textarea{
     html {
       font-size: 22.5%!important;
     }  }
+
+.alertcard{
+    position: absolute;
+    margin-left:41%;
+    margin-top:21%;
+}

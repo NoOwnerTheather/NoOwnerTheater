@@ -2,4 +2,13 @@
 {% block content %}
 메인페이지
 
+
+
 {% endblock content %}
+
+{% if messages %}
+	{% for message in messages %}
+		{{ message.tags }}
+		{{ message.message }}
+	{% endfor %}
+{% endif %}

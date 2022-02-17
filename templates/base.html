@@ -87,7 +87,21 @@
             </ul>
         </div>
     </nav>
-    
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alertcard">
+    <div class="card text-black bg-white mb-3" style="width: 40rem; height:20rem;">
+        <div class="card-header">경고!</div>
+        <div class="card-body">
+          <h4 class="card-title">유효하지 않은 사용자!</h4>
+          <p class="card-text">당신은 이 컨텐츠에 대한 수정 및 삭제 권한이 없습니다.</p>
+          <a href="{%url 'theater:main' %}"><button type="button" class="btn btn-danger">메인페이지로 돌아가기</button></a>
+        </div>
+      </div>
+	</div>
+		
+	{% endfor %}
+{% endif %}
     
     {% block content %}
         <!-- extend -->

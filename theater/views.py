@@ -17,20 +17,20 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
 from django.db.models import Avg
-
+from django.contrib import messages
 from .forms import MovieForm,ReviewForm,BusinessForm
 def main(request):
    return render(request, template_name='theater/main.html')
 
 
 
-
+@login_required
 def movie_enroll(request):
-
-    if request.method=="POST":
-        form=MovieForm(request.POST,request.FILES)
+   if request.user.type=="제작사":
+      if request.method=="POST":
+         form=MovieForm(request.POST,request.FILES)
         
-        if form.is_valid():
+         if form.is_valid():
 
             user=User.objects.get(username=request.user)
             
@@ -53,85 +53,112 @@ def movie_enroll(request):
             
             return redirect('theater:chart_list')
 
-    else:
+      else:
         form=MovieForm()
         ctx={'form':form}
         return render(request,template_name='theater/enroll.html',context=ctx)
-
-
-def movie_fix(request,pk):
-   post=get_object_or_404(Movie,id=pk)
-   if request.method=="POST":
-      form=MovieForm(request.POST,request.FILES,instance=post)
-        
-      if form.is_valid():
-         post=form.save()
-         return redirect('theater:main',pk)
-
    else:
-      form=MovieForm(instance=post)
-      ctx={'form':form}
-      return render(request,template_name='theater/enroll.html',context=ctx)
-      # redirect랑 render 주소는 임시
-def movie_delete(request,pk):
-   post=get_object_or_404(Movie,id=pk)
-   post.delete()
-   return redirect("theater:main")
+      messages.info(request, '유효하지 않은 접근입니다.')
+      return redirect('theater:main')
 
-   
-def review_enroll(request,pk):
-   
-   if request.method=="POST":
-      form=ReviewForm(request.POST)
+@login_required
+def movie_fix(request,pk):
+   movie=get_object_or_404(Movie,id=pk)
+   if request.user==movie.user:
+      if request.method=="POST":
+         form=MovieForm(request.POST,request.FILES,instance=movie)
+        
+         if form.is_valid():
+            post=form.save()
+            return redirect('theater:movie_detail',pk)
+
+      else:
+         form=MovieForm(instance=movie)
+         ctx={'form':form}
+         return render(request,template_name='theater/enroll.html',context=ctx)
+   else:
+      messages.info(request, '유효하지 않은 접근입니다.')
+      return redirect('theater:main')
       
-      if form.is_valid():
-         user=User.objects.get(username=request.user)
-         movie=Movie.objects.get(id=pk)
-         review=Review(
+      # redirect랑 render 주소는 임시
+@login_required
+def movie_delete(request,pk):
+   
+   movie=get_object_or_404(Movie,id=pk)
+   if request.user==movie.user:
+      movie.delete()
+      return redirect("theater:chart_list")
+   else:
+      messages.info(request, '유효하지 않은 접근입니다.')
+      return redirect('theater:main')
+
+@login_required
+def review_enroll(request,pk):
+   if request.user.type=="일반 사용자":
+      if request.method=="POST":
+         form=ReviewForm(request.POST)
+      
+         if form.is_valid():
+            user=User.objects.get(username=request.user)
+            movie=Movie.objects.get(id=pk)
+            review=Review(
                title=form.cleaned_data['title'],
                content=form.cleaned_data['content'],
                rating=form.cleaned_data['rating'],
                user=user,
                movie=movie
             )
-         review.save()
+            review.save()
 
-         movie.rating = Review.objects.filter(movie=movie).aggregate(Avg('rating'))['rating__avg']
-         movie.rating = round(movie.rating, 2)
-         movie.save()
+            movie.rating = Review.objects.filter(movie=movie).aggregate(Avg('rating'))['rating__avg']
+            movie.rating = round(movie.rating, 2)
+            movie.save()
 
-         return redirect('theater:main') 
+            return redirect('theater:movie_detail',pk) 
          #임시용 코드
 
+      else:
+         form=ReviewForm()
+         movie=get_object_or_404(Movie,id=pk)
+         ctx={'form':form,
+         'movie':movie}
+         return render(request,template_name='theater/review_enroll.html',context=ctx)
    else:
-      form=ReviewForm()
-      movie=get_object_or_404(Movie,id=pk)
-      ctx={'form':form,
-      'movie':movie}
-      return render(request,template_name='theater/review_enroll.html',context=ctx)
+      messages.info(request, '유효하지 않은 접근입니다.')
+      return redirect('theater:main')
 
 def review_fix(request,pk,gk):
-   post=get_object_or_404(Review,id=gk)
-  
-   if request.method=="POST":
-      form=ReviewForm(request.POST,instance=post)
+   review=get_object_or_404(Review,id=gk)
+   if request.user==review.user:
+      if request.method=="POST":
+         form=ReviewForm(request.POST,instance=review)
         
-      if form.is_valid():
-         post=form.save()
-         return redirect('theater:main')
+         if form.is_valid():
+            review=form.save()
+            return redirect('theater:review_detail',gk)
 
+      else:
+         form=ReviewForm(instance=review)
+         movie=get_object_or_404(Movie,id=pk)
+         ctx={'form':form,
+         'movie':movie}
+         return render(request,template_name='theater/review_enroll.html',context=ctx)
    else:
-      form=ReviewForm(instance=post)
-      movie=get_object_or_404(Movie,id=pk)
-      ctx={'form':form,
-      'movie':movie}
-      return render(request,template_name='theater/review_enroll.html',context=ctx)
+      messages.info(request, '유효하지 않은 접근입니다.')
+      return redirect('theater:main')      
       # redirect랑 render 주소는 임시
-def review_delete(request,pk,gk):
-   post=get_object_or_404(Review,id=gk)
-   post.delete()
-   return redirect("theater:main")
 
+@login_required
+def review_delete(request,pk,gk):
+   review=get_object_or_404(Review,id=gk)
+   if request.user==review.user:
+      review.delete()
+      return redirect("theater:movie_detail",pk)
+   else:
+      messages.info(request, '유효하지 않은 접근입니다.')
+      return redirect('theater:main')      
+
+@login_required
 def business_enroll(request):
 
     if request.method=="POST":
@@ -147,7 +174,7 @@ def business_enroll(request):
                user=user,
             )
             business.save()
-            return redirect('theater:main')
+            return redirect('theater:business_list')
 
     else:
         form=BusinessForm()
@@ -155,26 +182,37 @@ def business_enroll(request):
         ctx={'form':form}
         return render(request,template_name='theater/business_enroll.html',context=ctx)
 
-
+@login_required
 def business_fix(request,pk):
-   post=get_object_or_404(Business,id=pk)
-   if request.method=="POST":
-      form=BusinessForm(request.POST,request.FILES,instance=post)
+   
+   business=get_object_or_404(Business,id=pk)
+   if request.user==business.user:
+      if request.method=="POST":
+         form=BusinessForm(request.POST,request.FILES,instance=business)
         
-      if form.is_valid():
-         post=form.save()
-         return redirect('theater:business_list')
+         if form.is_valid():
+            business=form.save()
+            return redirect('theater:business_detail',pk)
 
-   else:
-      form=BusinessForm(instance=post)
-      ctx={'form':form}
-      return render(request,template_name='theater/business_enroll.html',context=ctx)
+      else:
+         form=BusinessForm(instance=business)
+         ctx={'form':form}
+         return render(request,template_name='theater/business_enroll.html',context=ctx)
       # redirect랑 render 주소는 임시
+   else:
+      messages.info(request, '유효하지 않은 접근입니다.')
+      return redirect('theater:main')      
 
+        
+@login_required
 def business_delete(request,pk):
-   post=get_object_or_404(Business,id=pk)
-   post.delete()
-   return redirect("theater:business_list")
+   business=get_object_or_404(Business,id=pk)
+   if request.user==business.user:
+      business.delete()
+      return redirect("theater:business_list")
+   else:
+      messages.info(request, '유효하지 않은 접근입니다.')
+      return redirect('theater:main')      
 
 
 def preview(request):
