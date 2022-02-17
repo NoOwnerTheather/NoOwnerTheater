@@ -313,6 +313,7 @@ def write_comment(request,pk):
    type = req['type']
    content = req['content']
    user=req['user']
+   user_img=request.user.user_img
    movie = Movie.objects.get(id=id)
    
 
@@ -321,6 +322,7 @@ def write_comment(request,pk):
    print("(+)마일리지") #####
    print(request.user) #####
    print(request.user.mileage) #####
+   print(user_img) #####
    
    request.user.mileage=request.user.mileage+5 #####
 
@@ -333,7 +335,7 @@ def write_comment(request,pk):
    comment = CommentPreview.objects.create(movie=movie, content=content, user=request.user)
    
    comment.save()
-   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id, 'user':user})
+   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id, 'user':user, 'user_img':user_img})
 
 
 
