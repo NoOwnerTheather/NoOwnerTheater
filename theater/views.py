@@ -191,6 +191,9 @@ def preview_detail(request,pk):
 
     #movie=Movie.objects.get(id=pk)
     movie = get_object_or_404(Movie, pk=pk)
+
+    comment = CommentPreview.objects.all().order_by('-id')
+    #comment = Movie.commentpreview_set.order_by('-id')
     
     #print(movie.comment_set.all())
     #preview_form = CommentPreviewForm()
@@ -199,6 +202,7 @@ def preview_detail(request,pk):
 
     ctx = {
        'movie': movie,
+       'comment' : comment,
        #'counting':counting,
        #'preview_form':preview_form,
        #'preview_comments':preview_comments,
