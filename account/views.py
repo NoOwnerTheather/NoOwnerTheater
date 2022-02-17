@@ -50,13 +50,13 @@ def login_view(request):
         auth.login(request, user,  backend='django.contrib.auth.backends.ModelBackend')
         return redirect('theater:main')
 
-    
+
   else:
     form = CustomAuthenticationForm()
-  
+
   context = {
         'form': form,
-  } 
+  }
   return render(request, 'account/login.html', context)
 
 
@@ -75,10 +75,10 @@ def signup_view(request):
 
   else:
     form = SignupForm()
-  
+
   context = {
         'form': form,
-  } 
+  }
   return render(request, 'account/signup.html', context)
 
 '''
@@ -101,12 +101,13 @@ def mypage(request,pk):
   #MyUser.follower.all()
 
   #print(counting)
-  
+
   ctx={
     'user':user, #'counitng':counting
   }
   return render(request, 'account/mypage.html',context=ctx)
 
+# TODO : 이건 POST가 아니라 DELETE 메소드가 바람직합니다.
 @require_POST
 @login_required
 def user_delete(request):
@@ -122,7 +123,7 @@ def user_fix(request):
     if form.is_valid():
       form.save()
       return redirect('account:mypage',request.user.id)
-    
+
   else:
     form = CustomUserChangeForm(instance =post)
     ctx={'form':form}
@@ -137,7 +138,7 @@ def change_password(request):
       user = password_change_form.save()
       update_session_auth_hash(request, user) #비밀번호 수정해도 로그아웃되지않게
       return redirect('account:mypage', request.user.id)
-  
+
   else:
     password_change_form = PasswordChangeForm(request.user)
     ctx = {'form':password_change_form}
@@ -162,5 +163,3 @@ class AuthSMS(APIView):
       else:
          result = m.AuthSMS.check_auth_number(p_num, a_num)
          return Response({'message': 'OK', 'result': result})
-
-
