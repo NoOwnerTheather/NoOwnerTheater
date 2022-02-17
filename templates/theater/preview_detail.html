@@ -6,16 +6,19 @@
         <div class=" center-block predebox" style="width:72%;  height:50rem;"></div>
 
 
-        <div class=" center-block" style="width:72%;  height:50rem;">
+       
+            
+           
 
-            <div class="img-responsive center-block" style="background-image: url({{movie.poster.url}}); width: 90rem; height:50rem;" ></div>
+            <!-- <div class="img-responsive center-block" style="background-image: url(); width: 90rem; height:50rem;" ></div> -->
         
-        </div>
-
+    
                   
         <div class="predesize center-block" style="width:72%; padding-bottom: 5rem; background-color: white; padding-top:1rem;">
 
-        
+            <div style="display: flex;justify-content: center;">
+                <img src="{{ movie.poster.url }}" style="max-width:120rem;max-height:70rem;">
+            </div>
             <div class="predesize center-block" style=" padding-bottom: 5rem; background-color: white;">
 
                 <div class="" style="margin-top: 2rem !important;">
@@ -32,7 +35,7 @@
 
                     <h1 class="prefont predetitle">Synopsis</h1>
                     <hr class="prede_hr">
-                    <h5 class="text-center predecolor">{{movie.content}}</h5>
+                    <h5 class="text-center predecolor">{% autoescape on %}{{movie.content|safe}}{% endautoescape %}</h5>
 
                 </div>
 
@@ -402,7 +405,7 @@
 
 
                 comment_user.innerHTML = `<td id="comment_inputuser-{{movie.id}}" style="width:10%">
-                                            <img src="{{comment.user.user_img}}"  class="detail-user-img" alt="...">
+                                         <img src="${user_img}"  class="detail-user-img" alt="...">
                                             <p>${user} </p>
                                     
                                           </td>`; //3
@@ -427,7 +430,7 @@
 
                 //comment_content.innerHTML = `${content}`; //1
 
-                comment_user_img.innerHTML = `<img src="${user_img}"  class="detail-user-img" alt="...">`; //3
+                // comment_user_img.innerHTML = `<img src="${user_img}"  class="detail-user-img" alt="...">`; //3
 
                 /*if(`${content}`==null){
 

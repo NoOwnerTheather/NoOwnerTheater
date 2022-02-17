@@ -60,7 +60,7 @@ class MovieForm(forms.ModelForm):
                 'style': 'max-width: 500px;',
                 'placeholder': '영상의 러닝타임을 적어주세요'
                 }),
-             'content': SummernoteWidget(attrs={'summernote': {'width': '800px', 'height': '380px'}}),
+             'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '100%'}}),
         }
 class ReviewForm(forms.ModelForm):
 
@@ -126,7 +126,7 @@ class BusinessForm(forms.ModelForm):
             
             
             'content': SummernoteWidget(attrs={'summernote': {
-                'width': '800px', 
+                'width': '100%', 
                 'height': '380px',
                 'placeholder':'''게시물에 들어가야할 항목들은 아래와 같습니다!<br><br><br>
 
