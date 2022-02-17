@@ -11,8 +11,11 @@
 <div class="section pt-5">
     <form  method="POST" action="{% url 'theater:movie_search' %}">
         {% csrf_token %}     
-        <div class="movie_board-search">
-            <input placeholder="검색어를 입력하시오" name="searched" />
+        <div class="board-search" style="width:17rem;">
+            <input placeholder="검색어를 입력하시오" name="searched" style="
+            font-size: 14px;
+            margin-left: 0;
+        " />
             <button type="submit"><i class="fas fa-search"></i></button>
         </div>
     </form>
