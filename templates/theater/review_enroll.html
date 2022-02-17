@@ -4,6 +4,11 @@
 
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
+<script>
+    $('#summernote').summernote({
+  fontSizeUnits: ['px', 'pt','rem']
+});
+</script>
 <div class="totalform">
 <div class="left_bar">
 <div class="left_text">
@@ -17,10 +22,11 @@
     그 영화의 리뷰로 올라가게 됩니다
 </div>
 </div>
-<div class="left_movie">
+<div class="left_text">
     <div class="left_main">현재 영화는?</div>
+    <img src={{movie.poster.url}} style="max-width:27rem;max-height:30rem;margin-top:3rem;"></img>
     <div class="left_main">{{movie.title}}</div>
-    <div class="left_sub">
+    <div class="left_sub" style="text-align: start;width: 20rem;margin-left: 3.1rem;height:20rem;font-size: 1.8rem;">
         개봉 | {{movie.release_date}}<br>
         장르 | {{movie.genre}}<br>
         러닝타임 | {{movie.running_time}}분<br>
@@ -28,15 +34,16 @@
         </div>
 </div>
 </div>
-<div class="enroll">
-    <div class="title">리뷰 등록</div>
+<div class="cutline" style="height: 85rem;"></div>
+<div class="enroll" style="margin-top: 5rem;">
+    
 <table>
-    <div class="form_block">
+    <div class="reviewform_block">
         <div class="main_text">리뷰 타이틀📌</div>
         <div class="sub_text">리뷰 글의 타이틀, 제목을 적어주세요</div>
        {{form.title}}
    </div>
-<div class="form_block"> 
+<div class="reviewform_block"> 
     <div class="main_text">영상 평점🖐</div>
     <div class="sub_text">영화를 보시고 난 후의 평점을 기록해주세요!</div>
     
@@ -44,13 +51,13 @@
     
 </div>
 
-<div class="form_block">
+<div class="reviewform_block" style="height:50rem;">
     <div class="main_text">영화 리뷰🖐</div>
     <div class="sub_text">영화를 보시고 난 후의, 영화 리뷰를 작성해주세요!</div>
     {{form.content}}
 </div>
 </table>
-<div class="button_area">
+<div class="button_area" style="margin-top:3rem;">
     <input id="no_enroll" type="button" value="취소하기" class="btn btn-dark" onClick="history.go(-1)"> 
     <input id="yes_enroll"type="submit" class="btn btn-light"value="등록하기">
     
@@ -58,4 +65,5 @@
     </div></form>
 </div>
 </div>
+
 {% endblock%}

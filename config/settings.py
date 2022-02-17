@@ -159,3 +159,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # settings.py
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
+
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+        'width': '100%',
+        'height': '480',
+    }
+}
