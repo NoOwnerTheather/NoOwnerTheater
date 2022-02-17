@@ -23,7 +23,7 @@
                     <span class="prefont predefontsize" style="margin-top: 1rem !important;">감독 | {{movie.director}}</span>
                     <h3 class="prefont predefontsize" style="margin-top: 1rem !important;">장르 | {{movie.genre}}</h3>
                     <span class="prefont predefontsize" style="margin-top: 1rem !important;">출연 | {{movie.actor}}</span>
-                    <span class="predebtn fundinglink predefontsize" type="button" href="{{movie.url}}">펀딩링크</span>
+                    <a class="predebtn fundinglink predefontsize" type="button" href="{{movie.url}}">펀딩링크</a>
 
                 </div>
             
@@ -68,10 +68,10 @@
 
 
 
-                    <div class="rgy-reply">
+                    <div class="">
 
                         
-                        <table class="comment-table-{{movie.id}}" style="width:900px !important;">
+                        <table class="comment-table-{{movie.id}} rgy-reply" style="width:900px !important;">
                             {% for comment in movie.commentpreview_set.all %}
                             <tr class = "comment-{{comment.id}} ">
                                 <td id="comment_inputuser-{{movie.id}}">

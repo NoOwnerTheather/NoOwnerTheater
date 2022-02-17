@@ -216,9 +216,17 @@
 
     display: flex;
 
-    flex-direction: column-reverse;
+    flex-direction: column-reverse !important;
 
-    -webkit-flex-direction: column-reverse;
+    /*-webkit-flex-direction: column-reverse;*/
+
+}
+
+tbody{
+
+    display: flex;
+
+    flex-direction: column-reverse !important;
 
 }
 
