@@ -243,10 +243,3 @@ textarea{
     html {
       font-size: 22.5%!important;
     }  }
-select{
-    max-width:27rem;
-    border-radius: 2rem;
-    height: 13rem;
-    margin-top: 2rem;
-    font-size: 20rem;
-}
