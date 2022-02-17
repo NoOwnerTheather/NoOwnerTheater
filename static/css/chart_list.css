@@ -55,3 +55,7 @@ cursor: pointer;
   height: 2.5rem !important;
 }
 
+.movie_chart_border{
+  background-color: white;
+}
+

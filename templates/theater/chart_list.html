@@ -38,7 +38,7 @@
                       <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
                       <div class="card my-3" style="width: 100%">
                         <img src="{{row1.poster.url}}" class="card-img-top" alt="...">
-                        <div class="card-body">
+                        <div class="card-body movie_chart_border">
                           <h5 class="card-title text-center">{{row1.title}}</h5>
                           <span class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
                         </div>
@@ -49,9 +49,9 @@
                     {%else%}
                     <div class="swiper-slide">
                         <a href="{% url 'theater:movie_detail' row1.id %}">
-                        <div class="card" style="width: 100%">
+                        <div class="card" style="width: 100%;">
                             <img src="{{row1.poster.url}}" class="card-img-top" alt="...">
-                            <div class="card-body">
+                            <div class="card-body movie_chart_border">
                               <h5 class="card-title text-center">{{row1.title}}</h5>
                               <span class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
                             </div>
@@ -116,7 +116,7 @@
                       <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
                       <div class="card" style="width: 100%">
                           <img src="{{row2.poster.url}}" class="card-img-top" alt="...">
-                          <div class="card-body">
+                          <div class="card-body movie_chart_border">
                             <h5 class="card-title text-center">{{row2.title}}</h5>
                             <span class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
                           </div>
@@ -129,7 +129,7 @@
                         <a href="{% url 'theater:movie_detail' row2.id %}">
                         <div class="card" style="width: 100%">
                             <img src="{{row2.poster.url}}" class="card-img-top" alt="...">
-                            <div class="card-body">
+                            <div class="card-body movie_chart_border">
                               <h5 class="card-title text-center">{{row2.title}}</h5>
                               <span class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
                             </div>
@@ -177,7 +177,7 @@
                     <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
                     <div class="card" style="width: 100%">
                         <img src="{{row3.poster.url}}" class="card-img-top" alt="...">
-                        <div class="card-body">
+                        <div class="card-body movie_chart_border">
                           <h5 class="card-title text-center">{{row3.title}}</h5>
                           <span class="stars text-dark-2 d-flex justify-content-center">{{row3.rating}}</span>
                         </div>
@@ -191,7 +191,7 @@
                       <a href="{% url 'theater:movie_detail' row3.id %}">
                       <div class="card" style="width: 100%">
                           <img src="{{row3.poster.url}}" class="card-img-top" alt="...">
-                          <div class="card-body">
+                          <div class="card-body movie_chart_border">
                             <h5 class="card-title text-center">{{row3.title}}</h5>
                             <span class="stars text-dark me-2 d-flex justify-content-center">{{row3.rating}}</span>
                           </div>
