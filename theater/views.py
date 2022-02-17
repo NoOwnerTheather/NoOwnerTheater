@@ -10,7 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.paginator import Paginator
 
 
-from django.core.paginator import Paginator  
+from django.core.paginator import Paginator
 import json
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -29,11 +29,11 @@ def movie_enroll(request):
 
     if request.method=="POST":
         form=MovieForm(request.POST,request.FILES)
-        
+
         if form.is_valid():
 
             user=User.objects.get(username=request.user)
-            
+
             movie=Movie(
                title=form.cleaned_data['title'],
                genre=form.cleaned_data['genre'],
@@ -41,16 +41,16 @@ def movie_enroll(request):
                release_date=form.cleaned_data['release_date'],
                actor=form.cleaned_data['actor'],
                content=form.cleaned_data['content'],
-               
+
                poster=form.cleaned_data['poster'],
                video=form.cleaned_data['video'],
                url=form.cleaned_data['url'],
                comeout=form.cleaned_data['comeout'],
-               
+
                user=user,
             )
             movie.save()
-            
+
             return redirect('theater:chart_list')
 
     else:
@@ -58,12 +58,13 @@ def movie_enroll(request):
         ctx={'form':form}
         return render(request,template_name='theater/enroll.html',context=ctx)
 
-
+# TODO : 권한 필요함.
+# TODO : 아무렇게나 요청해도 영화 다 수정할 수 있음
 def movie_fix(request,pk):
    post=get_object_or_404(Movie,id=pk)
    if request.method=="POST":
       form=MovieForm(request.POST,request.FILES,instance=post)
-        
+
       if form.is_valid():
          post=form.save()
          return redirect('theater:main',pk)
@@ -73,17 +74,20 @@ def movie_fix(request,pk):
       ctx={'form':form}
       return render(request,template_name='theater/enroll.html',context=ctx)
       # redirect랑 render 주소는 임시
+
+# TODO : 권한 필요함.
+# TODO : 아무렇게나 요청해도 영화 다 지워버릴 수 있음
 def movie_delete(request,pk):
    post=get_object_or_404(Movie,id=pk)
    post.delete()
    return redirect("theater:main")
 
-   
+
 def review_enroll(request,pk):
-   
+
    if request.method=="POST":
       form=ReviewForm(request.POST)
-      
+
       if form.is_valid():
          user=User.objects.get(username=request.user)
          movie=Movie.objects.get(id=pk)
@@ -100,7 +104,7 @@ def review_enroll(request,pk):
          movie.rating = round(movie.rating, 2)
          movie.save()
 
-         return redirect('theater:main') 
+         return redirect('theater:main')
          #임시용 코드
 
    else:
@@ -110,12 +114,13 @@ def review_enroll(request,pk):
       'movie':movie}
       return render(request,template_name='theater/review_enroll.html',context=ctx)
 
+# TODO : pk, gk 맥락 부여 필요. 두 개 이상의 모델이라, 키 값 대응이 어렵다.
 def review_fix(request,pk,gk):
    post=get_object_or_404(Review,id=gk)
-  
+
    if request.method=="POST":
       form=ReviewForm(request.POST,instance=post)
-        
+
       if form.is_valid():
          post=form.save()
          return redirect('theater:main')
@@ -127,6 +132,9 @@ def review_fix(request,pk,gk):
       'movie':movie}
       return render(request,template_name='theater/review_enroll.html',context=ctx)
       # redirect랑 render 주소는 임시
+# TODO : pk, gk 맥락 부여 필요. 두 개 이상의 모델이라, 키 값 대응이 어렵다.
+# TODO : 권한 필요함.
+# TODO : 아무렇게나 요청해도 영화 다 수정할 수 있음
 def review_delete(request,pk,gk):
    post=get_object_or_404(Review,id=gk)
    post.delete()
@@ -136,10 +144,10 @@ def business_enroll(request):
 
     if request.method=="POST":
         form=BusinessForm(request.POST,request.FILES)
-        
+
         if form.is_valid():
             user=User.objects.get(username=request.user)
-            
+
             business=Business(
                title=form.cleaned_data['title'],
                content=form.cleaned_data['content'],
@@ -151,16 +159,17 @@ def business_enroll(request):
 
     else:
         form=BusinessForm()
-        
+
         ctx={'form':form}
         return render(request,template_name='theater/business_enroll.html',context=ctx)
 
-
+# TODO : 권한 필요함.
+# TODO : 아무렇게나 요청해도 영화 다 수정할 수 있음
 def business_fix(request,pk):
    post=get_object_or_404(Business,id=pk)
    if request.method=="POST":
       form=BusinessForm(request.POST,request.FILES,instance=post)
-        
+
       if form.is_valid():
          post=form.save()
          return redirect('theater:business_list')
@@ -180,6 +189,7 @@ def business_delete(request,pk):
 def preview(request):
 
     #movie = Movie.objects.all()
+    # TODO : 페이지네이션 필요. 매 요청마다 모든 영화 불러오면 성능 저하될 수 있음.
     movie=Movie.objects.all().order_by('-id')
 
     ctx = {'movie': movie}
@@ -191,7 +201,7 @@ def preview_detail(request,pk):
 
     #movie=Movie.objects.get(id=pk)
     movie = get_object_or_404(Movie, pk=pk)
-    
+
     #print(movie.comment_set.all())
     #preview_form = CommentPreviewForm()
     #preview_comments = movie.commentpreview_set.all()
@@ -237,7 +247,7 @@ def like_ajax(request,pk):
 
 
     comment.save()
-    
+
     print(comment.like)
     print(button_type)
 
@@ -272,14 +282,14 @@ def write_comment(request,pk):
    content = req['content']
    user=req['user']
    movie = Movie.objects.get(id=id)
-   
 
-   movie = get_object_or_404(Movie, pk=pk) 
+
+   movie = get_object_or_404(Movie, pk=pk)
 
    print("(+)마일리지") #####
    print(request.user) #####
    print(request.user.mileage) #####
-   
+
    request.user.mileage=request.user.mileage+5 #####
 
    request.user.save() #####
@@ -287,9 +297,9 @@ def write_comment(request,pk):
    print(request.user.mileage) #####
 
 
-   
+
    comment = CommentPreview.objects.create(movie=movie, content=content, user=request.user)
-   
+
    comment.save()
    return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id, 'user':user})
 
@@ -307,7 +317,7 @@ def del_comment(request,pk):
    print("(-)마일리지") #####
    print(request.user) #####
    print(request.user.mileage) #####
-   
+
    request.user.mileage=request.user.mileage-5 #####
 
    request.user.save() #####
@@ -334,7 +344,7 @@ def replyUpdate(request,pk):
          'result':'ok'
       }
       return JsonResponse(context)
-   
+
    return JsonResponse(context)
 
 
@@ -349,7 +359,7 @@ def business_list(request):
 
    return render(request, template_name='theater/business_list.html', context=ctx)
 
-   
+
 def business_detail(request, pk):
    business = Business.objects.get(id=pk)
    business_list = Business.objects.all().order_by('-id')
@@ -358,13 +368,13 @@ def business_detail(request, pk):
    paginated_business_lists = paginator.get_page(page) #페이지 번호를 받아 해당 페이지를 리턴
    ctx = {'business' : business ,'paginated_business_lists':paginated_business_lists }
 
-   return render(request, template_name='theater/business_detail.html', context=ctx) 
+   return render(request, template_name='theater/business_detail.html', context=ctx)
 
 def business_search(request):
    if request.method == 'POST':
-      searched = request.POST['searched']        
+      searched = request.POST['searched']
       if not searched:
-         return redirect('theater:business_list')         
+         return redirect('theater:business_list')
       business_list = Business.objects.filter(Q(title__contains=searched)|Q(content__contains=searched)).order_by('-id')
       page = request.GET.get('page', '1') #GET 방식으로 정보를 받아오는 데이터
       paginator = Paginator(business_list, '10') #Paginator(분할될 객체, 페이지 당 담길 객체수)
@@ -384,13 +394,13 @@ def chart_list(request):
    'current_user':request.user,
    'blame':'성인물(에로)'}
 
-   return render(request, template_name='theater/chart_list.html', context=ctx) 
+   return render(request, template_name='theater/chart_list.html', context=ctx)
 
 def movie_search(request):
    if request.method == 'POST':
-      searched = request.POST['searched']        
+      searched = request.POST['searched']
       if not searched:
-         return redirect('theater:chart_list')         
+         return redirect('theater:chart_list')
       movies = Movie.objects.filter(title__contains=searched)
       ctx = {'searched': searched, 'movies': movies}
 
@@ -455,8 +465,8 @@ def genre_order(request):
 
    ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3, 'so':sort,'current_user':request.user}
 
-   return render(request, template_name='theater/chart_list.html', context=ctx) 
-   
+   return render(request, template_name='theater/chart_list.html', context=ctx)
+
 def movie_detail(request, pk):
    movie = Movie.objects.get(id=pk)
    reviews = movie.review_set.all()
@@ -469,7 +479,7 @@ def movie_detail(request, pk):
 
 
 
-   
+
 
 @csrf_exempt
 def business_hits_ajax(request):
@@ -484,7 +494,7 @@ def business_hits_ajax(request):
 
 
 def review_board(request):
-   
+
    page = request.GET.get('page', '1')  # 페이지
 
    review_list_pub = Review.objects.order_by('-created_at')
@@ -519,7 +529,7 @@ def review_like(request):
 
 
 def review_detail(request, pk):
-   
+
    review = Review.objects.get(pk=pk)
    context = {'review': review,
                }
@@ -531,7 +541,7 @@ def write_review_comment(request,pk):
    print("(+)마일리지") #####
    print(request.user) #####
    print(request.user.mileage) #####
-   
+
    request.user.mileage=request.user.mileage+5 #####
 
    request.user.save() #####
@@ -544,9 +554,9 @@ def write_review_comment(request,pk):
    content = req['content']
    user=req['user']
    review = Review.objects.get(id=id)
-   
+
    comment = CommentReview.objects.create(review=review, content=content, user=request.user)
-   
+
    comment.save()
    return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
 
@@ -561,7 +571,7 @@ def del_review_comment(request,pk):
    print("(-)마일리지") #####
    print(request.user) #####
    print(request.user.mileage) #####
-   
+
    request.user.mileage=request.user.mileage-5 #####
 
    request.user.save() #####
@@ -571,7 +581,7 @@ def del_review_comment(request,pk):
 
    return JsonResponse({'id': comment_id})
 
-   
+
 @csrf_exempt
 def review_hits_ajax(request):
    req = json.loads(request.body)
