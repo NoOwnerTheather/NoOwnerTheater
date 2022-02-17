@@ -1,1 +1,11 @@
-@import "reset.css";
+.main-img {
+  /* background-image: ""; */
+  background-color: #f5f4f2;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+}
+
+.main-title {
+  font-weight: bold;
+}
