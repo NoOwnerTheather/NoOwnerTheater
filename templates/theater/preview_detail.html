@@ -14,7 +14,7 @@
         
     
                   
-        <div class="predesize center-block" style="width:72%; padding-bottom: 5rem; background-color: white; padding-top:1rem;">
+        <div class="predesize center-block" style="width:72%; padding-bottom: 5rem; background-color: white; "> <!--padding-top:1rem;-->
 
             <div style="display: flex;justify-content: center;">
                 <img src="{{ movie.poster.url }}" style="max-width:120rem;max-height:70rem;">
@@ -58,13 +58,15 @@
 
 
                     {% else %}
-                    <div>
-                        <section class="input">
-                            <input id="comment_input-{{movie.id}}" placeholder="로그인 후 이용할 수 있습니다." type="text"/>
-                            <button class="btn">작성</button>
-                        </section>
 
+                    <div class="predeform center-block">
+                        <div class="input">
+                            <input id="comment_input-{{movie.id}}" class="predeformsize" placeholder="로그인 후 이용할 수 있습니다." type="text"/>
+                            <button class="predewritebtn">작성</button>
+                        </div>
                     </div>
+                    
+
 
                     
                     {% endif %}
@@ -131,11 +133,12 @@
             
                                 {% else %}
                                 <!--<td class="btn post__like">좋아요 {{ comment.like }}</td>-->
-            
+                                
                                 <td stlye="width:15%">
-                                    <input type="button" class="btn prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
-                                    <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em; margin-top: 3px;width: 70px;">&nbsp;{{ comment.likes.all.count }}</p>
+                                    <input type="button" class="predebtnlike prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
+                                    <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em;margin-top: 3px;width: 70px; margin-left:1rem;">&nbsp;{{ comment.likes.all.count }}</p>
                                 </td>
+
                                 {% endif %}
             
             
