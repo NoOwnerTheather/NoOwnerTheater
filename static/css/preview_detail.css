@@ -255,6 +255,18 @@ tbody{
     padding-left: 2.5rem;
 }
 
+tbody>tr{
+    border-bottom:1px solid rgba(0, 0, 0, 0.1) !important;
+    width: 88rem;
+    /*border-width: 80rem;*/
+}
+
+.predetrline{
+    border-bottom:1px solid rgba(0, 0, 0, 0.1) !important;
+    width: 88rem;
+}
+
+
 /*.predebtnlike:hover{
 
     color: #BEB0FF;
