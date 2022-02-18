@@ -61,7 +61,7 @@
 
                     <div class="predeform center-block">
                         <div class="input">
-                            <input id="comment_input-{{movie.id}}" class="predeformsize" placeholder="로그인 후 이용할 수 있습니다." type="text"/>
+                            <input id="comment_input-{{movie.id}}" class="predeformsize" type="text" value="로그인 후 이용할 수 있습니다." disabled/>
                             <button class="predewritebtn">작성</button>
                         </div>
                     </div>
@@ -86,7 +86,9 @@
                                 </td>
 
 
-                                <td style="width:70%"><input type="text" class="replyContent{{ comment.id }} prefont" value="{{ comment.content }}" style="width:100%; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
+                                <td style="width:70%">
+                                    
+                                    <input type="text" class="replyContent{{ comment.id }} prefont" value="{{ comment.content }}" style="width:100%; height: auto; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
                                     <p>
                                         <span class="prefont">{{comment.created_at}}</span> 
                                         {% if user == comment.user %}
@@ -428,8 +430,8 @@
                                         <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel(${comment_id})">삭제</button>
                                         <span>|</span>
                                         <button class="tdReplyUpdate(${comment_id})"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate(${comment_id})"></button>
-                                        <button class="tdReplySubmit(${comment_id})" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit(${comment_id})"></button>
-                                        <button class="tdReplyUpdateCancel(${comment_id})" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel(${comment_id})"></button>
+                                        <button class="tdReplySubmit(${comment_id}) predestylejs "><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit(${comment_id})"></button>
+                                        <button class="tdReplyUpdateCancel(${comment_id}) predestylejs"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel(${comment_id})"></button>
 
 
 
@@ -447,6 +449,8 @@
                     console.log("댓글X");
                     
                 }*/
+
+                const likezero=0;
     
                 del.innerHTML = `<td><button onclick="onClickDel(${comment_id})">삭제</button></td>`; //1
                 //update.innerHTML = `<button onclick="replyUpdate(${comment_id})">수정</button>`; //1
@@ -491,8 +495,8 @@
                 //var now = new Date();
 
                 date.innerHTML= `<td class="predewidth15">
-                                    <input type="button" class="predebtnlike like prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
-                                    <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em;margin-top: 3px;width: 70px; margin-left:1rem;">&nbsp;{{ comment.likes.all.count }}</p>
+                                    <input type="button" class="predebtnlike like prefont" name="(${comment_id})" value="♥" style="padding-top: 0rem; padding-left:0.3rem;">
+                                    <p id="count-(${comment_id})" class="prefont" style="font:bold 1em;margin-top: 3px;width: 70px; margin-left:1rem;">0</p>
                                 </td>`; //3
                 
                 //date.innerHTML= `${_today.format('NS월 dd, yyyy, hh:mm a/p')}`; //3
@@ -561,6 +565,15 @@
             let replyContent=document.querySelector(`.replyContent${id}`);
 
             console.log(tdReplyUpdate);
+
+            //document.getElementById('Noite').style.display='block';
+
+            //document.getElementsByClassName('tdReplyUpdate').style.display = 'block';
+            //document.getElementsByClassName('tdReplyDelete').style.display = 'block';
+            //document.getElementsByClassName('tdReplySubmit').style.display = 'inline-block';
+            //document.getElementsByClassName('tdReplyUpdateCancel').style.display = 'inline-block';
+
+
             tdReplyUpdate.style.display = 'none';
             tdReplyDelete.style.display = 'none';
             tdReplySubmit.style.display = 'inline-block';
