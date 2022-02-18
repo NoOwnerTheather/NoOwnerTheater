@@ -24,30 +24,29 @@
     <title>주인없는영화관</title>
 </head>
 <body> 
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light pretendfont navstyle" style="padding-left: 10rem!important;padding-right:10rem!important;">
         <div class="nav_left">
             <img src="{% static 'img/logo.png' %}">
-            <a  href="{% url 'theater:main' %}" class="navbar_title">주인없는영화관</a>
+            <a  href="{% url 'theater:main' %}" class="navbar_title pretendfont">주인없는영화관</a>
         </div>
     
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Nav"
         aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
-        <div class="collapse navbar-collapse" id="Nav" style="flex-basis:content">
+        <div class="" id="Nav" style="display:flex;margin-left: auto;"> <!--collapse navbar-collapse-->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:chart_list' %}">영화 차트</a> 
+                    <a class="nav-link p-0 m-0 navfontsizestlye" href="{% url 'theater:chart_list' %}">영화 차트</a> 
                 </li>
                 <li class="nav-item p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:review_board' %}">영화 리뷰</a>
+                    <a class="nav-link p-0 m-0 navfontsizestlye" href="{% url 'theater:review_board' %}">영화 리뷰</a>
                 </li>
                 <li class="nav-item  p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:preview' %}">온라인 시사회</a>
+                    <a class="nav-link p-0 m-0 navfontsizestlye pretendfont " href="{% url 'theater:preview' %}">온라인 시사회</a>
                 </li>
                 <li class="nav-item  p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:business_list' %}">지원사업 게시판</a>
+                    <a class="nav-link p-0 m-0 navfontsizestlye pretendfont" href="{% url 'theater:business_list' %}">지원사업 게시판</a>
                 </li>
                 {% if user.is_authenticated %}
                     {% if user.type == "일반 사용자" %}
