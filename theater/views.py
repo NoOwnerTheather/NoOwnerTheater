@@ -544,7 +544,7 @@ def review_board(request):
    return render(request, template_name='theater/review_board.html', context=context)
 
 
-@login_required
+
 @require_POST
 def review_like(request):
     pk = request.POST.get('pk', None)
