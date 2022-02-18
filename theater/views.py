@@ -19,10 +19,14 @@ from django.views.decorators.http import require_POST
 from django.db.models import Avg
 from django.contrib import messages
 from .forms import MovieForm,ReviewForm,BusinessForm
+
+
+
+
+
+
 def main(request):
    return render(request, template_name='theater/main.html')
-
-
 
 @login_required
 def movie_enroll(request):
@@ -624,3 +628,8 @@ def review_hits_ajax(request):
    review.hits += 1
    review.save()
    return HttpResponse('hits')
+
+
+
+
+
