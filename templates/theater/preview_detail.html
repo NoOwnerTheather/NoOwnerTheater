@@ -367,7 +367,7 @@
 
                 const {id, type, content, comment_id, user, user_img} = JSON.parse(requestComment.response);
                 const element = document.querySelector(`.comment-table-${id}`);
-                const new_comment = document.createElement("tr");
+                const new_comment = document.createElement("tr");  /////////////////
                 const comment_content = document.createElement("td");    
                 const del = document.createElement("td");
 
@@ -394,8 +394,14 @@
                 let replyContent=document.querySelector(`.replyContent${id}`);
                 ///.            
     
-                new_comment.setAttribute("class", `comment-${comment_id} writehandletr`);
+                new_comment.setAttribute("class", `comment-${comment_id} writehandletr`); //////////////
 
+                comment_user.setAttribute("class", `predewidth15`); //////////////
+
+                comment_content.setAttribute("class", `predewidth70`); //////////////
+
+                date.setAttribute("class", `predewidthmargin15`); //////////////
+                
 
                 //.
                 //console.log({user});
@@ -497,7 +503,7 @@
                 element.append(new_comment);
 
                 new_comment.appendChild(comment_user);//3
-                new_comment.appendChild(comment_user_img);//3
+                //new_comment.appendChild(comment_user_img);//3
                 new_comment.appendChild(comment_content);
 
                 new_comment.appendChild(date);//3

@@ -243,9 +243,16 @@ tbody{
 
 }
 
+.predewidthmargin15{
+    width:15%;
+    padding-left: 5.5rem;
+
+}
+
 .predewidth70{
 
     width:70%;
+    padding-left: 2.5rem;
 }
 
 /*.predebtnlike:hover{
