@@ -1,12 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<script>
+    $(document).ready(function() {
+ 
+    $('#summernote').summernote({
+  toolbar: [
+    // [groupName, [list of button]]
+    ['style', ['bold', 'italic', 'underline', 'clear']],
+    ['font', ['strikethrough']],
+    ['fontsize', ['fontsize']],
+    ['color', ['color']],
+    ['para', ['paragraph']],
+    ['height', ['height']]
+  ]
+});
+    }
+</script>
+
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 <form method="POST" enctype="multipart/form-data">
 {% csrf_token %}
 <div class="totalform">
     <div class="left_bar">
-    <div style="position: fixed;">
+    <div class="fix_bar">
     <div class="left_text">
     <div class="left_main">
     영상 등록이란?
@@ -92,7 +109,7 @@
 <div class="sub_text">하지만 영상을 쉽게 파악하고 좋은 인상을 받을 수 있도록 추가 항목을 작성해주세요!</div>
 </div>
 <div class="line_bottom"></div> 
-<div class="form_block" style="height:54rem;">
+<div class="form_block" style="width:95rem;">
     <div class="main_text">영상 소개🖐</div>
     <div class="sub_text" style="width:100rem;"style="margin-bottom:2rem;">영상을 소개하거나 영상에 대한 정보를 담고 있는 소개를 작성해주세요!</div>
     {% csrf_token %}

@@ -75,7 +75,7 @@ html{
     width: 80rem;
 }
 .form_block{
-    height:21rem;
+    height:auto;
     display: flex;
     flex-direction: column;
     margin-top:3rem;
@@ -127,6 +127,7 @@ html{
     border-right: 1px solid #bcbcbc;
     margin-right:5.6rem;
     margin-top:5rem;
+    margin-left:1.5rem;
     
 }
 .form_line .form_block:after{
@@ -183,7 +184,7 @@ html{
     background-color: #F5F4F2;
 }
 .left_bar{
-    width:38rem;
+    width:32rem;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -191,7 +192,7 @@ html{
     margin-top: 7rem;
 }
 .left_text{
-    width:25rem;
+    width:23rem;
     background-color: #FBFAF9;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -262,10 +263,54 @@ textarea{
         width: 200px;
        
     }
+    .left_sub{
+        display: none;
+    }
+    .left_bar{
+        display: none;
+    }
+    .enroll{
+        padding-left:14rem;
+    }
+    .cutline{
+        display: none;
+    }
+    #no_enroll{
+        padding-right: 12rem;
+        padding-bottom:5.5rem;
+    }
+    #yes_enroll{
+        padding-right: 12rem;
+        padding-bottom:5.5rem;
+    }
+    .plus_text{
+        display: none;
+    }
+    .movieenroll>.form_line >.form_block{
+        margin-right:16rem;
+    }
+    .movieenroll{
+        margin-left:3rem;
+    }
+    .form_line>.form_block>.sub_text{
+        max-width: 50rem;
+    }
+    input{
+        font-size: 5px;;
+    }
  }
   }
 .alertcard{
     position: absolute;
     margin-left:41%;
     margin-top:21%;
+}
+.fix_bar{
+    position:fixed;
+}
+@media screen and (max-width: 1400px) {
+    .fix_bar{
+        display: none;
+    }
+
 }
