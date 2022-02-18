@@ -1,6 +1,6 @@
 from django import forms
 from .models import Business, Movie,Review
-from django.forms import ChoiceField, ImageField, ModelForm, TextInput, EmailInput, NumberInput,DateInput,Select
+from django.forms import ChoiceField, ImageField, ModelForm,FileInput,TextInput, EmailInput, NumberInput,DateInput,Select
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django_summernote.widgets import SummernoteWidget
 from choiceinput.widgets import ChoiceInput
@@ -60,7 +60,17 @@ class MovieForm(forms.ModelForm):
                 'style': 'max-width: 500px;',
                 'placeholder': '영상의 러닝타임을 적어주세요'
                 }),
-             'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '100%'}}),
+             'content': SummernoteWidget(attrs={'summernote': {'width': '100%', 'height': '380px',
+             'toolbar': [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear',]],
+          ['fontname', ['fontname']],
+          ['color', ['color']],
+          ['para', ['paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen']]
+        ]}}),
         }
 class ReviewForm(forms.ModelForm):
 
@@ -104,7 +114,16 @@ class ReviewForm(forms.ModelForm):
 🎤 이 영상의 숨겨진 매력포인트가 있나요?<br>
 
 '''
-
+,'toolbar': [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear',]],
+          ['fontname', ['fontname']],
+          ['color', ['color']],
+          ['para', ['paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen']]
+        ]
                 }}),
 
 
@@ -139,7 +158,17 @@ class BusinessForm(forms.ModelForm):
 
 🎤 지원사업 혹은 행사에 대한 정보
 <br><br>
-'''
+''',
+'toolbar': [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear',]],
+          ['fontname', ['fontname']],
+          ['color', ['color']],
+          ['para', ['paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen']]
+        ]
 
                 }}),
 
