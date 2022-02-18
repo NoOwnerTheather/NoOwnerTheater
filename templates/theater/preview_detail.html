@@ -425,11 +425,11 @@
                                     <p>
                                         <span class="prefont">${_today.format('NS월 dd, yyyy, hh:mm a/p')}</span>
                                         <span style="margin-left: 1rem;"></span>
-                                        <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel({{comment.id}})">삭제</button>
+                                        <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel(${comment_id})">삭제</button>
                                         <span>|</span>
-                                        <button class="tdReplyUpdate{{ comment.id }}"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate({{ comment.id }})"></button>
-                                        <button class="tdReplySubmit{{ comment.id }}" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit({{ comment.id }})"></button>
-                                        <button class="tdReplyUpdateCancel{{ comment.id }}" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></button>
+                                        <button class="tdReplyUpdate(${comment_id})"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate(${comment_id})"></button>
+                                        <button class="tdReplySubmit(${comment_id})" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit(${comment_id})"></button>
+                                        <button class="tdReplyUpdateCancel(${comment_id})" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel(${comment_id})"></button>
 
 
 
