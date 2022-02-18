@@ -24,6 +24,9 @@ urlpatterns = [
       success_url = reverse_lazy('account:password_reset_complete')
    ), name="password_reset_confirm"),
    path('password_reset_complete/', views.UserPasswordResetCompleteView.as_view(), name="password_reset_complete"),
+
+   path('recovery/id/', views.RecoveryIdView.as_view(), name='recovery_id'),
+   path('recovery/id/find/', views.ajax_find_id_view, name='ajax_id'),
    
 
 

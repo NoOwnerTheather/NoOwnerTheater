@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 import django.contrib.auth.forms as auth_forms
+from django import forms
 
 
 
@@ -61,3 +62,24 @@ class PasswordResetForm(auth_forms.PasswordResetForm):
             u for u in active_users
             if u.has_usable_password()
         )
+
+class RecoveryIdForm(forms.Form):
+    phone = forms.CharField(widget=forms.TextInput,)
+    email = forms.EmailField(widget=forms.EmailInput,)
+
+    class Meta:
+        model = User
+        fields = ['phone', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super(RecoveryIdForm, self).__init__(*args, **kwargs)
+        self.fields['phone'].label = '핸드폰번호'
+        self.fields['phone'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'form_phone',
+        })
+        self.fields['email'].label = '이메일'
+        self.fields['email'].widget.attrs.update({
+            'class': 'form-control',
+            'id': 'form_email' 
+        })

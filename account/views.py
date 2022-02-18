@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 
 from django.contrib import auth
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.models import User
+from theater.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
 from .forms import *
@@ -56,7 +56,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.utils.translation import gettext_lazy as _
-
+from django.views.decorators.csrf import csrf_exempt
 
 
 def login_user(request): # 로그인 중인 Profile object
@@ -229,3 +229,43 @@ class UserPasswordResetCompleteView(PasswordResetCompleteView):
         context = super().get_context_data(**kwargs)
         context['login_url'] = resolve_url(settings.LOGIN_URL)
         return context
+
+
+from .forms import RecoveryIdForm
+from django.views.generic import View
+
+def logout_message_required(function):
+    def wrap(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            messages.info(request, "접속중인 사용자입니다.")
+            return redirect('/account/main/')
+        return function(request, *args, **kwargs)
+    return wrap
+
+
+@method_decorator(logout_message_required, name='dispatch')
+class RecoveryIdView(View):
+    template_name = 'account/recovery_id.html'
+    recovery_id = RecoveryIdForm
+    print("phone")
+    print("phone2")
+
+    def get(self, request):
+        if request.method=='GET':
+            form_id = self.recovery_id(None)
+        return render(request, self.template_name, { 'form_id':form_id, })
+
+
+
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+
+@csrf_exempt
+def ajax_find_id_view(request):
+    phone = request.POST.get('phone')
+    email = request.POST.get('email')
+    result_id = User.objects.get(phone=phone, email=email)
+    print("phone")
+    print(phone)
+       
+    return HttpResponse(json.dumps({"result_id": result_id.username}, cls=DjangoJSONEncoder), content_type = "application/json")
