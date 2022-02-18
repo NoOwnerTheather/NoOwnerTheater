@@ -6,26 +6,65 @@
     float:right !important;
 }
 
-.center{
-    float:center;
+.floatBox-center{
+    margin: 0 auto;
 }
 
+#container{
+    text-align: center;
+}
 
 .comment-position{
     position:relative;
-    top:-20px;
+    top:-2rem;
 }
 .movie-position{
     position:relative;
-    top: -36px;
-    left: 10px;
+    top: -4.5rem;
+    left: 1rem;
     
 }
 .user-position{
     position:relative;
-    top:5px;
+    top:0.5rem;
+    left: 1rem;
+}
+
+.user-position-or{
+    position:relative;
+    top:0.5rem;
     left: 2rem;
 }
+
+.user-icon-position{
+    position:relative;
+    top:0.5rem;
+    left: 0.5rem;
+}
+
+.review_detail_user_icon{
+    position: relative;
+    top: -0.3rem;
+    width: 3rem;
+    height: 3rem;
+}
+
+
+#next,#prev{
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+}
+.prev-button-position{
+    position:relative;
+    top:-16rem;
+    left: -1.5rem;
+}
+.next-button-position{
+    position:relative;
+    top:-16rem;
+    right: -1.5rem;
+}
+
 
 .like-container{
     display: flex;
@@ -34,12 +73,12 @@
 
 .page-section-background{
     background-color: #F5F4F2;
-    min-height: 110vh;
+    min-height: 91vh;
     height: 100%;
 }
 
-.review_card{
-    min-height: 500px;
+.review_detail_card{
+    min-height: 50rem;
     height: auto;
 }
 
@@ -54,25 +93,19 @@
 
 .like-position{
     position:relative;
-    top:180px;
+    top:18rem;
 }
-.like{
-    width: 72px;
-    height: 64px;
-    position:relative;
-    top:-20px;
+.like-review{
+    width: 5.4rem !important;
+    height: 4.2rem !important;
     
-}
-@media (max-width: 600px) {
-    .like {
-        top: -40px;
-    }
-}
+}*/
+
 .like-count{
-    font-size:28px;
+    font-size:2.8rem;
     position:relative;
-    top:0px;
-    right: 15px;
+    top:0rem;
+    right: 1.5rem;
 }
 .posted-at{
     color: #939698;
@@ -84,14 +117,105 @@
     border: none;
     border-radius: 2.5rem;
     color:white;
-    margin: 15px;
-    padding: 5px 10px 5px 10px;
-
-    
+    margin: 1.5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     clear:both;
     text-align: center;
-    
-    
-    
-    
+      
 } 
+
+.d-inline{
+    display: inline;
+    position: relative;
+    font-size: 2rem;
+    top: -1.3rem;
+    right: 1rem;
+
+}
+
+
+/* review_board */
+
+.review_board_card{
+    min-height: 28rem;
+    height: auto;
+}
+
+.cut-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    
+    -webkit-line-clamp:3; /* 표시하고자 하는 라인 수 */
+    -webkit-box-orient: vertical;
+}
+
+
+#swiper-container {
+	max-height:32rem;
+    height: 100%;
+}
+
+/* .swiper-button-next {
+background-image: none !important;
+background: url(/static/img/next.png) no-repeat !important;
+height: 34px !important;
+}
+  
+.swiper-button-prev {
+background-image: none !important;
+background: url(/static/img/next.png) no-repeat !important;
+height: 34px !important;
+}
+  
+.swiper-button-next::after,
+.swiper-button-prev::after {
+display: none;
+}
+ */
+
+.pagination-center{
+    display: flex !important;
+    justify-content: center;
+}
+
+.txt_line {
+    max-width:100px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+@media (max-width: 499px) {
+    .txt_line {
+      max-width: 15rem;
+    }
+}
+@media (min-width: 500px) and (max-width: 575px) {
+    .txt_line {
+      max-width: 25rem;
+    }
+}
+@media (min-width: 576px) and (max-width: 767px) {
+    .txt_line {
+      max-width: 25rem;
+    }
+    
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .txt_line {
+      max-width: 16rem;
+    }
+    
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+    .txt_line {
+      max-width: 13rem;
+    }
+    
+}
+@media (min-width: 1200px) {
+    .txt_line {
+      max-width: 10rem;
+    }
+}    

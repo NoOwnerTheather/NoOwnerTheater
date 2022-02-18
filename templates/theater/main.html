@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-메인페이지
+<div class="main-img">
+    <img style="width:100rem; margin-top:5rem; margin-bottom: 5rem;"src="../../static/img/mainpage.png">
+</div>
+
+
 
 {% endblock content %}
+
+{% if messages %}
+	{% for message in messages %}
+		{{ message.tags }}
+		{{ message.message }}
+	{% endfor %}
+{% endif %}

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load review_filter %}
 
 {% block content %}
 <div class="background">
@@ -27,7 +28,7 @@
                 {% if business_list %}
                 {% for paginated_business_list in paginated_business_lists %}
                 <tr>
-                    <th scope="row">{{paginated_business_list.id}}</th>
+                    <th scope="row">{{ paginated_business_lists.paginator.count|sub:paginated_business_lists.start_index|sub:forloop.counter0|add:1 }}</th>
                 <td><a href="{% url 'theater:business_detail' pk=paginated_business_list.pk %}" onclick="onClickTitle({{ paginated_business_list.id }})" ">{{paginated_business_list.title}}</a></td>
                     <td>{{paginated_business_list.user}}</td>
                     <td>{{paginated_business_list.created_at|date:'Y-m-d'}}</td>

@@ -1,5 +1,5 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-@import url();
+@import url(main.css);
 @import url(business_detail.css);
 @import url(business_search.css);
 @import url(chart_list.css);
@@ -12,8 +12,11 @@
 @import url(review_detail.css);
 @import url(base.css);
 @import url(preview.css);
+@import url(preview_detail.css);
 @import url(mypage.css);
 @import url(reset.css);
+@import url(user_fix.css);
+@import url(change_password.css);
 
 .navbar {
   margin: 0 !important;
@@ -73,4 +76,27 @@ ul {
 }
 html {
   font-size: 62.5%;
+}
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  html {
+    font-size: 52.5%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 42.5%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 22.5%;
+  }
 }

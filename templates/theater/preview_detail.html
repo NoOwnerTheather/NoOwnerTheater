@@ -1,123 +1,171 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="preview_detail.css">
-    <title>온라인 시사</title></head>
-    
-<body class="bg-light">
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="previewbackground" style="padding-bottom: 10rem;padding-top:2rem;">
+
+        <div class=" center-block predebox" style="width:72%;  height:50rem;"></div>
 
 
-    {% extends 'base.html' %}
+       
+            
+           
 
-    {% block content %}
-
-    <div class="preview_detail_image" style="background-image: url({{movie.poster.url}}); width: 90rem; height:40rem;" >
+            <!-- <div class="img-responsive center-block" style="background-image: url(); width: 90rem; height:50rem;" ></div> -->
         
-        <div class="">
-
-          <h1 class="preview_detail_image_item">{{movie.title}}</h1>
-          
-        </div>
-
-        <div class="">
-          
-            <p class="">감독 | {{movie.director}}</p>
-            <p class="">장르 | {{movie.genre}}</p>
-            <p class="">출연 | {{movie.actor}}</p>
-            
-        </div>
-
-    </div>
-
-    <div>
-        <a class="btn btn-dark" type="button" href="{{movie.url}}">펀딩링크</a>
-
-        <h1>시놉시스</h1>
-        <hr>
-        <h5>{{movie.content}}</h5>
-
-    </div>
-
-    <!--<h2>커뮤니티</h2>-->
     
-    
-    <div class="movie-comment">
-        <h1>커뮤니티</h1>
-        <hr>
+                  
+        <div class="predesize center-block" style="width:72%; padding-bottom: 5rem; background-color: white; padding-top:1rem;">
 
-        {% if user.is_authenticated %}
-        <section class="input">
-            <input id="comment_input-{{movie.id}}" placeholder="댓글을 남겨주세요" type="text"/>
-            <button class="btn" onclick="onClickComment({{movie.id}}, 'write', '{{request.user}}')">작성</button>
-        </section>
-        {% else %}
+            <div style="display: flex;justify-content: center;">
+                <img src="{{ movie.poster.url }}" style="max-width:120rem;max-height:70rem;">
+            </div>
+            <div class="predesize center-block" style=" padding-bottom: 5rem; background-color: white;">
 
-        <section class="input">
-            <input id="comment_input-{{movie.id}}" placeholder="로그인 후 이용할 수 있습니다." type="text"/>
-            <button class="btn">작성</button>
-        </section>
-        {% endif %}
+                <div class="" style="margin-top: 2rem !important;">
+                    <span class="preview_detail_image_item prefont predemargin" >{{movie.title}}</span >
+                    <span class="prefont predefontsize" style="margin-top: 1rem !important;">감독 | {{movie.director}}</span>
+                    <h3 class="prefont predefontsize" style="margin-top: 1rem !important;">장르 | {{movie.genre}}</h3>
+                    <span class="prefont predefontsize" style="margin-top: 1rem !important;">출연 | {{movie.actor}}</span>
+                    <a class="predebtn fundinglink predefontsize" type="button" href="{{movie.url}}">펀딩링크</a>
 
+                </div>
             
-            <table class="comment-table-{{movie.id}}">
-                {% for comment in movie.commentpreview_set.all %}
-                <tr class = "comment-{{comment.id}}">
-                    <td id="comment_inputuser-{{movie.id}}">{{comment.user}} </td>
-                    <td><input type="text" class="replyContent{{ comment.id }}" value="{{ comment.content }}" style="border:0 solid black; background-color: rgba(255, 255, 255, 0.466);" readonly></td>
+                <div>
+                    
 
-                    <!--<td>{{comment.content}} </td>-->
-                    <td>{{comment.created_at}} </td>
+                    <h1 class="prefont predetitle">Synopsis</h1>
+                    <hr class="prede_hr">
+                    <h5 class="text-center predecolor">{% autoescape on %}{{movie.content|safe}}{% endautoescape %}</h5>
+
+                </div>
+
+                <!--<h2>커뮤니티</h2>-->
+                
+                
+                <div class="movie-comment">
+                    <h1 class="prefont predetitle">Community</h1>
+                    <hr class="prede_hr">
 
                     {% if user.is_authenticated %}
-                    <!--<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>-->
 
+                    <div class="predeform center-block">
+                        <div class="input">
+                            <input id="comment_input-{{movie.id}}" class="predeformsize" placeholder="기대평을 남겨주세요!" type="text"/>
+                            <button class="predewritebtn" onclick="onClickComment({{movie.id}}, 'write', '{{request.user}}')">작성</button>
+                        </div>
+                    </div>
 
-                    <td>
-                        <input type="button" class="btn like" name="{{ comment.id }}" value="♥" style="margin-top: 7px">
-                        <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
-                    </td>
 
 
                     {% else %}
-                    <!--<td class="btn post__like">좋아요 {{ comment.like }}</td>-->
+                    <div>
+                        <section class="input">
+                            <input id="comment_input-{{movie.id}}" placeholder="로그인 후 이용할 수 있습니다." type="text"/>
+                            <button class="btn">작성</button>
+                        </section>
 
-                    <td>
-                        <input type="button" class="btn" name="{{ comment.id }}" value="Like" style="margin-top: 7px">
-                        <p id="count-{{ comment.id }}" style="font:bold 1em; margin-top: 3px">♥&nbsp;{{ comment.likes.all.count }}개</p>
-                    </td>
-                    {% endif %}
-
-
-                    {% if user == comment.user %}
-                    <td>
-                        <button class="tdReplyDelete{{comment.id}} del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
-                        <td class="tdReplyUpdate{{ comment.id }}"><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>
-                        <td class="tdReplySubmit{{ comment.id }}"  style="display:none"><input type="button"  value="확인" onclick="replySubmit({{ comment.id }})"></td>
-                        <td class="tdReplyUpdateCancel{{ comment.id }}"  style="display:none"><input type="button"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></td>
-
-                    </td>
-                    {% else %}
-                    {% endif %}
+                    </div>
 
                     
-                </tr>
-                {% endfor %}
-            </table>
+                    {% endif %}
 
+
+
+                    <div class="">
+
+                        
+                        <table class="comment-table-{{movie.id}} rgy-reply" style="width:900px !important; margin-left:1rem;">
+                            {% for comment in movie.commentpreview_set.all %}
+                            <tr class = "comment-{{comment.id}}" style="display:flex; justify-content: space-between; margin-top:2rem;">
+                                <td id="comment_inputuser-{{movie.id}}" style="width:15%">
+                                    <img src="{{comment.user.user_img}}"  class="detail-user-img" alt="...">
+                                    <p>{{comment.user}} </p>
+                                    
+                                </td>
+
+
+                                <td style="width:70%"><input type="text" class="replyContent{{ comment.id }} prefont" value="{{ comment.content }}" style="width:100%; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
+                                    <p>
+                                        <span class="prefont">{{comment.created_at}}</span> 
+                                        {% if user == comment.user %}
+                                        <span style="margin-left: 1rem;"></span>
+                                        <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel({{comment.id}})">삭제</button>
+                                        <span>|</span>
+                                        <button class="tdReplyUpdate{{ comment.id }}"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate({{ comment.id }})"></button>
+                                        <button class="tdReplySubmit{{ comment.id }}" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit({{ comment.id }})"></button>
+                                        <button class="tdReplyUpdateCancel{{ comment.id }}" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></button>
+
+                                        {% else %}
+                                        {% endif %}
+
+
+                                    </p>
+                                    
+                                </td>
+                                
+
+                                <!--{% if user == comment.user %}
+                                <td>
+                                    <p><button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel({{comment.id}})">삭제</button></p>
+                                    <td class="tdReplyUpdate{{ comment.id }}"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate({{ comment.id }})"></td>
+                                    <td class="tdReplySubmit{{ comment.id }}" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit({{ comment.id }})"></td>
+                                    <td class="tdReplyUpdateCancel{{ comment.id }}" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></td>
+            
+                                </td>
+                                {% else %}
+                                {% endif %} -->
+
+
+                                <!--<td>{{comment.content}} </td>-->
+                                
+            
+                                {% if user.is_authenticated %}
+                                <!--<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>-->
+            
+            
+                                <td stlye="width:15%">
+                                    <input type="button" class="predebtnlike like prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
+                                    <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em;margin-top: 3px;width: 70px; margin-left:1rem;">&nbsp;{{ comment.likes.all.count }}</p>
+                                </td>
+            
+            
+                                {% else %}
+                                <!--<td class="btn post__like">좋아요 {{ comment.like }}</td>-->
+            
+                                <td stlye="width:15%">
+                                    <input type="button" class="btn prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
+                                    <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em; margin-top: 3px;width: 70px;">&nbsp;{{ comment.likes.all.count }}</p>
+                                </td>
+                                {% endif %}
+            
+            
+                                
+            
+                                
+                            </tr>
+                            {% endfor %}
+                        </table>
+            
+                    </div>
+            
+            
+            
+            
+            
+            
+                </div>
+
+                <a class="predelistbtn" type="button" href="{% url 'theater:preview' %}">목록</a>
+
+
+                
+                
+
+            </div>
         </div>
+        
 
-
-
-
-
-
-    </div>
-
-
-    <a class="btn btn-dark" type="button" href="{% url 'theater:preview' %}">목록</a>
+</div>
 
     
 
@@ -139,7 +187,7 @@
                     //$("#count-" + pk).html("좋아요&nbsp;" + response.likes_count + "개"); // 좋아요 개수 변경
                     alert("!!")
                     //window.location.replace("preview/<int:pk>/") // 로그인 페이지로 넘어가기
-                    window.locationreload()	
+                    window.locationreload()   
                 },
             });
         })
@@ -212,14 +260,14 @@
             //console.log(point)
             
 
-
-
             //var comid=`${comment_id}`
             //var comid=`${comment_id}`
             //var comid= $(`pk`).val();
             //console.log(comid)
 
             const content = document.getElementById(`comment_input-${id}`).value
+
+
 
             //const user=1
 
@@ -242,13 +290,90 @@
     
         const WriteHandleResponse = () => {
             if (requestComment.status < 400){
-                const {id, type, content, comment_id, user} = JSON.parse(requestComment.response);
+
+                
+                Date.prototype.format = function (f) {
+
+                    if (!this.valueOf()) return " ";
+
+
+
+                    var weekKorName = ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"];
+
+                    var weekKorShortName = ["일", "월", "화", "수", "목", "금", "토"];
+
+                    var weekEngName = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+                    var weekEngShortName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+                    var weekNum = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+
+                    var d = this;
+
+
+
+                    return f.replace(/(yyyy|yy|MM|dd|KS|NS|KL|ES|EL|HH|hh|mm|ss|a\/p)/gi, function ($1) {
+
+                        switch ($1) {
+
+                            case "yyyy": return d.getFullYear(); // 년 (4자리)
+
+                            case "yy": return (d.getFullYear() % 1000).zf(2); // 년 (2자리)
+
+                            case "MM": return (d.getMonth() + 1).zf(2); // 월 (2자리)
+
+                            case "dd": return d.getDate().zf(2); // 일 (2자리)
+
+                            case "KS": return weekKorShortName[d.getDay()]; // 요일 (짧은 한글)
+
+                            case "NS" : return weekNum[d.getMonth()];
+
+                            case "KL": return weekKorName[d.getDay()]; // 요일 (긴 한글)
+
+                            case "ES": return weekEngShortName[d.getDay()]; // 요일 (짧은 영어)
+
+                            case "EL": return weekEngName[d.getDay()]; // 요일 (긴 영어)
+
+                            case "HH": return d.getHours().zf(2); // 시간 (24시간 기준, 2자리)
+
+                            case "hh": return ((h = d.getHours() % 12) ? h : 12).zf(2); // 시간 (12시간 기준, 2자리)
+
+                            case "mm": return d.getMinutes().zf(2); // 분 (2자리)
+
+                            case "ss": return d.getSeconds().zf(2); // 초 (2자리)
+
+                            case "a/p": return d.getHours() < 12 ? "오전" : "오후"; // 오전/오후 구분
+
+                            default: return $1;
+
+                        }
+
+                    });
+
+                    };
+
+
+
+                String.prototype.string = function (len) { var s = '', i = 0; while (i++ < len) { s += this; } return s; };
+
+                String.prototype.zf = function (len) { return "0".string(len - this.length) + this; };
+
+                Number.prototype.zf = function (len) { return this.toString().zf(len); };
+
+
+                var _today = new Date(); // 예제 기준 시간 : 2000-01-01 13:12:12
+
+
+
+                const {id, type, content, comment_id, user, user_img} = JSON.parse(requestComment.response);
                 const element = document.querySelector(`.comment-table-${id}`);
                 const new_comment = document.createElement("tr");
                 const comment_content = document.createElement("td");    
                 const del = document.createElement("td");
 
                 const comment_user = document.createElement("td");  ///3
+
+                const comment_user_img=document.createElement("td");//5
 
                 //const update = document.getElementsByClassName("tdReplyUpdate${ comment.id }$"); //4
                 //var x = document.getElementsByClassName("example");
@@ -269,21 +394,58 @@
                 let replyContent=document.querySelector(`.replyContent${id}`);
                 ///.            
     
-                new_comment.setAttribute("class", `comment-${comment_id}`);
+                new_comment.setAttribute("class", `comment-${comment_id} writehandletr`);
 
 
                 //.
                 //console.log({user});
-                comment_user.innerHTML = `${user}`; //3
-                comment_content.innerHTML = `${content}`; //1
+
+                
+                
+
+
+                comment_user.innerHTML = `<td id="comment_inputuser-{{movie.id}}" style="width:10%">
+                                            <img src="${user_img}"  class="detail-user-img" alt="...">
+                                            <p>${user} </p>
+                                    
+                                          </td>`; //3
+
+                //comment_user.innerHTML = `${user}`; //3
+
+                comment_content.innerHTML = `<td style="width:75%"><input type="text" class="replyContent{{ comment.id }} prefont" value="${content}" style="width:100%; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
+                                    <p>
+                                        <span class="prefont">${_today.format('NS월 dd, yyyy, hh:mm a/p')}</span>
+                                        <span style="margin-left: 1rem;"></span>
+                                        <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel({{comment.id}})">삭제</button>
+                                        <span>|</span>
+                                        <button class="tdReplyUpdate{{ comment.id }}"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate({{ comment.id }})"></button>
+                                        <button class="tdReplySubmit{{ comment.id }}" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit({{ comment.id }})"></button>
+                                        <button class="tdReplyUpdateCancel{{ comment.id }}" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></button>
+
+
+
+                                    </p>
+                                    
+                                </td>`; //1
+
+                //comment_content.innerHTML = `${content}`; //1
+
+                //comment_user_img.innerHTML = `<img src="${user_img}"  class="detail-user-img" alt="...">`; //3
+
+                /*if(`${content}`==null){
+
+                    alert("댓글입력해주세요");
+                    console.log("댓글X");
+                    
+                }*/
     
                 del.innerHTML = `<td><button onclick="onClickDel(${comment_id})">삭제</button></td>`; //1
                 //update.innerHTML = `<button onclick="replyUpdate(${comment_id})">수정</button>`; //1
                 update.innerHTML =`<td class="tdReplyUpdate(${comment_id})"><input type="button" value="수정" onclick="replyUpdate(${comment_id})"></td>`
 
                 //like.innerHTML = `<td class="like"><button>좋아요</button></td>`;
-                like.innerHTML=`<td>
-                        <input type="button" class="btn like" name="(${comment_id})" value="♥" style="margin-top: 7px">
+                like.innerHTML=`<td class="predewidth70">
+                        <input type="button" class="predebtnlike like prefont" name="(${comment_id})" value="♥" style="padding-top: 30px;">
                         <p id="count-(${comment_id})" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
                     </td>`;
                 //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요</button>`;
@@ -297,7 +459,35 @@
 
                 //tdReplyUpdate.innerHTML=`<td><input type="button" value="수정" onclick="replyUpdate({{ comment.id }})"></td>`; //2
                 
-                date.innerHTML= `${user}`; //3
+
+                
+
+
+                console.log(_today.format('yyyy-MM-dd'));
+
+
+
+                console.log(_today.format('HH:mm:ss'));
+
+
+
+                console.log(_today.format('yyyy-MM-dd(KS) HH:mm:ss'));
+
+
+
+                console.log(_today.format('yyyy-MM-dd a/p hh:mm:ss'));
+
+
+
+                //var now = new Date();
+
+                date.innerHTML= `<td class="predewidth15">
+                                    <input type="button" class="predebtnlike like prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
+                                    <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em;margin-top: 3px;width: 70px; margin-left:1rem;">&nbsp;{{ comment.likes.all.count }}</p>
+                                </td>`; //3
+                
+                //date.innerHTML= `${_today.format('NS월 dd, yyyy, hh:mm a/p')}`; //3
+                //date.innerHTML= `${user}`; //3
 
                 //.
     
@@ -305,15 +495,19 @@
                 
     
                 element.append(new_comment);
+
                 new_comment.appendChild(comment_user);//3
+                new_comment.appendChild(comment_user_img);//3
                 new_comment.appendChild(comment_content);
 
                 new_comment.appendChild(date);//3
 
-                new_comment.appendChild(like);
+                
 
-                new_comment.appendChild(del);
-                new_comment.appendChild(update);
+                //new_comment.appendChild(del);
+                //new_comment.appendChild(update);
+
+                //new_comment.appendChild(like);
                 ///new_comment.appendChild(tdReplyUpdate);
 
                 
@@ -427,10 +621,4 @@
 
     </script>
 
-    {% endblock %}
-
-
-    
-</body>
-</html>
-© 2022 GitHub, Inc.
+{% endblock %}

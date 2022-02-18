@@ -9,11 +9,11 @@
 
 <section class="page-section-background">
     <div class="like-container">
-        <div class="mx-auto my-auto col-md-7">
-            <div class="card review_card mt-5">
+        <div class="mx-auto my-auto col-md-5">
+            <div class="card review_detail_card mt-5">
                 <div class="card-body review-card-body">
                     <ul>
-                        <li class="floatBox-left user-position"> {{ review.user.user_img }}</li>
+                        <li class="floatBox-left user-icon-position"> <img class="review_detail_user_icon" src="{{review.user.user_img}}" /></li>
                         <li class="floatBox-left user-position">{{ review.user }}</li>
                         <li class="floatBox-right movie-position movie-button">{{ review.movie }}</li>
                         <br>
@@ -21,44 +21,47 @@
                         <li class="col-md-12 h3" style="float:none; margin:0 auto;">{{ review.title }}</li>
                         <br>
                         <li class="col-md-12" style="float: none; margin:0 auto;">{{ review.content }}</li>
-                        <div class="like-container like-position">
-                            <input type="image" src="{% static 'img/like.png' %}" class="like" name="{{ review.id }}" value="Like">
-                            <p id="count-{{ review.id }}" class="like-count"> {{ review.likes_user.all.count }}</p>
-                        </div>
                     </ul>
-                    <div class="movie-review-comment">
-                        <div class="floatBox-left comment-position h3" >댓글창</div>
-                        <div class="floatBox-right posted-at">posted at {{ review.created_at|date:'Y-m-d' }}</div>
-                        <br>
-                        <hr>
-                        {% if user.is_authenticated %}
-                        <section class="input">
-                            <input id="comment_input-{{review.id}}" placeholder="댓글을 남겨주세요" type="text"/>
-                            <button class="btn" onclick="onClickComment({{review.id}}, 'write', '{{request.user}}')">작성</button>
-                        </section>
-                        {% else %}
-                        로그인 후 이용할 수 있습니다.
-                        {% endif %}                            
-                            <table class="comment-table-{{review.id}}">
-                                {% for comment in review.commentreview_set.all %}
-                                <tr class = "comment-{{comment.id}}">
-                                    <td>{{comment.user}} </td>
-                                    <td>{{comment.content}} </td>
-                                    <td>{{comment.created_at}} </td>
-                                    <td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>
-                
-                                    {% if user == comment.user %}
-                                    <td>
-                                        <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
-                                    </td>
-                                    {% else %}
-                                    {% endif %}
-                                </tr>
-                                {% endfor %}
-                            </table>
-                            <a class="btn btn-dark" type="button" href="{% url 'theater:review_board' %}">목록</a>
+                        
+                        <div class="movie-review-comment">
+                            <div id="container">
+                                <div class="floatBox-center">
+                                    <input type="image" src="{% static 'img/like.png' %}" class="like-review" name="{{ review.id }}" value="Like">    
+                                    <p id="count-{{ review.id }}" class="d-inline"> {{ review.likes_user.all.count }}</p>
+                                </div>
+                                <div class="floatBox-left"  >댓글창</div>
+                                <div class="floatBox-right">posted at {{ review.created_at|date:'Y-m-d' }}</div>
+                            </div>
+                            <br>
+                            <hr>
+                            {% if user.is_authenticated %}
+                            <section class="input">
+                                <input id="comment_input-{{review.id}}" placeholder="댓글을 남겨주세요" type="text"/>
+                                <button class="btn" onclick="onClickComment({{review.id}}, 'write', '{{request.user}}')">작성</button>
+                            </section>
+                            {% else %}
+                            로그인 후 이용할 수 있습니다.
+                            {% endif %}                            
+                                <table class="comment-table-{{review.id}}">
+                                    {% for comment in review.commentreview_set.all %}
+                                    <tr class = "comment-{{comment.id}}">
+                                        <td>{{comment.user}} </td>
+                                        <td>{{comment.content}} </td>
+                                        <td>{{comment.created_at}} </td>
+                                        <td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like-review')">좋아요 {{ comment.like }}</td>
+                    
+                                        {% if user == comment.user %}
+                                        <td>
+                                            <button class="del-btn" onclick="onClickDel({{comment.id}})">삭제</button>
+                                        </td>
+                                        {% else %}
+                                        {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                                <a class="btn btn-dark" type="button" href="{% url 'theater:review_board' %}">목록</a>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -73,7 +76,7 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-    $(".like").click(function () { // .like 버튼을 클릭 감지
+    $(".like-review").click(function () { // .like 버튼을 클릭 감지
         var pk = $(this).attr('name')
         $.ajax({ // ajax로 서버와 통신
             type: "POST", // 데이터를 전송하는 방법

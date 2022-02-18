@@ -6,8 +6,11 @@
 <div class="section pt-5">
   <form  method="POST" action="{% url 'theater:movie_search' %}">
       {% csrf_token %}     
-      <div class="movie_board-search">
-          <input placeholder="검색어를 입력하시오" name="searched"/ >
+      <div class="board-search" style="width:100%;">
+          <input placeholder="검색어를 입력하시오" name="searched" style="
+          font-size: 1.4rem;
+          margin-left: 0;
+      " />
           <button type="submit"><i class="fas fa-search"></i></button>
       </div>
   </form>
@@ -18,34 +21,35 @@
             <div class="movie_vl"></div>
             <h5 class="section-heading mx-3">최근 개봉한 영화</h5>
           </div>
+        <div class="row">
           {% for movie in movies %}
         {%if movie.genre == '성인물(에로)' and request.user.age <= 19%}       
-        <div class="col-md-4">
+        <div class="col-md-3">
           <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
-            <div class="card my-3" style="width: 100%">
-              <img src="{{movie.poster.url}}" class="card-img-top" alt="...">
+            <div class="card my-3" style="width: 29.4rem;border-radius: 0!important;margin-bottom:3rem">
+              <img src="{{movie.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
               <div class="card-body">
                 <h5 class="card-title text-center">{{movie.title}}</h5>
                 <span class="stars text-dark me-2 d-flex justify-content-center">{{movie.rating}}</span>
               </div>
             </div>
+          </a>
         </div>
-      </a>
         {%else%}
-        <div class="col-md-4">
+        <div class="col-md-3">
           <a href="{% url 'theater:movie_detail' movie.id %}">
-            <div class="card my-3" style="width: 100%">
-              <img src="{{movie.poster.url}}" class="card-img-top" alt="...">
+            <div class="card" style="width: 29.4rem;  border-radius: 0!important;margin-bottom:3rem">
+              <img src="{{movie.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
               <div class="card-body">
                 <h5 class="card-title text-center">{{movie.title}}</h5>
                 <span class="stars text-dark me-2 d-flex justify-content-center">{{movie.rating}}</span>
               </div>
             </div>
+          </a>
         </div>
-      </a>
         {%endif%}
         {% endfor %}
-      </div>
+        </div>
         </div>
     </section>
     

@@ -23,7 +23,7 @@ section {
 .movie_board-search {
   border-bottom: 1px solid #707070;
   margin-bottom: 4rem;
-  width: 13rem;
+  width: 20rem;
   display: flex;
 }
 
@@ -41,22 +41,21 @@ cursor: pointer;
   background-color: #f5f4f2;
 }
 
-/* .swiper-pagination-bullet-active {
+.swiper-pagination-bullet-active {
   opacity: 1;
-  background: #70777F;
+  background: #6A7A84 !important;
 }
 
-.swiper-button-next {
-  background: url(/img/swiper_arrow.png) no-repeat;
-  background-size: 50% auto;
-  background-position: center;
+.sw{
+  background-image: none !important;
 }
 
-.swiper-button-prev {
-  background: url(/godiva/img/common/prev.png) no-repeat;
+.next,.prev{
+  width: 2.5rem !important;
+  height: 2.5rem !important;
 }
 
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  display: none;
-} */
+.movie_chart_border{
+  background-color: white;
+}
+
