@@ -183,7 +183,7 @@ html{
     background-color: #F5F4F2;
 }
 .left_bar{
-    width:38rem;
+    width:32rem;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -191,7 +191,7 @@ html{
     margin-top: 7rem;
 }
 .left_text{
-    width:25rem;
+    width:23rem;
     background-color: #FBFAF9;
     margin-top: 2rem;
     margin-bottom: 1rem;
@@ -261,6 +261,15 @@ textarea{
     .note-editor{
         width: 200px;
        
+    }
+    .left_sub{
+        display: none;
+    }
+    .left_bar{
+        display: none;
+    }
+    .enroll{
+        margin-left:8rem;
     }
  }
   }
