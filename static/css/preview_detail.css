@@ -91,8 +91,8 @@
 
     background-color: black;
     margin-top:5rem;
-    margin-left: 37rem;
-    margin-right:37rem;
+    /*margin-left: 37rem;
+    margin-right:37rem;*/
     border-radius: 50rem;
     color:white !important;
     font-family: 'Pretendard';
@@ -245,8 +245,8 @@ tbody{
 
 .predewidthmargin15{
     width:15%;
-    padding-left: 5.5rem;
-
+    padding-left: 7.3rem;
+    /*padding-left: 5.5rem;*/
 }
 
 .predewidth70{
@@ -257,13 +257,15 @@ tbody{
 
 tbody>tr{
     border-bottom:1px solid rgba(0, 0, 0, 0.1) !important;
-    width: 88rem;
+    /*width: 88rem;*/
+    width: 100rem;
     /*border-width: 80rem;*/
 }
 
 .predetrline{
     border-bottom:1px solid rgba(0, 0, 0, 0.1) !important;
-    width: 88rem;
+    /*width: 88rem;*/
+    width: 100rem;
 }
 
 .predestylejs{

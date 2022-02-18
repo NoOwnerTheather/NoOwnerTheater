@@ -19,7 +19,7 @@
             <div style="display: flex;justify-content: center;">
                 <img src="{{ movie.poster.url }}" style="max-width:120rem;max-height:70rem;">
             </div>
-            <div class="predesize center-block" style=" padding-bottom: 5rem; background-color: white;">
+            <div class="predesize center-block col-sm-auto col-md-auto col-lg-auto " style="padding-bottom: 5rem;"> <!-- background-color: white;-->
 
                 <div class="" style="margin-top: 2rem !important;">
                     <span class="preview_detail_image_item prefont predemargin" >{{movie.title}}</span >
@@ -76,7 +76,7 @@
                     <div class="">
 
                         
-                        <table class="comment-table-{{movie.id}} rgy-reply" style="width:900px !important; margin-left:1rem;">
+                        <table class="comment-table-{{movie.id}} rgy-reply" style="width:100%!important; margin-left:3rem;"> <!--width:900px-->
                             {% for comment in movie.commentpreview_set.all %}
                             <tr class = "comment-{{comment.id}}" style="display:flex; justify-content: space-between; margin-top:2rem;">
                                 <td id="comment_inputuser-{{movie.id}}" style="width:15%">
@@ -160,7 +160,11 @@
             
                 </div>
 
-                <a class="predelistbtn" type="button" href="{% url 'theater:preview' %}">목록</a>
+                <div style="display:flex; justify-content: center;">
+                    <a class="predelistbtn" type="button" style="text-align:center;" href="{% url 'theater:preview' %}">목록</a>
+                </div>
+
+                
 
 
                 
