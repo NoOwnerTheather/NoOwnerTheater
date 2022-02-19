@@ -68,6 +68,7 @@ def movie_enroll(request):
 @login_required
 def movie_fix(request,pk):
    movie=get_object_or_404(Movie,id=pk)
+   
    if request.user==movie.user:
       if request.method=="POST":
          form=MovieForm(request.POST,request.FILES,instance=movie)
@@ -508,13 +509,15 @@ def genre_order(request):
    ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3, 'so':sort,'current_user':request.user}
 
    return render(request, template_name='theater/chart_list.html', context=ctx) 
-   
+
 def movie_detail(request, pk):
    movie = Movie.objects.get(id=pk)
    reviews = movie.review_set.all()
+   
    ctx = {
         'movie' : movie,
         'reviews' : reviews,
+        
     }
 
    return render(request, template_name='theater/movie_detail.html', context=ctx)
