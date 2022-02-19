@@ -509,15 +509,15 @@ def genre_order(request):
    ctx = {'rows1':rows1, 'rows2':content_list, 'rows3':rows3, 'so':sort,'current_user':request.user}
 
    return render(request, template_name='theater/chart_list.html', context=ctx) 
-   
+
 def movie_detail(request, pk):
    movie = Movie.objects.get(id=pk)
    reviews = movie.review_set.all()
-   user=User.objects.get(username=request.user)
+   
    ctx = {
         'movie' : movie,
         'reviews' : reviews,
-        'user': user,
+        
     }
 
    return render(request, template_name='theater/movie_detail.html', context=ctx)
