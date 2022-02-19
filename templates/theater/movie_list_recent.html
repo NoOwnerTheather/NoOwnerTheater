@@ -6,12 +6,18 @@
 <div class="section pt-5">
   <form  method="POST" action="{% url 'theater:movie_search' %}">
       {% csrf_token %}     
-      <div class="board-search" style="width:100%;">
-          <input placeholder="검색어를 입력하시오" name="searched" style="
+      <div class="movie_board-search" style="width:100%;">
+          <input placeholder="영화를 검색해보세요." name="searched" style="
           font-size: 1.4rem;
           margin-left: 0;
+          border: 1px solid;
+          border-radius: 2rem;
+          width: 40rem;
+          padding-left: 1.5rem;
       " />
-          <button type="submit"><i class="fas fa-search"></i></button>
+        <div class="d-flex justify-content-center" style="position: relative; right:2.5rem; width: 3rem; height: 3rem; border: 1px solid; border-radius: 6rem; background: black;">
+          <button type="submit" style="background-color: black;"><i class="fas fa-search" style="color: white;"></i></button>
+        </div>
       </div>
   </form>
 </div>
