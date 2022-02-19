@@ -13,9 +13,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <!--bootstrap-->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"></link>
@@ -24,30 +26,29 @@
     <title>주인없는영화관</title>
 </head>
 <body> 
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light pretendfont navstyle" style="padding-left: 10rem!important;padding-right:10rem!important;">
         <div class="nav_left">
             <img src="{% static 'img/logo.png' %}">
-            <a  href="{% url 'theater:main' %}" class="navbar_title">주인없는영화관</a>
+            <a  href="{% url 'theater:main' %}" class="navbar_title pretendfont" style="font-size: 3rem;">주인없는영화관</a>
         </div>
     
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Nav"
         aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
-        <div class="collapse navbar-collapse" id="Nav">
+        <div class="" id="Nav collapse navbar-collapse" style="display:flex;margin-left: auto;"> <!--collapse navbar-collapse-->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:chart_list' %}">영화 차트</a> 
+                    <a class="nav-link p-0 m-0 navfontsizestlye" href="{% url 'theater:chart_list' %}">영화 차트</a> 
                 </li>
                 <li class="nav-item p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:review_board' %}">영화 리뷰</a>
+                    <a class="nav-link p-0 m-0 navfontsizestlye" href="{% url 'theater:review_board' %}">영화 리뷰</a>
                 </li>
                 <li class="nav-item  p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:preview' %}">온라인 시사회</a>
+                    <a class="nav-link p-0 m-0 navfontsizestlye pretendfont " href="{% url 'theater:preview' %}">온라인 시사회</a>
                 </li>
                 <li class="nav-item  p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:business_list' %}">지원사업 게시판</a>
+                    <a class="nav-link p-0 m-0 navfontsizestlye pretendfont" href="{% url 'theater:business_list' %}">지원사업 게시판</a>
                 </li>
                 {% if user.is_authenticated %}
                     {% if user.type == "일반 사용자" %}
@@ -87,13 +88,45 @@
             </ul>
         </div>
     </nav>
-    
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alertcard">
+    <div class="card text-black bg-white mb-3" style="width: 40rem; height:20rem;">
+        <div class="card-header">경고!</div>
+        <div class="card-body">
+          <h4 class="card-title">유효하지 않은 사용자!</h4>
+          <p class="card-text">당신은 이 컨텐츠에 대한 수정 및 삭제 권한이 없습니다.</p>
+          <a href="{%url 'theater:main' %}"><button type="button" class="btn btn-danger">메인페이지로 돌아가기</button></a>
+        </div>
+      </div>
+	</div>
+		
+	{% endfor %}
+{% endif %}
     
     {% block content %}
         <!-- extend -->
     {% endblock %}
-    <div class="footer">
-        주인없는 영화관 <i class="fab fa-github"></i>
+
+    <div class="footer main_foot_flex">
+        <div>
+            <h4 class="pretendfont">주인없는 영화관</h4>
+            <h4 class="pretendfont">독립영화 플랫폼</h4>
+        </div>
+    
+        <div style="margin-left:5rem;">
+            <h6 class="pretendfont">개발자 | 강성준 송우영 송하윤 유병찬 이유진 </h6>
+            <h6 class="pretendfont">제휴 및 협력 | noownertheater@gmail.com </h6>
+            <h6 class="pretendfont">ⓒ2022 by 주인없는영화관 All right reserved</h6>
+    
+        </div>
+    
+    
+    
+        <div style="margin-left: auto;">
+            <a href="https://github.com/NoOwnerTheather"><img src="/static/img/githubicon.png" width="25rem" height="25rem" alt=""/></a>
+        </div>
+
     </div>
 </body>
 </html>

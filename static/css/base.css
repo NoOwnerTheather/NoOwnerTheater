@@ -1,5 +1,5 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-@import url();
+@import url(main.css);
 @import url(business_detail.css);
 @import url(business_search.css);
 @import url(chart_list.css);
@@ -18,9 +18,17 @@
 @import url(user_fix.css);
 @import url(change_password.css);
 
+
+.pretendfont{
+  font-family: 'Pretendard';
+
+
+}
+
+
 .navbar {
   margin: 0 !important;
-  padding: 0.5rem 5rem !important;
+  padding: 2rem 5rem !important;
   font-size: 1.3rem;
   background-color: #f5f4f2;
 }
@@ -50,7 +58,7 @@
 }
 
 .navbar-nav > li:hover {
-  border-bottom: 0.1rem solid black;
+  border-bottom: 0.3rem solid black;
 }
 
 ul {
@@ -70,7 +78,12 @@ ul {
   margin: 0;
 }
 .footer {
-  padding: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  padding-left: 10rem;
+  padding-right: 10rem;
+
   background-color: #000000;
   color: #fff;
 }
@@ -92,10 +105,22 @@ html {
 @media screen and (max-width: 768px) {
   html {
     font-size: 42.5%;
-  }  
+  }
 }
 
 @media screen and (max-width: 480px) {
   html {
     font-size: 22.5%;
-  }  }
+  }
+}
+
+
+.navfontsizestlye{
+  font-size: 2rem;
+  font-weight:300;
+}
+
+.navstyle{
+  display: flex;
+
+}
