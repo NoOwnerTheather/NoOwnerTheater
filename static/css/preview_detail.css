@@ -321,7 +321,10 @@ table>tbody{
 }
 .predewritebtn{
     padding-bottom:4.2rem;
+    
 }
+.predelistbtn{
+margin-top:8rem;}
 .justify-content-center > img{
     height: auto !important;;
     max-height: 80rem!important;;
