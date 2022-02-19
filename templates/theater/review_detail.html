@@ -88,9 +88,9 @@
                 $("#count-" + pk).html(response.likes_count); // 좋아요 개수 변경
             },
             error: function (request, status, error) { // 실패
-                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                window.location.replace("/account/login/"); // 로그인 페이지로 넘어가기
-            },
+            alert("로그인이 필요합니다.")
+            window.location.replace("/account/login/") // 로그인 페이지로 넘어가기
+        },
         });
     })
 </script>
