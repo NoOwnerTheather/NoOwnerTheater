@@ -7,9 +7,10 @@
   <form  method="POST" action="{% url 'theater:movie_search' %}">
       {% csrf_token %}     
       <div class="board-search" style="width:100%;">
-          <input placeholder="검색어를 입력하시오" name="searched" style="
+          <input value="{{searched}}" name="searched" style="
           font-size: 1.4rem;
-          margin-left: 0;
+          margin-left: 0; 
+
       " />
           <button type="submit"><i class="fas fa-search"></i></button>
       </div>
@@ -23,7 +24,7 @@
           {%if movie.genre == '성인물(에로)' and request.user.age <= 19%}       
           <div class="col-md-3">
             <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
-              <div class="card my-3" style="width: 29.4rem;border-radius: 0!important;margin-bottom:3rem">
+              <div class="card mb-3" style="border-radius: 0!important;">
                 <img src="{{movie.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
                 <div class="card-body">
                   <h5 class="card-title text-center">{{movie.title}}</h5>
@@ -35,7 +36,7 @@
           {%else%}
           <div class="col-md-3">
             <a href="{% url 'theater:movie_detail' movie.id %}">
-              <div class="card" style="width: 29.4rem;  border-radius: 0!important;margin-bottom:3rem">
+              <div class="card mb-3" style="border-radius: 0!important;">
                 <img src="{{movie.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
                 <div class="card-body">
                   <h5 class="card-title text-center">{{movie.title}}</h5>
