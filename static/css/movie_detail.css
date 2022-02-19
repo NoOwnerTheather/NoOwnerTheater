@@ -71,3 +71,14 @@
     border:none;
     background-color: rgba(0, 0, 0, 0.25);
 }
+
+.movie_left_bar{
+    position: fixed;
+}
+
+@media screen and (max-width: 1500px) {
+
+    .movie_left_bar{
+        position: inherit;
+    }
+}

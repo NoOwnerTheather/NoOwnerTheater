@@ -16,3 +16,13 @@
   align-items: center;
 
 }
+
+@media screen and (max-width: 480px) {
+
+  .main-img{
+
+    min-height:110rem;
+
+
+  }
+}
