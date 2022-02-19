@@ -125,12 +125,21 @@
             
                                 {% if user.is_authenticated %}
                                 <!--<td class="btn post__like" onclick="onClickLike({{ comment.id }}, 'like')">좋아요 {{ comment.like }}</td>-->
+                                
+                                        {% if user == comment.user %}
+                                        <td stlye="width:15%">
+                                            <input type="button" class="predebtnlike prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
+                                            <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em;margin-top: 3px;width: 70px; margin-left:1rem;">&nbsp;{{ comment.likes.all.count }}</p>
+                                        </td>
+
+                                        {% else %}
+                                        <td stlye="width:15%">
+                                            <input type="button" class="predebtnlike like prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
+                                            <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em;margin-top: 3px;width: 70px; margin-left:1rem;">&nbsp;{{ comment.likes.all.count }}</p>
+                                        </td>
+                                        {% endif %}
             
-            
-                                <td stlye="width:15%">
-                                    <input type="button" class="predebtnlike like prefont" name="{{ comment.id }}" value="♥" style="padding-top: 0px;">
-                                    <p id="count-{{ comment.id }}" class="prefont" style="font:bold 1em;margin-top: 3px;width: 70px; margin-left:1rem;">&nbsp;{{ comment.likes.all.count }}</p>
-                                </td>
+                                
             
             
                                 {% else %}
