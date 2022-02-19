@@ -114,6 +114,10 @@ def review_enroll(request,pk):
             movie.rating = round(movie.rating, 2)
             movie.save()
 
+            request.user.mileage=request.user.mileage+10 #####
+
+            request.user.save() #####
+
             return redirect('theater:movie_detail',pk) 
          #임시용 코드
 
