@@ -86,7 +86,18 @@ ul {
 
   background-color: #000000;
   color: #fff;
+
+  position : relative;
+  transform : translateY(-100%);
+  
+  /*bottom:0;*/
 }
+
+#wrapper{
+  height : 100%;
+}
+
+
 html {
   font-size: 62.5%;
 }

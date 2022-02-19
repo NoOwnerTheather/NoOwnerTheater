@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <title>주인없는영화관</title>
 </head>
-<body> 
+<body>
     <nav class="navbar navbar-expand-lg navbar-light pretendfont navstyle" style="padding-left: 10rem!important;padding-right:10rem!important;">
         <div class="nav_left">
             <img src="{% static 'img/logo.png' %}">
@@ -103,30 +103,38 @@
 		
 	{% endfor %}
 {% endif %}
+    <div id='wrapper'>
+
     
-    {% block content %}
-        <!-- extend -->
-    {% endblock %}
+        
+        {% block content %}
+            <!-- extend -->
+        {% endblock %}
+
+    </div>
 
     <div class="footer main_foot_flex">
         <div>
-            <h4 class="pretendfont">주인없는 영화관</h4>
             <h4 class="pretendfont">독립영화 플랫폼</h4>
+            <h4 class="pretendfont">주인없는 영화관</h4>
         </div>
-    
+        
         <div style="margin-left:5rem;">
             <h6 class="pretendfont">개발자 | 강성준 송우영 송하윤 유병찬 이유진 </h6>
             <h6 class="pretendfont">제휴 및 협력 | noownertheater@gmail.com </h6>
             <h6 class="pretendfont">ⓒ2022 by 주인없는영화관 All right reserved</h6>
-    
+        
         </div>
-    
-    
-    
+        
+        
+        
         <div style="margin-left: auto;">
             <a href="https://github.com/NoOwnerTheather"><img src="/static/img/githubicon.png" width="25rem" height="25rem" alt=""/></a>
         </div>
-
+    
     </div>
+
+
+
 </body>
 </html>
