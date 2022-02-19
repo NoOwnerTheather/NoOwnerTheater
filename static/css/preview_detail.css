@@ -273,8 +273,64 @@ tbody>tr{
     display:none;
 
 }
+@media screen and (max-width: 480px) {
+.comment_tool{
+    width:45%;
+}
+tbody>tr{
+    width:67rem;
+}
+.prefont{
+    font-size:2rem;
+}
+td>input{
+    font-size:3rem!important;
+}
+td>p{
+    width:59px!important;
+}
+tr>td>p{
+    margin-right:1rem;
+    font-size:3rem;
+    margin-left:0rem;
+}
+tr>td{
+    text-align: center;
+    width:25%!important;
+}
+.business{
+    min-height:123rem;
+}
+.img-fluid{
+    max-width:80rem!important;
+}
+div>p>img{
+    max-width:75rem!important;
 
-
+}
+tr>td>p{
+    margin-left:0!important;
+}
+tr>td>input{
+    text-align: center;
+}
+table>tbody{
+    margin-top:4rem;
+}
+.predewritebtn{
+    padding-bottom:4.2rem;
+}
+.justify-content-center > img{
+    height: auto !important;;
+    max-height: 80rem!important;;
+    
+}
+.justify-content-center{
+    margin-left: 8.5rem!important;
+}
+.previewbtncolor{
+    margin-right:8rem;
+}
 /*.predebtnlike:hover{
 
     color: #BEB0FF;
