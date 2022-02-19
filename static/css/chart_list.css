@@ -59,3 +59,11 @@ cursor: pointer;
   background-color: white;
 }
 
+a>.card:hover{
+
+
+  
+  transition:all 0.5s;
+  overflow: hidden;
+  transform: scale(1.05);
+}
