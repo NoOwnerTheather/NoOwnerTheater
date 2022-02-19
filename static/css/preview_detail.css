@@ -273,6 +273,8 @@ tbody>tr{
     display:none;
 
 }
+
+/* 전체 반응형 모음집 */
 @media screen and (max-width: 480px) {
 .comment_tool{
     width:45%;
@@ -330,6 +332,31 @@ table>tbody{
 }
 .previewbtncolor{
     margin-right:8rem;
+}
+.predesize>div>img{
+    max-width:66rem!important;
+    height: auto !important;;
+    max-height: 80rem!important;;
+    
+}
+.background>.business>div{
+    justify-content: center!important;;
+}
+.page-section>.my-3{
+    min-height:126rem;
+}
+.background{
+    height:74vh
+}
+.container > .row> .col{
+    padding-right:0px;
+}
+.last_hit{
+    min-width:15rem;
+}
+.thead-dark>th{
+    text-align: center;
+}
 }
 /*.predebtnlike:hover{
 
