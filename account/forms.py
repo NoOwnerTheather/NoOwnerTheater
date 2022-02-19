@@ -75,11 +75,14 @@ class RecoveryIdForm(forms.Form):
         super(RecoveryIdForm, self).__init__(*args, **kwargs)
         self.fields['phone'].label = '핸드폰번호'
         self.fields['phone'].widget.attrs.update({
-            'class': 'form-control',
+            'class': 'form-control input-lg input-style',
             'id': 'form_phone',
         })
         self.fields['email'].label = '이메일'
         self.fields['email'].widget.attrs.update({
-            'class': 'form-control',
+            'class': 'form-control input-lg input-style',
             'id': 'form_email' 
         })
+
+
+        
