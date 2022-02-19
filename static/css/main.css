@@ -9,3 +9,10 @@
 .main-title {
   font-weight: bold;
 }
+
+.main_foot_flex{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
