@@ -9,27 +9,41 @@
 }
 </style>
 
-<div class="section">
-    <div class="position-sticky pt-3">
-    <ul class="nav flex-column">
-      <li class="nav-item text-center px-5" style="background-color: black;color:white;" >
-            <h3 class="text-start m-0 mt-3">{{ movie.rating }}</h3>
-            <img style="width: 10rem;" src="{% static 'img/diagnol.png' %}" alt="">
-            <h3 class="text-start m-0 mb-3">5.0</h3>
-      </li>
-    </ul>
-    <div class="d-flex flex-column my-3" >
-        <a class="badge rounded-pill bg-dark text-light m-1 p-2" href="{% if movie.url %} {{movie.url}} {% endif %}">영상 링크</a>
-        <a class="badge rounded-pill bg-dark text-light m-1 p-2" href="{% if movie.video %} {{movie.video.url}} {% endif %}">예고편</a>
-        <a class="badge rounded-pill bg-dark text-light m-1 p-2" href="{% url 'theater:review_enroll' pk=movie.id%}">리뷰 작성</a>
-    </div>    
-</div>
+<div class="section" style="padding-bottom: 10rem">
+    <div class="position-sticky">
+
+        <div style="background-color: white;">
+
+            <ul class="nav flex-column">
+                <li class="nav-item text-center px-5" style="background-color: black;color:white; padding-top: 1.5rem; padding-bottom: 1.5rem;" >
+                      <h2 class="text-start m-0 mt-3" style="font-size: 3.5rem;">{{ movie.rating }}</h2>
+                      <img style="width: 10rem;" src="{% static 'img/diagnol.png' %}" alt="">
+                      <h3 class="text-start m-0 mb-3" style="font-weight: lighter; font-size: 3rem;">5.0</h3>
+                      <h3 style="font-weight:normal; font-size: 1.5rem; text-align: center;">사용자 평점</h3>
+                </li>
+              </ul>
+              <div class="d-flex flex-column my-3 center-block" style="margin-top:3rem !important; padding-bottom:3rem !important; padding-left:1rem !important; padding-right:1rem !important;">
+                  
+                  <img style="width: 5rem;height: 5rem;margin-left:4.5rem !important;" src="{% static 'img/playbtn.png' %}" alt="">
+                  <a class="" href="{% if movie.video %} {{movie.video.url}} {% endif %}"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">예고편</h3></a>
+
+                  <img style="width: 5rem;height: 5rem;margin-left:4.5rem !important;" src="{% static 'img/playmovie.png' %}" alt="">
+                  <a class="" href="{% if movie.url %} {{movie.url}} {% endif %}"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">영화</h3></a>
+
+                  <img style="width: 5rem;height: 5rem;margin-left:4.5rem !important;" src="{% static 'img/reviewbtn.png' %}" alt="">
+                  <a class="" href="{% url 'theater:review_enroll' pk=movie.id%}"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">리뷰 작성</h3></a>
+              </div> 
+
+
+        </div>
+   
+    </div>
 
 
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="card sd" style="width: 100%">
+                <div class="card sd" style="width: 100%; border-radius:0!important; border-color: rgba(238, 238, 238, 0) !important;">
 
                 <div class="jb-wrap">
                     <div class="text-center jb-image">
@@ -39,8 +53,8 @@
 
                     <div class="card-body">
                         <div>
-                            <h5 class="text-start">Synopsis</h5>
-                            <hr class="movie_detail_hr">
+                            <div class="text-start moviedetitle">Synopsis</div>
+                            <hr class="moviedehr">
                             <div class="text-center">
                                 <h2 class="movie_title my-5 prefont">{{ movie.title }}</h2>
                             </div>
@@ -53,8 +67,8 @@
                                 </div>
                             </div>
                             <div class="text-center py-5 mx-5 px-5">{% autoescape on %}{{movie.content|safe}}{% endautoescape %}</div>
-                            <h5 class="text-start">Review</h5>
-                            <hr class="movie_detail_hr">
+                            <h5 class="text-start predetitle">Review</h5>
+                            <hr class="moviedehr">
                                     {% for review in reviews %}
                                     <div class="col-md-3 mb-3" style="width: 100%">
                                         <div class="card text-center" style="width: 100%">
@@ -75,13 +89,13 @@
                         </div>
                     </div>
 
-                    <div class="text-center my-5 pt-3">
-                        <a onClick="history.go(-1)">
-        
+                    <div class="text-center my-5 pt-3" style="display:flex; justify-content: center;">
 
-                            <button type="button" class="movie_list_button">목록</button>
+                        <a class="moviedelistbtn" onClick="history.go(-1)" type="button" style="text-align:center;">
+                            목록
                         </a>
                     </div>
+
 
                 </div>     
             </div>    

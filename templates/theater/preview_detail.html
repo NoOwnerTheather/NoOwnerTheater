@@ -79,26 +79,16 @@
                         <table class="comment-table-{{movie.id}} rgy-reply" style="width:100%!important; margin-left:3rem;"> <!--width:900px-->
                             {% for comment in movie.commentpreview_set.all %}
                             <tr class = "comment-{{comment.id}}" style="display:flex; justify-content: space-between; margin-top:2rem;">
-<<<<<<< HEAD
-                                <td id="comment_inputuser-{{movie.id}}" style="width:10%">
-                                    <img src="{{comment.user.user_img}}"  class="detail-user-img" alt="...">
-                                    <p>{{comment.user}} </p>
-=======
                                 <td id="comment_inputuser-{{movie.id}}" style="width:15%">
                                     <img src="{{comment.user.user_img}}"  class="detail-user-img2" alt="...">
                                     <p style="margin-left:0.5rem;">{{comment.user}} </p>
->>>>>>> 5781e69c7be4e5d1d46cdcd2d23354b27e7d9431
                                     
                                 </td>
 
 
-<<<<<<< HEAD
-                                <td style="width:75%"><input type="text" class="replyContent{{ comment.id }} prefont" value="{{ comment.content }}" style="width:100%; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
-=======
                                 <td style="width:70%">
                                     
                                     <input type="text" class="replyContent{{ comment.id }} prefont" value="{{ comment.content }}" style="width:100%; height: auto; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
->>>>>>> 5781e69c7be4e5d1d46cdcd2d23354b27e7d9431
                                     <p>
                                         <span class="prefont">{{comment.created_at}}</span> 
                                         {% if user == comment.user %}
@@ -318,63 +308,6 @@
     
         const WriteHandleResponse = () => {
             if (requestComment.status < 400){
-<<<<<<< HEAD
-                const {id, type, content, comment_id, user} = JSON.parse(requestComment.response);
-                const element = document.querySelector(`.comment-table-${id}`);
-                const new_comment = document.createElement("tr");
-                const comment_content = document.createElement("td");    
-                const del = document.createElement("td");
-
-                const comment_user = document.createElement("td");  ///3
-
-                //const update = document.getElementsByClassName("tdReplyUpdate${ comment.id }$"); //4
-                //var x = document.getElementsByClassName("example");
-                //class="tdReplyUpdate{{ comment.id }}"
-
-                const update = document.createElement("td"); //4!!!수정필요
-                //const update = document.createElement("td").style.display='inline-block'; //4
-
-                const like = document.createElement("td"); //4!!!수정필요
-
-                const date = document.createElement("td"); //4!!!수정필요
-
-                ///.
-
-                let tdReplyUpdate = document.querySelector(`.tdReplyUpdate${id}`);
-                let tdReplyDelete = document.querySelector(`.tdReplyDelete${id}`);
-
-                let replyContent=document.querySelector(`.replyContent${id}`);
-                ///.            
-    
-                new_comment.setAttribute("class", `comment-${comment_id}`);
-
-
-                //.
-                //console.log({user});
-                comment_user.innerHTML = `${user}`; //3
-                comment_content.innerHTML = `${content}`; //1
-
-                /*if(`${content}`==null){
-
-                    alert("댓글입력해주세요");
-                    console.log("댓글X");
-                    
-                }*/
-    
-                del.innerHTML = `<td><button onclick="onClickDel(${comment_id}) prededelmodibtn">삭제</button></td>`; //1
-                //update.innerHTML = `<button onclick="replyUpdate(${comment_id})">수정</button>`; //1
-                update.innerHTML =`<td class="tdReplyUpdate(${comment_id})"><input type="button" value="수정" onclick="replyUpdate(${comment_id})"></td>`
-
-                //like.innerHTML = `<td class="like"><button>좋아요</button></td>`;
-                like.innerHTML=`<td>
-                        <input type="button" class="predebtnlike like prefont" name="(${comment_id})" value="♥" style="padding-top: 30px;">
-                        <p id="count-(${comment_id})" style="font:bold 1em; margin-top: 3px">&nbsp;{{ comment.likes.all.count }}</p>
-                    </td>`;
-                //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요</button>`;
-                
-                //like.innerHTML=`<button onclick="onClickLike(${comment_id})">좋아요 ${ like }</button>`;
-=======
->>>>>>> 5781e69c7be4e5d1d46cdcd2d23354b27e7d9431
 
                 
                 Date.prototype.format = function (f) {
