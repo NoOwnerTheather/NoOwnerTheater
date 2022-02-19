@@ -24,30 +24,29 @@
     <title>주인없는영화관</title>
 </head>
 <body> 
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light pretendfont navstyle" style="padding-left: 10rem!important;padding-right:10rem!important;">
         <div class="nav_left">
             <img src="{% static 'img/logo.png' %}">
-            <a  href="{% url 'theater:main' %}" class="navbar_title">주인없는영화관</a>
+            <a  href="{% url 'theater:main' %}" class="navbar_title pretendfont" style="font-size: 3rem;">주인없는영화관</a>
         </div>
     
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Nav"
         aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
-        <div class="collapse navbar-collapse" id="Nav" style="flex-basis:content">
+        <div class="" id="Nav collapse navbar-collapse" style="display:flex;margin-left: auto;"> <!--collapse navbar-collapse-->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:chart_list' %}">영화 차트</a> 
+                    <a class="nav-link p-0 m-0 navfontsizestlye" href="{% url 'theater:chart_list' %}">영화 차트</a> 
                 </li>
                 <li class="nav-item p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:review_board' %}">영화 리뷰</a>
+                    <a class="nav-link p-0 m-0 navfontsizestlye" href="{% url 'theater:review_board' %}">영화 리뷰</a>
                 </li>
                 <li class="nav-item  p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:preview' %}">온라인 시사회</a>
+                    <a class="nav-link p-0 m-0 navfontsizestlye pretendfont " href="{% url 'theater:preview' %}">온라인 시사회</a>
                 </li>
                 <li class="nav-item  p-0 m-2 mx-4">
-                    <a class="nav-link p-0 m-0" href="{% url 'theater:business_list' %}">지원사업 게시판</a>
+                    <a class="nav-link p-0 m-0 navfontsizestlye pretendfont" href="{% url 'theater:business_list' %}">지원사업 게시판</a>
                 </li>
                 {% if user.is_authenticated %}
                     {% if user.type == "일반 사용자" %}
@@ -106,8 +105,26 @@
     {% block content %}
         <!-- extend -->
     {% endblock %}
-    <div class="footer">
-        주인없는 영화관 <i class="fab fa-github"><a href="https://github.com/NoOwnerTheather"></a></i>
+
+    <div class="footer main_foot_flex">
+        <div>
+            <h4 class="pretendfont">주인없는 영화관</h4>
+            <h4 class="pretendfont">독립영화 플랫폼</h4>
+        </div>
+    
+        <div style="margin-left:5rem;">
+            <h6 class="pretendfont">개발자 | 강성준 송우영 송하윤 유병찬 이유진 </h6>
+            <h6 class="pretendfont">제휴 및 협력 | noownertheater@gmail.com </h6>
+            <h6 class="pretendfont">ⓒ2022 by 주인없는영화관 All right reserved</h6>
+    
+        </div>
+    
+    
+    
+        <div style="margin-left: auto;">
+            <a href="https://github.com/NoOwnerTheather"><img src="/static/img/githubicon.png" width="25rem" height="25rem" alt=""/></a>
+        </div>
+
     </div>
 </body>
 </html>
