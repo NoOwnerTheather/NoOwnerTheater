@@ -39,7 +39,7 @@
                     
                     <div class="swiper-slide">
                       <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
-                      <div class="card my-3" style="width: 100%;height:100%;">
+                      <div class="card my-3" style="width: 100%; border-radius: 0!important;">
                         <img src="{{row1.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
                         <div class="card-body movie_chart_border">
                           <h5 class="card-title text-center">{{row1.title}}</h5>
@@ -245,20 +245,20 @@ navigation : { // 네비게이션
     nextEl : '.swiper-button-next', // 다음 버튼 클래스명
     prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
 },
-breakpoints: { //반응형 조건 속성
-        768: { //500 미만일경우
-          slidesPerView: 1, //레이아웃 1열
-          slidesPerGroup : 1.
-        },
-        992: { //640 미만일경우
-          slidesPerView: 2, //레이아웃 2열
-          slidesPerGroup : 2,
-        },
-        1200: { // 768 미만일경우
-          slidesPerView: 3,
-          slidesPerGroup : 3,
-        },
-      },
+// breakpoints: { //반응형 조건 속성
+//         768: { //500 미만일경우
+//           slidesPerView: 1, //레이아웃 1열
+//           slidesPerGroup : 1.
+//         },
+//         992: { //640 미만일경우
+//           slidesPerView: 2, //레이아웃 2열
+//           slidesPerGroup : 2,
+//         },
+//         1200: { // 768 미만일경우
+//           slidesPerView: 3,
+//           slidesPerGroup : 3,
+//         },
+//       },
 
 });
 
