@@ -21,7 +21,12 @@
     <div class="d-flex flex-column my-3" >
         <a class="badge rounded-pill bg-dark text-light m-1 p-2" href="{% if movie.url %} {{movie.url}} {% endif %}">영상 링크</a>
         <a class="badge rounded-pill bg-dark text-light m-1 p-2" href="{% if movie.video %} {{movie.video.url}} {% endif %}">예고편</a>
+        {%if user.type == '일반 사용자'%}
         <a class="badge rounded-pill bg-dark text-light m-1 p-2" href="{% url 'theater:review_enroll' pk=movie.id%}">리뷰 작성</a>
+        {%elif user.type == '제작사' and user.username == movie.user.username%}
+        <a class="badge rounded-pill bg-dark text-light m-1 p-2" href="{% url 'theater:movie_fix' pk=movie.id%}">영화 수정</a>
+        <a class="badge rounded-pill bg-dark text-light m-1 p-2" href="{% url 'theater:movie_delete' pk=movie.id%}">영화 삭제</a>
+        {%endif%}
     </div>    
 </div>
 
