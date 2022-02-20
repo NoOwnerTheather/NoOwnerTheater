@@ -20,7 +20,7 @@
                         <hr>
                         <li class="col-md-12 h3" style="float:none; margin:0 auto;">{{ review.title }}</li>
                         <br>
-                        <li class="col-md-12" style="float: none; margin:0 auto;">{{ review.content }}</li>
+                        <li class="col-md-12" style="float: none; margin:0 auto;">{% autoescape on %}{{ review.content|safe }}{% endautoescape %}</li>
                     </ul>
                         
                         <div class="movie-review-comment">

@@ -97,4 +97,7 @@ a>.card:hover{
     margin-left:2rem;
     margin-top:3rem;
   }
+  #last-page-section{
+    min-height:75rem;
+  }
 }
