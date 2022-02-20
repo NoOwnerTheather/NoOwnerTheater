@@ -1,6 +1,7 @@
 .login-background {
     background-color: #f5f4f2;
-    min-height: 110vh;
+    min-height: 90vh;
+    padding-bottom: 10rem;
     height: 100%;
 }
 .login-position {
@@ -108,7 +109,8 @@ margin-bottom: 1rem;
 
 .signup-background {
     background-color: #f5f4f2;
-    min-height: 125vh;
+    min-height: 90vh;
+    padding-bottom: 10rem;
     height: 100%;
 }
 

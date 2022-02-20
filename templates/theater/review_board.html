@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
-<section class="page-section">
+<section class="page-section-background">
     <div class="container">
         <div class="container floatBox-center text-dark p-4">
             <h5 class="section-heading mx-3">인기 글</h5>    
@@ -25,15 +25,15 @@
                                     <li class="floatBox-right movie-position movie-button txt_line">{{ review.movie }}</li>
                                     <br>
                                     <hr>
-                                    <li class="col-md-12 h3" style="float:none; margin:0 auto;">{{ review.title }}</li>
+                                    <li class="col-md-12 h3" style="float:none; margin:0 auto;"><a href="{% url 'theater:review_detail' review.id %}" onclick="onClickTitle({{ review.id }})" ">{{review.title}}</a></li>
                                     <br>
                                     <li class="col-md-12 cut-text" style="float: none; margin:0 auto;">{% autoescape on %}{{review.content|safe}}{% endautoescape %}</li>
                                 </ul>
                                     <div>
-                                        <div class="floatBox-center">
+                                        <!-- <div class="floatBox-center">
                                             <input type="image" src="{% static 'img/like.png' %}" class="like-review" name="{{ review.id }}" value="Like">    
                                             <p id="count-{{ review.id }}" class="d-inline"> {{ review.likes_user.all.count }}</p>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </ul>
                                 </div>

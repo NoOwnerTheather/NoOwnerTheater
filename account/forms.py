@@ -77,11 +77,13 @@ class RecoveryIdForm(forms.Form):
         self.fields['phone'].widget.attrs.update({
             'class': 'form-control input-lg input-style',
             'id': 'form_phone',
+            'placeholder':"000-0000-0000"
         })
         self.fields['email'].label = '이메일'
         self.fields['email'].widget.attrs.update({
             'class': 'form-control input-lg input-style',
-            'id': 'form_email' 
+            'id': 'form_email',
+            'placeholder':"EMAIL"
         })
 
 
