@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
-<section class="page-section-background">
+<section class="page-section">
     <div class="container">
         <div class="container floatBox-center text-dark p-4">
             <h5 class="section-heading mx-3">인기 글</h5>    
@@ -25,15 +25,15 @@
                                     <li class="floatBox-right movie-position movie-button txt_line">{{ review.movie }}</li>
                                     <br>
                                     <hr>
-                                    <li class="col-md-12 h3" style="float:none; margin:0 auto;"><a href="{% url 'theater:review_detail' review.id %}" onclick="onClickTitle({{ review.id }})" ">{{review.title}}</a></li>
+                                    <li class="col-md-12 h3" style="float:none; margin:0 auto;">{{ review.title }}</li>
                                     <br>
-                                    <li class="col-md-12 cut-text" style="float: none; margin:0 auto;">{% autoescape on %}{{review.content|safe}}{% endautoescape %}</li>
+                                    <li class="col-md-12 cut-text" style="float: none; margin:0 auto;">{{ review.content }}</li>
                                 </ul>
                                     <div>
-                                        <!-- <div class="floatBox-center">
+                                        <div class="floatBox-center">
                                             <input type="image" src="{% static 'img/like.png' %}" class="like-review" name="{{ review.id }}" value="Like">    
                                             <p id="count-{{ review.id }}" class="d-inline"> {{ review.likes_user.all.count }}</p>
-                                        </div> -->
+                                        </div>
                                     </div>
                                 </ul>
                                 </div>
@@ -60,10 +60,10 @@
                 <th>제목</th>
                 <th>작성자</th>
                 <th>작성일</th>
-                <th class="last_hit">조회수</th>
+                <th>조회수</th>
             </tr>
             </thead>
-            <tbody class="business-table">
+            <tbody>
             {% if review_list_pub %}
             {% for review in review_list_pub %}
             <tr>
@@ -177,8 +177,6 @@ breakpoints: { //반응형 조건 속성
           slidesPerView: 3,
           slidesPerGroup : 3,
         },
-        slidesPerView: 4,
-          slidesPerGroup : 4,
       },
 });
 $('#prev').click(function(){
@@ -200,8 +198,8 @@ $(".like-review").click(function () { // .like 버튼을 클릭 감지
             myswiper.update()
         },
         error: function (request, status, error) { // 실패
-            alert("로그인이 필요합니다.")
-            window.location.replace("/account/login/") // 로그인 페이지로 넘어가기
+            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            $(window.location).replace("/account/login/"); // 로그인 페이지로 넘어가기
         },
     });
 })
