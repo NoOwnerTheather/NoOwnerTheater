@@ -288,7 +288,11 @@ tbody>tr{
 .writehandletr{
     width:auto;
 }
+.predewidth70_2{
+   
+    width:56rem;
 
+}
 /* 전체 반응형 모음집 */
 @media screen and (max-width: 480px) {
 .comment_tool{
@@ -405,6 +409,10 @@ td>.replyContent{
     display: flex;
     flex-direction: column;
 }
+#commentbutton_id{
+    margin-left:0rem !important;;
+    margin-right:2rem;
+}
 .commentbutton_flex{
     display:flex ;
     align-items: center;
@@ -437,10 +445,7 @@ td>.replyContent{
     align-items: center;;
     padding-left:0;
 }
-.prewidth70>.commentbutton_flex{
-    margin-left:0rem;
-}
-}
+
 /*.predebtnlike:hover{
 
     color: #BEB0FF;
