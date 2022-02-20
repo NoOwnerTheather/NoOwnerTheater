@@ -598,12 +598,13 @@ def write_review_comment(request,pk):
    type = req['type']
    content = req['content']
    user=req['user']
+   user_img=request.user.user_img
    review = Review.objects.get(id=id)
    
    comment = CommentReview.objects.create(review=review, content=content, user=request.user)
    
    comment.save()
-   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id})
+   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id, 'user':user, 'user_img':user_img})
 
 
 @csrf_exempt
@@ -625,6 +626,103 @@ def del_review_comment(request,pk):
 
 
    return JsonResponse({'id': comment_id})
+
+@csrf_exempt
+def review_replyUpdate(request,pk):
+   jsonObject = json.loads(request.body)
+   reply=CommentReview.objects.filter(id=jsonObject.get('id'))
+   context={
+      'result':'no'
+   }
+
+   if reply is not None:
+      reply.update(content=jsonObject.get('content'))
+      context={
+         'result':'ok'
+      }
+      return JsonResponse(context)
+   
+   return JsonResponse(context)
+
+
+@csrf_exempt
+def write_comment(request,pk):
+   print("hi")
+   req = json.loads(request.body)
+   id = req['id']
+   type = req['type']
+   content = req['content']
+   user=req['user']
+   user_img=request.user.user_img
+   movie = Movie.objects.get(id=id)
+   
+
+   movie = get_object_or_404(Movie, pk=pk) 
+
+   print("(+)마일리지") #####
+   print(request.user) #####
+   print(request.user.mileage) #####
+   print(user_img) #####
+   
+   request.user.mileage=request.user.mileage+5 #####
+
+   request.user.save() #####
+
+   print(request.user.mileage) #####
+
+
+   
+   comment = CommentPreview.objects.create(movie=movie, content=content, user=request.user)
+   
+   comment.save()
+   return JsonResponse({'id': id, 'type': type, 'content': content, 'comment_id': comment.id, 'user':user, 'user_img':user_img})
+
+
+
+
+
+@csrf_exempt
+def del_comment(request,pk):
+   req = json.loads(request.body)
+   comment_id = req['id']
+   comment = get_object_or_404(CommentPreview, id=comment_id)
+   comment.delete()
+
+   print("(-)마일리지") #####
+   print(request.user) #####
+   print(request.user.mileage) #####
+   
+   request.user.mileage=request.user.mileage-5 #####
+
+   request.user.save() #####
+
+   print(request.user.mileage) #####
+
+
+   return JsonResponse({'id': comment_id})
+
+
+
+#####수정 ajax#######
+@csrf_exempt
+def replyUpdate(request,pk):
+   jsonObject = json.loads(request.body)
+   reply=CommentPreview.objects.filter(id=jsonObject.get('id'))
+   context={
+      'result':'no'
+   }
+
+   if reply is not None:
+      reply.update(content=jsonObject.get('content'))
+      context={
+         'result':'ok'
+      }
+      return JsonResponse(context)
+   
+   return JsonResponse(context)
+
+
+
 
    
 @csrf_exempt
