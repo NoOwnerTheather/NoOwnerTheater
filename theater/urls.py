@@ -49,7 +49,7 @@ urlpatterns = [
    path("review/<int:pk>/del_review_comment/", views.del_review_comment, name='del_review_comment'),
    path('review_hits_ajax/',views.review_hits_ajax, name='review_hits_ajax'),
 
-   #path('review/<int:pk>/replyUpdate/', views.replyUpdate, name='replyUpdate'),
+   path('review/<int:pk>/replyUpdate/', views.review_replyUpdate, name='review_replyUpdate'),
    path("preview/<int:pk>/replyUpdate/", views.replyUpdate, name='replyUpdate'),
 
    path('likes_ajax/', views.likes_ajax, name='likes_ajax'),
