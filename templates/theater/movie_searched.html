@@ -7,7 +7,7 @@
   <form  method="POST" action="{% url 'theater:movie_search' %}">
       {% csrf_token %}     
       <div class="movie_board-search" style="width:100%;">
-          <input value="{{searched}}" name="searched" style="
+          <input placeholder="영화를 검색해보세요." name="searched" style="
           font-size: 1.4rem;
           margin-left: 0;
           border: 1px solid;
@@ -15,12 +15,12 @@
           width: 40rem;
           padding-left: 1.5rem;
       " />
-        <div class="d-flex justify-content-center" style="position: relative; right:2.5rem; width: 3rem; height: 3rem; border: 1px solid; border-radius: 6rem; background: black;">
+        <div id="movie_search"class="d-flex justify-content-center" style="position: relative; right:2.5rem; width: 3rem; height: 3rem; border: 1px solid; border-radius: 6rem; background: black;">
           <button type="submit" style="background-color: black;"><i class="fas fa-search" style="color: white;"></i></button>
         </div>
       </div>
   </form>
-</div>  
+</div> 
 
     {% if movies %}  
     <section class="page-section" id="" style="height: 79rem;">
@@ -58,7 +58,7 @@
     {% else %}
     <section class="page-section py-5" id="" style="height: 79rem;">
         <i class="fas fa-exclamation-circle d-flex justify-content-center fa-7x" style="margin-top:25rem"></i>
-        <h1 class="text-center">검색된 영화가 없습니다.</h1>
+        <h1 class="d-flex justify-content-center text-center">검색된 영화가 없습니다.</h1>
     </section>
     {% endif %}
 

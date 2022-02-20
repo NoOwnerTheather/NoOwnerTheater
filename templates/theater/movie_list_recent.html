@@ -33,10 +33,10 @@
         <div class="col-md-3">
           <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
             <div class="card mb-3" style="border-radius: 0!important;">
-              <img src="{{movie.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
+              <img id="movie_chart_img" src="{{movie.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
               <div class="card-body">
                 <h5 class="card-title text-center">{{movie.title}}</h5>
-                <span class="stars text-dark me-2 d-flex justify-content-center">{{movie.rating}}</span>
+                <span id="star-zone" class="stars text-dark me-2 d-flex justify-content-center">{{movie.rating}}</span>
               </div>
             </div>
           </a>
@@ -45,10 +45,10 @@
         <div class="col-md-3">
           <a href="{% url 'theater:movie_detail' movie.id %}">
             <div class="card mb-3" style="border-radius: 0!important;">
-              <img src="{{movie.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
+              <img id="movie_chart_img" src="{{movie.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
               <div class="card-body">
                 <h5 class="card-title text-center">{{movie.title}}</h5>
-                <span class="stars text-dark me-2 d-flex justify-content-center">{{movie.rating}}</span>
+                <span id="star-zone" class="stars text-dark me-2 d-flex justify-content-center">{{movie.rating}}</span>
               </div>
             </div>
           </a>

@@ -89,4 +89,12 @@ a>.card:hover{
   .main-img>img{
     margin-top:9.3rem!important;
   }
+  #movie_chart_img{
+    min-height: 80rem!important;;
+    max-height:100rem!important;
+    height:auto!important;
+    max-width:100rem;
+    margin-left:2rem;
+    margin-top:3rem;
+  }
 }
