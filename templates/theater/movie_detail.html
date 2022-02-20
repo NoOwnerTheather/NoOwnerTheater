@@ -35,9 +35,9 @@
                   <a class="" href="{% url 'theater:review_enroll' pk=movie.id%}"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">리뷰 작성</h3></a>
                   {%endif%}
                   {%if request.user.type == "제작사" and request.user.username == movie.user.username%}
-                  <img style="width: 5rem;height: 5rem;margin-left:4.5rem !important;" src="{% static 'img/reviewbtn.png' %}" alt="">
+                  <img style="width: 5rem;height: 5rem;margin-left:4.5rem !important;" src="{% static 'img/modibtn.png' %}" alt="">
                   <a class="" href="{% url 'theater:movie_fix' pk=movie.id%}"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">수정하기</h3></a>
-                  <img style="width: 5rem;height: 5rem;margin-left:4.5rem !important;" src="{% static 'img/reviewbtn.png' %}" alt="">
+                  <img style="width: 5rem;height: 5rem;margin-left:4.5rem !important;" src="{% static 'img/deletebtn.png' %}" alt="">
                   <a class="" href="{% url 'theater:movie_delete' pk=movie.id%}"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">삭제하기</h3></a>
                   {%endif%}
                   {%endif%}

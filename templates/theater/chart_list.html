@@ -20,7 +20,7 @@
             width: 40rem;
             padding-left: 1.5rem;
         " />
-          <div class="d-flex justify-content-center" style="position: relative; right:2.5rem; width: 3rem; height: 3rem; border: 1px solid; border-radius: 6rem; background: black;">
+          <div id="movie_search"class="d-flex justify-content-center" style="position: relative; right:2.5rem; width: 3rem; height: 3rem; border: 1px solid; border-radius: 6rem; background: black;">
             <button type="submit" style="background-color: black;"><i class="fas fa-search" style="color: white;"></i></button>
           </div>
         </div>
@@ -41,7 +41,8 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     {% for row1 in rows1 %}
-                    {%if row1.genre == '성인물(에로)' and current_user.age <= 19%}
+                    {%if user.is_authenticated%}
+                    {%if row1.genre == '성인물(에로)' and current_user.age <= 19 and user.is_authenticated%}
                     
                     <div class="swiper-slide">
                       <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
@@ -49,7 +50,7 @@
                         <img src="{{row1.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
                         <div class="card-body movie_chart_border">
                           <h5 class="card-title text-center">{{row1.title}}</h5>
-                          <span class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
+                          <span id="star-zone" class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
                         </div>
                       </div>
                       </a>
@@ -62,12 +63,37 @@
                             <img src="{{row1.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
                             <div class="card-body movie_chart_border">
                               <h5 class="card-title text-center">{{row1.title}}</h5>
-                              <span class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
+                              <span id="star-zone" class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
                             </div>
                         </div>
                         </a>
                     </div>
                     {%endif%}
+                    {%elif row1.genre == '성인물(에로)'%}
+                    <div class="swiper-slide">
+                      <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
+                      <div class="card" style="width: 100%; border-radius: 0!important;">
+                        <img src="{{row1.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
+                        <div class="card-body movie_chart_border">
+                          <h5 class="card-title text-center">{{row1.title}}</h5>
+                          <span id="star-zone" class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
+                        </div>
+                      </div>
+                      </a>
+                  </div>
+                    {%else%}
+                    <div class="swiper-slide">
+                      <a href="{% url 'theater:movie_detail' row1.id %}">
+                      <div class="card" style="width: 100%; border-radius: 0!important;;">
+                          <img src="{{row1.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
+                          <div class="card-body movie_chart_border">
+                            <h5 class="card-title text-center">{{row1.title}}</h5>
+                            <span class="stars text-dark me-2 d-flex justify-content-center">{{row1.rating}}</span>
+                          </div>
+                      </div>
+                      </a>
+                  </div>
+                  {%endif%}
                     
                     {% endfor %}
                 </div>
@@ -120,14 +146,15 @@
                 <div class="swiper-wrapper">
               
                     {% for row2 in rows2 %}
-                    {%if row2.genre == '성인물(에로)' and current_user.age <= 19%}
+                    {%if user.is_authenticated%}
+                    {%if row2.genre == '성인물(에로)' and current_user.age <= 19 and user.is_authenticated%}
                     <div class="swiper-slide">
                       <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
                       <div class="card" style="width: 100%; border-radius: 0!important;">
                           <img src="{{row2.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
                           <div class="card-body movie_chart_border">
                             <h5 class="card-title text-center">{{row2.title}}</h5>
-                            <span class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
+                            <span id="star-zone"class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
                           </div>
                       </div>
                       </a>
@@ -140,12 +167,37 @@
                             <img src="{{row2.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
                             <div class="card-body movie_chart_border">
                               <h5 class="card-title text-center">{{row2.title}}</h5>
-                              <span class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
+                              <span id="star-zone"class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
                             </div>
                         </div>
                         </a>
                     </div>
                     {%endif%}
+                    {%elif row2.genre == '성인물(에로)'%}
+                    <div class="swiper-slide">
+                      <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
+                      <div class="card" style="width: 100%; border-radius: 0!important;">
+                          <img src="{{row2.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
+                          <div class="card-body movie_chart_border">
+                            <h5 class="card-title text-center">{{row2.title}}</h5>
+                            <span id="star-zone"class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
+                          </div>
+                      </div>
+                      </a>
+                  </div>
+                  {%else%}
+                  <div class="swiper-slide">
+                    <a href="{% url 'theater:movie_detail' row2.id %}">
+                    <div class="card" style="width: 100%; border-radius: 0!important;">
+                        <img src="{{row2.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
+                        <div class="card-body movie_chart_border">
+                          <h5 class="card-title text-center">{{row2.title}}</h5>
+                          <span id="star-zone" class="stars text-dark me-2 d-flex justify-content-center">{{row2.rating}}</span>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                  {%endif%}
                     {% endfor %}
                 </div>
 
@@ -180,6 +232,7 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                   {% for row3 in rows3 %}
+                  {%if user.is_authenticated%}
                   {%if row3.genre == '성인물(에로)' and current_user.age <= 19%}
                   
                   <div class="swiper-slide">
@@ -188,7 +241,7 @@
                         <img src="{{row3.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
                         <div class="card-body movie_chart_border">
                           <h5 class="card-title text-center">{{row3.title}}</h5>
-                          <span class="stars text-dark-2 d-flex justify-content-center">{{row3.rating}}</span>
+                          <span id="star-zone"class="stars text-dark-2 d-flex justify-content-center">{{row3.rating}}</span>
                         </div>
                     </div>
                     </a>
@@ -202,13 +255,37 @@
                           <img src="{{row3.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
                           <div class="card-body movie_chart_border">
                             <h5 class="card-title text-center">{{row3.title}}</h5>
-                            <span class="stars text-dark me-2 d-flex justify-content-center">{{row3.rating}}</span>
+                            <span id="star-zone"class="stars text-dark me-2 d-flex justify-content-center">{{row3.rating}}</span>
                           </div>
                       </div>
                       </a>
                   </div>
                   {%endif%}
-                  
+                  {%elif row3.genre == '성인물(에로)'%}
+                  <div class="swiper-slide">
+                    <a data-bs-toggle="modal" data-bs-target="#Modalwhite">
+                    <div class="card" style="width: 100%; border-radius: 0!important;">
+                        <img src="{{row3.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
+                        <div class="card-body movie_chart_border">
+                          <h5 class="card-title text-center">{{row3.title}}</h5>
+                          <span id="star-zone"class="stars text-dark-2 d-flex justify-content-center">{{row3.rating}}</span>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                {%else%}
+                <div class="swiper-slide">
+                  <a href="{% url 'theater:movie_detail' row3.id %}">
+                  <div class="card" style="width: 100%; border-radius: 0!important;">
+                      <img src="{{row3.poster.url}}" class="card-img-top" alt="..." style="height: 40rem;">
+                      <div class="card-body movie_chart_border">
+                        <h5 class="card-title text-center">{{row3.title}}</h5>
+                        <span id="star-zone"class="stars text-dark me-2 d-flex justify-content-center">{{row3.rating}}</span>
+                      </div>
+                  </div>
+                  </a>
+              </div>
+                {%endif%}
                   {% endfor %}
                 </div>
 

@@ -66,4 +66,19 @@ a>.card:hover{
   transition:all 0.5s;
   overflow: hidden;
   transform: scale(1.05);
+}@media screen and (max-width: 480px) {
+  #movie_search{
+      margin-left:0!important;
+      width: 8rem!important;;
+      height:5.3rem!important;
+      right:4.5rem!important;
+  }
+  #movie_search > button{
+    padding-left: 0rem;
+    padding-bottom:5rem;
+  }
+  #star-zone{
+    margin-left:0!important;
+  } 
+  
 }
