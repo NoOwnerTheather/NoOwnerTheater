@@ -66,12 +66,12 @@
 
 
 
-                    <div class="">
+                    <div style="margin-top:4rem;" >
 
                         
                         <table class="comment-table-{{review.id}} rgy-reply" style="width:100%!important; margin-left:3rem;"> <!--width:900px-->
                             {% for comment in review.commentreview_set.all %}
-                            <tr class = "comment-{{comment.id}}" style="display:flex; justify-content: space-between; margin-top:2rem;">
+                            <tr id="review_commentbox" class = "comment-{{comment.id}}" style="display:flex; justify-content: space-between; margin-top:2rem;">
                                 <td id="comment_inputuser-{{review.id}}" style="width:15%">
                                     <img src="{{comment.user.user_img}}"  class="detail-user-img2" alt="...">
                                     <p style="margin-left:0.5rem;">{{comment.user}} </p>
@@ -86,11 +86,14 @@
                                         <span class="prefont">{{comment.created_at}}</span> 
                                         {% if user == comment.user %}
                                         <span style="margin-left: 1rem;"></span>
+                                        <div class="commentbutton_flex">
                                         <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel({{comment.id}})">삭제</button>
-                                        <span>|</span>
+                                        <span id="comment_line">|</span>
+                                        
                                         <button class="tdReplyUpdate{{ comment.id }}"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate({{ comment.id }})"></button>
                                         <button class="tdReplySubmit{{ comment.id }}" style="display:none"><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit({{ comment.id }})"></button>
                                         <button class="tdReplyUpdateCancel{{ comment.id }}" style="display:none"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel({{ comment.id }})"></button>
+                                    </div>
 
                                         {% else %}
                                         {% endif %}
@@ -323,7 +326,7 @@
 
                 comment_content.setAttribute("class", `predewidth70`); //////////////
 
-                date.setAttribute("class", `predewidthmargin15`); //////////////
+                
                 
 
                 //.
@@ -346,7 +349,7 @@
                                         <span class="prefont">${_today.format('NS월 dd, yyyy, hh:mm a/p')}</span>
                                         <span style="margin-left: 1rem;"></span>
                                         <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel(${comment_id})">삭제</button>
-                                        <span>|</span>
+                                        <span >|</span>
                                         <button class="tdReplyUpdate(${comment_id})"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate(${comment_id})"></button>
                                         <button class="tdReplySubmit(${comment_id}) predestylejs "><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit(${comment_id})"></button>
                                         <button class="tdReplyUpdateCancel(${comment_id}) predestylejs"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel(${comment_id})"></button>

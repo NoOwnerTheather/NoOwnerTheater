@@ -211,7 +211,9 @@
     
 
 }
-
+.predewidth70{
+    width:67.5%!important;
+}
 .rgy-reply {
 
     display: flex;
@@ -245,23 +247,26 @@ tbody{
 
 .predewidthmargin15{
     width:15%;
-    padding-left: 12.3rem;
+    padding-left:10.7rem;
+    padding-right:2rem;
     /*padding-left: 5.5rem;*/
 }
 
 .predewidth70{
 
     width:70%;
-    padding-left: 2.5rem;
+    padding-left: 3.8rem;
 }
 
 tbody>tr{
     border-bottom:1px solid rgba(0, 0, 0, 0.1) !important;
     /*width: 88rem;*/
-    width: 130rem;
+    width: auto;
     /*border-width: 80rem;*/
 }
-
+/* tbody{
+    padding-right:5rem!important;
+} */
 .predetrline{
     border-bottom:1px solid rgba(0, 0, 0, 0.1) !important;
     /*width: 88rem;*/
@@ -274,6 +279,15 @@ tbody>tr{
 
 }
 
+#review_commentbox{
+    width:58rem;
+}
+#review_commentbox>td{
+    padding-top:1rem;;
+}
+.writehandletr{
+    width:auto;
+}
 
 /* 전체 반응형 모음집 */
 @media screen and (max-width: 480px) {
@@ -285,12 +299,13 @@ tbody>tr{
 }
 .prefont{
     font-size:2rem;
+    width:18rem;
 }
 td>input{
     font-size:3rem!important;
 }
 td>p{
-    width:59px!important;
+    width:62px!important;
 }
 tr>td>p{
     margin-right:1rem;
@@ -364,6 +379,7 @@ margin-top:8rem;}
 .predewidthmargin15{
     width:15%;
     padding-left: 2.3rem;
+    
     /*padding-left: 5.5rem;*/
 }
 .predetrline{
@@ -372,7 +388,58 @@ margin-top:8rem;}
 .predewidthmargin15>p{
     text-align: center;
 }
-
+td>.replyContent{
+    width:100%;
+}
+#review_commentbox{
+    width: 94rem!important;
+}
+#review_commentbox>td>input{
+    width:100%!important;
+    padding-right:8rem;
+}
+#review_commentbox>td>img{
+    margin-right:7rem;;
+}
+#review_commentbox>td>p{
+    display: flex;
+    flex-direction: column;
+}
+.commentbutton_flex{
+    display:flex ;
+    align-items: center;
+    margin-left:3rem;
+}
+#review_commentbox>td>p>span{
+    width:18rem;
+}
+.prededelmodibtn{
+    padding-bottom:4.2rem;
+    height:38.5px;
+}
+.tdReplyUpdate>.prededelmodibtn{
+    position: relative;
+    bottom: 0.5rem;
+    
+}
+#comment_line{
+    margin-bottom:4rem;
+}
+.writehandletr{
+    width:auto;
+}
+.button_relative{
+    margin-top:50px;;
+}
+.predewidth70{
+    display:flex;
+    flex-direction: column;
+    align-items: center;;
+    padding-left:0;
+}
+.prewidth70>.commentbutton_flex{
+    margin-left:0rem;
+}
 }
 /*.predebtnlike:hover{
 
