@@ -3,12 +3,12 @@
 {% block content %}
 
 <div class="signup-background" >
-  <div class="d-flex justify-content-center align-items-center flex-colum mb-5">
+  <div style="justify-content:center;" class="d-flex  align-items-center flex-colum mb-5">
     <img class="mt-5" src="{% static 'img/logo.png' %}">
   </div>
-  <div class="signup-container container card col-md-4" style="top: 2rem;" >
-    <div class="d-flex justify-content-center align-items-center flex-column signup-height"  >
-        <form class="text-center" method="POST" action="{% url 'account:signup' %}">
+  <div class="signup-container container card col-md-4" style="top: 2rem; height:75rem;" >
+    <div style="justify-content:center;" class="d-flex  align-items-center flex-column signup-height"  >
+        <form class="text-center" method="POST" action="{% url 'account:signup' %}" style="margin-top:2rem;">
             <div class="signup-alert-content">
               {% csrf_token %}
               {% if form.errors %}

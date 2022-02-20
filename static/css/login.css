@@ -24,9 +24,10 @@ margin-bottom: 1rem;
 .login-margin{
     margin: 0px 0px 5rem 0px;
 }
-/* .login-container{
-    max-width: 49.3rem !important; 
-} */
+.login-container{
+    width:50rem !important;
+
+}
 
 .signup-container{
     max-width: 49.3rem !important; 
@@ -50,8 +51,12 @@ margin-bottom: 1rem;
     border-radius: 0rem !important;
     /* box-shadow: 3px 3px 10px rgb(209, 209, 209) !important; */
     height:6rem !important; 
-    width:100% !important;
+    width:40rem !important;
+    font-size: 1.8rem !important;
 }
+    
+}
+
 
 @media (min-width: 499px) {
     .input-style {
@@ -105,6 +110,7 @@ margin-bottom: 1rem;
     border-radius: 0rem !important;
     height:6rem !important; 
     width:40rem !important;
+    font-size: 1.8rem !important;
 }
 
 .signup-background {
