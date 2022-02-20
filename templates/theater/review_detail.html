@@ -66,7 +66,7 @@
 
 
 
-                    <div style="margin-top:4rem;" >
+                    <div id="write_area"style="margin-top:4rem;" >
 
                         
                         <table class="comment-table-{{review.id}} rgy-reply" style="width:98%!important; margin-left:3rem;"> <!--width:900px-->
@@ -80,8 +80,8 @@
 
 
                                 <td style="width:82.6%">
-                                    
-                                    <input type="text" class="replyContent{{ comment.id }} prefont" value="{{ comment.content }}" style="width:30%; height: auto; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
+                                   
+                                    <input type="text" class="replyContent{{ comment.id }} prefont" value="{{ comment.content }}" style="width:100%; height: auto; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
                                     <p>
                                         <span class="prefont">{{comment.created_at}}</span> 
                                         {% if user == comment.user %}
@@ -310,7 +310,7 @@
 
                 // const like = document.createElement("td"); //4!!!수정필요
 
-                const date = document.createElement("td"); //4!!!수정필요
+                // const date = document.createElement("td"); //4!!!수정필요
 
                 ///.
 
@@ -320,9 +320,9 @@
                 let replyContent=document.querySelector(`.replyContent${id}`);
                 ///.            
     
-                new_comment.setAttribute("class", `comment-${comment_id} writehandletr predetrline`); //////////////
+                new_comment.setAttribute("class", `comment-${comment_id} writehandletr2 predetrline`); //////////////
 
-                comment_user.setAttribute("class", `predewidth15`); //////////////
+                comment_user.setAttribute("class", `predewidth15_2`); //////////////
 
                 comment_content.setAttribute("class", `predewidth70_2`); //////////////
 
@@ -346,9 +346,9 @@
 
                 comment_content.innerHTML = `<td class='comment_tool'style="width:75%"><input type="text" class="replyContent{{ comment.id }} prefont" value="${content}" id="value_comment" style="width:30%; border:0 solid black; background-color: rgba(255, 255, 255, 0.466); font-size:larger" readonly>
                                     <p>
-                                        <span class="prefont">${_today.format('yyyy년 NS월 dd일 hh:mm a/p')}</span>
+                                        <span class="prefont_2">${_today.format('yyyy년 NS월 dd일 hh:mm a/p')}</span>
                                         <span style="margin-left: 1rem;"></span>
-                                        <div class=commentbutton_flex>
+                                        <div class=commentbutton_flex2>
                                         <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel(${comment_id})">삭제</button>
                                         <span >|</span>
                                         <button class="tdReplyUpdate(${comment_id})"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate(${comment_id})"></button>
