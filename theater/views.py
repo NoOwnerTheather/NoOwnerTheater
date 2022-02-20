@@ -738,3 +738,9 @@ def review_hits_ajax(request):
 
 
 
+def page_not_found(request, exception):
+    """
+    404 Page not found
+    """
+    return render(request, 'theater/404.html', {})
+
