@@ -80,5 +80,13 @@ a>.card:hover{
   #star-zone{
     margin-left:0!important;
   } 
-  
+  /* a>div>.card-img-top{
+    min-height:80rem;
+    max-width: 100rem;;
+    margin-left:2.5rem;
+    margin-top:1rem;
+  } */
+  .main-img>img{
+    margin-top:9.3rem!important;
+  }
 }
