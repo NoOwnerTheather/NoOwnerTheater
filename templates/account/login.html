@@ -14,11 +14,11 @@
 
 <div class="login-background">
   <div class="login-position"> 
-    <div class="d-flex justify-content-center align-items-center flex-column login-margin">
+    <div class="d-flex align-items-center flex-column login-margin">
       <img src="{% static 'img/logo.png' %}">
     </div>
     <div class="container card col-md-4 mb-5 login-container" style="float: none; margin:0 auto;">
-      <div class="d-flex justify-content-center align-items-center flex-column login-container-content" >
+      <div class="d-flex align-items-center flex-column login-container-content" >
           <form class="form-block text-center w-30" method="POST" action="{% url 'account:login' %}">
               <div class="login-field">
                 {% csrf_token %}
