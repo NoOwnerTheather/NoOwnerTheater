@@ -442,9 +442,9 @@
                                     <p>
                                         <span class="prefont">${_today.format('yyyy년 NS월 dd일 hh:mm a/p')}</span>
                                         <span style="margin-left: 1rem;"></span>
-                                        <div class="commentbutton_flex">
+                                        <div class="commentbutton_flex" id="commentbutton_id">
                                         <button class="tdReplyDelete{{comment.id}} prededelmodibtn" onclick="onClickDel(${comment_id})">삭제</button>
-                                        <span>|</span>
+                                        <span id="comment_line">|</span>
                                         <button class="tdReplyUpdate(${comment_id})"><input type="button" class="prededelmodibtn" value="수정" onclick="replyUpdate(${comment_id})"></button>
                                         <button class="tdReplySubmit(${comment_id}) predestylejs "><input type="button"  class="prededelmodibtn" value="확인" onclick="replySubmit(${comment_id})"></button>
                                         <button class="tdReplyUpdateCancel(${comment_id}) predestylejs"><input type="button" class="prededelmodibtn"  value="취소" onclick="replyUpdateCancel(${comment_id})"></button>
