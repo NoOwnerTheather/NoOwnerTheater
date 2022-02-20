@@ -8,6 +8,11 @@
     flex-direction: column;
     align-items: center;
 }
+.left_text:hover{
+    transition:all 0.5s;
+  overflow: hidden;
+  transform: scale(1.05);
+}
 
 .movieenroll{
     font-family: 'Pretendard';
@@ -64,7 +69,7 @@ html{
 }
 .form_text .main_text{
     padding-left:30rem;
-    color:#D151AF
+    color:#ffc83d
 }
 .reviewform_block{
     height:17rem;

@@ -245,7 +245,7 @@ tbody{
 
 .predewidthmargin15{
     width:15%;
-    padding-left: 7.3rem;
+    padding-left: 12.3rem;
     /*padding-left: 5.5rem;*/
 }
 
@@ -258,7 +258,7 @@ tbody{
 tbody>tr{
     border-bottom:1px solid rgba(0, 0, 0, 0.1) !important;
     /*width: 88rem;*/
-    width: 95rem;
+    width: 130rem;
     /*border-width: 80rem;*/
 }
 
@@ -273,6 +273,7 @@ tbody>tr{
     display:none;
 
 }
+
 
 /* 전체 반응형 모음집 */
 @media screen and (max-width: 480px) {
@@ -360,6 +361,18 @@ margin-top:8rem;}
 .thead-dark>th{
     text-align: center;
 }
+.predewidthmargin15{
+    width:15%;
+    padding-left: 2.3rem;
+    /*padding-left: 5.5rem;*/
+}
+.predetrline{
+    width:65rem;
+}
+.predewidthmargin15>p{
+    text-align: center;
+}
+
 }
 /*.predebtnlike:hover{
 

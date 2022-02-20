@@ -33,8 +33,8 @@
             <img src="{% static 'img/logo.png' %}">
             <a  href="{% url 'theater:main' %}" class="navbar_title pretendfont" style="font-size: 3rem;">주인없는영화관</a>
         </div>
-        <div class="web-nav" id="Nav collapse navbar-collapse" style="display:flex;margin-left: auto;"> <!--collapse navbar-collapse-->
-            <ul class="navbar-nav mr-auto">
+        <div class="web-nav" id="Nav collapse navbar-collapse" style="display:flex;margin-left: auto;text-align: center;"> <!--collapse navbar-collapse-->
+            <ul class="navbar-nav mr-auto" style="align-items: center;">
                 <li class="nav-item p-0 m-2 mx-4">
                     <a class="nav-link p-0 m-0 navfontsizestlye" href="{% url 'theater:chart_list' %}">영화 차트</a> 
                 </li>
@@ -85,50 +85,62 @@
             </ul>
         </div>
         <!--모바일 메뉴-->
-        <div class="dropdown moblie-nav">
-            <a href="#" class="dropdown-toggle p-0 m-2 mx-4" data-toggle="dropdown">Menu</a>
-            <ul class="dropdown-menu">
-                <li><a class=" dropdown-item " href="{% url 'theater:chart_list' %}">영화 차트</a> </li>
-                <li><a class="dropdown-item" href="{% url 'theater:review_board' %}">영화 리뷰</a></li>
-                <li><a class="dropdown-item pretendfont " href="{% url 'theater:preview' %}">온라인 시사회</a></li>
-                <li><a class="dropdown-itempretendfont" href="{% url 'theater:business_list' %}">지원사업 게시판</a></li>
-            </ul>
+        <div style="display:flex; justify-content: flex-end; align-items: center;">
+
+            <div class="dropdown moblie-nav" style="">
+                <a href="#" class="dropdown-toggle p-0 m-2 mx-4" data-toggle="dropdown" style=" font-size: 3rem!important;">메뉴</a>
+                <ul class="dropdown-menu">
+                    <li><a class=" dropdown-item " href="{% url 'theater:chart_list' %}">영화 차트</a> </li>
+                    <li><a class="dropdown-item" href="{% url 'theater:review_board' %}">영화 리뷰</a></li>
+                    <li><a class="dropdown-item pretendfont " href="{% url 'theater:preview' %}">온라인 시사회</a></li>
+                    <li><a class="dropdown-itempretendfont" href="{% url 'theater:business_list' %}">지원사업 게시판</a></li>
+                </ul>
+            </div>
+    
+            <div>
+    
+                {% if user.is_authenticated %}
+                    {% if user.type == "일반 사용자" %}
+                    <li class="nav-item  p-0 m-2 mx-4 dropdown moblie-nav">
+                        <div class="dropdown event-dropdown" style=" font-size: 3rem!important">
+                            <a class="nav-link p-0 m-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="user_icon" style=" width: 6rem !important;height: 6rem!important;" src="{{user.user_img}}" />
+                            </a>
+                            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'account:mypage' user.id %}">마이페이지</a>
+                                <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
+                            </div>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li  class="nav-item  p-0 m-2 mx-4 dropdown moblie-nav">
+                        <div class="dropdown event-dropdown" style=" font-size: 3rem!important">
+                            <a class="nav-link p-0 m-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="user_icon" style=" width: 6rem !important;height: 6rem!important;" src="{{user.user_img}}" />
+                            </a>
+                            <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'account:mypage' user.id %}">마이페이지</a>
+                                <a class="dropdown-item" href="{% url 'theater:enroll' %}">영화등록</a>
+                                <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
+                            </div>
+                        </div>
+                    </li>
+                    {% endif %}
+                {% else %}
+                <li class="nav-item  p-0 m-2 mx-4 moblie-nav">
+                    <a class="nav-link p-0 m-0 pretendfont navfontsizestlye" href="{% url 'account:login' %}">로그인</a> <!--수정-->
+                </li>
+                <li class="nav-item  p-0 m-2 mx-4 moblie-nav">
+                    <a class="nav-link p-0 m-0 pretendfont navfontsizestlye" href="{% url 'account:signup' %}">회원가입</a> <!--수정-->
+                </li>
+                {% endif %}
+    
+    
+            </div>
+        
         </div>
-        {% if user.is_authenticated %}
-        {% if user.type == "일반 사용자" %}
-        <li class="nav-item  p-0 m-2 mx-4 dropdown moblie-nav">
-            <div class="dropdown event-dropdown">
-                <a class="nav-link p-0 m-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user_icon" src="{{user.user_img}}" />
-                </a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'account:mypage' user.id %}">마이페이지</a>
-                    <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
-                </div>
-            </div>
-        </li>
-        {% else %}
-        <li class="nav-item  p-0 m-2 mx-4 dropdown" moblie-nav>
-            <div class="dropdown event-dropdown">
-                <a class="nav-link p-0 m-0 dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="user_icon" src="{{user.user_img}}" />
-                </a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'account:mypage' user.id %}">마이페이지</a>
-                    <a class="dropdown-item" href="{% url 'theater:enroll' %}">영화등록</a>
-                    <a class="dropdown-item" href="{% url 'account:logout' %}">로그아웃</a>
-                </div>
-            </div>
-        </li>
-        {% endif %}
-        {% else %}
-        <li class="nav-item  p-0 m-2 mx-4 moblie-nav">
-            <a class="nav-link p-0 m-0 pretendfont navfontsizestlye" href="{% url 'account:login' %}">로그인</a> <!--수정-->
-        </li>
-        <li class="nav-item  p-0 m-2 mx-4 moblie-nav">
-            <a class="nav-link p-0 m-0 pretendfont navfontsizestlye" href="{% url 'account:signup' %}">회원가입</a> <!--수정-->
-        </li>
-        {% endif %}
+        
+
     </nav>
     {% if messages %}
     {% for message in messages %}
@@ -141,9 +153,9 @@
           <a href="{%url 'theater:main' %}"><button type="button" class="btn btn-danger">메인페이지로 돌아가기</button></a>
         </div>
       </div>
-	</div>
-		
-	{% endfor %}
+   </div>
+      
+   {% endfor %}
 {% endif %}
     
     {% block content %}

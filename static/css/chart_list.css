@@ -100,4 +100,12 @@ a>.card:hover{
   #last-page-section{
     min-height:75rem;
   }
+  .mypage_img{
+    width: 90% !important;;
+    margin-left: 8rem !important;;
+  }
+  a>.detail-card-info{
+    width: 90% !important;;
+    margin-left: 10rem !important;;
+  }
 }

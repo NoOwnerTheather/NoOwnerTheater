@@ -26,7 +26,7 @@
                 {% for review in user.review_set.all %}
                     <div class="col-lg-3 col-sm-6 mb-4  d-flex flex-column mypage-card">
                         <a href="{% url 'theater:review_detail' pk=review.pk %}">
-                        <img class="" src="{{review.movie.poster.url}}" alt="" style="width: 100%; height: 250px; ">
+                        <img class="mypage_img" src="{{review.movie.poster.url}}" alt="" style="width: 100%; height: 250px; ">
                         <div class=" detail-card-info d-flex align-items-center justify-content-center " style="width: 100%;">
                             <div class="movie-title">{{review.movie.title}}</div>
                             <div class="movie-review-title">{{review.title}}</div>
@@ -67,7 +67,7 @@
                 {% if movie.comeout == '미개봉 및 제작중' %}
                     <div class="col-lg-3 col-sm-6 mb-4  d-flex flex-column mypage-card">
                         <a href="{% url 'theater:preview_detail' pk=movie.pk %}">
-                        <img class="" src="{{movie.poster.url}}" alt="" style="width: 100%; height: 250px; ">
+                        <img class="mypage_img" src="{{movie.poster.url}}" alt="" style="width: 100%; height: 250px; ">
                         <div class=" detail-card-info d-flex align-items-center justify-content-center " style="width: 100%;">
                             <div class="movie-title">{{movie.title}}</div>
                             
@@ -81,7 +81,7 @@
                     {% else %}
                     <div class="col-lg-3 col-sm-6 mb-4  d-flex flex-column mypage-card">
                         <a href="{% url 'theater:movie_detail' pk=movie.id  %}">
-                        <img class="" src="{{movie.poster.url}}" alt="" style="width: 100%; height: 250px; ">
+                        <img class="mypage_img" src="{{movie.poster.url}}" alt="" style="width: 100%; height: 250px; ">
                         <div class=" detail-card-info d-flex align-items-center justify-content-center " style="width: 100%;">
                             <div class="movie-title">{{movie.title}}</div>
                             
