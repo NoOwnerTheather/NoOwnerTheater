@@ -7,7 +7,7 @@
             <form  method="POST" action="{% url 'theater:business_search' %}">
                 {% csrf_token %}     
                 <div class="board-search">
-                    <input placeholder="검색어를 입력하시오"  name="searched"/>
+                    <input placeholder="검색어를 입력하시오"  name="searched" style="width: 17rem;"/>
                     <button type="submit"><i class="fas fa-search"></i></button>
                 </div>
             </form>
@@ -26,7 +26,7 @@
                     <th scope="col">조회수</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="business-table">
                 {% if paginated_business_lists %} 
                 {% for paginated_business_list in paginated_business_lists %}
                 <tr>
@@ -54,11 +54,11 @@
                 <!-- 이전페이지 -->
                 {% if paginated_business_lists.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" tabindex="-1"  href="?page={{ paginated_business_lists.previous_page_number }}">&laquo;</a>
+                    <a class="page-link" tabindex="-1"  href="?page={{ paginated_business_lists.previous_page_number }}">이전</a>
                 </li>
                 {% else %}
                 <li class="page-item disabled">
-                    <a class="page-link" href="#">&laquo;</a>
+                    <a class="page-link" href="#">이전</a>
                 </li>
                 {% endif %}
                 <!-- 페이지리스트 -->
@@ -78,11 +78,11 @@
                 <!-- 다음페이지 -->
                 {% if paginated_business_lists.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ business_lists.next_page_number }}">&raquo;</a>
+                    <a class="page-link" href="?page={{ business_lists.next_page_number }}">다음</a>
                 </li>
                 {% else %}
                 <li class="page-item disabled">
-                    <a class="page-link" tabindex="-1" href="#">&raquo;</a>
+                    <a class="page-link" tabindex="-1" href="#">다음</a>
                 </li>
                 {% endif %}
             </ul>
