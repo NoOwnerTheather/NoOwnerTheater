@@ -150,6 +150,15 @@
     -webkit-box-orient: vertical;
 }
 
+.cut-text2{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    
+    -webkit-line-clamp:3; /* 표시하고자 하는 라인 수 */
+    -webkit-box-orient: vertical;
+}
+
 
 #swiper-container {
 	max-height:32rem;
