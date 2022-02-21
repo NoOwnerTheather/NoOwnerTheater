@@ -45,7 +45,7 @@ def movie_enroll(request):
                release_date=form.cleaned_data['release_date'],
                actor=form.cleaned_data['actor'],
                content=form.cleaned_data['content'],
-               
+               director=form.cleaned_data['director'],
                poster=form.cleaned_data['poster'],
                video=form.cleaned_data['video'],
                url=form.cleaned_data['url'],
