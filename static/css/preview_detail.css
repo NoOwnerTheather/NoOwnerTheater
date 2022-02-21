@@ -379,7 +379,7 @@ margin-top:8rem;}
     min-height:126rem;
 }
 .background{
-    height:74vh
+    height:86vh
 }
 .container > .row> .col{
     padding-right:0px;
@@ -403,7 +403,7 @@ margin-top:8rem;}
     text-align: center;
 }
 td>.replyContent{
-    width:100%!important;
+    width:auto!important;
     padding-right: 0!important;
     padding-left:0!important;
 }
