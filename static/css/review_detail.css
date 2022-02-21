@@ -190,6 +190,9 @@ display: none;
     .txt_line {
       max-width: 15rem;
     }
+    .col-md-12>p{
+        display: none;
+    }
 }
 @media (min-width: 500px) and (max-width: 575px) {
     .txt_line {
