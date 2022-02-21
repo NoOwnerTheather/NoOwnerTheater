@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
+
+
     <div class="previewbackground" style="padding-bottom: 10rem;padding-top:2rem;">
 
         <div class=" center-block predebox" style="width:72%;  height:50rem;"></div>
@@ -27,7 +30,14 @@
                     <h3 class="prefont predefontsize" style="margin-top: 1rem !important;">장르 | {{movie.genre}}</h3>
                     <span class="prefont predefontsize" style="margin-top: 1rem !important;">출연 | {{movie.actor}}</span>
                     <a class="predebtn fundinglink predefontsize" type="button" href="{{movie.url}}">펀딩링크</a>
-
+                    <br>
+                    <div class="d-flex flex-end" style="margin-top:3rem !important; padding-bottom:3rem !important; padding-left:1rem !important; padding-right:1rem !important; display: flex;justify-content: end;">
+                        {%if request.user.type == "제작사" and request.user.username == movie.user.username%}
+                        <a class="" href="{% url 'theater:movie_delete' pk=movie.id%}"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem; margin-right: 1rem;">삭제하기</h3></a>
+                        <span style="padding-top: 1.7rem;">|</span>
+                        <a class=""  href="{% url 'theater:movie_fix' pk=movie.id%}"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem; margin-left: 1rem;">수정하기</h3></a>
+                        {%endif%}
+                    </div> 
                 </div>
             
                 <div>
