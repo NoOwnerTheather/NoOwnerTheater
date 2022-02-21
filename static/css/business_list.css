@@ -8,7 +8,14 @@
 
 .business {
   width: 80%;
-  min-height:auto;
+  min-height: auto;
+}
+
+.business_title {
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .board-search {
