@@ -31,6 +31,9 @@
 
 .writehandletr2{
     width: auto !important;;
+    display: flex;
+    height: 13rem;
+    align-items: center;
 }
 
 .preview_detail_image{
@@ -300,7 +303,7 @@ tbody>tr{
 .predewidth70_2{
    
     width:56rem;
-    padding-left: 1.5rem;
+    padding-left: 2rem;
 }
 /* 전체 반응형 모음집 */
 @media screen and (max-width: 480px) {
@@ -405,7 +408,7 @@ margin-top:8rem;}
 td>.replyContent{
     width:auto!important;
     padding-right: 0!important;
-    padding-left:0!important;
+    padding-left:8rem!important;
 }
 #review_commentbox{
     width: 94rem!important;
@@ -485,6 +488,7 @@ td>.replyContent{
 .writehandletr2{
     width: 93rem !important;;
     max-height:100px;
+    display:table;
 }
 .predetrline{
     width:auto;
@@ -510,7 +514,7 @@ td>.replyContent{
 .prefont_2{
     font-family: "Pretendard";
     position:relative;
-    left:4rem;
+    left:16rem;
     font-size:2rem;
 }
 }
