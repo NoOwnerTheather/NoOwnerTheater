@@ -115,14 +115,8 @@ class ReviewForm(forms.ModelForm):
 
 '''
 ,'toolbar': [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear',]],
-          ['fontname', ['fontname']],
-          ['color', ['color']],
-          ['para', ['paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-          ['view', ['fullscreen']]
+
+          ['view', ['fullscreen']],
         ]
                 }}),
 
