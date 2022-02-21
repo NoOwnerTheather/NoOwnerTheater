@@ -30,7 +30,7 @@
 }
 
 .writehandletr2{
-    width: 58rem !important;;
+    width: auto !important;;
 }
 
 .preview_detail_image{
@@ -225,7 +225,7 @@
 
 }
 .replyContent{
-    width:100%!important;
+    width:auto!important;
 }
 
 tbody{
@@ -288,7 +288,7 @@ tbody>tr{
 }
 
 #review_commentbox{
-    width:58rem;
+    width:auto;
     max-height: 25rem;;
 }
 #review_commentbox>td{
@@ -313,7 +313,7 @@ tbody>tr{
 }
 .prefont{
     font-size:2rem;
-    width:18rem;
+    width:20rem;
 }
 td>input{
     font-size:3rem!important;
