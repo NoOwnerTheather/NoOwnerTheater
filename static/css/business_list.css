@@ -11,13 +11,6 @@
   min-height: auto;
 }
 
-.business_title {
-  max-width: 10rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
 .board-search {
   border-bottom: 1px solid #707070;
   margin-bottom: 4rem;
