@@ -169,9 +169,12 @@ def review_delete(request,pk,gk):
    if request.user==review.user:
       review.delete()
 
-      movie=get_object_or_404(Movie,id=pk)
-      movie.rating = Review.objects.filter(movie=movie).aggregate(Avg('rating'))['rating__avg']
-      if movie.rating != 0:
+      movie=get_object_or_404(Movie,id=pk)   
+
+      if movie.rating == review.rating:
+         movie.rating = 0
+      else:
+         movie.rating = Review.objects.filter(movie=movie).aggregate(Avg('rating'))['rating__avg']
          movie.rating = round(movie.rating, 2)
       movie.save()
       
@@ -757,4 +760,3 @@ def page_not_found(request, exception):
     404 Page not found
     """
     return render(request, 'theater/404.html', {})
-
