@@ -180,7 +180,7 @@ display: none;
 }
 
 .txt_line {
-    max-width:100px;
+    max-width:10rem;
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
@@ -219,6 +219,6 @@ display: none;
 }
 @media (min-width: 1200px) {
     .txt_line {
-      max-width: 10rem;
+      max-width: 9rem;
     }
 }    
