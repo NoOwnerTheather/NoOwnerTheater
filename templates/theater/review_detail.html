@@ -35,9 +35,9 @@
                                 <br> 
                                 {% if request.user.username == review.user.username %}
                                     <div class="d-flex justify-content-end mx-2">
-                                        <a class="business_detail_btn business_delete" href="{% url 'theater:review_delete' review.movie.id review.id %}">삭제</a>
+                                        <a class="business_detail_btn business_delete" style="padding-right: 0.5rem;" href="{% url 'theater:review_delete' review.movie.id review.id %}">삭제하기</a>
                                         <span id="comment_line">|</span>
-                                        <a class="business_detail_btn business_fix" href="{% url 'theater:review_fix' review.movie.id review.id %}">수정</a>
+                                        <a class="business_detail_btn business_fix" style="padding-left: 0.5rem;" href="{% url 'theater:review_fix' review.movie.id review.id %}">수정하기</a>
                                     </div>
                                 {% else %}
                                 {% endif %}
