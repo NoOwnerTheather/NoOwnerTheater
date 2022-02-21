@@ -144,6 +144,12 @@ def review_fix(request,pk,gk):
         
          if form.is_valid():
             review=form.save()
+
+            movie=get_object_or_404(Movie,id=pk)
+            movie.rating = Review.objects.filter(movie=movie).aggregate(Avg('rating'))['rating__avg']
+            movie.rating = round(movie.rating, 2)
+            movie.save()
+
             return redirect('theater:review_detail',gk)
 
       else:
@@ -159,9 +165,19 @@ def review_fix(request,pk,gk):
 
 @login_required
 def review_delete(request,pk,gk):
-   review=get_object_or_404(Review,id=gk)
+   review = get_object_or_404(Review,id=gk)
    if request.user==review.user:
       review.delete()
+
+      movie=get_object_or_404(Movie,id=pk)
+      movie.rating = Review.objects.filter(movie=movie).aggregate(Avg('rating'))['rating__avg']
+      if movie.rating is not None:
+         movie.rating = round(movie.rating, 2)
+      else :
+         movie.rating = 0
+      movie.save()
+      
+
       return redirect("theater:movie_detail",pk)
    else:
       messages.info(request, '유효하지 않은 접근입니다.')
