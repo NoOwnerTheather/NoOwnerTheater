@@ -247,8 +247,8 @@ def logout_message_required(function):
 class RecoveryIdView(View):
     template_name = 'account/recovery_id.html'
     recovery_id = RecoveryIdForm
-    print("phone")
-    print("phone2")
+    # print("phone")
+    # print("phone2")
 
     def get(self, request):
         if request.method=='GET':
