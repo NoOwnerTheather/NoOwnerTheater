@@ -21,7 +21,7 @@
                                 <div class="card-body review-card-body">
                                 <ul>
                                     <li class="floatBox-left user-icon-position"> <img class="review_detail_user_icon" src="{{review.user.user_img}}" /></li>
-                                    <li class="floatBox-left user-position">{{ review.user }}</li>
+                                    <li class="floatBox-left user-position">{{ review.user.nickname }}</li>
                                     <a href="{% url 'theater:movie_detail' review.movie.id %}"><li class="floatBox-right movie-position movie-button txt_line">{{ review.movie }}</li></a>
                                     <br>
                                     <hr>
@@ -78,7 +78,7 @@
                     <span class="text-danger small ml-2">[{{ review.commentreview_set.count }}]</span>
                 </td>
                 <td>
-                    {{ review.user }}
+                    {{ review.user.nickname }}
                 </td>
                 <td>
                     {{ review.created_at|date:'Y-m-d' }}
