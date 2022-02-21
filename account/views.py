@@ -73,7 +73,7 @@ def login_view(request):
         username=username,
         password=password
       )
-
+    
       if user is not None:
         auth.login(request, user,  backend='django.contrib.auth.backends.ModelBackend')
         return redirect('theater:main')

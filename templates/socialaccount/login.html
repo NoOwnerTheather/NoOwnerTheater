@@ -2,18 +2,36 @@
 {% load i18n %}
 
 {% block content %}
-{% if process == "connect" %}
-<h1>{% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}</h1>
 
-<p>{% blocktrans with provider.name as provider %}You are about to connect a new third party account from {{ provider }}.{% endblocktrans %}</p>
-{% else %}
-<h1>{% blocktrans with provider.name as provider %}Sign In Via {{ provider }}{% endblocktrans %}</h1>
-
-<p>{% blocktrans with provider.name as provider %}You are about to sign in using a third party account from {{ provider }}.{% endblocktrans %}</p>
-{% endif %}
 
 <form method="post">
   {% csrf_token %}
-  <button type="submit">{% trans "Continue" %}</button>
+  <div class="login-background">
+    <div class="login-position"> 
+      <div style="justify-content:center;"class="d-flex  align-items-center flex-column login-margin">
+        
+      </div>
+      <div class="container card col-md-4 mb-5 login-container" style="float: none; margin:0 auto;">
+        <div style="justify-content:center;"class="d-flex  align-items-center flex-column login-container-content" >
+          
+          {% if process == "connect" %}
+          <span style="font-size: 4rem;" >{% blocktrans with provider.name as provider %}Connect {{ provider }}{% endblocktrans %}</span>
+          <br>
+          
+          
+          {% else %}
+          
+          <span style="font-size: 4rem;">{% blocktrans with provider.name as provider %}Sign In Via {{ provider }}{% endblocktrans %}</span>
+          
+          <br>
+          
+          {% endif %}
+          <br>
+          <button type="submit" class="mb-5 login-button">{% trans "Continue" %}</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
 </form>
 {% endblock %}
