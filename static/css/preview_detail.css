@@ -213,7 +213,7 @@
 
 }
 .predewidth70{
-    width:67.5%!important;
+    width:67.5%;
 }
 .rgy-reply {
 
@@ -262,8 +262,8 @@ tbody{
 
 .predewidth70{
 
-    width:70%;
-    padding-left: 4.5rem;
+    width:70%!important;
+    /*padding-left: 4.5rem;*/
 }
 
 tbody>tr{
