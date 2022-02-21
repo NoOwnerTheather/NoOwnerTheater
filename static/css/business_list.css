@@ -15,6 +15,7 @@
   margin-bottom: 4rem;
   width: 20rem;
   display: flex;
+  justify-content: space-between;
 }
 
 .board-search input {
