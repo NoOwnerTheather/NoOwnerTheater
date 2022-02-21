@@ -597,7 +597,7 @@ def write_review_comment(request,pk):
    id = req['id']
    type = req['type']
    content = req['content']
-   user=req['user']
+   user=request.user.nickname
    user_img=request.user.user_img
    review = Review.objects.get(id=id)
    
@@ -652,7 +652,7 @@ def write_comment(request,pk):
    id = req['id']
    type = req['type']
    content = req['content']
-   user=req['user']
+   user=request.user.nickname
    user_img=request.user.user_img
    movie = Movie.objects.get(id=id)
    

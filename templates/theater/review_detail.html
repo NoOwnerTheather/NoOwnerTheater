@@ -14,7 +14,7 @@
                 <div class="card-body review-card-body">
                     <ul>
                         <li class="floatBox-left user-icon-position"> <img class="review_detail_user_icon" src="{{review.user.user_img}}" /></li>
-                        <li class="floatBox-left user-position">{{ review.user }}</li>
+                        <li class="floatBox-left user-position">{{ review.user.nickname }}</li>
                         <a href="{% url 'theater:movie_detail' review.movie.id %}"><li class="floatBox-right movie-position movie-button txt_line">{{ review.movie }}</li></a>
                         <br>
                         <hr>
@@ -74,7 +74,7 @@
                             <tr id="review_commentbox" class = "comment-{{comment.id}}" style="display:flex; justify-content: space-between; margin-top:2rem;">
                                 <td id="comment_inputuser-{{review.id}}" style="width:15%">
                                     <img src="{{comment.user.user_img}}"  class="detail-user-img2" alt="...">
-                                    <p style="margin-left:0.5rem;">{{comment.user}} </p>
+                                    <p style="margin-left:0.5rem;">{{comment.user.nickname}} </p>
                                     
                                 </td>
 

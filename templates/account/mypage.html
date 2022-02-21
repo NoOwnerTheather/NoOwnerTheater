@@ -7,8 +7,8 @@
     <div class="detail-background" style="min-height: 200rem;">
         <div class="detail-info-panel">
             <img src="{{user.user_img}}"  class="detail-user-img" alt="...">
-            <div class="detail-user-name">{{user}}<p>님</p></div>
-            <div class="detail-user-nickname">{{user.nickname}}</div>
+            <div class="detail-user-name">{{user.nickname}}<p>님</p></div>
+            <!-- <div class="detail-user-nickname">{{user.nickname}}</div> -->
             <div class="detail-user-mileage">{{user.mileage}}<i class="fas fa-coins"></i></div>
         </div> 
         {% if request.user == user %}
@@ -46,8 +46,8 @@
     <div class="detail-background">
         <div class="detail-info-panel">
             <img src="{{user.user_img}}"  class="detail-user-img" alt="...">
-            <div class="detail-user-name">{{user}}<p>님</p></div>
-            <div class="detail-user-nickname">{{user.nickname}}</div>
+            <div class="detail-user-name">{{user.nickname}}<p>님</p></div>
+            <!-- <div class="detail-user-nickname">{{user.nickname}}</div> -->
         </div>
         {% if request.user == user %}
             <div class="user-fix">
