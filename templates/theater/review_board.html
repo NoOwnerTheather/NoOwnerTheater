@@ -25,7 +25,7 @@
                                     <a href="{% url 'theater:movie_detail' review.movie.id %}"><li class="floatBox-right movie-position movie-button txt_line">{{ review.movie }}</li></a>
                                     <br>
                                     <hr>
-                                    <li class="col-md-12 h3" style="float:none; margin:0 auto;"><a href="{% url 'theater:review_detail' review.id %}" onclick="onClickTitle({{ review.id }})" ">{{review.title}}</a></li>
+                                    <li class="col-md-12 h3" style="margin: 0 auto;height: 4rem;bottom: 2.5rem;padding-bottom: 0rem;"><a href="{% url 'theater:review_detail' review.id %}" onclick="onClickTitle({{ review.id }})" ">{{review.title}}</a></li>
                                     <br>
                                     <li class="col-md-12 cut-text" style="float: none; margin:0 auto;">{% autoescape on %}{{review.content|safe}}{% endautoescape %}</li>
                                 </ul>
