@@ -38,7 +38,7 @@
                   <img style="width: 5rem;height: 5rem;margin-left:4.5rem !important;" src="{% static 'img/modibtn.png' %}" alt="">
                   <a class="" href="{% url 'theater:movie_fix' pk=movie.id%}"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">수정하기</h3></a>
                   <img style="width: 5rem;height: 5rem;margin-left:4.5rem !important;" src="{% static 'img/deletebtn.png' %}" alt="">
-                  <a class="" href="{% url 'theater:movie_delete' pk=movie.id%}"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">삭제하기</h3></a>
+                  <a class="" data-bs-toggle="modal" href="#deleteModal"><h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 2rem;">삭제하기</h3></a>
                   {%endif%}
                   {%endif%}
               </div> 
@@ -130,6 +130,25 @@ rating.forEach((value) => {
 
 </script>
 
+<div class="modal fade" id="deleteModal" style="z-index: 100000;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <div class="modal-body">
+                    <h4 style="font-weight: bold;">영화 삭제</h4>
+                    <br>
+                    <span style="color:red">등록한 영화를 삭제하시겠습니까?</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'theater:movie_delete' pk=movie.id%}"><button  type="button" class="btn btn-primary">삭제하기</button></a>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">취소하기</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 
 

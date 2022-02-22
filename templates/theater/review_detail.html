@@ -35,7 +35,7 @@
                                 <br> 
                                 {% if request.user.username == review.user.username %}
                                     <div class="d-flex justify-content-end mx-2">
-                                        <a class="business_detail_btn business_delete" style="padding-right: 0.5rem;" href="{% url 'theater:review_delete' review.movie.id review.id %}">삭제하기</a>
+                                        <a class="business_detail_btn business_delete" data-bs-toggle="modal" href="#deleteModal" style="padding-right: 0.5rem;">삭제하기</a>
                                         <span id="comment_line">|</span>
                                         <a class="business_detail_btn business_fix" style="padding-left: 0.5rem;" href="{% url 'theater:review_fix' review.movie.id review.id %}">수정하기</a>
                                     </div>
@@ -594,6 +594,28 @@
         });
     })
 </script>
-{% endblock %}
+
+<div class="modal fade" id="deleteModal" style="z-index: 100000;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <div class="modal-body">
+                    <h4 style="font-weight: bold;">리뷰 삭제</h4>
+                    <br>
+                    <span style="color:red">등록한 리뷰를 삭제하시겠습니까?</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="{% url 'theater:review_delete' review.movie.id review.id %}"><button  type="button" class="btn btn-primary">삭제하기</button></a>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">취소하기</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+  {% endblock %}
 
 
