@@ -26,6 +26,13 @@
             {{ form.as_table }}
             {% if redirect_field_value %}
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            <div class="form-group mb-3">
+            <div class="form-group mb-3">
+              <input class="form-control input-lg input-style-no-shadow" name="nickname" type="text" maxlength="30" placeholder="별명" required/>
+            </div>
+            
+              <input class="form-control input-lg input-style-no-shadow" name="phone" type="tel" maxlength="30" placeholder="휴대폰 번호" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required/>
+            </div>
             {% endif %}
             <button class="mb-5 login-button" type="submit">{% trans "Sign Up" %} &raquo;</button>
         </form>
