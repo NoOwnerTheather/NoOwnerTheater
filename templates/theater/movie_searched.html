@@ -7,7 +7,7 @@
   <form  method="POST" action="{% url 'theater:movie_search' %}">
       {% csrf_token %}     
       <div class="movie_board-search" style="width:100%;">
-          <input placeholder="영화를 검색해보세요." name="searched" style="
+          <input value="{{searched}}" name="searched" style="
           font-size: 1.4rem;
           margin-left: 0;
           border: 1px solid;
