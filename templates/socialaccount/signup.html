@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+
+<form method="post">
+  {% csrf_token %}
+  <div class="login-background">
+    <div class="login-position"> 
+      <div style="justify-content:center;"class="d-flex  align-items-center flex-column login-margin">
+        
+      </div>
+      <div class="container card col-md-4 mb-5 login-container" style="float: none; margin:0 auto;">
+        <div style="justify-content:center;"class="d-flex  align-items-center flex-column login-container-content" >
+          
+        <span style="font-size: 4rem;">{% trans "Sign Up" %}</span>
+        <br>
+        <span style="font-size: 2rem;"> 거의 다 완료 되었습니다! 아래사항을 기입해주세요!</span>
+        <br>
+        <form class="signup" id="signup_form" method="post" action="{% url 'socialaccount_signup' %}">
+            {% csrf_token %}
+            {{ form.as_table }}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            <div class="form-group mb-3">
+            <div class="form-group mb-3">
+              <input class="form-control input-lg input-style-no-shadow" name="nickname" type="text" maxlength="30" placeholder="별명" required/>
+            </div>
+            
+              <input class="form-control input-lg input-style-no-shadow" name="phone" type="tel" maxlength="30" placeholder="휴대폰 번호" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required/>
+            </div>
+            {% endif %}
+            <button class="mb-5 login-button" type="submit">{% trans "Sign Up" %} &raquo;</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock %}
