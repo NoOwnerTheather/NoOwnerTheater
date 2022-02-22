@@ -24,13 +24,35 @@
                 <button class="user-fix-btn" type="submit" form="update">수정완료</button>
                 <a href="{% url 'account:change_password' %}"><button class="user-fix-btn">비밀밀호 변경</button></a>
             </div>
-            <form action="{% url 'account:user_delete' %}" method="POST">
-                {% csrf_token %}
-                <button class="user-fix-btn">회원탈퇴</button>
-            </form>
+
+            <button class="user-fix-btn"data-toggle="modal" data-target="#userDeleteModal" type="button" >회원탈퇴</button>
+
         </div>
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="userDeleteModal" data-backdrop="static"  tabindex="-1" role="dialog" aria-labelledby="userDeleteModalLabel" aria-hidden="true" style="z-index: 100000;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="userDeleteModalLabel">정말 탈퇴하시겠습니까?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                탈퇴시 이전에 작성한 게시물, 댓글은 모두 삭제됩니다.
+            </div>
+            <div class="modal-footer">
+                <form action="{% url 'account:user_delete' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-danger">회원탈퇴</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
